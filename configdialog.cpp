@@ -11,8 +11,8 @@ configDialog::configDialog(QWidget *parent) :
 	m_ui(new Ui::configDialog)
 {
 	m_ui->setupUi(this);
-	m_ui->ed_NotesPath->setText(Settings::getNotesPath());
-	m_ui->cb_HideStart->setChecked(Settings::getHideStart());
+	m_ui->ed_NotesPath->setText(settings.getNotesPath());
+	m_ui->cb_HideStart->setChecked(settings.getHideStart());
 }
 
 configDialog::~configDialog()
@@ -34,14 +34,8 @@ void configDialog::changeEvent(QEvent *e)
 
 void configDialog::SaveSettings()
 {
-	Settings::setHideStart(m_ui->cb_HideStart->checkState());
-
-	//FIXME:dirty hack
-	if(m_ui->ed_NotesPath->text()!=Settings::getNotesPath())
-	{
-		Settings::setNotesPath(m_ui->ed_NotesPath->text());
-		emit pathChanged();
-	}
+	settings.setHideStart(m_ui->cb_HideStart->checkState());
+	settings.setNotesPath(m_ui->ed_NotesPath->text());
 }
 
 void configDialog::on_buttonBox_clicked(QAbstractButton* button)
@@ -60,9 +54,9 @@ void configDialog::on_buttonBox_clicked(QAbstractButton* button)
 
 void configDialog::on_btn_NotesPath_clicked()
 {
-	QString path = Settings::getNotesPath();
+	QString path = settings.getNotesPath();
 	path = QFileDialog::getExistingDirectory(0,
-			QObject::tr("Select notes directory"),Settings::getNotesPath(),
+			QObject::tr("Select notes directory"),settings.getNotesPath(),
 			QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks);
 	if(!path.isEmpty()) m_ui->ed_NotesPath->setText(path);
 }

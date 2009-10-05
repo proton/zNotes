@@ -24,9 +24,6 @@ private:
 private slots:
 	void on_btn_NotesPath_clicked();
 	void on_buttonBox_clicked(QAbstractButton* button);
-
-signals:
-	void pathChanged();
 };
 
 #endif // CONFIGDIALOG_H

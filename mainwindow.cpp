@@ -9,6 +9,8 @@
 #include <QMessageBox>
 #include <QFileDialog>
 
+Settings settings;
+
 Note::Note(const QString& fn, const QDir& dir) : QPlainTextEdit(), name(fn), file(dir.absoluteFilePath(fn))
 {
 	if(file.open(QIODevice::ReadOnly | QIODevice::Text))
@@ -95,23 +97,27 @@ void MainWindow::NewNote()
 void MainWindow::LoadNotes()
 {
 	ui->tabs->clear();
-	dir.setPath(Settings::getNotesPath());
+	dir.setPath(settings.getNotesPath());
 	while(dir.path().isEmpty())
 	{
 		dir.setPath(QFileDialog::getExistingDirectory(0,
 			QObject::tr("Select notes directory"), QDir::homePath(),
 			QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks));
-		if(!dir.path().isEmpty()) Settings::setNotesPath(dir.path());
+		if(!dir.path().isEmpty()) settings.setNotesPath(dir.path());
 	}
 	dir.setFilter(QDir::Files);
 	QFileInfoList flist = dir.entryInfoList();
 	Notes.resize(flist.size());
+	const QString& old_note = settings.getLastNote();
+	int old_index=-1;
 	for(int i=0; i<flist.size(); ++i)
 	{
 		Notes[i] = new Note(flist.at(i).fileName(), dir);
 		ui->tabs->addTab(Notes[i], Notes[i]->name);
 		QObject::connect(Notes[i], SIGNAL(textChanged()), this, SLOT(currentNoteChanged()));
+		if(old_index==-1 && Notes[i]->name==old_note) old_index = i;
 	}
+	if(old_index!=-1) ui->tabs->setCurrentIndex(old_index);
 }
 
 void MainWindow::currentNoteChanged()
@@ -159,13 +165,16 @@ void MainWindow::aboutDialog()
 {
 	QMessageBox::information(this, tr("zNotes"),
 		tr("zNotes\nby Peter Savichev (proton)\npsavichev@gmail.com\n2009"));
+	show();
+	hide();
 }
 
 void MainWindow::prefDialog()
 {
 	configDialog dlg;
-	connect(&dlg, SIGNAL(pathChanged()), this, SLOT(notesPathChanged()));
 	dlg.exec();
+	show();
+	hide();
 }
 
 void MainWindow::notesPathChanged()
@@ -176,19 +185,20 @@ void MainWindow::notesPathChanged()
 	int ret = msgBox.exec();
 	if(ret == QMessageBox::Yes)
 	{
-		dir.setPath(Settings::getNotesPath());
+		dir.setPath(settings.getNotesPath());
 		for(int i=0; i<Notes.count(); ++i)
 			Notes[i]->file.rename(dir.absoluteFilePath(Notes[i]->name));
 	}
 	else QMessageBox::information(this, tr("Notes path change"),
 		tr("You need restart application to get effect"));
+	show();
+	hide();
 }
 
 MainWindow::MainWindow(QWidget *parent)
 	: QMainWindow(parent), ui(new Ui::MainWindow), CurrentIndex(-1)
 {
 	ui->setupUi(this);
-	Settings::Load();
 	LoadNotes();
 	if(Notes.count()==0) NewNote();
 	//
@@ -222,12 +232,15 @@ MainWindow::MainWindow(QWidget *parent)
 	//
 	connect(&SaveTimer, SIGNAL(timeout()), this, SLOT(SaveAll()));
 	SaveTimer.start(100000);
+	//
+	connect(&settings, SIGNAL(NotesPathChanged()), this, SLOT(notesPathChanged()));
 }
 
 MainWindow::~MainWindow()
 {
 	delete ui;
 	SaveAll();
+	settings.setLastNote(currentNote()->name);
 }
 
 void MainWindow::on_tabs_currentChanged(int index)

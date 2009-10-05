@@ -2,16 +2,32 @@
 #define SETTINGS_H
 
 #include <QString>
+#include <QObject>
+#include <QSettings>
 
-namespace Settings
+class Settings : public QObject
 {
-	void Load();
+	Q_OBJECT
+public:
+	Settings();
 	//
 	const QString& getNotesPath();
+	const QString& getLastNote();
 	bool getHideStart();
 	//
 	void setNotesPath(const QString& path);
+	void setLastNote(const QString& name);
 	void setHideStart(bool hide);
-}
+private:
+	QSettings config;
+	//
+	QString NotesPath;
+	QString LastNote;
+	bool HideStart;
+signals:
+	void NotesPathChanged();
+};
+
+extern Settings settings;
 
 #endif // SETTINGS_H

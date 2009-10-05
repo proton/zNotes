@@ -2,6 +2,7 @@
 # Project created by QtCreator 2009-09-20T17:20:55
 # -------------------------------------------------
 TARGET = znotes
+QT += core gui
 TEMPLATE = app
 SOURCES += main.cpp \
     mainwindow.cpp \
