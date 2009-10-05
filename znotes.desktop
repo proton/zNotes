@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=zNotes
+GenericName=Simple Notes
+GenericName[ru]=Простые заметки
+Type=Application
+Comment=Simple Notes
+Exec=znotes
+TryExec=znotes
+Icon=znotes
+Categories=Utility;Office;TextEditorlQt;
