@@ -199,6 +199,9 @@ MainWindow::MainWindow(QWidget *parent)
 	: QMainWindow(parent), ui(new Ui::MainWindow), CurrentIndex(-1)
 {
 	ui->setupUi(this);
+	//
+	setGeometry(x(), y(), settings.getDialogWidth(), settings.getDialogHeight());
+	//
 	LoadNotes();
 	if(Notes.count()==0) NewNote();
 	//
@@ -241,6 +244,8 @@ MainWindow::~MainWindow()
 	delete ui;
 	SaveAll();
 	settings.setLastNote(currentNote()->name);
+	settings.setDialogWidth(width());
+	settings.setDialogHeight(height());
 }
 
 void MainWindow::on_tabs_currentChanged(int index)

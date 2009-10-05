@@ -1,12 +1,17 @@
 #include "settings.h"
 
 #include <QObject>
+#include <QtDebug>
 
 Settings::Settings() : config("pDev", "zNotes")
 {
 	NotesPath = config.value("NotesPath").toString();
 	LastNote = config.value("LastNote").toString();
 	HideStart = config.value("HideStart").toBool();
+	DialogWidth = config.value("DialogWidth").toInt();
+	DialogHeight = config.value("DialogHeight").toInt();
+	if(DialogWidth==0) DialogWidth = 300;
+	if(DialogHeight==0) DialogHeight = 400;
 }
 
 const QString& Settings::getNotesPath()
@@ -22,6 +27,16 @@ const QString& Settings::getLastNote()
 bool Settings::getHideStart()
 {
 	return HideStart;
+}
+
+int Settings::getDialogWidth()
+{
+	return DialogWidth;
+}
+
+int Settings::getDialogHeight()
+{
+	return DialogHeight;
 }
 
 void Settings::setNotesPath(const QString& path)
@@ -49,5 +64,23 @@ void Settings::setHideStart(bool hide)
 	{
 		HideStart = hide;
 		config.setValue("HideStart", HideStart);
+	}
+}
+
+void Settings::setDialogWidth(int w)
+{
+	if(DialogWidth != w)
+	{
+		DialogWidth = w;
+		config.setValue("DialogWidth", DialogWidth);
+	}
+}
+
+void Settings::setDialogHeight(int h)
+{
+	if(DialogHeight != h)
+	{
+		DialogHeight = h;
+		config.setValue("DialogHeight", DialogHeight);
 	}
 }
