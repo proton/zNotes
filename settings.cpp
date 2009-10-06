@@ -8,10 +8,12 @@ Settings::Settings() : config("pDev", "zNotes")
 	NotesPath = config.value("NotesPath").toString();
 	LastNote = config.value("LastNote").toString();
 	HideStart = config.value("HideStart").toBool();
-	DialogWidth = config.value("DialogWidth").toInt();
-	DialogHeight = config.value("DialogHeight").toInt();
-	if(DialogWidth==0) DialogWidth = 300;
-	if(DialogHeight==0) DialogHeight = 400;
+	DialogPos.setX(config.value("DialogX").toInt());
+	DialogPos.setY(config.value("DialogY").toInt());
+	DialogRect.setWidth(config.value("DialogWidth").toInt());
+	DialogRect.setHeight(config.value("DialogHeight").toInt());
+	if(DialogRect.width()==0) DialogRect.setWidth(300);
+	if(DialogRect.height()==0) DialogRect.setHeight(400);
 }
 
 const QString& Settings::getNotesPath()
@@ -29,14 +31,14 @@ bool Settings::getHideStart()
 	return HideStart;
 }
 
-int Settings::getDialogWidth()
+const QRect& Settings::getDialogRect()
 {
-	return DialogWidth;
+	return DialogRect;
 }
 
-int Settings::getDialogHeight()
+const QPoint& Settings::getDialogPos()
 {
-	return DialogHeight;
+	return DialogPos;
 }
 
 void Settings::setNotesPath(const QString& path)
@@ -67,20 +69,18 @@ void Settings::setHideStart(bool hide)
 	}
 }
 
-void Settings::setDialogWidth(int w)
+void Settings::setDialogRect(const QRect& r)
 {
-	if(DialogWidth != w)
-	{
-		DialogWidth = w;
-		config.setValue("DialogWidth", DialogWidth);
-	}
+	DialogRect = r;
+	config.setValue("DialogWidth", r.width());
+	config.setValue("DialogHeight", r.height());
+
 }
 
-void Settings::setDialogHeight(int h)
+void Settings::setDialogPos(const QPoint& p)
 {
-	if(DialogHeight != h)
-	{
-		DialogHeight = h;
-		config.setValue("DialogHeight", DialogHeight);
-	}
+	DialogPos = p;
+	config.setValue("DialogX", p.x());
+	config.setValue("DialogY", p.y());
+
 }

@@ -194,32 +194,31 @@ MainWindow::MainWindow(QWidget *parent)
 {
 	ui->setupUi(this);
 	//
-	setGeometry(x(), y(), settings.getDialogWidth(), settings.getDialogHeight());
+	setGeometry(settings.getDialogRect());
+	move(settings.getDialogPos());
 	//
 	LoadNotes();
 	if(Notes.count()==0) NewNote();
 	//
-	ui->mainToolBar->addAction(QIcon(":/res/add.png"), tr("Create new note"));
-	ui->mainToolBar->addAction(QIcon(":/res/remove.png"), tr("Remove this note"));
-	ui->mainToolBar->addAction(QIcon(":/res/rename.png"), tr("Rename this note"));
-	connect(ui->mainToolBar->actions()[0], SIGNAL(triggered()),this, SLOT(NewNote()));
-	connect(ui->mainToolBar->actions()[1], SIGNAL(triggered()),this, SLOT(RemoveCurrentNote()));
-	connect(ui->mainToolBar->actions()[2], SIGNAL(triggered()),this, SLOT(RenameCurrentNote()));
+	ui->mainToolBar->addAction(QIcon(":/res/add.png"), tr("Create new note"),
+							   this, SLOT(NewNote()));
+	ui->mainToolBar->addAction(QIcon(":/res/remove.png"), tr("Remove this note"),
+							   this, SLOT(RemoveCurrentNote()));
+	ui->mainToolBar->addAction(QIcon(":/res/rename.png"), tr("Rename this note"),
+							   this, SLOT(RenameCurrentNote()));
+	ui->mainToolBar->addSeparator();
+	ui->mainToolBar->addAction(QIcon(":/res/settings.png"), tr("Preferences"),
+							   this, SLOT(prefDialog()));
 	ui->mainToolBar->actions()[0]->setShortcut(QKeySequence::New);
 	ui->mainToolBar->actions()[1]->setShortcut(QKeySequence::Delete);
 	//
-	cmenu.addAction(tr("Show"));
-	cmenu.addAction(tr("Hide"));
+	cmenu.addAction(tr("Show"), this, SLOT(show()));
+	cmenu.addAction(tr("Hide"), this, SLOT(hide()));
 	cmenu.addSeparator();
-	cmenu.addAction(QIcon(":/res/settings.png"), tr("Preferences"));
-	cmenu.addAction(QIcon(":/res/info.png"), tr("About"));
+	cmenu.addAction(QIcon(":/res/settings.png"), tr("Preferences"), this, SLOT(prefDialog()));
+	cmenu.addAction(QIcon(":/res/info.png"), tr("About"), this, SLOT(aboutDialog()));
 	cmenu.addSeparator();
-	cmenu.addAction(QIcon(":/res/exit.png"), tr("Quit"));
-	connect(cmenu.actions()[0], SIGNAL(triggered()), this, SLOT(show()));
-	connect(cmenu.actions()[1], SIGNAL(triggered()), this, SLOT(hide()));
-	connect(cmenu.actions()[3], SIGNAL(triggered()), this, SLOT(prefDialog()));
-	connect(cmenu.actions()[4], SIGNAL(triggered()), this, SLOT(aboutDialog()));
-	connect(cmenu.actions()[6], SIGNAL(triggered()), qApp, SLOT(quit()));
+	cmenu.addAction(QIcon(":/res/exit.png"), tr("Quit"), qApp, SLOT(quit()));
 	cmenu.actions()[6]->setShortcut(QKeySequence::Close);
 	tray.setIcon(QIcon(":/res/znotes32.png"));
 	tray.setContextMenu(&cmenu);
@@ -239,8 +238,8 @@ MainWindow::~MainWindow()
 	delete ui;
 	SaveAll();
 	settings.setLastNote(currentNote()->name);
-	settings.setDialogWidth(width());
-	settings.setDialogHeight(height());
+	settings.setDialogRect(rect());
+	settings.setDialogPos(pos());
 }
 
 void MainWindow::on_tabs_currentChanged(int index)

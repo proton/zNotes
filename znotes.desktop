@@ -7,4 +7,4 @@ Comment=Simple Notes
 Exec=znotes
 TryExec=znotes
 Icon=znotes
-Categories=Utility;Office;TextEditorlQt;
+Categories=Utility;Office;TextEditor;Qt;

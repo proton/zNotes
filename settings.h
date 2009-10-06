@@ -4,6 +4,8 @@
 #include <QString>
 #include <QObject>
 #include <QSettings>
+#include <QRect>
+#include <QPoint>
 
 class Settings : public QObject
 {
@@ -14,21 +16,22 @@ public:
 	const QString& getNotesPath();
 	const QString& getLastNote();
 	bool getHideStart();
-	int getDialogWidth();
-	int getDialogHeight();
+	const QRect& getDialogRect();
+	const QPoint& getDialogPos();
 	//
 	void setNotesPath(const QString& path);
 	void setLastNote(const QString& name);
 	void setHideStart(bool hide);
-	void setDialogWidth(int w);
-	void setDialogHeight(int h);
+	void setDialogRect(const QRect& r);
+	void setDialogPos(const QPoint& p);
 private:
 	QSettings config;
 	//
 	QString NotesPath;
 	QString LastNote;
 	bool HideStart;
-	int DialogWidth, DialogHeight;
+	QRect DialogRect;
+	QPoint DialogPos;
 signals:
 	void NotesPathChanged();
 };
