@@ -149,7 +149,15 @@ void MainWindow::trayActivated(QSystemTrayIcon::ActivationReason reason)
 
 void MainWindow::hideEvent(QHideEvent */*event*/)
 {
+	cmenu.actions()[0]->setEnabled(true);
+	cmenu.actions()[1]->setDisabled(true);
 	SaveAll();
+}
+
+void MainWindow::showEvent(QShowEvent */*event*/)
+{
+	cmenu.actions()[0]->setEnabled(false);
+	cmenu.actions()[1]->setDisabled(false);
 }
 
 void MainWindow::closeEvent(QCloseEvent *event)
