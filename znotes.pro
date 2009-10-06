@@ -2,7 +2,8 @@
 # Project created by QtCreator 2009-09-20T17:20:55
 # -------------------------------------------------
 TARGET = znotes
-QT += core gui
+QT += core \
+    gui
 TEMPLATE = app
 SOURCES += main.cpp \
     mainwindow.cpp \
@@ -13,3 +14,4 @@ HEADERS += mainwindow.h \
     settings.h
 FORMS += mainwindow.ui \
     configdialog.ui
+RESOURCES += znotes.qrc

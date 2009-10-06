@@ -165,16 +165,12 @@ void MainWindow::aboutDialog()
 {
 	QMessageBox::information(this, tr("zNotes"),
 		tr("zNotes\nby Peter Savichev (proton)\npsavichev@gmail.com\n2009"));
-	show();
-	hide();
 }
 
 void MainWindow::prefDialog()
 {
 	configDialog dlg;
 	dlg.exec();
-	show();
-	hide();
 }
 
 void MainWindow::notesPathChanged()
@@ -191,8 +187,6 @@ void MainWindow::notesPathChanged()
 	}
 	else QMessageBox::information(this, tr("Notes path change"),
 		tr("You need restart application to get effect"));
-	show();
-	hide();
 }
 
 MainWindow::MainWindow(QWidget *parent)
@@ -205,9 +199,9 @@ MainWindow::MainWindow(QWidget *parent)
 	LoadNotes();
 	if(Notes.count()==0) NewNote();
 	//
-	ui->mainToolBar->addAction(qApp->style()->standardIcon(QStyle::SP_FileIcon), tr("Create new note"));
-	ui->mainToolBar->addAction(qApp->style()->standardIcon(QStyle::SP_DialogDiscardButton), tr("Remove this note"));
-	ui->mainToolBar->addAction(qApp->style()->standardIcon(QStyle::SP_DialogResetButton), tr("Rename this note"));
+	ui->mainToolBar->addAction(QIcon(":/res/add.png"), tr("Create new note"));
+	ui->mainToolBar->addAction(QIcon(":/res/remove.png"), tr("Remove this note"));
+	ui->mainToolBar->addAction(QIcon(":/res/rename.png"), tr("Rename this note"));
 	connect(ui->mainToolBar->actions()[0], SIGNAL(triggered()),this, SLOT(NewNote()));
 	connect(ui->mainToolBar->actions()[1], SIGNAL(triggered()),this, SLOT(RemoveCurrentNote()));
 	connect(ui->mainToolBar->actions()[2], SIGNAL(triggered()),this, SLOT(RenameCurrentNote()));
@@ -217,17 +211,17 @@ MainWindow::MainWindow(QWidget *parent)
 	cmenu.addAction(tr("Show"));
 	cmenu.addAction(tr("Hide"));
 	cmenu.addSeparator();
-	cmenu.addAction(tr("Preferences"));
-	cmenu.addAction(tr("About"));
+	cmenu.addAction(QIcon(":/res/settings.png"), tr("Preferences"));
+	cmenu.addAction(QIcon(":/res/info.png"), tr("About"));
 	cmenu.addSeparator();
-	cmenu.addAction(qApp->style()->standardIcon(QStyle::SP_TitleBarCloseButton), tr("Quit"));
+	cmenu.addAction(QIcon(":/res/exit.png"), tr("Quit"));
 	connect(cmenu.actions()[0], SIGNAL(triggered()), this, SLOT(show()));
 	connect(cmenu.actions()[1], SIGNAL(triggered()), this, SLOT(hide()));
 	connect(cmenu.actions()[3], SIGNAL(triggered()), this, SLOT(prefDialog()));
 	connect(cmenu.actions()[4], SIGNAL(triggered()), this, SLOT(aboutDialog()));
 	connect(cmenu.actions()[6], SIGNAL(triggered()), qApp, SLOT(quit()));
 	cmenu.actions()[6]->setShortcut(QKeySequence::Close);
-	tray.setIcon(qApp->style()->standardIcon(QStyle::SP_FileIcon));
+	tray.setIcon(QIcon(":/res/znotes32.png"));
 	tray.setContextMenu(&cmenu);
 	connect(&tray, SIGNAL(activated(QSystemTrayIcon::ActivationReason)),
 			this, SLOT(trayActivated(QSystemTrayIcon::ActivationReason)));
@@ -237,6 +231,7 @@ MainWindow::MainWindow(QWidget *parent)
 	SaveTimer.start(100000);
 	//
 	connect(&settings, SIGNAL(NotesPathChanged()), this, SLOT(notesPathChanged()));
+	if(!settings.getHideStart()) show();
 }
 
 MainWindow::~MainWindow()

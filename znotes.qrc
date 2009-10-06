@@ -1,0 +1,13 @@
+<RCC>
+    <qresource prefix="/" >
+        <file>res/add.png</file>
+        <file>res/close.png</file>
+        <file>res/exit.png</file>
+        <file>res/info.png</file>
+        <file>res/remove.png</file>
+        <file>res/rename.png</file>
+        <file>res/settings.png</file>
+        <file>res/znotes.png</file>
+        <file>res/znotes32.png</file>
+    </qresource>
+</RCC>

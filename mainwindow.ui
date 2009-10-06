@@ -6,12 +6,16 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>301</width>
-    <height>335</height>
+    <width>299</width>
+    <height>333</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>zNotes</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="znotes.qrc">
+    <normaloff>:/res/znotes.png</normaloff>:/res/znotes.png</iconset>
   </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QVBoxLayout" name="verticalLayout">
@@ -48,6 +52,8 @@
   </widget>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
- <resources/>
+ <resources>
+  <include location="znotes.qrc"/>
+ </resources>
  <connections/>
 </ui>

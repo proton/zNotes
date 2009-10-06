@@ -6,12 +6,16 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>320</width>
-    <height>128</height>
+    <width>318</width>
+    <height>126</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Preferences</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="znotes.qrc">
+    <normaloff>:/res/settings.png</normaloff>:/res/settings.png</iconset>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
@@ -66,6 +70,8 @@
    </item>
   </layout>
  </widget>
- <resources/>
+ <resources>
+  <include location="znotes.qrc"/>
+ </resources>
  <connections/>
 </ui>
