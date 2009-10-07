@@ -8,10 +8,12 @@ TEMPLATE = app
 SOURCES += main.cpp \
     mainwindow.cpp \
     configdialog.cpp \
-    settings.cpp
+    settings.cpp \
+    note.cpp
 HEADERS += mainwindow.h \
     configdialog.h \
-    settings.h
+    settings.h \
+    note.h
 FORMS += mainwindow.ui \
     configdialog.ui
 TRANSLATIONS = translations/znotes_ru.ts

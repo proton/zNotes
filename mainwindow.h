@@ -3,21 +3,11 @@
 
 #include <QtGui/QMainWindow>
 #include <QDir>
-#include <QFile>
-#include <QPlainTextEdit>
 #include <QSystemTrayIcon>
 #include <QMenu>
 #include <QTimer>
 
-class Note : public QPlainTextEdit
-{
-	public:
-		Note(const QString& fn, const QDir&);
-		QString name;
-		void load(const QString&);
-		QFile file;
-		bool hasChange;
-};
+#include "note.h"
 
 namespace Ui
 {
