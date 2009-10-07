@@ -6,6 +6,7 @@
 #include <QSettings>
 #include <QRect>
 #include <QPoint>
+#include <QByteArray>
 
 class Settings : public QObject
 {
@@ -16,24 +17,35 @@ public:
 	const QString& getNotesPath();
 	const QString& getLastNote();
 	bool getHideStart();
-	const QRect& getDialogRect();
-	const QPoint& getDialogPos();
+	const QByteArray& getDialogGeometry();
+	bool getHideToolbar();
+	bool getHideFrame();
+	bool getStayTop();
 	//
 	void setNotesPath(const QString& path);
 	void setLastNote(const QString& name);
 	void setHideStart(bool hide);
-	void setDialogRect(const QRect& r);
-	void setDialogPos(const QPoint& p);
+	void setDialogGeometry(const QByteArray& g);
+	void setHideToolbar(bool s);
+	void setHideFrame(bool s);
+	void setStayTop(bool s);
 private:
 	QSettings config;
 	//
 	QString NotesPath;
 	QString LastNote;
 	bool HideStart;
-	QRect DialogRect;
-	QPoint DialogPos;
+	//
+	QByteArray DialogGeometry;
+	//
+	bool HideToolbar;
+	bool HideFrame;
+	bool StayTop;
+
 signals:
 	void NotesPathChanged();
+	void WindowStateChanged();
+	void ToolbarVisChanged();
 };
 
 extern Settings settings;

@@ -46,12 +46,11 @@ void MainWindow::RemoveCurrentNote()
 
 void MainWindow::RenameCurrentNote()
 {
+	SaveCurrentNote();
 	Note* n = currentNote();
 	bool ok;
-	QString text =
-		QInputDialog::getText(this,
-			tr("Rename note"), tr("New name:"),
-			QLineEdit::Normal, n->name, &ok);
+	QString text = QInputDialog::getText(this, tr("Rename note"),
+							tr("New name:"), QLineEdit::Normal, n->name, &ok);
 	if (ok && !text.isEmpty())
 	{
 		n->file.close();
@@ -197,17 +196,33 @@ void MainWindow::notesPathChanged()
 		tr("You need restart application to get effect"));
 }
 
+void MainWindow::windowStateChanged()
+{
+	Qt::WindowFlags flags = Qt::Window;
+	if(settings.getHideFrame()) flags |= Qt::FramelessWindowHint;
+	if(settings.getStayTop()) flags |= Qt::WindowStaysOnTopHint;
+	setWindowFlags(flags);
+}
+
+void MainWindow::toolbarVisChanged()
+{
+	if(settings.getHideToolbar()) ui->mainToolBar->hide();
+	else ui->mainToolBar->show();
+}
+
 MainWindow::MainWindow(QWidget *parent)
 	: QMainWindow(parent), ui(new Ui::MainWindow), CurrentIndex(-1)
 {
 	ui->setupUi(this);
 	//
-	setGeometry(settings.getDialogRect());
-	move(settings.getDialogPos());
+	restoreGeometry(settings.getDialogGeometry());
+	windowStateChanged();
 	//
 	LoadNotes();
 	if(Notes.count()==0) NewNote();
 	//
+	//ui->mainToolBar->setOrientation(Qt::Vertical);
+	ui->mainToolBar->setContextMenuPolicy(Qt::NoContextMenu);
 	ui->mainToolBar->addAction(QIcon(":/res/add.png"), tr("Create new note"),
 							   this, SLOT(NewNote()));
 	ui->mainToolBar->addAction(QIcon(":/res/remove.png"), tr("Remove this note"),
@@ -238,6 +253,8 @@ MainWindow::MainWindow(QWidget *parent)
 	SaveTimer.start(100000);
 	//
 	connect(&settings, SIGNAL(NotesPathChanged()), this, SLOT(notesPathChanged()));
+	connect(&settings, SIGNAL(WindowStateChanged()), this, SLOT(windowStateChanged()));
+	connect(&settings, SIGNAL(ToolbarVisChanged()), this, SLOT(toolbarVisChanged()));
 	if(!settings.getHideStart()) show();
 }
 
@@ -246,8 +263,7 @@ MainWindow::~MainWindow()
 	delete ui;
 	SaveAll();
 	settings.setLastNote(currentNote()->name);
-	settings.setDialogRect(rect());
-	settings.setDialogPos(pos());
+	settings.setDialogGeometry(saveGeometry());
 }
 
 void MainWindow::on_tabs_currentChanged(int index)

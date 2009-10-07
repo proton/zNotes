@@ -8,12 +8,11 @@ Settings::Settings() : config("pDev", "zNotes")
 	NotesPath = config.value("NotesPath").toString();
 	LastNote = config.value("LastNote").toString();
 	HideStart = config.value("HideStart").toBool();
-	DialogPos.setX(config.value("DialogX").toInt());
-	DialogPos.setY(config.value("DialogY").toInt());
-	DialogRect.setWidth(config.value("DialogWidth").toInt());
-	DialogRect.setHeight(config.value("DialogHeight").toInt());
-	if(DialogRect.width()==0) DialogRect.setWidth(300);
-	if(DialogRect.height()==0) DialogRect.setHeight(400);
+	DialogGeometry = config.value("DialogGeometry").toByteArray();
+	//
+	HideToolbar = config.value("HideToolbar").toBool();
+	HideFrame = config.value("HideFrame").toBool();
+	StayTop = config.value("StayTop").toBool();
 }
 
 const QString& Settings::getNotesPath()
@@ -31,14 +30,24 @@ bool Settings::getHideStart()
 	return HideStart;
 }
 
-const QRect& Settings::getDialogRect()
+const QByteArray& Settings::getDialogGeometry()
 {
-	return DialogRect;
+	return DialogGeometry;
 }
 
-const QPoint& Settings::getDialogPos()
+bool Settings::getHideToolbar()
 {
-	return DialogPos;
+	return HideToolbar;
+}
+
+bool Settings::getHideFrame()
+{
+	return HideFrame;
+}
+
+bool Settings::getStayTop()
+{
+	return StayTop;
 }
 
 void Settings::setNotesPath(const QString& path)
@@ -69,18 +78,38 @@ void Settings::setHideStart(bool hide)
 	}
 }
 
-void Settings::setDialogRect(const QRect& r)
+void Settings::setHideToolbar(bool Hide)
 {
-	DialogRect = r;
-	config.setValue("DialogWidth", r.width());
-	config.setValue("DialogHeight", r.height());
-
+	if(HideToolbar != Hide)
+	{
+		HideToolbar = Hide;
+		config.setValue("HideToolbar", HideToolbar);
+		emit ToolbarVisChanged();
+	}
 }
 
-void Settings::setDialogPos(const QPoint& p)
+void Settings::setHideFrame(bool Hide)
 {
-	DialogPos = p;
-	config.setValue("DialogX", p.x());
-	config.setValue("DialogY", p.y());
+	if(HideFrame != Hide)
+	{
+		HideFrame = Hide;
+		config.setValue("HideFrame", HideToolbar);
+		emit WindowStateChanged();
+	}
+}
 
+void Settings::setStayTop(bool top)
+{
+	if(StayTop != top)
+	{
+		StayTop = top;
+		config.setValue("StayTop", StayTop);
+		emit WindowStateChanged();
+	}
+}
+
+void Settings::setDialogGeometry(const QByteArray& g)
+{
+	DialogGeometry = g;
+	config.setValue("DialogGeometry", DialogGeometry);
 }

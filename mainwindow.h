@@ -64,6 +64,8 @@ public slots:
 	void prefDialog();
 	//
 	void notesPathChanged();
+	void windowStateChanged();
+	void toolbarVisChanged();
 
 private slots:
 	void on_tabs_currentChanged(int index);
