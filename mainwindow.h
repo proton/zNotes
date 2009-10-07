@@ -54,6 +54,11 @@ public slots:
 	void RenameCurrentNote();
 	void NewNote();
 	//
+	void PreviousNote();
+	void NextNote();
+	//
+	void CopyNote();
+	//
 	void currentNoteChanged();
 	//
 	void SaveAll();

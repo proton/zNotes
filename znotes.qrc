@@ -9,5 +9,8 @@
         <file>res/settings.png</file>
         <file>res/znotes.png</file>
         <file>res/znotes32.png</file>
+        <file>res/copy.png</file>
+        <file>res/next.png</file>
+        <file>res/prev.png</file>
     </qresource>
 </RCC>

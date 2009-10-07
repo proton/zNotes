@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>298</width>
-    <height>398</height>
+    <width>296</width>
+    <height>396</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -30,8 +30,8 @@
       <property name="tabPosition">
        <enum>QTabWidget::West</enum>
       </property>
-      <property name="currentIndex">
-       <number>0</number>
+      <property name="documentMode">
+       <bool>true</bool>
       </property>
       <widget class="QWidget" name="note1">
        <attribute name="title">

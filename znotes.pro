@@ -14,4 +14,5 @@ HEADERS += mainwindow.h \
     settings.h
 FORMS += mainwindow.ui \
     configdialog.ui
+TRANSLATIONS = translations/znotes_ru.ts
 RESOURCES += znotes.qrc

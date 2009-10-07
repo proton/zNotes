@@ -8,6 +8,7 @@
 #include <QInputDialog>
 #include <QMessageBox>
 #include <QFileDialog>
+#include <QClipboard>
 
 Settings settings;
 
@@ -41,6 +42,11 @@ void MainWindow::RemoveCurrentNote()
 		Notes.remove(ui->tabs->currentIndex());
 		ui->tabs->removeTab(ui->tabs->currentIndex());
 		delete n;
+		if(Notes.count()<2)
+		{
+			ui->mainToolBar->actions()[1]->setDisabled(true);
+			cmenu.actions()[4]->setDisabled(true);
+		}
 	}
 }
 
@@ -91,6 +97,26 @@ void MainWindow::NewNote()
 	ui->tabs->addTab(Notes[index], fn);
 	ui->tabs->setCurrentIndex(index);
 	QObject::connect(Notes[index], SIGNAL(textChanged()), this, SLOT(currentNoteChanged()));
+	if(Notes.count()>1)
+	{
+		ui->mainToolBar->actions()[1]->setEnabled(true);
+		cmenu.actions()[4]->setEnabled(true);
+	}
+}
+
+void MainWindow::PreviousNote()
+{
+	ui->tabs->setCurrentIndex(ui->tabs->currentIndex()-1);
+}
+
+void MainWindow::NextNote()
+{
+	ui->tabs->setCurrentIndex(ui->tabs->currentIndex()+1);
+}
+
+void MainWindow::CopyNote()
+{
+	QApplication::clipboard()->setText(currentNote()->toPlainText());
 }
 
 void MainWindow::LoadNotes()
@@ -170,7 +196,7 @@ void MainWindow::closeEvent(QCloseEvent *event)
 
 void MainWindow::aboutDialog()
 {
-	QMessageBox::information(this, tr("zNotes"),
+	QMessageBox::information(this, tr("zNotes - about"),
 		tr("zNotes\nby Peter Savichev (proton)\npsavichev@gmail.com\n2009"));
 }
 
@@ -193,7 +219,7 @@ void MainWindow::notesPathChanged()
 			Notes[i]->file.rename(dir.absoluteFilePath(Notes[i]->name));
 	}
 	else QMessageBox::information(this, tr("Notes path change"),
-		tr("You need restart application to get effect"));
+		tr("You need restart application to get effect."));
 }
 
 void MainWindow::windowStateChanged()
@@ -218,9 +244,6 @@ MainWindow::MainWindow(QWidget *parent)
 	restoreGeometry(settings.getDialogGeometry());
 	windowStateChanged();
 	//
-	LoadNotes();
-	if(Notes.count()==0) NewNote();
-	//
 	//ui->mainToolBar->setOrientation(Qt::Vertical);
 	ui->mainToolBar->setContextMenuPolicy(Qt::NoContextMenu);
 	ui->mainToolBar->addAction(QIcon(":/res/add.png"), tr("Create new note"),
@@ -230,6 +253,14 @@ MainWindow::MainWindow(QWidget *parent)
 	ui->mainToolBar->addAction(QIcon(":/res/rename.png"), tr("Rename this note"),
 							   this, SLOT(RenameCurrentNote()));
 	ui->mainToolBar->addSeparator();
+	ui->mainToolBar->addAction(QIcon(":/res/prev.png"), tr("Previous note"),
+							   this, SLOT(PreviousNote()));
+	ui->mainToolBar->addAction(QIcon(":/res/next.png"), tr("Next note"),
+							   this, SLOT(NextNote()));
+	ui->mainToolBar->addSeparator();
+	ui->mainToolBar->addAction(QIcon(":/res/copy.png"), tr("Copy this note to clipboard"),
+							   this, SLOT(CopyNote()));
+	ui->mainToolBar->addSeparator();
 	ui->mainToolBar->addAction(QIcon(":/res/settings.png"), tr("Preferences"),
 							   this, SLOT(prefDialog()));
 	ui->mainToolBar->actions()[0]->setShortcut(QKeySequence::New);
@@ -238,16 +269,28 @@ MainWindow::MainWindow(QWidget *parent)
 	cmenu.addAction(tr("Show"), this, SLOT(show()));
 	cmenu.addAction(tr("Hide"), this, SLOT(hide()));
 	cmenu.addSeparator();
+	cmenu.addAction(QIcon(":/res/add.png"), tr("Create new note"), this, SLOT(NewNote()));
+	cmenu.addAction(QIcon(":/res/remove.png"), tr("Remove this note"), this, SLOT(RemoveCurrentNote()));
+	cmenu.addAction(QIcon(":/res/rename.png"), tr("Rename this note"), this, SLOT(RenameCurrentNote()));
+	cmenu.addSeparator();
 	cmenu.addAction(QIcon(":/res/settings.png"), tr("Preferences"), this, SLOT(prefDialog()));
 	cmenu.addAction(QIcon(":/res/info.png"), tr("About"), this, SLOT(aboutDialog()));
 	cmenu.addSeparator();
 	cmenu.addAction(QIcon(":/res/exit.png"), tr("Quit"), qApp, SLOT(quit()));
-	cmenu.actions()[6]->setShortcut(QKeySequence::Close);
+	cmenu.actions()[10]->setShortcut(QKeySequence::Close);
 	tray.setIcon(QIcon(":/res/znotes32.png"));
 	tray.setContextMenu(&cmenu);
 	connect(&tray, SIGNAL(activated(QSystemTrayIcon::ActivationReason)),
 			this, SLOT(trayActivated(QSystemTrayIcon::ActivationReason)));
 	tray.show();
+	//
+	LoadNotes();
+	if(Notes.count()==0) NewNote();
+	if(Notes.count()<2)
+	{
+		ui->mainToolBar->actions()[1]->setDisabled(true);
+		cmenu.actions()[4]->setDisabled(true);
+	}
 	//
 	connect(&SaveTimer, SIGNAL(timeout()), this, SLOT(SaveAll()));
 	SaveTimer.start(100000);
@@ -270,4 +313,6 @@ void MainWindow::on_tabs_currentChanged(int index)
 {
 	SaveNote(CurrentIndex);
 	CurrentIndex = index;
+	ui->mainToolBar->actions()[4]->setDisabled(index==0);
+	ui->mainToolBar->actions()[5]->setDisabled(index==Notes.count()-1);
 }
