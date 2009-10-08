@@ -15,7 +15,7 @@ unix {
     DEFINES += PROGRAM_DATA_DIR=\\\"$$PREFIX/share/znotes/\\\"
     target.path = $$PREFIX/bin/
     locale.path = $$PREFIX/share/znotes/translations/
-    locale.files = locale/*.qm
+    locale.files = translations/*.qm
     pixmap.path = /usr/share/pixmaps
     pixmap.files = *.png
     desktop.path = /usr/share/applications
