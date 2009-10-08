@@ -5,6 +5,26 @@ TARGET = znotes
 QT += core \
     gui
 TEMPLATE = app
+OBJECTS_DIR = build
+UI_DIR = build
+MOC_DIR = build
+RCC_DIR = build
+unix {
+    PREFIX = $$(PREFIX)
+    isEmpty( PREFIX ):PREFIX = /usr/local
+    DEFINES += PROGRAM_DATA_DIR=\\\"$$PREFIX/share/znotes/\\\"
+    target.path = $$PREFIX/bin/
+    locale.path = $$PREFIX/share/znotes/translations/
+    locale.files = locale/*.qm
+    pixmap.path = /usr/share/pixmaps
+    pixmap.files = *.png
+    desktop.path = /usr/share/applications
+    desktop.files = *.desktop
+    INSTALLS += target \
+        locale \
+	pixmap \
+	desktop
+}
 SOURCES += main.cpp \
     mainwindow.cpp \
     configdialog.cpp \
