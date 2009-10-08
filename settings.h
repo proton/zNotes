@@ -7,6 +7,7 @@
 #include <QRect>
 #include <QPoint>
 #include <QByteArray>
+#include <QFont>
 
 class Settings : public QObject
 {
@@ -14,13 +15,14 @@ class Settings : public QObject
 public:
 	Settings();
 	//
-	const QString& getNotesPath();
-	const QString& getLastNote();
-	bool getHideStart();
-	const QByteArray& getDialogGeometry();
-	bool getHideToolbar();
-	bool getHideFrame();
-	bool getStayTop();
+	inline const QString& getNotesPath()			{ return NotesPath; }
+	inline const QString& getLastNote()				{ return LastNote; }
+	inline bool getHideStart()						{ return HideStart; }
+	inline const QByteArray& getDialogGeometry()	{ return DialogGeometry; }
+	inline bool getHideToolbar()					{ return HideToolbar; }
+	inline bool getHideFrame()						{ return HideFrame; }
+	inline bool getStayTop()						{ return StayTop; }
+	inline const QFont& getNoteFont()				{ return NoteFont; }
 	//
 	void setNotesPath(const QString& path);
 	void setLastNote(const QString& name);
@@ -29,6 +31,7 @@ public:
 	void setHideToolbar(bool s);
 	void setHideFrame(bool s);
 	void setStayTop(bool s);
+	void setNoteFont(const QFont& f);
 private:
 	QSettings config;
 	//
@@ -41,11 +44,13 @@ private:
 	bool HideToolbar;
 	bool HideFrame;
 	bool StayTop;
-
+	//
+	QFont NoteFont;
 signals:
 	void NotesPathChanged();
 	void WindowStateChanged();
 	void ToolbarVisChanged();
+	void NoteFontChanged();
 };
 
 extern Settings settings;

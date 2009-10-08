@@ -13,41 +13,8 @@ Settings::Settings() : config("pDev", "zNotes")
 	HideToolbar = config.value("HideToolbar").toBool();
 	HideFrame = config.value("HideFrame").toBool();
 	StayTop = config.value("StayTop").toBool();
-}
-
-const QString& Settings::getNotesPath()
-{
-	return NotesPath;
-}
-
-const QString& Settings::getLastNote()
-{
-	return LastNote;
-}
-
-bool Settings::getHideStart()
-{
-	return HideStart;
-}
-
-const QByteArray& Settings::getDialogGeometry()
-{
-	return DialogGeometry;
-}
-
-bool Settings::getHideToolbar()
-{
-	return HideToolbar;
-}
-
-bool Settings::getHideFrame()
-{
-	return HideFrame;
-}
-
-bool Settings::getStayTop()
-{
-	return StayTop;
+	//
+	NoteFont.fromString(config.value("NoteFont").toString());
 }
 
 void Settings::setNotesPath(const QString& path)
@@ -112,4 +79,14 @@ void Settings::setDialogGeometry(const QByteArray& g)
 {
 	DialogGeometry = g;
 	config.setValue("DialogGeometry", DialogGeometry);
+}
+
+void Settings::setNoteFont(const QFont& f)
+{
+	if(NoteFont != f)
+	{
+		NoteFont = f;
+		config.setValue("NoteFont", NoteFont.toString());
+		emit NoteFontChanged();
+	}
 }

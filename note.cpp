@@ -3,7 +3,8 @@
 
 #include "note.h"
 
-Note::Note(const QString& fn, const QDir& dir) : QPlainTextEdit(), name(fn), file(dir.absoluteFilePath(fn))
+Note::Note(const QString& fn, const QDir& dir, const QFont& f)
+	: QPlainTextEdit(), name(fn), file(dir.absoluteFilePath(fn))
 {
 	if(file.open(QIODevice::ReadOnly | QIODevice::Text))
 	{
@@ -12,5 +13,6 @@ Note::Note(const QString& fn, const QDir& dir) : QPlainTextEdit(), name(fn), fil
 		file.close();
 	}
 	else if(file.open(QIODevice::WriteOnly | QIODevice::Text)) file.close();
+	setFont(f);
 }
 

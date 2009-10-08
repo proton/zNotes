@@ -5,6 +5,8 @@
 
 #include <QtDebug>
 #include <QFileDialog>
+#include <QFontDialog>
+#include <QColorDialog>
 
 configDialog::configDialog(QWidget *parent) :
 	QDialog(parent),
@@ -16,6 +18,7 @@ configDialog::configDialog(QWidget *parent) :
 	m_ui->cb_ToolbarHide->setChecked(settings.getHideToolbar());
 	m_ui->cb_FrameHide->setChecked(settings.getHideFrame());
 	m_ui->cb_StayTop->setChecked(settings.getStayTop());
+	m_ui->lb_FontExample->setFont(settings.getNoteFont());
 }
 
 configDialog::~configDialog()
@@ -42,6 +45,7 @@ void configDialog::SaveSettings()
 	settings.setHideToolbar(m_ui->cb_ToolbarHide->checkState());
 	settings.setHideFrame(m_ui->cb_FrameHide->checkState());
 	settings.setStayTop(m_ui->cb_StayTop->checkState());
+	settings.setNoteFont(m_ui->lb_FontExample->font());
 }
 
 void configDialog::on_buttonBox_clicked(QAbstractButton* button)
@@ -65,4 +69,11 @@ void configDialog::on_btn_NotesPath_clicked()
 			QObject::tr("Select notes directory"),settings.getNotesPath(),
 			QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks);
 	if(!path.isEmpty()) m_ui->ed_NotesPath->setText(path);
+}
+
+void configDialog::on_btn_FontChange_clicked()
+{
+	QFontDialog dlg(m_ui->lb_FontExample->font());
+	dlg.exec();
+	m_ui->lb_FontExample->setFont(dlg.currentFont());
 }

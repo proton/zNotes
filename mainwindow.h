@@ -35,10 +35,13 @@ private:
 	QTimer SaveTimer;
 	//
 	void LoadNotes();
-	Note* currentNote();
+	inline Note* currentNote()
+	{
+		return Notes[CurrentIndex];
+	}
 	int currentIndex;
 	void SaveNote(int i);
-public slots:
+private slots:
 	void SaveCurrentNote();
 	void RemoveCurrentNote();
 	void RenameCurrentNote();
@@ -50,6 +53,7 @@ public slots:
 	void CopyNote();
 	//
 	void currentNoteChanged();
+	void on_tabs_currentChanged(int index);
 	//
 	void SaveAll();
 	//
@@ -61,9 +65,7 @@ public slots:
 	void notesPathChanged();
 	void windowStateChanged();
 	void toolbarVisChanged();
-
-private slots:
-	void on_tabs_currentChanged(int index);
+	void noteFontChanged();
 };
 
 #endif // MAINWINDOW_H

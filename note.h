@@ -7,7 +7,7 @@
 class Note : public QPlainTextEdit
 {
 	public:
-		Note(const QString& fn, const QDir&);
+		Note(const QString& fn, const QDir&, const QFont&);
 		QString name;
 		QFile file;
 		bool hasChange;

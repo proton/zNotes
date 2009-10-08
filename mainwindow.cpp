@@ -12,11 +12,6 @@
 
 Settings settings;
 
-Note* MainWindow::currentNote()
-{
-	return Notes[CurrentIndex];
-}
-
 void MainWindow::RemoveCurrentNote()
 {
 	Note* n = currentNote();
@@ -82,7 +77,7 @@ void MainWindow::NewNote()
 		fn = QString::number(++n);
 		f.setFileName(dir.absoluteFilePath(fn));
 	}
-	Notes.append(new Note(fn, dir));
+	Notes.append(new Note(fn, dir, settings.getNoteFont()));
 	ui->tabs->addTab(Notes[index], fn);
 	ui->tabs->setCurrentIndex(index);
 	QObject::connect(Notes[index], SIGNAL(textChanged()), this, SLOT(currentNoteChanged()));
@@ -126,7 +121,7 @@ void MainWindow::LoadNotes()
 	int old_index=-1;
 	for(int i=0; i<flist.size(); ++i)
 	{
-		Notes[i] = new Note(flist.at(i).fileName(), dir);
+		Notes[i] = new Note(flist.at(i).fileName(), dir, settings.getNoteFont());
 		ui->tabs->addTab(Notes[i], Notes[i]->name);
 		QObject::connect(Notes[i], SIGNAL(textChanged()), this, SLOT(currentNoteChanged()));
 		if(old_index==-1 && Notes[i]->name==old_note) old_index = i;
@@ -227,6 +222,14 @@ void MainWindow::toolbarVisChanged()
 	else ui->mainToolBar->show();
 }
 
+void MainWindow::noteFontChanged()
+{
+	for(int i=0; i<Notes.count(); ++i)
+	{
+		Notes[i]->setFont(settings.getNoteFont());
+	}
+}
+
 MainWindow::MainWindow(QWidget *parent)
 	: QMainWindow(parent), ui(new Ui::MainWindow), CurrentIndex(-1)
 {
@@ -289,6 +292,7 @@ MainWindow::MainWindow(QWidget *parent)
 	connect(&settings, SIGNAL(NotesPathChanged()), this, SLOT(notesPathChanged()));
 	connect(&settings, SIGNAL(WindowStateChanged()), this, SLOT(windowStateChanged()));
 	connect(&settings, SIGNAL(ToolbarVisChanged()), this, SLOT(toolbarVisChanged()));
+	connect(&settings, SIGNAL(NoteFontChanged()), this, SLOT(noteFontChanged()));
 	if(!settings.getHideStart()) show();
 }
 
