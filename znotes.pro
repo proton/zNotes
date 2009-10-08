@@ -11,7 +11,7 @@ MOC_DIR = build
 RCC_DIR = build
 unix {
     PREFIX = $$(PREFIX)
-    isEmpty( PREFIX ):PREFIX = /usr/local
+    isEmpty( PREFIX ):PREFIX = /usr
     DEFINES += PROGRAM_DATA_DIR=\\\"$$PREFIX/share/znotes/\\\"
     target.path = $$PREFIX/bin/
     locale.path = $$PREFIX/share/znotes/translations/
