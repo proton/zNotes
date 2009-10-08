@@ -213,10 +213,12 @@ void MainWindow::notesPathChanged()
 
 void MainWindow::windowStateChanged()
 {
+	bool v = isVisible();
 	Qt::WindowFlags flags = Qt::Window;
 	if(settings.getHideFrame()) flags |= Qt::FramelessWindowHint;
 	if(settings.getStayTop()) flags |= Qt::WindowStaysOnTopHint;
 	setWindowFlags(flags);
+	if(v) show();
 }
 
 void MainWindow::toolbarVisChanged()
