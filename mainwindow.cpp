@@ -57,7 +57,7 @@ void MainWindow::RenameCurrentNote()
 
 void MainWindow::SaveCurrentNote()
 {
-	SaveNote(currentIndex);
+	SaveNote(CurrentIndex);
 }
 
 void MainWindow::SaveNote(int i)
@@ -186,7 +186,7 @@ void MainWindow::closeEvent(QCloseEvent *event)
 void MainWindow::aboutDialog()
 {
 	QMessageBox::information(this, tr("zNotes - about"),
-		tr("zNotes\nby Peter Savichev (proton)\npsavichev@gmail.com\n2009"));
+		tr("zNotes %1\nby Peter Savichev (proton)\npsavichev@gmail.com\n2009").arg(VERSION));
 }
 
 void MainWindow::prefDialog()

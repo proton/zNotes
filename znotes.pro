@@ -2,6 +2,7 @@
 # Project created by QtCreator 2009-09-20T17:20:55
 # -------------------------------------------------
 TARGET = znotes
+VERSION = 0.2.6
 QT += core \
     gui
 TEMPLATE = app
@@ -9,22 +10,7 @@ OBJECTS_DIR = build
 UI_DIR = build
 MOC_DIR = build
 RCC_DIR = build
-unix {
-    PREFIX = $$(PREFIX)
-    isEmpty( PREFIX ):PREFIX = /usr
-    DEFINES += PROGRAM_DATA_DIR=\\\"$$PREFIX/share/znotes/\\\"
-    target.path = $$PREFIX/bin/
-    locale.path = $$PREFIX/share/znotes/translations/
-    locale.files = translations/*.qm
-    pixmap.path = /usr/share/pixmaps
-    pixmap.files = *.png
-    desktop.path = /usr/share/applications
-    desktop.files = *.desktop
-    INSTALLS += target \
-        locale \
-	pixmap \
-	desktop
-}
+
 SOURCES += main.cpp \
     mainwindow.cpp \
     configdialog.cpp \
@@ -52,3 +38,21 @@ TSQM.commands = $$QMAKE_LRELEASE \
 TSQM.CONFIG = no_link
 QMAKE_EXTRA_COMPILERS += TSQM
 PRE_TARGETDEPS += $$TS_OUT
+
+unix {
+    PREFIX = $$(PREFIX)
+    isEmpty( PREFIX ):PREFIX = /usr
+    DEFINES += PROGRAM_DATA_DIR=\\\"$$PREFIX/share/znotes/\\\"
+    DEFINES += VERSION=\\\"$$VERSION\\\"
+    target.path = $$PREFIX/bin/
+    locale.path = $$PREFIX/share/znotes/translations/
+    locale.files = $$TS_OUT
+    pixmap.path = /usr/share/pixmaps
+    pixmap.files = *.png
+    desktop.path = /usr/share/applications
+    desktop.files = *.desktop
+    INSTALLS += target \
+        locale \
+	pixmap \
+	desktop
+}
