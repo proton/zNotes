@@ -12,5 +12,6 @@
         <file>res/copy.png</file>
         <file>res/next.png</file>
         <file>res/prev.png</file>
+        <file>res/exec.png</file>
     </qresource>
 </RCC>

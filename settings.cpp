@@ -15,6 +15,14 @@ Settings::Settings() : config("pDev", "zNotes")
 	StayTop = config.value("StayTop").toBool();
 	//
 	NoteFont.fromString(config.value("NoteFont").toString());
+	//
+	ComandList.resize(config.value("ComandCount").toInt());
+	for(int i=0; i<ComandList.size(); ++i)
+	{
+		ComandList[i].name = config.value(QString("ComandName%1").arg(i)).toString();
+		ComandList[i].icon = config.value(QString("ComandIcon%1").arg(i)).toString();
+		ComandList[i].addr = config.value(QString("ComandFile%1").arg(i)).toString();
+	}
 }
 
 void Settings::setNotesPath(const QString& path)

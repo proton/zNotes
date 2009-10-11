@@ -102,7 +102,7 @@ Do you want to move your notes to new place ?</source>
     <message>
         <location filename="../mainwindow.cpp" line="255"/>
         <source>Copy this note to clipboard</source>
-        <translation>Копировать содержимое в буффер обмена</translation>
+        <translation>Скопировать содержимое в буффер обмена</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="258"/>

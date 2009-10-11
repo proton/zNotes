@@ -6,6 +6,7 @@
 #include <QSystemTrayIcon>
 #include <QMenu>
 #include <QTimer>
+#include <QSignalMapper>
 
 #include "note.h"
 
@@ -32,6 +33,9 @@ private:
 	int CurrentIndex;
 	QSystemTrayIcon tray;
 	QMenu cmenu;
+	QAction cmd_action;
+	QMenu cmd_menu;
+	QSignalMapper cmd_mapper;
 	QTimer SaveTimer;
 	//
 	void LoadNotes();
@@ -41,7 +45,7 @@ private:
 	}
 	int currentIndex;
 	void SaveNote(int i);
-private slots:
+public slots:
 	void SaveCurrentNote();
 	void RemoveCurrentNote();
 	void RenameCurrentNote();
@@ -59,12 +63,15 @@ private slots:
 	//
 	void trayActivated(QSystemTrayIcon::ActivationReason reason);
 	//
+	void commandMenu();
 	void aboutDialog();
 	void prefDialog();
 	//
+	void cmdExec(const QString &);
+	//
 	void notesPathChanged();
 	void windowStateChanged();
-	void toolbarVisChanged();
+	void toolbarVisChanged();//TODO:подумать...
 	void noteFontChanged();
 };
 

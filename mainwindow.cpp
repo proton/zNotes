@@ -9,6 +9,7 @@
 #include <QMessageBox>
 #include <QFileDialog>
 #include <QClipboard>
+#include <QProcess>
 
 Settings settings;
 
@@ -230,16 +231,37 @@ void MainWindow::noteFontChanged()
 	}
 }
 
+void MainWindow::commandMenu()
+{
+	QPoint p = ui->mainToolBar->actionGeometry(&cmd_action).center();
+	p+=pos();
+	cmd_menu.exec(p);
+}
+
+void MainWindow::cmdExec(const QString & command)
+{
+	QProcess p;
+	QStringList args;
+	args << dir.absoluteFilePath(currentNote()->file.fileName());
+	p.start(command, args);
+	if(p.waitForStarted())
+	{
+		if(p.waitForFinished(10000))
+		{
+			QByteArray result = p.readAll();
+			tray.showMessage(command, QString::fromUtf8(result));
+		}
+	}
+}
+
 MainWindow::MainWindow(QWidget *parent)
-	: QMainWindow(parent), ui(new Ui::MainWindow), CurrentIndex(-1)
+	: QMainWindow(parent), ui(new Ui::MainWindow), CurrentIndex(-1), cmd_action(QIcon(":/res/exec.png"), tr("Commands"), parent)
 {
 	ui->setupUi(this);
 	//
 	restoreGeometry(settings.getDialogGeometry());
 	windowStateChanged();
 	//
-	//ui->mainToolBar->setOrientation(Qt::Vertical);
-	ui->mainToolBar->setContextMenuPolicy(Qt::NoContextMenu);
 	ui->mainToolBar->addAction(QIcon(":/res/add.png"), tr("Create new note"),
 							   this, SLOT(NewNote()));
 	ui->mainToolBar->addAction(QIcon(":/res/remove.png"), tr("Remove this note"),
@@ -257,8 +279,19 @@ MainWindow::MainWindow(QWidget *parent)
 	ui->mainToolBar->addSeparator();
 	ui->mainToolBar->addAction(QIcon(":/res/settings.png"), tr("Preferences"),
 							   this, SLOT(prefDialog()));
+	ui->mainToolBar->addSeparator();
+	ui->mainToolBar->addAction(&cmd_action);
+	connect(&cmd_action, SIGNAL(triggered()), this, SLOT(commandMenu()));
 	ui->mainToolBar->actions()[0]->setShortcut(QKeySequence::New);
 	ui->mainToolBar->actions()[1]->setShortcut(QKeySequence::Delete);
+	//
+	const QVector<Script>& cmdlist = settings.getComandList();
+	for(int i=0; i<cmdlist.size(); ++i)
+	{
+		cmd_menu.addAction(QIcon(cmdlist[i].icon), cmdlist[i].name, &cmd_mapper, SLOT(map()));
+		cmd_mapper.setMapping(cmd_menu.actions().last(), cmdlist[i].addr);
+		connect(&cmd_mapper, SIGNAL(mapped(const QString &)), this, SLOT(cmdExec(const QString &)));
+	}
 	//
 	cmenu.addAction(tr("Show"), this, SLOT(show()));
 	cmenu.addAction(tr("Hide"), this, SLOT(hide()));

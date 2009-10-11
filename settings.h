@@ -8,6 +8,14 @@
 #include <QPoint>
 #include <QByteArray>
 #include <QFont>
+#include <QVector>
+
+struct Script
+{
+	QString name;
+	QString icon;
+	QString addr;
+};
 
 class Settings : public QObject
 {
@@ -23,6 +31,7 @@ public:
 	inline bool getHideFrame()						{ return HideFrame; }
 	inline bool getStayTop()						{ return StayTop; }
 	inline const QFont& getNoteFont()				{ return NoteFont; }
+	inline const QVector<Script>& getComandList()		{ return ComandList; }
 	//
 	void setNotesPath(const QString& path);
 	void setLastNote(const QString& name);
@@ -46,6 +55,8 @@ private:
 	bool StayTop;
 	//
 	QFont NoteFont;
+	//
+	QVector<Script> ComandList;
 signals:
 	void NotesPathChanged();
 	void WindowStateChanged();
