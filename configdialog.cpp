@@ -19,6 +19,10 @@ configDialog::configDialog(QWidget *parent) :
 	m_ui->cb_FrameHide->setChecked(settings.getHideFrame());
 	m_ui->cb_StayTop->setChecked(settings.getStayTop());
 	m_ui->lb_FontExample->setFont(settings.getNoteFont());
+	m_ui->tabScripts->setModel(&settings.getScriptModel());
+	m_ui->tabScripts->resizeColumnsToContents();
+	m_ui->cb_ScriptShowOutput->setChecked(settings.getScriptShowOutput());
+	m_ui->cb_ScriptCopyOutput->setChecked(settings.getScriptCopyOutput());
 }
 
 configDialog::~configDialog()
@@ -46,6 +50,8 @@ void configDialog::SaveSettings()
 	settings.setHideFrame(m_ui->cb_FrameHide->checkState());
 	settings.setStayTop(m_ui->cb_StayTop->checkState());
 	settings.setNoteFont(m_ui->lb_FontExample->font());
+	settings.setScriptShowOutput(m_ui->cb_ScriptShowOutput->checkState());
+	settings.setScriptCopyOutput(m_ui->cb_ScriptCopyOutput->checkState());
 }
 
 void configDialog::on_buttonBox_clicked(QAbstractButton* button)

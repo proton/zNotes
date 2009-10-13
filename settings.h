@@ -10,6 +10,8 @@
 #include <QFont>
 #include <QVector>
 
+#include "scriptmodel.h"
+
 struct Script
 {
 	QString name;
@@ -31,7 +33,9 @@ public:
 	inline bool getHideFrame()						{ return HideFrame; }
 	inline bool getStayTop()						{ return StayTop; }
 	inline const QFont& getNoteFont()				{ return NoteFont; }
-	inline const QVector<Script>& getComandList()		{ return ComandList; }
+	inline ScriptModel& getScriptModel()			{ return smodel; }
+	inline bool getScriptShowOutput()				{ return ScriptShowOutput; }
+	inline bool getScriptCopyOutput()				{ return ScriptCopyOutput; }
 	//
 	void setNotesPath(const QString& path);
 	void setLastNote(const QString& name);
@@ -41,6 +45,8 @@ public:
 	void setHideFrame(bool s);
 	void setStayTop(bool s);
 	void setNoteFont(const QFont& f);
+	void setScriptShowOutput(bool b);
+	void setScriptCopyOutput(bool b);
 private:
 	QSettings config;
 	//
@@ -56,7 +62,9 @@ private:
 	//
 	QFont NoteFont;
 	//
-	QVector<Script> ComandList;
+	ScriptModel smodel;
+	bool ScriptShowOutput;
+	bool ScriptCopyOutput;
 signals:
 	void NotesPathChanged();
 	void WindowStateChanged();

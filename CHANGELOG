@@ -1,0 +1,60 @@
+zNotes 0.3.0
+* Added ability to execute commands on scripts (such as upload to pasterbin);
+* Updated russian translate
+
+zNotes 0.2.9
+* Fixed toolbar
+* Updated russian translate
+
+zNotes 0.2.8
+* Added ability to change note's font
+* Updated russian translate
+
+zNotes 0.2.7
+* Fixed bug with hiding on preferences's changing
+
+zNotes 0.2.6
+* Added russian translation
+* Some improvements
+* Fixed bug with crush on note's renaming
+* "make install" work now!
+
+zNotes 0.2.5
+* Fixed bug with renaming
+* Added ability to hide toolbar
+* Added ability to hide window's frame
+
+zNotes 0.2.4
+* Fixed desktop file
+* Added saving window's coordinates on quit
+* Beautifiered source code
+* Some improvements
+
+zNotes 0.2.3:
+* Added icons to actions
+
+zNotes 0.2.2:
+* Added program icon
+* Fixedbug with closing application, when it hided and any dialog was showed
+
+zNotes 0.2.1:
+* Added save of dialog's width and height on exit
+
+zNotes 0.2.0:
+* Added activation of last used note on program start
+* Fixed the dirty hack with changing note's directory
+* Added a hack to avoid bug with closing application, when it hided and any dialog was showed
+
+zNotes 0.1.9:
+* Fixed bug with crush on creating new note
+
+zNotes 0.1.8:
+* Fixed critical bug with segmenration fault on start
+
+zNotes 0.1.7:
+* Fixed serious bug with note's saving
+
+zNotes 0.1.4:
+* Fixed some bugs
+* Changed config file's format
+* Added preferences dialog

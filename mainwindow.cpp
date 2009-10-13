@@ -249,7 +249,8 @@ void MainWindow::cmdExec(const QString & command)
 		if(p.waitForFinished(10000))
 		{
 			QByteArray result = p.readAll();
-			tray.showMessage(command, QString::fromUtf8(result));
+			if(settings.getScriptShowOutput()) tray.showMessage(command, QString::fromUtf8(result));
+			if(settings.getScriptCopyOutput()) QApplication::clipboard()->setText(QString::fromUtf8(result));
 		}
 	}
 }
@@ -285,11 +286,11 @@ MainWindow::MainWindow(QWidget *parent)
 	ui->mainToolBar->actions()[0]->setShortcut(QKeySequence::New);
 	ui->mainToolBar->actions()[1]->setShortcut(QKeySequence::Delete);
 	//
-	const QVector<Script>& cmdlist = settings.getComandList();
-	for(int i=0; i<cmdlist.size(); ++i)
+	ScriptModel& sm = settings.getScriptModel();
+	for(int i=0; i<sm.rowCount(); ++i)
 	{
-		cmd_menu.addAction(QIcon(cmdlist[i].icon), cmdlist[i].name, &cmd_mapper, SLOT(map()));
-		cmd_mapper.setMapping(cmd_menu.actions().last(), cmdlist[i].addr);
+		cmd_menu.addAction(QIcon(sm.getIcon(i)), sm.getName(i), &cmd_mapper, SLOT(map()));
+		cmd_mapper.setMapping(cmd_menu.actions().last(), sm.getFile(i));
 		connect(&cmd_mapper, SIGNAL(mapped(const QString &)), this, SLOT(cmdExec(const QString &)));
 	}
 	//

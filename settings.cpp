@@ -16,13 +16,16 @@ Settings::Settings() : config("pDev", "zNotes")
 	//
 	NoteFont.fromString(config.value("NoteFont").toString());
 	//
-	ComandList.resize(config.value("ComandCount").toInt());
-	for(int i=0; i<ComandList.size(); ++i)
+	int ScriptCount = config.value("ComandCount").toInt();
+	for(int i=0; i<ScriptCount; ++i)
 	{
-		ComandList[i].name = config.value(QString("ComandName%1").arg(i)).toString();
-		ComandList[i].icon = config.value(QString("ComandIcon%1").arg(i)).toString();
-		ComandList[i].addr = config.value(QString("ComandFile%1").arg(i)).toString();
+		smodel.append(
+			config.value(QString("ComandName%1").arg(i)).toString(),
+			config.value(QString("ComandFile%1").arg(i)).toString(),
+			config.value(QString("ComandIcon%1").arg(i)).toString());
 	}
+	ScriptShowOutput = config.value("ScriptShowOutput").toBool();
+	ScriptCopyOutput = config.value("ScriptCopyOutput").toBool();
 }
 
 void Settings::setNotesPath(const QString& path)
@@ -96,5 +99,23 @@ void Settings::setNoteFont(const QFont& f)
 		NoteFont = f;
 		config.setValue("NoteFont", NoteFont.toString());
 		emit NoteFontChanged();
+	}
+}
+
+void Settings::setScriptShowOutput(bool sso)
+{
+	if(ScriptShowOutput != sso)
+	{
+		ScriptShowOutput = sso;
+		config.setValue("ScriptShowOutput", ScriptShowOutput);
+	}
+}
+
+void Settings::setScriptCopyOutput(bool sco)
+{
+	if(ScriptCopyOutput != sco)
+	{
+		ScriptCopyOutput = sco;
+		config.setValue("ScriptCopyOutput", ScriptCopyOutput);
 	}
 }
