@@ -47,6 +47,7 @@ public:
 	void setNoteFont(const QFont& f);
 	void setScriptShowOutput(bool b);
 	void setScriptCopyOutput(bool b);
+	void setScripts();
 private:
 	QSettings config;
 	//

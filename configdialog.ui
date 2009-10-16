@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>509</width>
-    <height>255</height>
+    <width>507</width>
+    <height>253</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -145,7 +145,40 @@
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout_3">
        <item>
-        <widget class="QTableView" name="tabScripts"/>
+        <widget class="QTableView" name="tabScripts">
+         <property name="selectionMode">
+          <enum>QAbstractItemView::SingleSelection</enum>
+         </property>
+         <property name="selectionBehavior">
+          <enum>QAbstractItemView::SelectRows</enum>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_4">
+         <item>
+          <widget class="QPushButton" name="btn_ScriptAdd">
+           <property name="text">
+            <string>Add</string>
+           </property>
+           <property name="icon">
+            <iconset resource="znotes.qrc">
+             <normaloff>:/res/add.png</normaloff>:/res/add.png</iconset>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="btn_ScriptRemove">
+           <property name="text">
+            <string>Remove</string>
+           </property>
+           <property name="icon">
+            <iconset resource="znotes.qrc">
+             <normaloff>:/res/remove.png</normaloff>:/res/remove.png</iconset>
+           </property>
+          </widget>
+         </item>
+        </layout>
        </item>
        <item>
         <layout class="QHBoxLayout" name="horizontalLayout_3">

@@ -67,6 +67,7 @@ public slots:
 	void aboutDialog();
 	void prefDialog();
 	//
+	void cmd_changed();
 	void cmdExec(const QString &);
 	//
 	void notesPathChanged();

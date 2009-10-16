@@ -83,3 +83,14 @@ void configDialog::on_btn_FontChange_clicked()
 	dlg.exec();
 	m_ui->lb_FontExample->setFont(dlg.currentFont());
 }
+
+void configDialog::on_btn_ScriptRemove_clicked()
+{
+	if(!m_ui->tabScripts->selectionModel()->hasSelection()) return;
+	settings.getScriptModel().removeRow(m_ui->tabScripts->selectionModel()->currentIndex().row());
+}
+
+void configDialog::on_btn_ScriptAdd_clicked()
+{
+	settings.getScriptModel().append("","","");
+}

@@ -119,3 +119,14 @@ void Settings::setScriptCopyOutput(bool sco)
 		config.setValue("ScriptCopyOutput", ScriptCopyOutput);
 	}
 }
+
+void Settings::setScripts()
+{
+	config.setValue("ComandCount", smodel.rowCount());
+	for(int i=0; i<smodel.rowCount(); ++i)
+	{
+		config.setValue(QString("ComandName%1").arg(i), smodel.getName(i));
+		config.setValue(QString("ComandFile%1").arg(i), smodel.getFile(i));
+		config.setValue(QString("ComandIcon%1").arg(i), smodel.getIcon(i));
+	}
+}

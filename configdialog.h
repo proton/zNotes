@@ -22,6 +22,8 @@ private:
 	void SaveSettings();
 
 private slots:
+	void on_btn_ScriptAdd_clicked();
+	void on_btn_ScriptRemove_clicked();
 	void on_btn_FontChange_clicked();
 	void on_btn_NotesPath_clicked();
 	void on_buttonBox_clicked(QAbstractButton* button);

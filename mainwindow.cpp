@@ -255,6 +255,18 @@ void MainWindow::cmdExec(const QString & command)
 	}
 }
 
+void MainWindow::cmd_changed()
+{
+	cmd_menu.clear();
+	ScriptModel& sm = settings.getScriptModel();
+	for(int i=0; i<sm.rowCount(); ++i)
+	{
+		cmd_menu.addAction(QIcon(sm.getIcon(i)), sm.getName(i), &cmd_mapper, SLOT(map()));
+		cmd_mapper.setMapping(cmd_menu.actions().last(), sm.getFile(i));
+		connect(&cmd_mapper, SIGNAL(mapped(const QString &)), this, SLOT(cmdExec(const QString &)));
+	}
+}
+
 MainWindow::MainWindow(QWidget *parent)
 	: QMainWindow(parent), ui(new Ui::MainWindow), CurrentIndex(-1), cmd_action(QIcon(":/res/exec.png"), tr("Commands"), parent)
 {
@@ -286,13 +298,7 @@ MainWindow::MainWindow(QWidget *parent)
 	ui->mainToolBar->actions()[0]->setShortcut(QKeySequence::New);
 	ui->mainToolBar->actions()[1]->setShortcut(QKeySequence::Delete);
 	//
-	ScriptModel& sm = settings.getScriptModel();
-	for(int i=0; i<sm.rowCount(); ++i)
-	{
-		cmd_menu.addAction(QIcon(sm.getIcon(i)), sm.getName(i), &cmd_mapper, SLOT(map()));
-		cmd_mapper.setMapping(cmd_menu.actions().last(), sm.getFile(i));
-		connect(&cmd_mapper, SIGNAL(mapped(const QString &)), this, SLOT(cmdExec(const QString &)));
-	}
+	cmd_changed();
 	//
 	cmenu.addAction(tr("Show"), this, SLOT(show()));
 	cmenu.addAction(tr("Hide"), this, SLOT(hide()));
@@ -327,6 +333,8 @@ MainWindow::MainWindow(QWidget *parent)
 	connect(&settings, SIGNAL(WindowStateChanged()), this, SLOT(windowStateChanged()));
 	connect(&settings, SIGNAL(ToolbarVisChanged()), this, SLOT(toolbarVisChanged()));
 	connect(&settings, SIGNAL(NoteFontChanged()), this, SLOT(noteFontChanged()));
+	connect(&settings.getScriptModel(), SIGNAL(dataChanged(const QModelIndex &, const QModelIndex &)),
+		this, SLOT(cmd_changed()));
 	if(!settings.getHideStart()) show();
 }
 
@@ -336,6 +344,7 @@ MainWindow::~MainWindow()
 	SaveAll();
 	settings.setLastNote(currentNote()->name);
 	settings.setDialogGeometry(saveGeometry());
+	settings.setScripts();
 }
 
 void MainWindow::on_tabs_currentChanged(int index)
