@@ -1,0 +1,4 @@
+lrelease znotes.pro
+qmake
+make
+make install
