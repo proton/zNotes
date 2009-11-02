@@ -302,6 +302,8 @@ MainWindow::MainWindow(QWidget *parent)
 							   this, SLOT(prefDialog()));
 	ui->mainToolBar->addSeparator();
 	ui->mainToolBar->addAction(&cmd_action);
+	ui->mainToolBar->addSeparator();
+	ui->mainToolBar->addAction(QIcon(":/res/exit.png"), tr("Exit"), qApp, SLOT(quit()));
 	connect(&cmd_action, SIGNAL(triggered()), this, SLOT(commandMenu()));
 	ui->mainToolBar->actions()[0]->setShortcut(QKeySequence::New);
 	ui->mainToolBar->actions()[1]->setShortcut(QKeySequence::Delete);
