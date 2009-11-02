@@ -108,6 +108,14 @@ void MainWindow::LoadNotes()
 {
 	ui->tabs->clear();
 	dir.setPath(settings.getNotesPath());
+#ifdef unix
+	if(dir.path().isEmpty())
+	{
+		dir.setPath(dir.homePath()+"/.local/share/notes");
+		if(!dir.exists()) if(!dir.mkpath(dir.path())) dir.setPath("");
+		if(!dir.isReadable()) dir.setPath("");
+	}
+#endif
 	while(dir.path().isEmpty())
 	{
 		dir.setPath(QFileDialog::getExistingDirectory(0,
