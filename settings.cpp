@@ -8,7 +8,9 @@ Settings::Settings() : config("pDev", "zNotes")
 	NotesPath = config.value("NotesPath").toString();
 	LastNote = config.value("LastNote").toString();
 	HideStart = config.value("HideStart").toBool();
+	//
 	DialogGeometry = config.value("DialogGeometry").toByteArray();
+	DialogState = config.value("DialogState").toByteArray();
 	//
 	HideToolbar = config.value("HideToolbar").toBool();
 	HideFrame = config.value("HideFrame").toBool();
@@ -90,6 +92,12 @@ void Settings::setDialogGeometry(const QByteArray& g)
 {
 	DialogGeometry = g;
 	config.setValue("DialogGeometry", DialogGeometry);
+}
+
+void Settings::setDialogState(const QByteArray& g)
+{
+	DialogState = g;
+	config.setValue("DialogState", DialogState);
 }
 
 void Settings::setNoteFont(const QFont& f)

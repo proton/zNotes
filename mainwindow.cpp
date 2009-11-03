@@ -281,6 +281,7 @@ MainWindow::MainWindow(QWidget *parent)
 	ui->setupUi(this);
 	//
 	restoreGeometry(settings.getDialogGeometry());
+	restoreState(settings.getDialogState());
 	windowStateChanged();
 	//
 	ui->mainToolBar->addAction(QIcon(":/res/add.png"), tr("Create new note"),
@@ -354,6 +355,8 @@ MainWindow::~MainWindow()
 	SaveAll();
 	settings.setLastNote(currentNote()->name);
 	settings.setDialogGeometry(saveGeometry());
+	settings.setDialogState(saveState());
+	//
 	settings.setScripts();
 }
 

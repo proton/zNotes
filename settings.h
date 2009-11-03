@@ -29,6 +29,7 @@ public:
 	inline const QString& getLastNote()				{ return LastNote; }
 	inline bool getHideStart()						{ return HideStart; }
 	inline const QByteArray& getDialogGeometry()	{ return DialogGeometry; }
+	inline const QByteArray& getDialogState()	{ return DialogState; }
 	inline bool getHideToolbar()					{ return HideToolbar; }
 	inline bool getHideFrame()						{ return HideFrame; }
 	inline bool getStayTop()						{ return StayTop; }
@@ -41,6 +42,7 @@ public:
 	void setLastNote(const QString& name);
 	void setHideStart(bool hide);
 	void setDialogGeometry(const QByteArray& g);
+	void setDialogState(const QByteArray& g);
 	void setHideToolbar(bool s);
 	void setHideFrame(bool s);
 	void setStayTop(bool s);
@@ -56,6 +58,7 @@ private:
 	bool HideStart;
 	//
 	QByteArray DialogGeometry;
+	QByteArray DialogState;
 	//
 	bool HideToolbar;
 	bool HideFrame;
