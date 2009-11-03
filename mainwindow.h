@@ -7,6 +7,7 @@
 #include <QMenu>
 #include <QTimer>
 #include <QSignalMapper>
+#include <QAction>
 
 #include "note.h"
 
@@ -33,10 +34,13 @@ private:
 	int CurrentIndex;
 	QSystemTrayIcon tray;
 	QMenu cmenu;
-	QAction cmd_action;
 	QMenu cmd_menu;
 	QSignalMapper cmd_mapper;
 	QTimer SaveTimer;
+	//
+	//QAction *actAdd, *actRemove, *actRename;
+	//QAction* actPrev, *actNext;
+	//QAction* actCopy, *actSetup, *actRun, *actExit;
 	//
 	void LoadNotes();
 	inline Note* currentNote()
@@ -66,6 +70,8 @@ public slots:
 	void commandMenu();
 	void aboutDialog();
 	void prefDialog();
+	//
+	void actions_changed();
 	//
 	void cmd_changed();
 	void cmdExec(const QString &);

@@ -241,9 +241,9 @@ void MainWindow::noteFontChanged()
 
 void MainWindow::commandMenu()
 {
-	QPoint p = ui->mainToolBar->actionGeometry(&cmd_action).center();
+	/*QPoint p = ui->mainToolBar->actionGeometry(actRun).center();
 	p+=pos();
-	cmd_menu.exec(p);
+	cmd_menu.exec(p);*/
 }
 
 void MainWindow::cmdExec(const QString & command)
@@ -275,8 +275,42 @@ void MainWindow::cmd_changed()
 	}
 }
 
+void MainWindow::actions_changed()
+{
+	/*ui->mainToolBar->actions().clear();
+	if(!settings.getTbHideEdit())
+	{
+		ui->mainToolBar->addAction(actAdd);
+		ui->mainToolBar->addAction(actRemove);
+		ui->mainToolBar->addAction(actRename);
+		ui->mainToolBar->addSeparator();
+	}
+	if(!settings.getTbHideMove())
+	{
+		ui->mainToolBar->addAction(actPrev);
+		ui->mainToolBar->addAction(actNext);
+		ui->mainToolBar->addSeparator();
+	}
+	if(!settings.getTbHideCopy())
+	{
+		ui->mainToolBar->addAction(actCopy);
+		ui->mainToolBar->addSeparator();
+	}
+	if(!settings.getTbHideSetup())
+	{
+		ui->mainToolBar->addAction(actSetup);
+		ui->mainToolBar->addSeparator();
+	}
+	if(!settings.getTbHideRun())
+	{
+		ui->mainToolBar->addAction(actRun);
+		ui->mainToolBar->addSeparator();
+	}
+	if(!settings.getTbHideExit()) ui->mainToolBar->addAction(actExit);*/
+}
+
 MainWindow::MainWindow(QWidget *parent)
-	: QMainWindow(parent), ui(new Ui::MainWindow), CurrentIndex(-1), cmd_action(QIcon(":/res/exec.png"), tr("Commands"), parent)
+	: QMainWindow(parent), ui(new Ui::MainWindow), CurrentIndex(-1)
 {
 	ui->setupUi(this);
 	//
@@ -284,31 +318,28 @@ MainWindow::MainWindow(QWidget *parent)
 	restoreState(settings.getDialogState());
 	windowStateChanged();
 	//
-	ui->mainToolBar->addAction(QIcon(":/res/add.png"), tr("Create new note"),
-							   this, SLOT(NewNote()));
-	ui->mainToolBar->addAction(QIcon(":/res/remove.png"), tr("Remove this note"),
-							   this, SLOT(RemoveCurrentNote()));
-	ui->mainToolBar->addAction(QIcon(":/res/rename.png"), tr("Rename this note"),
-							   this, SLOT(RenameCurrentNote()));
-	ui->mainToolBar->addSeparator();
-	ui->mainToolBar->addAction(QIcon(":/res/prev.png"), tr("Previous note"),
-							   this, SLOT(PreviousNote()));
-	ui->mainToolBar->addAction(QIcon(":/res/next.png"), tr("Next note"),
-							   this, SLOT(NextNote()));
-	ui->mainToolBar->addSeparator();
-	ui->mainToolBar->addAction(QIcon(":/res/copy.png"), tr("Copy this note to clipboard"),
-							   this, SLOT(CopyNote()));
-	ui->mainToolBar->addSeparator();
-	ui->mainToolBar->addAction(QIcon(":/res/settings.png"), tr("Preferences"),
-							   this, SLOT(prefDialog()));
-	ui->mainToolBar->addSeparator();
-	ui->mainToolBar->addAction(&cmd_action);
-	ui->mainToolBar->addSeparator();
-	ui->mainToolBar->addAction(QIcon(":/res/exit.png"), tr("Exit"), qApp, SLOT(quit()));
-	connect(&cmd_action, SIGNAL(triggered()), this, SLOT(commandMenu()));
-	ui->mainToolBar->actions()[0]->setShortcut(QKeySequence::New);
-	ui->mainToolBar->actions()[1]->setShortcut(QKeySequence::Delete);
+	/*actAdd = new QAction(QIcon(":/res/add.png"), tr("Create new note"), parent);
+	actRemove = new QAction(QIcon(":/res/remove.png"), tr("Remove this note"), parent);
+	actRename = new QAction(QIcon(":/res/rename.png"), tr("Rename this note"), parent);
+	actPrev = new QAction(QIcon(":/res/prev.png"), tr("Previous note"), parent);
+	actNext = new QAction(QIcon(":/res/next.png"), tr("Next note"), parent);
+	actCopy = new QAction(QIcon(":/res/copy.png"), tr("Copy this note to clipboard"), parent);
+	actSetup = new QAction(QIcon(":/res/settings.png"), tr("Preferences"), parent);
+	actRun = new QAction(QIcon(":/res/exec.png"), tr("Commands"), parent);
+	actExit = new QAction(QIcon(":/res/exit.png"), tr("Exit"), parent);
+	QObject::connect(actAdd, SIGNAL(triggered()), this, SLOT(NewNote()));
+	QObject::connect(actRemove, SIGNAL(triggered()), this, SLOT(RemoveCurrentNote()));
+	QObject::connect(actRename, SIGNAL(triggered()), this, SLOT(RenameCurrentNote()));
+	QObject::connect(actPrev, SIGNAL(triggered()), this, SLOT(PreviousNote()));
+	QObject::connect(actNext, SIGNAL(triggered()), this, SLOT(NextNote()));
+	QObject::connect(actCopy, SIGNAL(triggered()), this, SLOT(CopyNote()));
+	QObject::connect(actSetup, SIGNAL(triggered()), this, SLOT(prefDialog()));
+	QObject::connect(actRun, SIGNAL(triggered()), this, SLOT(commandMenu()));
+	QObject::connect(actExit, SIGNAL(triggered()), qApp, SLOT(quit()));
+	actAdd->setShortcut(QKeySequence::New);
+	actRemove->setShortcut(QKeySequence::Delete);*/
 	//
+	actions_changed();
 	cmd_changed();
 	//
 	cmenu.addAction(tr("Show"), this, SLOT(show()));
@@ -344,6 +375,7 @@ MainWindow::MainWindow(QWidget *parent)
 	connect(&settings, SIGNAL(WindowStateChanged()), this, SLOT(windowStateChanged()));
 	connect(&settings, SIGNAL(ToolbarVisChanged()), this, SLOT(toolbarVisChanged()));
 	connect(&settings, SIGNAL(NoteFontChanged()), this, SLOT(noteFontChanged()));
+	connect(&settings, SIGNAL(tbHidingChanged()), this, SLOT(actions_changed()));
 	connect(&settings.getScriptModel(), SIGNAL(dataChanged(const QModelIndex &, const QModelIndex &)),
 		this, SLOT(cmd_changed()));
 	if(!settings.getHideStart()) show();

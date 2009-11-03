@@ -14,9 +14,6 @@ public:
 	configDialog(QWidget *parent = 0);
 	~configDialog();
 
-protected:
-	void changeEvent(QEvent *e);
-
 private:
 	Ui::configDialog *m_ui;
 	void SaveSettings();

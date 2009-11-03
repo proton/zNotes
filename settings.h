@@ -37,6 +37,12 @@ public:
 	inline ScriptModel& getScriptModel()			{ return smodel; }
 	inline bool getScriptShowOutput()				{ return ScriptShowOutput; }
 	inline bool getScriptCopyOutput()				{ return ScriptCopyOutput; }
+	inline bool getTbHideEdit()						{ return tbHideEdit; }
+	inline bool getTbHideMove()						{ return tbHideMove; }
+	inline bool getTbHideCopy()						{ return tbHideCopy; }
+	inline bool getTbHideSetup()					{ return tbHideSetup; }
+	inline bool getTbHideRun()						{ return tbHideRun; }
+	inline bool getTbHideExit()						{ return tbHideExit; }
 	//
 	void setNotesPath(const QString& path);
 	void setLastNote(const QString& name);
@@ -50,6 +56,12 @@ public:
 	void setScriptShowOutput(bool b);
 	void setScriptCopyOutput(bool b);
 	void setScripts();
+	void setTbHideEdit(bool Edit);
+	void setTbHideMove(bool Move);
+	void setTbHideCopy(bool Copy);
+	void setTbHideSetup(bool Setup);
+	void setTbHideRun(bool Run);
+	void setTbHideExit(bool Exit);
 private:
 	QSettings config;
 	//
@@ -69,11 +81,19 @@ private:
 	ScriptModel smodel;
 	bool ScriptShowOutput;
 	bool ScriptCopyOutput;
+	//
+	bool tbHideEdit;
+	bool tbHideMove;
+	bool tbHideCopy;
+	bool tbHideSetup;
+	bool tbHideRun;
+	bool tbHideExit;
 signals:
 	void NotesPathChanged();
 	void WindowStateChanged();
 	void ToolbarVisChanged();
 	void NoteFontChanged();
+	void tbHidingChanged();
 };
 
 extern Settings settings;
