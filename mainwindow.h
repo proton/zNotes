@@ -38,9 +38,9 @@ private:
 	QSignalMapper cmd_mapper;
 	QTimer SaveTimer;
 	//
-	//QAction *actAdd, *actRemove, *actRename;
-	//QAction* actPrev, *actNext;
-	//QAction* actCopy, *actSetup, *actRun, *actExit;
+	QAction *actAdd, *actRemove, *actRename;
+	QAction* actPrev, *actNext;
+	QAction* actCopy, *actSetup, *actRun, *actExit;
 	//
 	void LoadNotes();
 	inline Note* currentNote()

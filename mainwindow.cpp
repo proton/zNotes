@@ -241,9 +241,9 @@ void MainWindow::noteFontChanged()
 
 void MainWindow::commandMenu()
 {
-	/*QPoint p = ui->mainToolBar->actionGeometry(actRun).center();
+	QPoint p = ui->mainToolBar->actionGeometry(actRun).center();
 	p+=pos();
-	cmd_menu.exec(p);*/
+	cmd_menu.exec(p);
 }
 
 void MainWindow::cmdExec(const QString & command)
@@ -277,7 +277,7 @@ void MainWindow::cmd_changed()
 
 void MainWindow::actions_changed()
 {
-	/*ui->mainToolBar->actions().clear();
+	ui->mainToolBar->clear();
 	if(!settings.getTbHideEdit())
 	{
 		ui->mainToolBar->addAction(actAdd);
@@ -306,7 +306,7 @@ void MainWindow::actions_changed()
 		ui->mainToolBar->addAction(actRun);
 		ui->mainToolBar->addSeparator();
 	}
-	if(!settings.getTbHideExit()) ui->mainToolBar->addAction(actExit);*/
+	if(!settings.getTbHideExit()) ui->mainToolBar->addAction(actExit);
 }
 
 MainWindow::MainWindow(QWidget *parent)
@@ -318,7 +318,7 @@ MainWindow::MainWindow(QWidget *parent)
 	restoreState(settings.getDialogState());
 	windowStateChanged();
 	//
-	/*actAdd = new QAction(QIcon(":/res/add.png"), tr("Create new note"), parent);
+	actAdd = new QAction(QIcon(":/res/add.png"), tr("Create new note"), parent);
 	actRemove = new QAction(QIcon(":/res/remove.png"), tr("Remove this note"), parent);
 	actRename = new QAction(QIcon(":/res/rename.png"), tr("Rename this note"), parent);
 	actPrev = new QAction(QIcon(":/res/prev.png"), tr("Previous note"), parent);
@@ -337,7 +337,7 @@ MainWindow::MainWindow(QWidget *parent)
 	QObject::connect(actRun, SIGNAL(triggered()), this, SLOT(commandMenu()));
 	QObject::connect(actExit, SIGNAL(triggered()), qApp, SLOT(quit()));
 	actAdd->setShortcut(QKeySequence::New);
-	actRemove->setShortcut(QKeySequence::Delete);*/
+	actRemove->setShortcut(QKeySequence::Delete);
 	//
 	actions_changed();
 	cmd_changed();
@@ -396,6 +396,6 @@ void MainWindow::on_tabs_currentChanged(int index)
 {
 	SaveNote(CurrentIndex);
 	CurrentIndex = index;
-	ui->mainToolBar->actions()[4]->setDisabled(index==0);
-	ui->mainToolBar->actions()[5]->setDisabled(index==Notes.count()-1);
+	actPrev->setDisabled(index==0);
+	actNext->setDisabled(index==Notes.count()-1);
 }

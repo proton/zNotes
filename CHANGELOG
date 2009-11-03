@@ -1,5 +1,19 @@
+zNotes 0.3.4
+* Added ability to hide some parts of toolbar's elements
+* Updated russian translate
+
+zNotes 0.3.3
+* Added saving toolbar's place on quit
+* Updated russian translate
+
+zNotes 0.3.2
+* Added Exit button to toolbar
+
+zNotes 0.3.1
+* Added default notes' path
+
 zNotes 0.3.0
-* Added ability to execute commands on scripts (such as upload to pasterbin);
+* Added ability to execute commands on scripts (such as upload to pasterbin)
 * Updated russian translate
 
 zNotes 0.2.9

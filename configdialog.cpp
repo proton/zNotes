@@ -23,12 +23,12 @@ configDialog::configDialog(QWidget *parent) :
 	m_ui->cb_ScriptShowOutput->setChecked(settings.getScriptShowOutput());
 	m_ui->cb_ScriptCopyOutput->setChecked(settings.getScriptCopyOutput());
 	//
-//	m_ui->cb_tbHideEdit->setChecked(settings.getTbHideEdit());
-//	m_ui->cb_tbHideMove->setChecked(settings.getTbHideMove());
-//	m_ui->cb_tbHideCopy->setChecked(settings.getTbHideCopy());
-//	m_ui->cb_tbHideSetup->setChecked(settings.getTbHideSetup());
-//	m_ui->cb_tbHideRun->setChecked(settings.getTbHideRun());
-//	m_ui->cb_tbHideExit->setChecked(settings.getTbHideExit());
+	m_ui->cb_tbHideEdit->setChecked(settings.getTbHideEdit());
+	m_ui->cb_tbHideMove->setChecked(settings.getTbHideMove());
+	m_ui->cb_tbHideCopy->setChecked(settings.getTbHideCopy());
+	m_ui->cb_tbHideSetup->setChecked(settings.getTbHideSetup());
+	m_ui->cb_tbHideRun->setChecked(settings.getTbHideRun());
+	m_ui->cb_tbHideExit->setChecked(settings.getTbHideExit());
 }
 
 configDialog::~configDialog()
@@ -47,12 +47,12 @@ void configDialog::SaveSettings()
 	settings.setScriptShowOutput(m_ui->cb_ScriptShowOutput->checkState());
 	settings.setScriptCopyOutput(m_ui->cb_ScriptCopyOutput->checkState());
 	//
-//	settings.setTbHideEdit(m_ui->cb_tbHideEdit->checkState());
-//	settings.setTbHideMove(m_ui->cb_tbHideMove->checkState());
-//	settings.setTbHideCopy(m_ui->cb_tbHideCopy->checkState());
-//	settings.setTbHideSetup(m_ui->cb_tbHideSetup->checkState());
-//	settings.setTbHideRun(m_ui->cb_tbHideRun->checkState());
-//	settings.setTbHideExit(m_ui->cb_tbHideExit->checkState());
+	settings.setTbHideEdit(m_ui->cb_tbHideEdit->checkState());
+	settings.setTbHideMove(m_ui->cb_tbHideMove->checkState());
+	settings.setTbHideCopy(m_ui->cb_tbHideCopy->checkState());
+	settings.setTbHideSetup(m_ui->cb_tbHideSetup->checkState());
+	settings.setTbHideRun(m_ui->cb_tbHideRun->checkState());
+	settings.setTbHideExit(m_ui->cb_tbHideExit->checkState());
 }
 
 void configDialog::on_buttonBox_clicked(QAbstractButton* button)

@@ -29,13 +29,12 @@ Settings::Settings() : config("pDev", "zNotes")
 	ScriptShowOutput = config.value("ScriptShowOutput").toBool();
 	ScriptCopyOutput = config.value("ScriptCopyOutput").toBool();
 	//
-//	tbHideEdit = config.value("tbHideEdit").toBool();
-//	tbHideMove = config.value("tbHideMove").toBool();
-//	//tbHideMove = false;
-//	tbHideCopy = config.value("tbHideCopy").toBool();
-//	tbHideSetup = config.value("tbHideSetup").toBool();
-//	tbHideRun = config.value("tbHideRun").toBool();
-//	tbHideExit = config.value("tbHideExit").toBool();
+	tbHideEdit = config.value("tbHideEdit").toBool();
+	tbHideMove = config.value("tbHideMove").toBool();
+	tbHideCopy = config.value("tbHideCopy").toBool();
+	tbHideSetup = config.value("tbHideSetup").toBool();
+	tbHideRun = config.value("tbHideRun").toBool();
+	tbHideExit = config.value("tbHideExit").toBool();
 }
 
 void Settings::setNotesPath(const QString& path)
