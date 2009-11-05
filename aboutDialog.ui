@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>aboutDialog</class>
+ <widget class="QDialog" name="aboutDialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>349</width>
+    <height>298</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>about zNotes</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="znotes.qrc">
+    <normaloff>:/res/znotes.png</normaloff>:/res/znotes.png</iconset>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <widget class="QLabel" name="icon">
+     <property name="text">
+      <string/>
+     </property>
+     <property name="pixmap">
+      <pixmap resource="znotes.qrc">:/res/znotes32.png</pixmap>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QTabWidget" name="tabWidget">
+     <property name="currentIndex">
+      <number>0</number>
+     </property>
+     <widget class="QWidget" name="widget">
+      <attribute name="title">
+       <string>About</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_2">
+       <item>
+        <widget class="QLabel" name="lbAbout">
+         <property name="text">
+          <string>zNotes</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignHCenter|Qt::AlignTop</set>
+         </property>
+         <property name="wordWrap">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="widget">
+      <attribute name="title">
+       <string>Authors</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_4">
+       <item>
+        <widget class="QTextBrowser" name="lbAuthors"/>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="widget">
+      <attribute name="title">
+       <string>Credits</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_5">
+       <item>
+        <widget class="QTextBrowser" name="lbCredits"/>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="widget">
+      <attribute name="title">
+       <string>License</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_3">
+       <item>
+        <widget class="QPlainTextEdit" name="textLicense">
+         <property name="readOnly">
+          <bool>true</bool>
+         </property>
+         <property name="plainText">
+          <string>This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+See the GNU General Public License for more details.
+
+The text of the license can can be found in the file LICENSE.</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <spacer name="horizontalSpacer">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QPushButton" name="butClose">
+       <property name="text">
+        <string>Close</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer_2">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <resources>
+  <include location="znotes.qrc"/>
+ </resources>
+ <connections>
+  <connection>
+   <sender>butClose</sender>
+   <signal>clicked()</signal>
+   <receiver>aboutDialog</receiver>
+   <slot>accept()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>168</x>
+     <y>286</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>289</x>
+     <y>266</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>

@@ -68,8 +68,8 @@ public slots:
 	void trayActivated(QSystemTrayIcon::ActivationReason reason);
 	//
 	void commandMenu();
-	void aboutDialog();
-	void prefDialog();
+	void showAboutDialog();
+	void showPrefDialog();
 	//
 	void actions_changed();
 	//

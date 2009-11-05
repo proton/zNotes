@@ -24,9 +24,8 @@
         <translation>Новое имя:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="192"/>
         <source>zNotes - about</source>
-        <translation>О программе zNotes</translation>
+        <translation type="obsolete">О программе zNotes</translation>
     </message>
     <message>
         <source>zNotes
@@ -39,12 +38,11 @@ psavichev@gmail.com
 2009г.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="193"/>
         <source>zNotes %1
 by Peter Savichev (proton)
 psavichev@gmail.com
 2009</source>
-        <translation>zNotes %1
+        <translation type="obsolete">zNotes %1
 Автор: Савичев Петр (proton)
 psavichev@gmail.com
 2009г.</translation>
@@ -180,7 +178,114 @@ Do you want to move your notes to new place ?</source>
     <message>
         <location filename="../scriptmodel.cpp" line="8"/>
         <source>Icon</source>
-        <translation>Иконка</translation>
+        <translation>Значок</translation>
+    </message>
+</context>
+<context>
+    <name>aboutDialog</name>
+    <message>
+        <location filename="../aboutDialog.cpp" line="13"/>
+        <source>Simple Qt-based notes aplication</source>
+        <translation>Простая программа для ведения заметок</translation>
+    </message>
+    <message>
+        <location filename="../aboutDialog.cpp" line="14"/>
+        <source>version</source>
+        <translation>версия</translation>
+    </message>
+    <message>
+        <location filename="../aboutDialog.cpp" line="15"/>
+        <source>Copyright (c) 2009</source>
+        <translation>Copyright (c) 2009</translation>
+    </message>
+    <message>
+        <location filename="../aboutDialog.cpp" line="16"/>
+        <source>by Peter Savichev (proton)</source>
+        <translation>Петр Савичев (proton)</translation>
+    </message>
+    <message>
+        <location filename="../aboutDialog.cpp" line="17"/>
+        <source>Distributed under the GPL license version 3 or later</source>
+        <translation>Распространяется под лицензией GPL версии 3 или более поздней</translation>
+    </message>
+    <message>
+        <location filename="../aboutDialog.cpp" line="22"/>
+        <source>Application concept and main development</source>
+        <translation>Основные идеи и реализация</translation>
+    </message>
+    <message>
+        <location filename="../aboutDialog.cpp" line="23"/>
+        <source>Translations:</source>
+        <translation>Переводы:</translation>
+    </message>
+    <message>
+        <location filename="../aboutDialog.cpp" line="26"/>
+        <source>Russian translation</source>
+        <translation>Русский перевод</translation>
+    </message>
+    <message>
+        <location filename="../aboutDialog.cpp" line="27"/>
+        <source>Icons:</source>
+        <translation>Иконки:</translation>
+    </message>
+    <message>
+        <location filename="../aboutDialog.cpp" line="29"/>
+        <source>All icons from Oxygen project</source>
+        <translation>Все иконки взяты из проекта Oxygen</translation>
+    </message>
+    <message>
+        <location filename="../aboutDialog.cpp" line="33"/>
+        <source>Testing:</source>
+        <translation>Тестирование:</translation>
+    </message>
+    <message>
+        <location filename="../aboutDialog.cpp" line="37"/>
+        <source>Releasing:</source>
+        <translation>Сборка:</translation>
+    </message>
+    <message>
+        <location filename="../aboutDialog.ui" line="14"/>
+        <source>about zNotes</source>
+        <translation>О программе zNotes</translation>
+    </message>
+    <message>
+        <location filename="../aboutDialog.ui" line="41"/>
+        <source>About</source>
+        <translation>Описание</translation>
+    </message>
+    <message>
+        <location filename="../aboutDialog.ui" line="47"/>
+        <source>zNotes</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../aboutDialog.ui" line="61"/>
+        <source>Authors</source>
+        <translation>Авторы</translation>
+    </message>
+    <message>
+        <location filename="../aboutDialog.ui" line="71"/>
+        <source>Credits</source>
+        <translation>Благодарности</translation>
+    </message>
+    <message>
+        <location filename="../aboutDialog.ui" line="81"/>
+        <source>License</source>
+        <translation>Лицензия</translation>
+    </message>
+    <message>
+        <location filename="../aboutDialog.ui" line="90"/>
+        <source>This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+See the GNU General Public License for more details.
+
+The text of the license can can be found in the file LICENSE.</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../aboutDialog.ui" line="120"/>
+        <source>Close</source>
+        <translation>Закрыть</translation>
     </message>
 </context>
 <context>

@@ -1,8 +1,8 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-
 #include "settings.h"
 #include "configdialog.h"
+#include "aboutDialog.h"
 
 #include <QtDebug>
 #include <QInputDialog>
@@ -187,13 +187,13 @@ void MainWindow::closeEvent(QCloseEvent *event)
 	}
 }
 
-void MainWindow::aboutDialog()
+void MainWindow::showAboutDialog()
 {
-	QMessageBox::information(this, tr("zNotes - about"),
-		tr("zNotes %1\nby Peter Savichev (proton)\npsavichev@gmail.com\n2009").arg(VERSION));
+	aboutDialog dlg;
+	dlg.exec();
 }
 
-void MainWindow::prefDialog()
+void MainWindow::showPrefDialog()
 {
 	configDialog dlg;
 	dlg.exec();
@@ -333,7 +333,7 @@ MainWindow::MainWindow(QWidget *parent)
 	QObject::connect(actPrev, SIGNAL(triggered()), this, SLOT(PreviousNote()));
 	QObject::connect(actNext, SIGNAL(triggered()), this, SLOT(NextNote()));
 	QObject::connect(actCopy, SIGNAL(triggered()), this, SLOT(CopyNote()));
-	QObject::connect(actSetup, SIGNAL(triggered()), this, SLOT(prefDialog()));
+	QObject::connect(actSetup, SIGNAL(triggered()), this, SLOT(showPrefDialog()));
 	QObject::connect(actRun, SIGNAL(triggered()), this, SLOT(commandMenu()));
 	QObject::connect(actExit, SIGNAL(triggered()), qApp, SLOT(quit()));
 	actAdd->setShortcut(QKeySequence::New);
@@ -349,8 +349,8 @@ MainWindow::MainWindow(QWidget *parent)
 	cmenu.addAction(QIcon(":/res/remove.png"), tr("Remove this note"), this, SLOT(RemoveCurrentNote()));
 	cmenu.addAction(QIcon(":/res/rename.png"), tr("Rename this note"), this, SLOT(RenameCurrentNote()));
 	cmenu.addSeparator();
-	cmenu.addAction(QIcon(":/res/settings.png"), tr("Preferences"), this, SLOT(prefDialog()));
-	cmenu.addAction(QIcon(":/res/info.png"), tr("About"), this, SLOT(aboutDialog()));
+	cmenu.addAction(QIcon(":/res/settings.png"), tr("Preferences"), this, SLOT(showPrefDialog()));
+	cmenu.addAction(QIcon(":/res/info.png"), tr("About"), this, SLOT(showAboutDialog()));
 	cmenu.addSeparator();
 	cmenu.addAction(QIcon(":/res/exit.png"), tr("Quit"), qApp, SLOT(quit()));
 	cmenu.actions()[10]->setShortcut(QKeySequence::Close);

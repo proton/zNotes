@@ -2,7 +2,7 @@
 # Project created by QtCreator 2009-09-20T17:20:55
 # -------------------------------------------------
 TARGET = znotes
-VERSION = 0.3.0
+VERSION = 0.3.5
 QT += core \
     gui
 TEMPLATE = app
@@ -15,14 +15,17 @@ SOURCES += main.cpp \
     configdialog.cpp \
     settings.cpp \
     note.cpp \
-    scriptmodel.cpp
+    scriptmodel.cpp \
+    aboutDialog.cpp
 HEADERS += mainwindow.h \
     configdialog.h \
     settings.h \
     note.h \
-    scriptmodel.h
+    scriptmodel.h \
+    aboutDialog.h
 FORMS += mainwindow.ui \
-    configdialog.ui
+    configdialog.ui \
+    aboutDialog.ui
 TRANSLATIONS += translations/znotes_ru.ts
 RESOURCES += znotes.qrc
 
@@ -39,11 +42,11 @@ TSQM.commands = $$QMAKE_LRELEASE \
 TSQM.CONFIG = no_link
 QMAKE_EXTRA_COMPILERS += TSQM
 PRE_TARGETDEPS += $$TS_OUT
+DEFINES += VERSION=\\\"$$VERSION\\\"
 unix { 
     PREFIX = $$(PREFIX)
     isEmpty( PREFIX ):PREFIX = /usr
     DEFINES += PROGRAM_DATA_DIR=\\\"$$PREFIX/share/znotes/\\\"
-    DEFINES += VERSION=\\\"$$VERSION\\\"
     target.path = $$PREFIX/bin/
     locale.path = $$PREFIX/share/znotes/translations/
     locale.files = $$TS_OUT
@@ -55,4 +58,10 @@ unix {
         locale \
         pixmap \
         desktop
+}
+os2 {
+	RC_FILE = znotes.rc
+}
+windows {
+	RC_FILE = znotes.rc
 }
