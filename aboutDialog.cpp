@@ -33,10 +33,11 @@ aboutDialog::aboutDialog(QWidget *parent) :
 	strCredits.append(QString("<p><b>%1</b><p>").arg(tr("Testing:")));
 	strCredits.append(QString("<b>%1</b> - <a href='mailto:%2'>%2</a><br/>").arg("Nikolay Edigaryev").arg("edigaryev@gmail.com"));
 	strCredits.append(QString("<b>%1</b> - <a href='mailto:%2'>%2</a><br/>").arg("Nikita Lyalin (tinman321)").arg("tinman321@gmail.com"));
-	strCredits.append(QString("<b>%1</b> -<a href='mailto:%2'>%2</a><br/>").arg("Elbert Pol").arg("e.pol@chello.nl"));
+	strCredits.append(QString("<b>%1</b> - <a href='mailto:%2'>%2</a><br/>").arg("Elbert Pol").arg("e.pol@chello.nl"));
 	strCredits.append(QString("<p><b>%1</b></p>").arg(tr("Releasing:")));
-	strCredits.append(QString("<p><b>%1</b> - <a href='mailto:%2'>%2</a><br/>%3</p>")
+	strCredits.append(QString("<p><b>%1</b> - <a href='mailto:%2'>%2</a><br/><b>%3</b> - <a href='mailto:%4'>%4</a><br/>%5</p>")
 		.arg("Peter Savichev (proton)").arg("psavichev@gmail.com")
+		.arg("Ben de Groot (yngwin)").arg("yngwin@gentoo.org ")
 		.arg("Gentoo"));
 	strCredits.append(QString("<p><b>%1</b> - <a href='mailto:%2'>%2></a><br/>%3</p>")
 		.arg("Nikita Lyalin (tinman321)").arg("tinman321@gmail.com")

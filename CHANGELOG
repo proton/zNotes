@@ -1,6 +1,6 @@
 zNotes 0.3.5
 * Fixed bug with compilation on not "unix" operation systems
-* Added icon to application (for OS/2)
+* Added icon to application (for OS/2 and Windows)
 * Updated about dialog
 * Some fixes
 * Updated russian translate
