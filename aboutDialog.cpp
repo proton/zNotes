@@ -39,9 +39,12 @@ aboutDialog::aboutDialog(QWidget *parent) :
 		.arg("Peter Savichev (proton)").arg("psavichev@gmail.com")
 		.arg("Ben de Groot (yngwin)").arg("yngwin@gentoo.org ")
 		.arg("Gentoo"));
-	strCredits.append(QString("<p><b>%1</b> - <a href='mailto:%2'>%2></a><br/>%3</p>")
+	strCredits.append(QString("<p><b>%1</b> - <a href='mailto:%2'>%2</a><br/>%3</p>")
 		.arg("Nikita Lyalin (tinman321)").arg("tinman321@gmail.com")
 		.arg("ArchLinux"));
+	strCredits.append(QString("<p><b>%1</b> - <a href='mailto:%2'>%2</a><br/>%3</p>")
+		.arg("xelat").arg("xelat09@yahoo.de")
+		.arg("Windows"));
 	ui->lbCredits->setHtml(strCredits);
 }
 

@@ -60,7 +60,7 @@ unix {
         desktop
 }
 os2 {
-	RC_FILE = znotes.rc
+	RC_FILE = znotes_os2.rc
 }
 windows {
 	RC_FILE = znotes.rc
