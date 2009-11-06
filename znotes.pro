@@ -62,6 +62,6 @@ unix {
 os2 {
 	RC_FILE = znotes_os2.rc
 }
-windows {
+win32 {
 	RC_FILE = znotes.rc
 }
