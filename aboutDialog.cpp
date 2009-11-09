@@ -34,9 +34,8 @@ aboutDialog::aboutDialog(QWidget *parent) :
 	strCredits.append(QString("<b>%1</b> - <a href='mailto:%2'>%2</a><br/>").arg("Nikolay Edigaryev").arg("edigaryev@gmail.com"));
 	strCredits.append(QString("<b>%1</b> - <a href='mailto:%2'>%2</a><br/>").arg("Nikita Lyalin (tinman321)").arg("tinman321@gmail.com"));
 	strCredits.append(QString("<b>%1</b> - <a href='mailto:%2'>%2</a><br/>").arg("Elbert Pol").arg("e.pol@chello.nl"));
-	strCredits.append(QString("<b>%1</b> - <a href='mailto:%2'>%2</a><br/>").arg("Andrew Bodrow (Drino))").arg("drinob@gmail.com"));
-	strCredits.append(QString("<b>%1</b> - <a href='mailto:%2'>%2</a><br/>").arg("Elbert Pol").arg("e.pol@chello.nl"));
-	strCredits.append(QString("<b>%1</b> - <a href='mailto:%2'>%2</a><br/>").arg("Max Porozkov (MaxPv").arg("maxpv@rusnix.ru"));
+	strCredits.append(QString("<b>%1</b> - <a href='mailto:%2'>%2</a><br/>").arg("Andrew Bodrow (Drino)").arg("drinob@gmail.com"));
+	strCredits.append(QString("<b>%1</b> - <a href='mailto:%2'>%2</a><br/>").arg("Max Porozkov (MaxPv)").arg("maxpv@rusnix.ru"));
 	strCredits.append(QString("<p><b>%1</b></p>").arg(tr("Releasing:")));
 	strCredits.append(QString("<p><b>%1</b> - <a href='mailto:%2'>%2</a><br/><b>%3</b> - <a href='mailto:%4'>%4</a><br/>%5</p>")
 		.arg("Peter Savichev (proton)").arg("psavichev@gmail.com")

@@ -60,6 +60,7 @@ unix {
         desktop
 }
 os2 {
+	DEFINES += VERSION=\"$$VERSION\"
 	RC_FILE = znotes_os2.rc
 }
 win32 {
