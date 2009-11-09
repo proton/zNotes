@@ -42,7 +42,9 @@ TSQM.commands = $$QMAKE_LRELEASE \
 TSQM.CONFIG = no_link
 QMAKE_EXTRA_COMPILERS += TSQM
 PRE_TARGETDEPS += $$TS_OUT
-DEFINES += VERSION=\\\"$$VERSION\\\"
+!os2 {
+	DEFINES += VERSION=\\\"$$VERSION\\\"
+}
 unix { 
     PREFIX = $$(PREFIX)
     isEmpty( PREFIX ):PREFIX = /usr
