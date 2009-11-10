@@ -80,6 +80,8 @@ public slots:
 	void windowStateChanged();
 	void toolbarVisChanged();//TODO:подумать...
 	void noteFontChanged();
+private slots:
+	void on_edSearch_textChanged(QString text);
 };
 
 #endif // MAINWINDOW_H

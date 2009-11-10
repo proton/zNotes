@@ -114,6 +114,7 @@ void MainWindow::LoadNotes()
 		dir.setPath(dir.homePath()+"/.local/share/notes");
 		if(!dir.exists()) if(!dir.mkpath(dir.path())) dir.setPath("");
 		if(!dir.isReadable()) dir.setPath("");
+		if(!dir.path().isEmpty()) settings.setNotesPath(dir.path());
 	}
 #endif
 	while(dir.path().isEmpty())
@@ -123,6 +124,7 @@ void MainWindow::LoadNotes()
 			QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks));
 		if(!dir.path().isEmpty()) settings.setNotesPath(dir.path());
 	}
+	if(!dir.exists()) dir.mkpath(dir.path());
 	dir.setFilter(QDir::Files);
 	QFileInfoList flist = dir.entryInfoList();
 	Notes.resize(flist.size());
@@ -313,6 +315,7 @@ MainWindow::MainWindow(QWidget *parent)
 	: QMainWindow(parent), ui(new Ui::MainWindow), CurrentIndex(-1)
 {
 	ui->setupUi(this);
+	ui->wSearch->hide();
 	//
 	restoreGeometry(settings.getDialogGeometry());
 	restoreState(settings.getDialogState());
@@ -398,4 +401,17 @@ void MainWindow::on_tabs_currentChanged(int index)
 	CurrentIndex = index;
 	actPrev->setDisabled(index==0);
 	actNext->setDisabled(index==Notes.count()-1);
+}
+
+void MainWindow::on_edSearch_textChanged(QString text)
+{
+	if(text.isEmpty()) return;
+	for(int i=0; i<Notes.size(); ++i)
+	{
+		if(Notes[i]->find(text))
+		{
+			ui->tabs->setCurrentIndex(i);
+			break;
+		}
+	}
 }
