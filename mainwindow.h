@@ -8,6 +8,7 @@
 #include <QTimer>
 #include <QSignalMapper>
 #include <QAction>
+#include <QShortcut>
 
 #include "note.h"
 
@@ -38,9 +39,10 @@ private:
 	QSignalMapper cmd_mapper;
 	QTimer SaveTimer;
 	//
-	QAction *actAdd, *actRemove, *actRename;
-	QAction* actPrev, *actNext;
-	QAction* actCopy, *actSetup, *actRun, *actExit;
+	QAction *actAdd, *actRemove, *actRename, *actPrev, *actNext;
+	QAction *actCopy, *actSetup, *actRun, *actExit, *actInfo, *actSearch;
+	//
+	QShortcut *scAdd, *scRemove, *scPrev, *scNext, *scExit, *scSearch;
 	//
 	void LoadNotes();
 	inline Note* currentNote()
@@ -70,6 +72,7 @@ public slots:
 	void commandMenu();
 	void showAboutDialog();
 	void showPrefDialog();
+	void showSearchBar();
 	//
 	void actions_changed();
 	//
@@ -81,7 +84,8 @@ public slots:
 	void toolbarVisChanged();//TODO:подумать...
 	void noteFontChanged();
 private slots:
-	void on_edSearch_textChanged(QString text);
+	void on_edSearch_returnPressed();
+ void on_edSearch_textChanged(QString text);
 };
 
 #endif // MAINWINDOW_H

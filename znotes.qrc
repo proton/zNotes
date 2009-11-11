@@ -13,5 +13,6 @@
         <file>res/next.png</file>
         <file>res/prev.png</file>
         <file>res/exec.png</file>
+        <file>res/find.png</file>
     </qresource>
 </RCC>

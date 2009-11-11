@@ -301,11 +301,13 @@ void MainWindow::actions_changed()
 	if(!settings.getTbHideSetup())
 	{
 		ui->mainToolBar->addAction(actSetup);
+		ui->mainToolBar->addAction(actInfo);
 		ui->mainToolBar->addSeparator();
 	}
 	if(!settings.getTbHideRun())
 	{
 		ui->mainToolBar->addAction(actRun);
+		ui->mainToolBar->addAction(actSearch);
 		ui->mainToolBar->addSeparator();
 	}
 	if(!settings.getTbHideExit()) ui->mainToolBar->addAction(actExit);
@@ -328,8 +330,11 @@ MainWindow::MainWindow(QWidget *parent)
 	actNext = new QAction(QIcon(":/res/next.png"), tr("Next note"), parent);
 	actCopy = new QAction(QIcon(":/res/copy.png"), tr("Copy this note to clipboard"), parent);
 	actSetup = new QAction(QIcon(":/res/settings.png"), tr("Preferences"), parent);
+	actInfo = new QAction(QIcon(":/res/info.png"), tr("Info"), parent);
 	actRun = new QAction(QIcon(":/res/exec.png"), tr("Commands"), parent);
+	actSearch = new QAction(QIcon(":/res/find.png"), tr("Search"), parent);
 	actExit = new QAction(QIcon(":/res/exit.png"), tr("Exit"), parent);
+	//
 	QObject::connect(actAdd, SIGNAL(triggered()), this, SLOT(NewNote()));
 	QObject::connect(actRemove, SIGNAL(triggered()), this, SLOT(RemoveCurrentNote()));
 	QObject::connect(actRename, SIGNAL(triggered()), this, SLOT(RenameCurrentNote()));
@@ -337,10 +342,10 @@ MainWindow::MainWindow(QWidget *parent)
 	QObject::connect(actNext, SIGNAL(triggered()), this, SLOT(NextNote()));
 	QObject::connect(actCopy, SIGNAL(triggered()), this, SLOT(CopyNote()));
 	QObject::connect(actSetup, SIGNAL(triggered()), this, SLOT(showPrefDialog()));
+	QObject::connect(actInfo, SIGNAL(triggered()), this, SLOT(showAboutDialog()));
 	QObject::connect(actRun, SIGNAL(triggered()), this, SLOT(commandMenu()));
+	QObject::connect(actSearch, SIGNAL(triggered()), this, SLOT(showSearchBar()));
 	QObject::connect(actExit, SIGNAL(triggered()), qApp, SLOT(quit()));
-	actAdd->setShortcut(QKeySequence::New);
-	actRemove->setShortcut(QKeySequence::Delete);
 	//
 	actions_changed();
 	cmd_changed();
@@ -356,12 +361,25 @@ MainWindow::MainWindow(QWidget *parent)
 	cmenu.addAction(QIcon(":/res/info.png"), tr("About"), this, SLOT(showAboutDialog()));
 	cmenu.addSeparator();
 	cmenu.addAction(QIcon(":/res/exit.png"), tr("Quit"), qApp, SLOT(quit()));
-	cmenu.actions()[10]->setShortcut(QKeySequence::Close);
 	tray.setIcon(QIcon(":/res/znotes32.png"));
 	tray.setContextMenu(&cmenu);
 	connect(&tray, SIGNAL(activated(QSystemTrayIcon::ActivationReason)),
 			this, SLOT(trayActivated(QSystemTrayIcon::ActivationReason)));
 	tray.show();
+	//
+	scAdd = new QShortcut(QKeySequence::New, this);
+	scRemove = new QShortcut(QKeySequence::Delete, this);
+	scPrev = new QShortcut(QKeySequence::Back, this);
+	scNext = new QShortcut(QKeySequence::Forward, this);
+	scSearch = new QShortcut(QKeySequence::Find, this);
+	scExit = new QShortcut(QKeySequence::Close, this);
+	//
+	connect(scAdd, SIGNAL(activated()), this, SLOT(NewNote()));
+	connect(scRemove, SIGNAL(activated()), this, SLOT(RemoveCurrentNote()));
+	connect(scPrev, SIGNAL(activated()), this, SLOT(PreviousNote()));
+	connect(scNext, SIGNAL(activated()), this, SLOT(NextNote()));
+	connect(scSearch, SIGNAL(activated()), this, SLOT(showSearchBar()));
+	connect(scExit, SIGNAL(activated()), qApp, SLOT(quit()));
 	//
 	LoadNotes();
 	if(Notes.count()==0) NewNote();
@@ -403,15 +421,39 @@ void MainWindow::on_tabs_currentChanged(int index)
 	actNext->setDisabled(index==Notes.count()-1);
 }
 
+void MainWindow::showSearchBar()
+{
+	ui->wSearch->show();
+	ui->edSearch->setFocus();
+}
+
 void MainWindow::on_edSearch_textChanged(QString text)
 {
+	//TODO: шде-то тут косяк
 	if(text.isEmpty()) return;
-	for(int i=0; i<Notes.size(); ++i)
+	int start_index = CurrentIndex;
+	for(int i=start_index; i<Notes.size(); ++i)
 	{
 		if(Notes[i]->find(text))
 		{
 			ui->tabs->setCurrentIndex(i);
-			break;
+			return;
 		}
+		//qDebug() << i;
 	}
+		//qDebug() << "ololo";
+	for(int i=0; i<start_index; ++i)
+	{
+		if(Notes[i]->find(text))
+		{
+			ui->tabs->setCurrentIndex(i);
+			return;
+		}
+		//qDebug() << i;
+	}
+}
+
+void MainWindow::on_edSearch_returnPressed()
+{
+	on_edSearch_textChanged(ui->edSearch->text());
 }
