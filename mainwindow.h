@@ -51,6 +51,8 @@ private:
 	}
 	int currentIndex;
 	void SaveNote(int i);
+	//
+	void Search(bool next);
 public slots:
 	void SaveCurrentNote();
 	void RemoveCurrentNote();

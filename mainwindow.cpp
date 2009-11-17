@@ -427,33 +427,44 @@ void MainWindow::showSearchBar()
 	ui->edSearch->setFocus();
 }
 
-void MainWindow::on_edSearch_textChanged(QString text)
+void MainWindow::Search(bool next)
 {
-	//TODO: шде-то тут косяк
+	QString text = ui->edSearch->text();
 	if(text.isEmpty()) return;
+	//
 	int start_index = CurrentIndex;
-	for(int i=start_index; i<Notes.size(); ++i)
+	//
+	if(!next) Notes[start_index]->unsetCursor();
+	//
+	if(Notes[start_index]->find(text)) return;
+	//
+	for(int i=start_index+1; i<Notes.size(); ++i)
 	{
+		Notes[i]->setTextCursor(QTextCursor());
 		if(Notes[i]->find(text))
 		{
 			ui->tabs->setCurrentIndex(i);
 			return;
 		}
-		//qDebug() << i;
 	}
-		//qDebug() << "ololo";
 	for(int i=0; i<start_index; ++i)
 	{
+		Notes[i]->setTextCursor(QTextCursor());
 		if(Notes[i]->find(text))
 		{
 			ui->tabs->setCurrentIndex(i);
 			return;
 		}
-		//qDebug() << i;
 	}
+}
+
+void MainWindow::on_edSearch_textChanged(QString text)
+{
+	Q_UNUSED(text);
+	Search(false);
 }
 
 void MainWindow::on_edSearch_returnPressed()
 {
-	on_edSearch_textChanged(ui->edSearch->text());
+	Search(true);
 }
