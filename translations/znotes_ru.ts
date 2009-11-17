@@ -48,93 +48,103 @@ psavichev@gmail.com
 2009г.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="204"/>
+        <location filename="../mainwindow.cpp" line="206"/>
         <source>Move Notes</source>
         <translation>Перемещение заметок</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="205"/>
+        <location filename="../mainwindow.cpp" line="207"/>
         <source>Notes path changed!
 Do you want to move your notes to new place ?</source>
         <translation>Каталог с заметками изменен!
 Перенести заметки в новое место?</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="214"/>
+        <location filename="../mainwindow.cpp" line="216"/>
         <source>Notes path change</source>
         <translation>Изменение места хранения заметок</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="215"/>
+        <location filename="../mainwindow.cpp" line="217"/>
         <source>You need restart application to get effect.</source>
         <translation>Необходимо перезапустить приложения, чтобы изменения вступили в силу.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="328"/>
+        <location filename="../mainwindow.cpp" line="334"/>
         <source>Commands</source>
         <translation>Комманды</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="321"/>
-        <location filename="../mainwindow.cpp" line="348"/>
+        <location filename="../mainwindow.cpp" line="326"/>
+        <location filename="../mainwindow.cpp" line="356"/>
         <source>Create new note</source>
         <translation>Новая заметка</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="322"/>
-        <location filename="../mainwindow.cpp" line="349"/>
+        <location filename="../mainwindow.cpp" line="327"/>
+        <location filename="../mainwindow.cpp" line="357"/>
         <source>Remove this note</source>
         <translation>Удалить заметку</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="323"/>
-        <location filename="../mainwindow.cpp" line="350"/>
+        <location filename="../mainwindow.cpp" line="328"/>
+        <location filename="../mainwindow.cpp" line="358"/>
         <source>Rename this note</source>
         <translation>Пререименовать заметку</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="324"/>
+        <location filename="../mainwindow.cpp" line="329"/>
         <source>Previous note</source>
         <translation>Предыдущая заметка</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="325"/>
+        <location filename="../mainwindow.cpp" line="330"/>
         <source>Next note</source>
         <translation>Следующая заметка</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="326"/>
+        <location filename="../mainwindow.cpp" line="331"/>
         <source>Copy this note to clipboard</source>
         <translation>Скопировать содержимое в буффер обмена</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="327"/>
-        <location filename="../mainwindow.cpp" line="352"/>
+        <location filename="../mainwindow.cpp" line="332"/>
+        <location filename="../mainwindow.cpp" line="360"/>
         <source>Preferences</source>
         <translation>Настройки</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="329"/>
+        <location filename="../mainwindow.cpp" line="333"/>
+        <source>Info</source>
+        <translation>Информация</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="335"/>
+        <source>Search</source>
+        <translation>Поиск</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="336"/>
         <source>Exit</source>
         <translation>Выход</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="345"/>
+        <location filename="../mainwindow.cpp" line="353"/>
         <source>Show</source>
         <translation>Показать</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="346"/>
+        <location filename="../mainwindow.cpp" line="354"/>
         <source>Hide</source>
         <translation>Скрыть</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="353"/>
+        <location filename="../mainwindow.cpp" line="361"/>
         <source>About</source>
         <translation>О программе</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="355"/>
+        <location filename="../mainwindow.cpp" line="363"/>
         <source>Quit</source>
         <translation>Выход</translation>
     </message>
@@ -149,7 +159,12 @@ Do you want to move your notes to new place ?</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="47"/>
+        <location filename="../mainwindow.ui" line="49"/>
+        <source>Enter text:</source>
+        <translation>Введите текст:</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="77"/>
         <source>Show Toolbar</source>
         <translation>Показывать панель инструментов</translation>
     </message>
@@ -158,7 +173,7 @@ Do you want to move your notes to new place ?</source>
     <name>QObject</name>
     <message>
         <location filename="../configdialog.cpp" line="76"/>
-        <location filename="../mainwindow.cpp" line="122"/>
+        <location filename="../mainwindow.cpp" line="123"/>
         <source>Select notes directory</source>
         <translation>Выбор каталога с заметками</translation>
     </message>
@@ -239,7 +254,7 @@ Do you want to move your notes to new place ?</source>
         <translation>Тестирование:</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="37"/>
+        <location filename="../aboutDialog.cpp" line="39"/>
         <source>Releasing:</source>
         <translation>Сборка:</translation>
     </message>

@@ -1,3 +1,11 @@
+zNotes 0.3.6
+* Fixed bug with showing notes' path in settings
+* Fixed bug with not working shortcuts
+- шорткаты не на action,  на слоты
+* Added search in a notes' text
+* Some fixes
+* Updated russian translate
+
 zNotes 0.3.5
 * Fixed bug with compilation on not "unix" operation systems
 * Added icon to application (for OS/2 and Windows)
