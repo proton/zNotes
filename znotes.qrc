@@ -14,5 +14,9 @@
         <file>res/prev.png</file>
         <file>res/exec.png</file>
         <file>res/find.png</file>
+        <file>res/te/down.png</file>
+        <file>res/te/left.png</file>
+        <file>res/te/right.png</file>
+        <file>res/te/up.png</file>
     </qresource>
 </RCC>
