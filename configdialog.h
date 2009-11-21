@@ -19,6 +19,10 @@ private:
 	void SaveSettings();
 
 private slots:
+	void on_butActionBottom_clicked();
+	void on_butActionTop_clicked();
+	void on_butActionRemove_clicked();
+	void on_butActionAdd_clicked();
 	void on_btn_ScriptAdd_clicked();
 	void on_btn_ScriptRemove_clicked();
 	void on_btn_FontChange_clicked();

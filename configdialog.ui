@@ -389,7 +389,7 @@
        <item>
         <layout class="QVBoxLayout" name="verticalLayout_5">
          <item>
-          <widget class="QPushButton" name="pushButton">
+          <widget class="QPushButton" name="butActionAdd">
            <property name="text">
             <string/>
            </property>
@@ -400,7 +400,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="pushButton_2">
+          <widget class="QPushButton" name="butActionRemove">
            <property name="text">
             <string/>
            </property>
@@ -411,7 +411,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="pushButton_3">
+          <widget class="QPushButton" name="butActionTop">
            <property name="text">
             <string/>
            </property>
@@ -422,7 +422,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="pushButton_4">
+          <widget class="QPushButton" name="butActionBottom">
            <property name="text">
             <string/>
            </property>

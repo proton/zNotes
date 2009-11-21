@@ -95,3 +95,68 @@ void configDialog::on_btn_ScriptAdd_clicked()
 {
 	settings.getScriptModel().append("","","");
 }
+
+void configDialog::on_butActionAdd_clicked()
+{
+	QListWidgetItem* action = m_ui->listActions->currentItem();
+	//QAction *action = itemToAction.value(currentAction);
+	//QListWidgetItem new_item(*item);
+	//m_ui->listToolbarActions->addItem(&new_item);
+	/*
+	QListWidgetItem *currentToolBarAction = ui.currentToolBarList->currentItem();
+
+	QAction *action = itemToAction.value(currentAction);
+	QListWidgetItem *item = 0;
+	if (action)
+	{
+		if (currentState[currentToolBar].contains(action)) {
+			item = actionToCurrentItem.value(action);
+			if (item == currentToolBarAction)
+				return;
+			int row = ui.currentToolBarList->row(item);
+			ui.currentToolBarList->takeItem(row);
+			currentState[currentToolBar].removeAt(row);
+			// only reorder here
+		}
+		else
+		{
+			item = new QListWidgetItem(action->text());
+			item->setIcon(action->icon());
+			item->setTextAlignment(Qt::AlignLeft | Qt::AlignVCenter | Qt::TextShowMnemonic);
+			currentItemToAction.insert(item, action);
+			actionToCurrentItem.insert(action, item);
+			if (widgetActionToToolBar.contains(action)) {
+				item->setData(Qt::TextColorRole, QColor(Qt::blue));
+				ToolBarItem *toolBar = widgetActionToToolBar.value(action);
+				if (toolBar) {
+					currentState[toolBar].removeAll(action);
+					toolBarToWidgetActions[toolBar].remove(action);
+					if (toolBarToWidgetActions[toolBar].empty())
+						toolBarToWidgetActions.remove(toolBar);
+				}
+				widgetActionToToolBar.insert(action, currentToolBar);
+				toolBarToWidgetActions[currentToolBar].insert(action);
+			}
+		}
+	}
+	else
+	{
+		item = new QListWidgetItem(separatorText);
+		currentItemToAction.insert(item, 0);
+	}*/
+}
+
+void configDialog::on_butActionRemove_clicked()
+{
+	//
+}
+
+void configDialog::on_butActionTop_clicked()
+{
+	//
+}
+
+void configDialog::on_butActionBottom_clicked()
+{
+	//
+}
