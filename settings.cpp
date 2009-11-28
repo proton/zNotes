@@ -5,6 +5,8 @@
 
 Settings::Settings() : config("pDev", "zNotes")
 {
+
+	//
 	NotesPath = config.value("NotesPath").toString();
 	LastNote = config.value("LastNote").toString();
 	HideStart = config.value("HideStart").toBool();
@@ -29,12 +31,12 @@ Settings::Settings() : config("pDev", "zNotes")
 	ScriptShowOutput = config.value("ScriptShowOutput").toBool();
 	ScriptCopyOutput = config.value("ScriptCopyOutput").toBool();
 	//
-	tbHideEdit = config.value("tbHideEdit").toBool();
-	tbHideMove = config.value("tbHideMove").toBool();
-	tbHideCopy = config.value("tbHideCopy").toBool();
-	tbHideSetup = config.value("tbHideSetup").toBool();
-	tbHideRun = config.value("tbHideRun").toBool();
-	tbHideExit = config.value("tbHideExit").toBool();
+	tb_items.resize(config.value("Toolbar/itemCount").toInt());
+	for(int i=itemAdd; i<itemMax; ++i)
+	{
+		int pos = config.value(getItemName(i), tb_items.size()).toInt();
+		if(pos<tb_items.size()) tb_items[pos] = i;
+	}
 }
 
 void Settings::setNotesPath(const QString& path)
@@ -143,65 +145,5 @@ void Settings::setScripts()
 		config.setValue(QString("ComandName%1").arg(i), smodel.getName(i));
 		config.setValue(QString("ComandFile%1").arg(i), smodel.getFile(i));
 		config.setValue(QString("ComandIcon%1").arg(i), smodel.getIcon(i));
-	}
-}
-
-void Settings::setTbHideEdit(bool v)
-{
-	if(tbHideEdit !=v )
-	{
-		tbHideEdit = v;
-		config.setValue("tbHideEdit", tbHideEdit);
-		emit tbHidingChanged();
-	}
-}
-
-void Settings::setTbHideMove(bool v)
-{
-	if(tbHideMove !=v )
-	{
-		tbHideMove = v;
-		config.setValue("tbHideMove", tbHideMove);
-		emit tbHidingChanged();
-	}
-}
-
-void Settings::setTbHideCopy(bool v)
-{
-	if(tbHideCopy !=v )
-	{
-		tbHideCopy = v;
-		config.setValue("tbHideCopy", tbHideCopy);
-		emit tbHidingChanged();
-	}
-}
-
-void Settings::setTbHideSetup(bool v)
-{
-	if(tbHideSetup !=v )
-	{
-		tbHideSetup = v;
-		config.setValue("tbHideSetup", tbHideSetup);
-		emit tbHidingChanged();
-	}
-}
-
-void Settings::setTbHideRun(bool v)
-{
-	if(tbHideRun !=v )
-	{
-		tbHideRun = v;
-		config.setValue("tbHideRun", tbHideRun);
-		emit tbHidingChanged();
-	}
-}
-
-void Settings::setTbHideExit(bool v)
-{
-	if(tbHideExit !=v )
-	{
-		tbHideExit = v;
-		config.setValue("tbHideExit", tbHideExit);
-		emit tbHidingChanged();
 	}
 }

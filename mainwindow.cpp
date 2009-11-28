@@ -280,37 +280,11 @@ void MainWindow::cmd_changed()
 void MainWindow::actions_changed()
 {
 	ui->mainToolBar->clear();
-	if(!settings.getTbHideEdit())
+	for(int i=0; i<settings.getTbItems().size(); ++i)
 	{
-		ui->mainToolBar->addAction(actAdd);
-		ui->mainToolBar->addAction(actRemove);
-		ui->mainToolBar->addAction(actRename);
-		ui->mainToolBar->addSeparator();
+		if(settings.getTbItems()[i]==itemSeparator) ui->mainToolBar->addSeparator();
+		else ui->mainToolBar->addAction(getAction(settings.getTbItems()[i]));
 	}
-	if(!settings.getTbHideMove())
-	{
-		ui->mainToolBar->addAction(actPrev);
-		ui->mainToolBar->addAction(actNext);
-		ui->mainToolBar->addSeparator();
-	}
-	if(!settings.getTbHideCopy())
-	{
-		ui->mainToolBar->addAction(actCopy);
-		ui->mainToolBar->addSeparator();
-	}
-	if(!settings.getTbHideSetup())
-	{
-		ui->mainToolBar->addAction(actSetup);
-		ui->mainToolBar->addAction(actInfo);
-		ui->mainToolBar->addSeparator();
-	}
-	if(!settings.getTbHideRun())
-	{
-		ui->mainToolBar->addAction(actRun);
-		ui->mainToolBar->addAction(actSearch);
-		ui->mainToolBar->addSeparator();
-	}
-	if(!settings.getTbHideExit()) ui->mainToolBar->addAction(actExit);
 }
 
 MainWindow::MainWindow(QWidget *parent)
@@ -323,17 +297,17 @@ MainWindow::MainWindow(QWidget *parent)
 	restoreState(settings.getDialogState());
 	windowStateChanged();
 	//
-	actAdd = new QAction(QIcon(":/res/add.png"), tr("Create new note"), parent);
-	actRemove = new QAction(QIcon(":/res/remove.png"), tr("Remove this note"), parent);
-	actRename = new QAction(QIcon(":/res/rename.png"), tr("Rename this note"), parent);
-	actPrev = new QAction(QIcon(":/res/prev.png"), tr("Previous note"), parent);
-	actNext = new QAction(QIcon(":/res/next.png"), tr("Next note"), parent);
-	actCopy = new QAction(QIcon(":/res/copy.png"), tr("Copy this note to clipboard"), parent);
-	actSetup = new QAction(QIcon(":/res/settings.png"), tr("Preferences"), parent);
-	actInfo = new QAction(QIcon(":/res/info.png"), tr("Info"), parent);
-	actRun = new QAction(QIcon(":/res/exec.png"), tr("Commands"), parent);
-	actSearch = new QAction(QIcon(":/res/find.png"), tr("Search"), parent);
-	actExit = new QAction(QIcon(":/res/exit.png"), tr("Exit"), parent);
+	actAdd = new QAction(ToolbarAction(itemAdd).icon(), ToolbarAction(itemAdd).text(), parent);
+	actRemove = new QAction(ToolbarAction(itemRemove).icon(), ToolbarAction(itemRemove).text(), parent);
+	actRename = new QAction(ToolbarAction(itemRename).icon(), ToolbarAction(itemRename).text(), parent);
+	actPrev = new QAction(ToolbarAction(itemPrev).icon(), ToolbarAction(itemPrev).text(), parent);
+	actNext = new QAction(ToolbarAction(itemNext).icon(), ToolbarAction(itemNext).text(), parent);
+	actCopy = new QAction(ToolbarAction(itemCopy).icon(), ToolbarAction(itemCopy).text(), parent);
+	actSetup = new QAction(ToolbarAction(itemSetup).icon(), ToolbarAction(itemSetup).text(), parent);
+	actInfo = new QAction(ToolbarAction(itemInfo).icon(), ToolbarAction(itemInfo).text(), parent);
+	actRun = new QAction(ToolbarAction(itemRun).icon(), ToolbarAction(itemRun).text(), parent);
+	actSearch = new QAction(ToolbarAction(itemSearch).icon(), ToolbarAction(itemSearch).text(), parent);
+	actExit = new QAction(ToolbarAction(itemExit).icon(), ToolbarAction(itemExit).text(), parent);
 	//
 	QObject::connect(actAdd, SIGNAL(triggered()), this, SLOT(NewNote()));
 	QObject::connect(actRemove, SIGNAL(triggered()), this, SLOT(RemoveCurrentNote()));
@@ -353,14 +327,14 @@ MainWindow::MainWindow(QWidget *parent)
 	cmenu.addAction(tr("Show"), this, SLOT(show()));
 	cmenu.addAction(tr("Hide"), this, SLOT(hide()));
 	cmenu.addSeparator();
-	cmenu.addAction(QIcon(":/res/add.png"), tr("Create new note"), this, SLOT(NewNote()));
-	cmenu.addAction(QIcon(":/res/remove.png"), tr("Remove this note"), this, SLOT(RemoveCurrentNote()));
-	cmenu.addAction(QIcon(":/res/rename.png"), tr("Rename this note"), this, SLOT(RenameCurrentNote()));
+	cmenu.addAction(ToolbarAction(itemAdd).icon(), ToolbarAction(itemAdd).text(), this, SLOT(NewNote()));
+	cmenu.addAction(ToolbarAction(itemRemove).icon(), ToolbarAction(itemRemove).text(), this, SLOT(RemoveCurrentNote()));
+	cmenu.addAction(ToolbarAction(itemRename).icon(), ToolbarAction(itemRename).text(), this, SLOT(RenameCurrentNote()));
 	cmenu.addSeparator();
-	cmenu.addAction(QIcon(":/res/settings.png"), tr("Preferences"), this, SLOT(showPrefDialog()));
-	cmenu.addAction(QIcon(":/res/info.png"), tr("About"), this, SLOT(showAboutDialog()));
+	cmenu.addAction(ToolbarAction(itemSetup).icon(), ToolbarAction(itemSetup).text(), this, SLOT(showPrefDialog()));
+	cmenu.addAction(ToolbarAction(itemInfo).icon(), ToolbarAction(itemInfo).text(), this, SLOT(showAboutDialog()));
 	cmenu.addSeparator();
-	cmenu.addAction(QIcon(":/res/exit.png"), tr("Quit"), qApp, SLOT(quit()));
+	cmenu.addAction(ToolbarAction(itemExit).icon(), ToolbarAction(itemExit).text(), qApp, SLOT(quit()));
 	tray.setIcon(QIcon(":/res/znotes32.png"));
 	tray.setContextMenu(&cmenu);
 	connect(&tray, SIGNAL(activated(QSystemTrayIcon::ActivationReason)),

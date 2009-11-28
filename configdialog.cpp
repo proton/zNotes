@@ -8,6 +8,8 @@
 #include <QFontDialog>
 #include <QColorDialog>
 
+#include <QAbstractListModel>
+
 configDialog::configDialog(QWidget *parent) :
 	QDialog(parent), m_ui(new Ui::configDialog)
 {
@@ -23,12 +25,12 @@ configDialog::configDialog(QWidget *parent) :
 	m_ui->cb_ScriptShowOutput->setChecked(settings.getScriptShowOutput());
 	m_ui->cb_ScriptCopyOutput->setChecked(settings.getScriptCopyOutput());
 	//
-	m_ui->cb_tbHideEdit->setChecked(settings.getTbHideEdit());
-	m_ui->cb_tbHideMove->setChecked(settings.getTbHideMove());
-	m_ui->cb_tbHideCopy->setChecked(settings.getTbHideCopy());
-	m_ui->cb_tbHideSetup->setChecked(settings.getTbHideSetup());
-	m_ui->cb_tbHideRun->setChecked(settings.getTbHideRun());
-	m_ui->cb_tbHideExit->setChecked(settings.getTbHideExit());
+//	m_ui->cb_tbHideEdit->setChecked(settings.getTbHideEdit());
+//	m_ui->cb_tbHideMove->setChecked(settings.getTbHideMove());
+//	m_ui->cb_tbHideCopy->setChecked(settings.getTbHideCopy());
+//	m_ui->cb_tbHideSetup->setChecked(settings.getTbHideSetup());
+//	m_ui->cb_tbHideRun->setChecked(settings.getTbHideRun());
+//	m_ui->cb_tbHideExit->setChecked(settings.getTbHideExit());
 }
 
 configDialog::~configDialog()
@@ -47,12 +49,12 @@ void configDialog::SaveSettings()
 	settings.setScriptShowOutput(m_ui->cb_ScriptShowOutput->checkState());
 	settings.setScriptCopyOutput(m_ui->cb_ScriptCopyOutput->checkState());
 	//
-	settings.setTbHideEdit(m_ui->cb_tbHideEdit->checkState());
-	settings.setTbHideMove(m_ui->cb_tbHideMove->checkState());
-	settings.setTbHideCopy(m_ui->cb_tbHideCopy->checkState());
-	settings.setTbHideSetup(m_ui->cb_tbHideSetup->checkState());
-	settings.setTbHideRun(m_ui->cb_tbHideRun->checkState());
-	settings.setTbHideExit(m_ui->cb_tbHideExit->checkState());
+//	settings.setTbHideEdit(m_ui->cb_tbHideEdit->checkState());
+//	settings.setTbHideMove(m_ui->cb_tbHideMove->checkState());
+//	settings.setTbHideCopy(m_ui->cb_tbHideCopy->checkState());
+//	settings.setTbHideSetup(m_ui->cb_tbHideSetup->checkState());
+//	settings.setTbHideRun(m_ui->cb_tbHideRun->checkState());
+//	settings.setTbHideExit(m_ui->cb_tbHideExit->checkState());
 }
 
 void configDialog::on_buttonBox_clicked(QAbstractButton* button)
@@ -98,57 +100,19 @@ void configDialog::on_btn_ScriptAdd_clicked()
 
 void configDialog::on_butActionAdd_clicked()
 {
-	QListWidgetItem* action = m_ui->listActions->currentItem();
-	//QAction *action = itemToAction.value(currentAction);
-	//QListWidgetItem new_item(*item);
-	//m_ui->listToolbarActions->addItem(&new_item);
-	/*
-	QListWidgetItem *currentToolBarAction = ui.currentToolBarList->currentItem();
-
-	QAction *action = itemToAction.value(currentAction);
-	QListWidgetItem *item = 0;
-	if (action)
-	{
-		if (currentState[currentToolBar].contains(action)) {
-			item = actionToCurrentItem.value(action);
-			if (item == currentToolBarAction)
-				return;
-			int row = ui.currentToolBarList->row(item);
-			ui.currentToolBarList->takeItem(row);
-			currentState[currentToolBar].removeAt(row);
-			// only reorder here
-		}
-		else
-		{
-			item = new QListWidgetItem(action->text());
-			item->setIcon(action->icon());
-			item->setTextAlignment(Qt::AlignLeft | Qt::AlignVCenter | Qt::TextShowMnemonic);
-			currentItemToAction.insert(item, action);
-			actionToCurrentItem.insert(action, item);
-			if (widgetActionToToolBar.contains(action)) {
-				item->setData(Qt::TextColorRole, QColor(Qt::blue));
-				ToolBarItem *toolBar = widgetActionToToolBar.value(action);
-				if (toolBar) {
-					currentState[toolBar].removeAll(action);
-					toolBarToWidgetActions[toolBar].remove(action);
-					if (toolBarToWidgetActions[toolBar].empty())
-						toolBarToWidgetActions.remove(toolBar);
-				}
-				widgetActionToToolBar.insert(action, currentToolBar);
-				toolBarToWidgetActions[currentToolBar].insert(action);
-			}
-		}
-	}
-	else
-	{
-		item = new QListWidgetItem(separatorText);
-		currentItemToAction.insert(item, 0);
-	}*/
+//	QListWidgetItem* old_item = m_ui->listActions->currentItem();
+//	QListWidgetItem* item = new QListWidgetItem(*old_item);
+//	m_ui->listToolbarActions->insertItem(m_ui->listToolbarActions->currentRow(), item);
+//	if(m_ui->listActions->currentRow()!=itemSeparator) m_ui->listActions->currentItem()->setHidden(true);
 }
 
 void configDialog::on_butActionRemove_clicked()
 {
-	//
+//	QListWidgetItem* item = m_ui->listToolbarActions->currentItem();
+//	//m_ui->listActions->find(item)->show();
+//	m_ui->listToolbarActions->removeItemWidget(item);
+//	//m_ui->listToolbarActions->insertItem(m_ui->listToolbarActions->currentRow(), item);
+//	//if(m_ui->listActions->currentRow()!=itemSeparator) m_ui->listActions->currentItem()->setHidden(true);
 }
 
 void configDialog::on_butActionTop_clicked()

@@ -11,6 +11,7 @@
 #include <QVector>
 
 #include "scriptmodel.h"
+#include "toolbaraction.h"
 
 struct Script
 {
@@ -37,12 +38,7 @@ public:
 	inline ScriptModel& getScriptModel()			{ return smodel; }
 	inline bool getScriptShowOutput()				{ return ScriptShowOutput; }
 	inline bool getScriptCopyOutput()				{ return ScriptCopyOutput; }
-	inline bool getTbHideEdit()						{ return tbHideEdit; }
-	inline bool getTbHideMove()						{ return tbHideMove; }
-	inline bool getTbHideCopy()						{ return tbHideCopy; }
-	inline bool getTbHideSetup()					{ return tbHideSetup; }
-	inline bool getTbHideRun()						{ return tbHideRun; }
-	inline bool getTbHideExit()						{ return tbHideExit; }
+	inline const QVector<int>& getTbItems()			{ return tb_items; }
 	//
 	void setNotesPath(const QString& path);
 	void setLastNote(const QString& name);
@@ -56,12 +52,6 @@ public:
 	void setScriptShowOutput(bool b);
 	void setScriptCopyOutput(bool b);
 	void setScripts();
-	void setTbHideEdit(bool Edit);
-	void setTbHideMove(bool Move);
-	void setTbHideCopy(bool Copy);
-	void setTbHideSetup(bool Setup);
-	void setTbHideRun(bool Run);
-	void setTbHideExit(bool Exit);
 private:
 	QSettings config;
 	//
@@ -82,12 +72,26 @@ private:
 	bool ScriptShowOutput;
 	bool ScriptCopyOutput;
 	//
-	bool tbHideEdit;
-	bool tbHideMove;
-	bool tbHideCopy;
-	bool tbHideSetup;
-	bool tbHideRun;
-	bool tbHideExit;
+	QVector<int> tb_items;
+	//
+	inline const char* getItemName(int i)
+	{
+		switch(i)
+		{
+			case itemAdd: return "Toolbar/itemAdd";
+			case itemRemove: return "Toolbar/itemRemove";
+			case itemRename: return "Toolbar/itemRename";
+			case itemPrev: return "Toolbar/itemPrev";
+			case itemNext: return "Toolbar/itemNext";
+			case itemCopy: return "Toolbar/itemCopy";
+			case itemSetup: return "Toolbar/itemSetup";
+			case itemInfo: return "Toolbar/itemInfo";
+			case itemRun: return "Toolbar/itemRun";
+			case itemSearch: return "Toolbar/itemSearch";
+			case itemExit: return "Toolbar/itemExit";
+			default: return "";
+		}
+	}
 signals:
 	void NotesPathChanged();
 	void WindowStateChanged();

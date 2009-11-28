@@ -11,6 +11,7 @@
 #include <QShortcut>
 
 #include "note.h"
+#include "settings.h"
 
 namespace Ui
 {
@@ -53,6 +54,24 @@ private:
 	void SaveNote(int i);
 	//
 	void Search(bool next);
+	inline QAction* getAction(int i)
+	{
+		switch(i)
+		{
+			case itemAdd: return actAdd;
+			case itemRemove: return actRemove;
+			case itemRename: return actRename;
+			case itemPrev: return actPrev;
+			case itemNext: return actNext;
+			case itemCopy: return actCopy;
+			case itemSetup: return actSetup;
+			case itemInfo: return actInfo;
+			case itemRun: return actRun;
+			case itemSearch: return actSearch;
+			case itemExit: return actExit;
+			default: return new QAction(this);
+		}
+	}
 public slots:
 	void SaveCurrentNote();
 	void RemoveCurrentNote();
@@ -83,7 +102,7 @@ public slots:
 	//
 	void notesPathChanged();
 	void windowStateChanged();
-	void toolbarVisChanged();//TODO:подумать...
+	void toolbarVisChanged();//TODO:think
 	void noteFontChanged();
 private slots:
 	void on_edSearch_returnPressed();

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>503</width>
-    <height>249</height>
+    <width>501</width>
+    <height>247</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -279,112 +279,7 @@
       </attribute>
       <layout class="QHBoxLayout" name="horizontalLayout_5">
        <item>
-        <widget class="QListWidget" name="listActions">
-         <item>
-          <property name="text">
-           <string>Separator</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Add note</string>
-          </property>
-          <property name="icon">
-           <iconset resource="znotes.qrc">
-            <normaloff>:/res/add.png</normaloff>:/res/add.png</iconset>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Remove note</string>
-          </property>
-          <property name="icon">
-           <iconset resource="znotes.qrc">
-            <normaloff>:/res/remove.png</normaloff>:/res/remove.png</iconset>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Rename note</string>
-          </property>
-          <property name="icon">
-           <iconset resource="znotes.qrc">
-            <normaloff>:/res/rename.png</normaloff>:/res/rename.png</iconset>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Previous note</string>
-          </property>
-          <property name="icon">
-           <iconset resource="znotes.qrc">
-            <normaloff>:/res/prev.png</normaloff>:/res/prev.png</iconset>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Next note</string>
-          </property>
-          <property name="icon">
-           <iconset resource="znotes.qrc">
-            <normaloff>:/res/next.png</normaloff>:/res/next.png</iconset>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Copy note</string>
-          </property>
-          <property name="icon">
-           <iconset resource="znotes.qrc">
-            <normaloff>:/res/copy.png</normaloff>:/res/copy.png</iconset>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Settings</string>
-          </property>
-          <property name="icon">
-           <iconset resource="znotes.qrc">
-            <normaloff>:/res/settings.png</normaloff>:/res/settings.png</iconset>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Information</string>
-          </property>
-          <property name="icon">
-           <iconset resource="znotes.qrc">
-            <normaloff>:/res/info.png</normaloff>:/res/info.png</iconset>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Commands</string>
-          </property>
-          <property name="icon">
-           <iconset resource="znotes.qrc">
-            <normaloff>:/res/exec.png</normaloff>:/res/exec.png</iconset>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Search</string>
-          </property>
-          <property name="icon">
-           <iconset resource="znotes.qrc">
-            <normaloff>:/res/find.png</normaloff>:/res/find.png</iconset>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Exit</string>
-          </property>
-          <property name="icon">
-           <iconset resource="znotes.qrc">
-            <normaloff>:/res/exit.png</normaloff>:/res/exit.png</iconset>
-          </property>
-         </item>
-        </widget>
+        <widget class="QListView" name="listActions"/>
        </item>
        <item>
         <layout class="QVBoxLayout" name="verticalLayout_5">
@@ -435,7 +330,7 @@
         </layout>
        </item>
        <item>
-        <widget class="QListWidget" name="listToolbarActions"/>
+        <widget class="QListView" name="listToolbarActions"/>
        </item>
       </layout>
      </widget>
