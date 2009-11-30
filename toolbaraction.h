@@ -55,10 +55,10 @@ public:
 			case itemPrev: return QIcon(":/res/prev.png");
 			case itemNext: return QIcon(":/res/next.png");
 			case itemCopy: return QIcon(":/res/copy.png");
-			case itemSetup: return QIcon(":/res/setup.png");
+			case itemSetup: return QIcon(":/res/settings.png");
 			case itemInfo: return QIcon(":/res/info.png");
-			case itemRun: return QIcon(":/res/run.png");
-			case itemSearch: return QIcon(":/res/search.png");
+			case itemRun: return QIcon(":/res/exec.png");
+			case itemSearch: return QIcon(":/res/find.png");
 			case itemExit: return QIcon(":/res/exit.png");
 			default: return QIcon();
 		}

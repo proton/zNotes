@@ -2,18 +2,23 @@
 #include "ui_configdialog.h"
 
 #include "settings.h"
+#include "toolbarmodel.h"
 
 #include <QtDebug>
 #include <QFileDialog>
 #include <QFontDialog>
 #include <QColorDialog>
 
-#include <QAbstractListModel>
+ItemModel m_items;
+ItemToolbarModel mt_items;
 
 configDialog::configDialog(QWidget *parent) :
 	QDialog(parent), m_ui(new Ui::configDialog)
 {
 	m_ui->setupUi(this);
+	m_ui->listActions->setModel(&m_items);
+	m_ui->listToolbarActions->setModel(&mt_items);
+	//
 	m_ui->ed_NotesPath->setText(settings.getNotesPath());
 	m_ui->cb_HideStart->setChecked(settings.getHideStart());
 	m_ui->cb_ToolbarHide->setChecked(settings.getHideToolbar());
@@ -25,12 +30,7 @@ configDialog::configDialog(QWidget *parent) :
 	m_ui->cb_ScriptShowOutput->setChecked(settings.getScriptShowOutput());
 	m_ui->cb_ScriptCopyOutput->setChecked(settings.getScriptCopyOutput());
 	//
-//	m_ui->cb_tbHideEdit->setChecked(settings.getTbHideEdit());
-//	m_ui->cb_tbHideMove->setChecked(settings.getTbHideMove());
-//	m_ui->cb_tbHideCopy->setChecked(settings.getTbHideCopy());
-//	m_ui->cb_tbHideSetup->setChecked(settings.getTbHideSetup());
-//	m_ui->cb_tbHideRun->setChecked(settings.getTbHideRun());
-//	m_ui->cb_tbHideExit->setChecked(settings.getTbHideExit());
+	mt_items.setVector(settings.getTbItems());
 }
 
 configDialog::~configDialog()
@@ -117,10 +117,16 @@ void configDialog::on_butActionRemove_clicked()
 
 void configDialog::on_butActionTop_clicked()
 {
-	//
+	if(!m_ui->listToolbarActions->selectionModel()->hasSelection()) return;
+	QModelIndex index;
+	mt_items.up(index);
+	m_ui->listToolbarActions->setCurrentIndex(mt_items.index(index.row()+1,0));
 }
 
 void configDialog::on_butActionBottom_clicked()
 {
-	//
+	if(!m_ui->listToolbarActions->selectionModel()->hasSelection()) return;
+	QModelIndex index;
+	mt_items.down(index);
+	m_ui->listToolbarActions->setCurrentIndex(mt_items.index(index.row()-1,0));
 }

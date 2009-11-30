@@ -30,7 +30,7 @@ public:
 	inline const QString& getLastNote()				{ return LastNote; }
 	inline bool getHideStart()						{ return HideStart; }
 	inline const QByteArray& getDialogGeometry()	{ return DialogGeometry; }
-	inline const QByteArray& getDialogState()	{ return DialogState; }
+	inline const QByteArray& getDialogState()		{ return DialogState; }
 	inline bool getHideToolbar()					{ return HideToolbar; }
 	inline bool getHideFrame()						{ return HideFrame; }
 	inline bool getStayTop()						{ return StayTop; }

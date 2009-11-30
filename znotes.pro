@@ -16,14 +16,16 @@ SOURCES += main.cpp \
     settings.cpp \
     note.cpp \
     scriptmodel.cpp \
-    aboutDialog.cpp
+    aboutDialog.cpp \
+    toolbarmodel.cpp
 HEADERS += mainwindow.h \
     configdialog.h \
     settings.h \
     note.h \
     scriptmodel.h \
     aboutDialog.h \
-    toolbaraction.h
+    toolbaraction.h \
+    toolbarmodel.h
 FORMS += mainwindow.ui \
     configdialog.ui \
     aboutDialog.ui
