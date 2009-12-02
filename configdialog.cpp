@@ -31,6 +31,10 @@ configDialog::configDialog(QWidget *parent) :
 	m_ui->cb_ScriptCopyOutput->setChecked(settings.getScriptCopyOutput());
 	//
 	mt_items.setVector(settings.getTbItems());
+	m_items.setVector(settings.getTbItems());
+	//
+	connect(m_ui->listActions->selectionModel(), SIGNAL(currentRowChanged(QModelIndex,QModelIndex)), this, SLOT(currentListActionChanged(QModelIndex,QModelIndex)));
+	connect(m_ui->listToolbarActions->selectionModel(), SIGNAL(currentRowChanged(QModelIndex,QModelIndex)), this, SLOT(currentToolbarActionChanged(QModelIndex,QModelIndex)));
 }
 
 configDialog::~configDialog()
@@ -48,13 +52,6 @@ void configDialog::SaveSettings()
 	settings.setNoteFont(m_ui->lb_FontExample->font());
 	settings.setScriptShowOutput(m_ui->cb_ScriptShowOutput->checkState());
 	settings.setScriptCopyOutput(m_ui->cb_ScriptCopyOutput->checkState());
-	//
-//	settings.setTbHideEdit(m_ui->cb_tbHideEdit->checkState());
-//	settings.setTbHideMove(m_ui->cb_tbHideMove->checkState());
-//	settings.setTbHideCopy(m_ui->cb_tbHideCopy->checkState());
-//	settings.setTbHideSetup(m_ui->cb_tbHideSetup->checkState());
-//	settings.setTbHideRun(m_ui->cb_tbHideRun->checkState());
-//	settings.setTbHideExit(m_ui->cb_tbHideExit->checkState());
 }
 
 void configDialog::on_buttonBox_clicked(QAbstractButton* button)
@@ -100,33 +97,45 @@ void configDialog::on_btn_ScriptAdd_clicked()
 
 void configDialog::on_butActionAdd_clicked()
 {
-//	QListWidgetItem* old_item = m_ui->listActions->currentItem();
-//	QListWidgetItem* item = new QListWidgetItem(*old_item);
-//	m_ui->listToolbarActions->insertItem(m_ui->listToolbarActions->currentRow(), item);
-//	if(m_ui->listActions->currentRow()!=itemSeparator) m_ui->listActions->currentItem()->setHidden(true);
+	int id = m_ui->listActions->currentIndex().row();
+	int row = (m_ui->listToolbarActions->selectionModel()->hasSelection())?
+		m_ui->listToolbarActions->currentIndex().row():-1;
+	qDebug() << id << " " << row;
+	mt_items.insert(id, row);
+	m_items.remove(id);
 }
 
 void configDialog::on_butActionRemove_clicked()
 {
-//	QListWidgetItem* item = m_ui->listToolbarActions->currentItem();
-//	//m_ui->listActions->find(item)->show();
-//	m_ui->listToolbarActions->removeItemWidget(item);
-//	//m_ui->listToolbarActions->insertItem(m_ui->listToolbarActions->currentRow(), item);
-//	//if(m_ui->listActions->currentRow()!=itemSeparator) m_ui->listActions->currentItem()->setHidden(true);
+	QModelIndex index = m_ui->listToolbarActions->currentIndex();
+	int id = mt_items.getId(index);
+	mt_items.remove(index);
+	m_items.insert(id);
 }
 
 void configDialog::on_butActionTop_clicked()
 {
-	if(!m_ui->listToolbarActions->selectionModel()->hasSelection()) return;
-	QModelIndex index;
+	QModelIndex index(m_ui->listToolbarActions->currentIndex());
 	mt_items.up(index);
-	m_ui->listToolbarActions->setCurrentIndex(mt_items.index(index.row()+1,0));
+	//m_ui->listToolbarActions->setCurrentIndex(mt_items.index(index.row()+1,0));
 }
 
 void configDialog::on_butActionBottom_clicked()
 {
-	if(!m_ui->listToolbarActions->selectionModel()->hasSelection()) return;
-	QModelIndex index;
+	QModelIndex index(m_ui->listToolbarActions->currentIndex());
 	mt_items.down(index);
-	m_ui->listToolbarActions->setCurrentIndex(mt_items.index(index.row()-1,0));
+	//m_ui->listToolbarActions->setCurrentIndex(mt_items.index(index.row()-1,0));
+}
+
+void configDialog::currentToolbarActionChanged(QModelIndex index, QModelIndex)
+{
+	m_ui->butActionRemove->setEnabled(index.isValid());
+	int row = index.row();
+	m_ui->butActionTop->setEnabled(row>0);
+	m_ui->butActionBottom->setEnabled(row<(mt_items.rowCount()-1));
+}
+
+void configDialog::currentListActionChanged(QModelIndex index, QModelIndex)
+{
+	m_ui->butActionAdd->setEnabled(index.isValid() && !m_items.isUsed(index.row()));
 }

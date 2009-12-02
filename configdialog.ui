@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>501</width>
-    <height>247</height>
+    <width>499</width>
+    <height>245</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -285,6 +285,9 @@
         <layout class="QVBoxLayout" name="verticalLayout_5">
          <item>
           <widget class="QPushButton" name="butActionAdd">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
            <property name="text">
             <string/>
            </property>
@@ -296,6 +299,9 @@
          </item>
          <item>
           <widget class="QPushButton" name="butActionRemove">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
            <property name="text">
             <string/>
            </property>
@@ -307,6 +313,9 @@
          </item>
          <item>
           <widget class="QPushButton" name="butActionTop">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
            <property name="text">
             <string/>
            </property>
@@ -318,6 +327,9 @@
          </item>
          <item>
           <widget class="QPushButton" name="butActionBottom">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
            <property name="text">
             <string/>
            </property>

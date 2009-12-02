@@ -21,6 +21,34 @@ QVariant ItemModel::data(const QModelIndex &index, int role) const
 	}
 }
 
+void ItemModel::setVector(const QVector<int>& nv)
+{
+	for(int i=0; i<nv.size(); ++i)
+	{
+		if(nv[i]!=itemSeparator) v[nv[i]] = true;
+	}
+}
+
+void ItemModel::insert(int id)
+{
+	if(id==itemSeparator) return;
+	v[id] = false;
+	emit reset();
+}
+
+void ItemModel::remove(int id)
+{
+	if(id==itemSeparator) return;
+	v[id] = true;
+	emit reset();
+}
+
+bool ItemModel::isUsed(int row) const
+{
+	return v[row];
+}
+
+
 //------------------------------------------------------------------------------
 
 ItemToolbarModel::ItemToolbarModel()
@@ -68,4 +96,18 @@ void ItemToolbarModel::setVector(const QVector<int>& nv)
 const QVector<int>& ItemToolbarModel::getVector() const
 {
 	return v;
+}
+
+void ItemToolbarModel::insert(int id, int row)
+{
+	if(row!=-1) v.insert(row, id);
+	else v.append(id);
+	emit reset();
+}
+
+void ItemToolbarModel::remove(const QModelIndex & index)
+{
+	if(!index.isValid()) return;
+	v.remove(index.row());
+	emit reset();
 }

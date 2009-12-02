@@ -10,6 +10,13 @@ public:
 	ItemModel();
 	int rowCount(const QModelIndex & = QModelIndex()) const;
 	QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;
+	//
+	void setVector(const QVector<int>& nv);
+	//
+	void insert(int);
+	void remove(int);
+	//
+	bool isUsed(int row) const;
 private:
 	QVector<bool> v;
 };
@@ -21,11 +28,16 @@ public:
 	int rowCount(const QModelIndex & = QModelIndex()) const;
 	QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;
 	//
+	void setVector(const QVector<int>& nv);
+	const QVector<int>& getVector() const;
+	//
 	void up(const QModelIndex &index);
 	void down(const QModelIndex &index);
 	//
-	void setVector(const QVector<int>& nv);
-	const QVector<int>& getVector() const;
+	inline int getId(const QModelIndex & index) const { return v[index.row()]; }
+	//
+	void insert(int, int);
+	void remove(const QModelIndex &);
 private:
 	QVector<int> v;
 };
