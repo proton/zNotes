@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>499</width>
-    <height>245</height>
+    <width>497</width>
+    <height>243</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -21,7 +21,7 @@
    <item>
     <widget class="QTabWidget" name="tabWidget">
      <property name="currentIndex">
-      <number>3</number>
+      <number>2</number>
      </property>
      <widget class="QWidget" name="tab">
       <attribute name="title">
@@ -118,7 +118,7 @@
             <enum>QFrame::StyledPanel</enum>
            </property>
            <property name="text">
-            <string>Eat more of these soft French loaves and drink tea.</string>
+            <string>The quick brown fox jumps over the lazy dog.</string>
            </property>
           </widget>
          </item>
@@ -200,82 +200,9 @@
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="tab_3">
+     <widget class="QWidget" name="toolbar">
       <attribute name="title">
        <string>Toolbar</string>
-      </attribute>
-      <layout class="QVBoxLayout" name="verticalLayout_4">
-       <item>
-        <widget class="QCheckBox" name="cb_tbHideEdit">
-         <property name="text">
-          <string>Hide edit section</string>
-         </property>
-         <property name="icon">
-          <iconset resource="znotes.qrc">
-           <normaloff>:/res/add.png</normaloff>:/res/add.png</iconset>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QCheckBox" name="cb_tbHideMove">
-         <property name="text">
-          <string>Hide move section</string>
-         </property>
-         <property name="icon">
-          <iconset resource="znotes.qrc">
-           <normaloff>:/res/next.png</normaloff>:/res/next.png</iconset>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QCheckBox" name="cb_tbHideCopy">
-         <property name="text">
-          <string>Hide copy section</string>
-         </property>
-         <property name="icon">
-          <iconset resource="znotes.qrc">
-           <normaloff>:/res/copy.png</normaloff>:/res/copy.png</iconset>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QCheckBox" name="cb_tbHideSetup">
-         <property name="text">
-          <string>Hide setup section</string>
-         </property>
-         <property name="icon">
-          <iconset resource="znotes.qrc">
-           <normaloff>:/res/settings.png</normaloff>:/res/settings.png</iconset>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QCheckBox" name="cb_tbHideRun">
-         <property name="text">
-          <string>Hide run section</string>
-         </property>
-         <property name="icon">
-          <iconset resource="znotes.qrc">
-           <normaloff>:/res/exec.png</normaloff>:/res/exec.png</iconset>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QCheckBox" name="cb_tbHideExit">
-         <property name="text">
-          <string>Hide exit section</string>
-         </property>
-         <property name="icon">
-          <iconset resource="znotes.qrc">
-           <normaloff>:/res/exit.png</normaloff>:/res/exit.png</iconset>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </widget>
-     <widget class="QWidget" name="toolbar_ng">
-      <attribute name="title">
-       <string>Toolbar NG</string>
       </attribute>
       <layout class="QHBoxLayout" name="horizontalLayout_5">
        <item>
