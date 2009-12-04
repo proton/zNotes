@@ -147,3 +147,15 @@ void Settings::setScripts()
 		config.setValue(QString("ComandIcon%1").arg(i), smodel.getIcon(i));
 	}
 }
+
+void Settings::setToolbarItems(const QVector<int>& v)
+{
+	if(v==tb_items) return;
+	tb_items = v;
+	config.setValue("Toolbar/itemCount", tb_items.size());
+	for(int i=0; i<tb_items.size(); ++i) if(tb_items[i]!=itemSeparator)
+	{
+		config.setValue(getItemName(tb_items[i]), i);
+	}
+	emit ToolbarItemsChanged();
+}

@@ -286,10 +286,11 @@ void MainWindow::cmd_changed()
 void MainWindow::actions_changed()
 {
 	ui->mainToolBar->clear();
-	for(int i=0; i<settings.getTbItems().size(); ++i)
+	const QVector<int>& items = settings.getToolbarItems();
+	for(int i=0; i<items.size(); ++i)
 	{
-		if(settings.getTbItems()[i]==itemSeparator) ui->mainToolBar->addSeparator();
-		else ui->mainToolBar->addAction(getAction(settings.getTbItems()[i]));
+		if(items[i]==itemSeparator) ui->mainToolBar->addSeparator();
+		else ui->mainToolBar->addAction(getAction(items[i]));
 	}
 }
 
@@ -384,7 +385,8 @@ MainWindow::MainWindow(QWidget *parent)
 	connect(&settings, SIGNAL(WindowStateChanged()), this, SLOT(windowStateChanged()));
 	connect(&settings, SIGNAL(ToolbarVisChanged()), this, SLOT(toolbarVisChanged()));
 	connect(&settings, SIGNAL(NoteFontChanged()), this, SLOT(noteFontChanged()));
-	connect(&settings, SIGNAL(tbHidingChanged()), this, SLOT(actions_changed()));
+	//connect(&settings, SIGNAL(tbHidingChanged()), this, SLOT(actions_changed()));
+	connect(&settings, SIGNAL(ToolbarItemsChanged()), this, SLOT(actions_changed()));
 	connect(&settings.getScriptModel(), SIGNAL(dataChanged(const QModelIndex &, const QModelIndex &)),
 		this, SLOT(cmd_changed()));
 	if(!settings.getHideStart()) show();

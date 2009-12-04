@@ -38,7 +38,7 @@ public:
 	inline ScriptModel& getScriptModel()			{ return smodel; }
 	inline bool getScriptShowOutput()				{ return ScriptShowOutput; }
 	inline bool getScriptCopyOutput()				{ return ScriptCopyOutput; }
-	inline const QVector<int>& getTbItems()			{ return tb_items; }
+	inline const QVector<int>& getToolbarItems()	{ return tb_items; }
 	//
 	void setNotesPath(const QString& path);
 	void setLastNote(const QString& name);
@@ -52,6 +52,7 @@ public:
 	void setScriptShowOutput(bool b);
 	void setScriptCopyOutput(bool b);
 	void setScripts();
+	void setToolbarItems(const QVector<int>& v);
 private:
 	QSettings config;
 	//
@@ -98,6 +99,7 @@ signals:
 	void ToolbarVisChanged();
 	void NoteFontChanged();
 	void tbHidingChanged();
+	void ToolbarItemsChanged();
 };
 
 extern Settings settings;

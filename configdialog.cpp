@@ -30,8 +30,8 @@ configDialog::configDialog(QWidget *parent) :
 	m_ui->cb_ScriptShowOutput->setChecked(settings.getScriptShowOutput());
 	m_ui->cb_ScriptCopyOutput->setChecked(settings.getScriptCopyOutput());
 	//
-	mt_items.setVector(settings.getTbItems());
-	m_items.setVector(settings.getTbItems());
+	mt_items.setVector(settings.getToolbarItems());
+	m_items.setVector(settings.getToolbarItems());
 	//
 	connect(m_ui->listActions->selectionModel(), SIGNAL(currentRowChanged(QModelIndex,QModelIndex)), this, SLOT(currentListActionChanged(QModelIndex,QModelIndex)));
 	connect(m_ui->listToolbarActions->selectionModel(), SIGNAL(currentRowChanged(QModelIndex,QModelIndex)), this, SLOT(currentToolbarActionChanged(QModelIndex,QModelIndex)));
@@ -52,6 +52,7 @@ void configDialog::SaveSettings()
 	settings.setNoteFont(m_ui->lb_FontExample->font());
 	settings.setScriptShowOutput(m_ui->cb_ScriptShowOutput->checkState());
 	settings.setScriptCopyOutput(m_ui->cb_ScriptCopyOutput->checkState());
+	settings.setToolbarItems(mt_items.getVector());
 }
 
 void configDialog::on_buttonBox_clicked(QAbstractButton* button)
@@ -100,7 +101,7 @@ void configDialog::on_butActionAdd_clicked()
 	int id = m_ui->listActions->currentIndex().row();
 	int row = (m_ui->listToolbarActions->selectionModel()->hasSelection())?
 		m_ui->listToolbarActions->currentIndex().row():-1;
-	qDebug() << id << " " << row;
+	//qDebug() << id << " " << row;
 	mt_items.insert(id, row);
 	m_items.remove(id);
 }
@@ -137,5 +138,14 @@ void configDialog::currentToolbarActionChanged(QModelIndex index, QModelIndex)
 
 void configDialog::currentListActionChanged(QModelIndex index, QModelIndex)
 {
+//	QModelIndexList list = m_ui->listActions->selectionModel()->selectedRows(0);
+//	qDebug() << "> " << list.size();
+//	for(int i=0; i<list.size(); ++i)
+//	{if(m_items.isUsed(list[i].row()))
+//	{
+//		m_ui->butActionAdd->setEnabled(false);
+//		return;
+//	} qDebug() << i; }
+//	m_ui->butActionAdd->setEnabled(true);
 	m_ui->butActionAdd->setEnabled(index.isValid() && !m_items.isUsed(index.row()));
 }
