@@ -99,6 +99,12 @@ void MainWindow::NextNote()
 	ui->tabs->setCurrentIndex(ui->tabs->currentIndex()+1);
 }
 
+void MainWindow::ToNote(int n)
+{
+	if(n>=Notes.size()) return;
+	ui->tabs->setCurrentIndex(n);
+}
+
 void MainWindow::CopyNote()
 {
 	QApplication::clipboard()->setText(currentNote()->toPlainText());
@@ -354,6 +360,14 @@ MainWindow::MainWindow(QWidget *parent)
 	connect(scNext, SIGNAL(activated()), this, SLOT(NextNote()));
 	connect(scSearch, SIGNAL(activated()), this, SLOT(showSearchBar()));
 	connect(scExit, SIGNAL(activated()), qApp, SLOT(quit()));
+	//
+	for(int i=1; i<10; ++i)
+	{
+		QShortcut* shortcut = new QShortcut(QKeySequence(Qt::ALT + Qt::Key_0+i), this);
+		connect(shortcut, SIGNAL(activated()), &alt_mapper, SLOT(map()));
+		alt_mapper.setMapping(shortcut, i-1);
+	}
+	connect(&alt_mapper, SIGNAL(mapped(int)), this, SLOT(ToNote(int)));
 	//
 	LoadNotes();
 	if(Notes.count()==0) NewNote();

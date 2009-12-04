@@ -38,6 +38,7 @@ private:
 	QMenu cmenu;
 	QMenu cmd_menu;
 	QSignalMapper cmd_mapper;
+	QSignalMapper alt_mapper;
 	QTimer SaveTimer;
 	//
 	QAction *actAdd, *actRemove, *actRename, *actPrev, *actNext;
@@ -80,6 +81,7 @@ public slots:
 	//
 	void PreviousNote();
 	void NextNote();
+	void ToNote(int n);
 	//
 	void CopyNote();
 	//
@@ -106,7 +108,7 @@ public slots:
 	void noteFontChanged();
 private slots:
 	void on_edSearch_returnPressed();
- void on_edSearch_textChanged(QString text);
+	void on_edSearch_textChanged(QString text);
 };
 
 #endif // MAINWINDOW_H
