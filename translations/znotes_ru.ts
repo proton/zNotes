@@ -48,105 +48,88 @@ psavichev@gmail.com
 2009г.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="206"/>
+        <location filename="../mainwindow.cpp" line="212"/>
         <source>Move Notes</source>
         <translation>Перемещение заметок</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="207"/>
+        <location filename="../mainwindow.cpp" line="213"/>
         <source>Notes path changed!
 Do you want to move your notes to new place ?</source>
         <translation>Каталог с заметками изменен!
 Перенести заметки в новое место?</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="216"/>
+        <location filename="../mainwindow.cpp" line="222"/>
         <source>Notes path change</source>
         <translation>Изменение места хранения заметок</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="217"/>
+        <location filename="../mainwindow.cpp" line="223"/>
         <source>You need restart application to get effect.</source>
         <translation>Необходимо перезапустить приложения, чтобы изменения вступили в силу.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="308"/>
         <source>Commands</source>
-        <translation>Комманды</translation>
+        <translation type="obsolete">Комманды</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="300"/>
-        <location filename="../mainwindow.cpp" line="330"/>
         <source>Create new note</source>
-        <translation>Новая заметка</translation>
+        <translation type="obsolete">Новая заметка</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="301"/>
-        <location filename="../mainwindow.cpp" line="331"/>
         <source>Remove this note</source>
-        <translation>Удалить заметку</translation>
+        <translation type="obsolete">Удалить заметку</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="302"/>
-        <location filename="../mainwindow.cpp" line="332"/>
         <source>Rename this note</source>
-        <translation>Пререименовать заметку</translation>
+        <translation type="obsolete">Пререименовать заметку</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="303"/>
         <source>Previous note</source>
-        <translation>Предыдущая заметка</translation>
+        <translation type="obsolete">Предыдущая заметка</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="304"/>
         <source>Next note</source>
-        <translation>Следующая заметка</translation>
+        <translation type="obsolete">Следующая заметка</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="305"/>
         <source>Copy this note to clipboard</source>
-        <translation>Скопировать содержимое в буффер обмена</translation>
+        <translation type="obsolete">Скопировать содержимое в буффер обмена</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="306"/>
-        <location filename="../mainwindow.cpp" line="334"/>
         <source>Preferences</source>
-        <translation>Настройки</translation>
+        <translation type="obsolete">Настройки</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="307"/>
         <source>Info</source>
-        <translation>Информация</translation>
+        <translation type="obsolete">Информация</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="309"/>
         <source>Search</source>
-        <translation>Поиск</translation>
+        <translation type="obsolete">Поиск</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="310"/>
         <source>Exit</source>
-        <translation>Выход</translation>
+        <translation type="obsolete">Выход</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="327"/>
+        <location filename="../mainwindow.cpp" line="334"/>
         <source>Show</source>
         <translation>Показать</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="328"/>
+        <location filename="../mainwindow.cpp" line="335"/>
         <source>Hide</source>
         <translation>Скрыть</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="335"/>
         <source>About</source>
-        <translation>О программе</translation>
+        <translation type="obsolete">О программе</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="337"/>
         <source>Quit</source>
-        <translation>Выход</translation>
+        <translation type="obsolete">Выход</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="14"/>
@@ -173,9 +156,69 @@ Do you want to move your notes to new place ?</source>
     <name>QObject</name>
     <message>
         <location filename="../configdialog.cpp" line="76"/>
-        <location filename="../mainwindow.cpp" line="123"/>
+        <location filename="../mainwindow.cpp" line="129"/>
         <source>Select notes directory</source>
         <translation>Выбор каталога с заметками</translation>
+    </message>
+    <message>
+        <location filename="../toolbaraction.h" line="33"/>
+        <source>Separator</source>
+        <translation>Разделитель</translation>
+    </message>
+    <message>
+        <location filename="../toolbaraction.h" line="34"/>
+        <source>Create new note</source>
+        <translation>Новая заметка</translation>
+    </message>
+    <message>
+        <location filename="../toolbaraction.h" line="35"/>
+        <source>Remove this note</source>
+        <translation>Удалить заметку</translation>
+    </message>
+    <message>
+        <location filename="../toolbaraction.h" line="36"/>
+        <source>Rename this note</source>
+        <translation>Пререименовать заметку</translation>
+    </message>
+    <message>
+        <location filename="../toolbaraction.h" line="37"/>
+        <source>Prev note</source>
+        <translation>Предыдущая заметка</translation>
+    </message>
+    <message>
+        <location filename="../toolbaraction.h" line="38"/>
+        <source>Next note</source>
+        <translation>Следующая заметка</translation>
+    </message>
+    <message>
+        <location filename="../toolbaraction.h" line="39"/>
+        <source>Copy this note to clipboard</source>
+        <translation>Скопировать содержимое в буффер обмена</translation>
+    </message>
+    <message>
+        <location filename="../toolbaraction.h" line="40"/>
+        <source>Preferences</source>
+        <translation>Настройки</translation>
+    </message>
+    <message>
+        <location filename="../toolbaraction.h" line="41"/>
+        <source>Info</source>
+        <translation>Информация</translation>
+    </message>
+    <message>
+        <location filename="../toolbaraction.h" line="42"/>
+        <source>Commands</source>
+        <translation>Комманды</translation>
+    </message>
+    <message>
+        <location filename="../toolbaraction.h" line="43"/>
+        <source>Search</source>
+        <translation>Поиск</translation>
+    </message>
+    <message>
+        <location filename="../toolbaraction.h" line="44"/>
+        <source>Exit</source>
+        <translation>Выход</translation>
     </message>
 </context>
 <context>
@@ -352,8 +395,12 @@ The text of the license can can be found in the file LICENSE.</source>
     </message>
     <message>
         <location filename="../configdialog.ui" line="121"/>
-        <source>Eat more of these soft French loaves and drink tea.</source>
+        <source>The quick brown fox jumps over the lazy dog.</source>
         <translation>Съешь еще этих мягких французских булок, да выпей чаю.</translation>
+    </message>
+    <message>
+        <source>Eat more of these soft French loaves and drink tea.</source>
+        <translation type="obsolete">Съешь еще этих мягких французских булок, да выпей чаю.</translation>
     </message>
     <message>
         <location filename="../configdialog.ui" line="134"/>
@@ -391,99 +438,52 @@ The text of the license can can be found in the file LICENSE.</source>
         <translation>Панель инструментов</translation>
     </message>
     <message>
-        <location filename="../configdialog.ui" line="211"/>
         <source>Hide edit section</source>
-        <translation>Скрыть секцию редактирования</translation>
+        <translation type="obsolete">Скрыть секцию редактирования</translation>
     </message>
     <message>
-        <location filename="../configdialog.ui" line="222"/>
         <source>Hide move section</source>
-        <translation>Скрыть  навигационную секцию</translation>
+        <translation type="obsolete">Скрыть  навигационную секцию</translation>
     </message>
     <message>
-        <location filename="../configdialog.ui" line="233"/>
         <source>Hide copy section</source>
-        <translation>Скрыть секцию копирования</translation>
+        <translation type="obsolete">Скрыть секцию копирования</translation>
     </message>
     <message>
-        <location filename="../configdialog.ui" line="244"/>
         <source>Hide setup section</source>
-        <translation>Скрыть секцию настройки</translation>
+        <translation type="obsolete">Скрыть секцию настройки</translation>
     </message>
     <message>
-        <location filename="../configdialog.ui" line="255"/>
         <source>Hide run section</source>
-        <translation>Скрыть секцию запуска скриптов</translation>
+        <translation type="obsolete">Скрыть секцию запуска скриптов</translation>
     </message>
     <message>
-        <location filename="../configdialog.ui" line="266"/>
         <source>Hide exit section</source>
-        <translation>Скрыть секцию выхода</translation>
+        <translation type="obsolete">Скрыть секцию выхода</translation>
     </message>
     <message>
-        <location filename="../configdialog.ui" line="278"/>
-        <source>Toolbar NG</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../configdialog.ui" line="285"/>
-        <source>Separator</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../configdialog.ui" line="290"/>
-        <source>Add note</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../configdialog.ui" line="299"/>
-        <source>Remove note</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../configdialog.ui" line="308"/>
         <source>Rename note</source>
-        <translation type="unfinished">Переименование заметки</translation>
+        <translation type="obsolete">Переименование заметки</translation>
     </message>
     <message>
-        <location filename="../configdialog.ui" line="317"/>
         <source>Previous note</source>
-        <translation type="unfinished">Предыдущая заметка</translation>
+        <translation type="obsolete">Предыдущая заметка</translation>
     </message>
     <message>
-        <location filename="../configdialog.ui" line="326"/>
         <source>Next note</source>
-        <translation type="unfinished">Следующая заметка</translation>
+        <translation type="obsolete">Следующая заметка</translation>
     </message>
     <message>
-        <location filename="../configdialog.ui" line="335"/>
-        <source>Copy note</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../configdialog.ui" line="344"/>
-        <source>Settings</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../configdialog.ui" line="353"/>
-        <source>Information</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../configdialog.ui" line="362"/>
         <source>Commands</source>
-        <translation type="unfinished">Комманды</translation>
+        <translation type="obsolete">Комманды</translation>
     </message>
     <message>
-        <location filename="../configdialog.ui" line="371"/>
         <source>Search</source>
-        <translation type="unfinished">Поиск</translation>
+        <translation type="obsolete">Поиск</translation>
     </message>
     <message>
-        <location filename="../configdialog.ui" line="380"/>
         <source>Exit</source>
-        <translation type="unfinished">Выход</translation>
+        <translation type="obsolete">Выход</translation>
     </message>
 </context>
 </TS>

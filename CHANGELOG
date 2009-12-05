@@ -1,3 +1,8 @@
+zNotes 0.3.7
+* Added ability to configure toolbar's elements
+* Added tab's switch via Alt+n (1<n<=9)
+* Updated russian translate
+
 zNotes 0.3.6
 * Fixed bug with showing notes' path in settings
 * Fixed bug with not working shortcuts
