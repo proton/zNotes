@@ -2,9 +2,8 @@
 # Project created by QtCreator 2009-09-20T17:20:55
 # -------------------------------------------------
 TARGET = znotes
-VERSION = 0.3.7
-QT += core \
-    gui
+VERSION = 0.3.8
+QT += core gui
 TEMPLATE = app
 OBJECTS_DIR = build
 UI_DIR = build

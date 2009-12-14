@@ -11,6 +11,15 @@
 #include <QClipboard>
 #include <QProcess>
 
+/*
+	Tray icon on windows is very small
+*/
+#ifdef unix
+#define TRAY_ICON_FILE_NAME ":/res/znotes32.png"
+#else
+#define TRAY_ICON_FILE_NAME ":/res/znotes.png"
+#endif
+
 Settings settings;
 
 void MainWindow::RemoveCurrentNote()
@@ -126,7 +135,7 @@ void MainWindow::LoadNotes()
 	while(dir.path().isEmpty())
 	{
 		dir.setPath(QFileDialog::getExistingDirectory(0,
-			QObject::tr("Select notes directory"), QDir::homePath(),
+			tr("Select notes directory"), QDir::homePath(),
 			QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks));
 		if(!dir.path().isEmpty()) settings.setNotesPath(dir.path());
 	}
@@ -299,7 +308,7 @@ MainWindow::MainWindow(QWidget *parent)
 {
 	ui->setupUi(this);
 	ui->wSearch->hide();
-	//
+	//restoring window state
 	restoreGeometry(settings.getDialogGeometry());
 	restoreState(settings.getDialogState());
 	windowStateChanged();
@@ -328,8 +337,8 @@ MainWindow::MainWindow(QWidget *parent)
 	QObject::connect(actSearch, SIGNAL(triggered()), this, SLOT(showSearchBar()));
 	QObject::connect(actExit, SIGNAL(triggered()), qApp, SLOT(quit()));
 	//
-	actions_changed();
-	cmd_changed();
+	actions_changed(); //Adding toolbar's actions
+	cmd_changed(); //Adding scripts
 	//
 	cmenu.addAction(tr("Show"), this, SLOT(show()));
 	cmenu.addAction(tr("Hide"), this, SLOT(hide()));
@@ -342,7 +351,7 @@ MainWindow::MainWindow(QWidget *parent)
 	cmenu.addAction(ToolbarAction(itemInfo).icon(), ToolbarAction(itemInfo).text(), this, SLOT(showAboutDialog()));
 	cmenu.addSeparator();
 	cmenu.addAction(ToolbarAction(itemExit).icon(), ToolbarAction(itemExit).text(), qApp, SLOT(quit()));
-	tray.setIcon(QIcon(":/res/znotes32.png"));
+	tray.setIcon(QIcon(TRAY_ICON_FILE_NAME));
 	tray.setContextMenu(&cmenu);
 	connect(&tray, SIGNAL(activated(QSystemTrayIcon::ActivationReason)),
 			this, SLOT(trayActivated(QSystemTrayIcon::ActivationReason)));
@@ -395,11 +404,14 @@ MainWindow::MainWindow(QWidget *parent)
 MainWindow::~MainWindow()
 {
 	delete ui;
+	//saving notes
 	SaveAll();
+	//saving title of last note
 	settings.setLastNote(currentNote()->name);
+	//saving dialog's params
 	settings.setDialogGeometry(saveGeometry());
 	settings.setDialogState(saveState());
-	//
+	//saving scrits
 	settings.setScripts();
 }
 
@@ -417,6 +429,9 @@ void MainWindow::showSearchBar()
 	ui->edSearch->setFocus();
 }
 
+/*
+  Searching text in notes
+*/
 void MainWindow::Search(bool next)
 {
 	QString text = ui->edSearch->text();

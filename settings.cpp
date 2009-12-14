@@ -3,6 +3,9 @@
 #include <QObject>
 #include <QtDebug>
 
+/*
+  Settings loading...
+*/
 Settings::Settings() : config("pDev", "zNotes")
 {
 	NotesPath = config.value("NotesPath").toString();
@@ -105,6 +108,9 @@ Settings::Settings() : config("pDev", "zNotes")
 	}
 }
 
+/*
+  Saving notes's path
+*/
 void Settings::setNotesPath(const QString& path)
 {
 	if(NotesPath != path)
@@ -115,6 +121,9 @@ void Settings::setNotesPath(const QString& path)
 	}
 }
 
+/*
+  Saving title of last note
+*/
 void Settings::setLastNote(const QString& note_name)
 {
 	if(LastNote != note_name)
@@ -124,6 +133,9 @@ void Settings::setLastNote(const QString& note_name)
 	}
 }
 
+/*
+  Saving option (hiding dialog on start)
+*/
 void Settings::setHideStart(bool hide)
 {
 	if(HideStart != hide)
@@ -133,6 +145,9 @@ void Settings::setHideStart(bool hide)
 	}
 }
 
+/*
+  Saving option (toolbar's showing)
+*/
 void Settings::setHideToolbar(bool Hide)
 {
 	if(HideToolbar != Hide)
@@ -143,6 +158,9 @@ void Settings::setHideToolbar(bool Hide)
 	}
 }
 
+/*
+  Saving option (hiding window decoration)
+*/
 void Settings::setHideFrame(bool Hide)
 {
 	if(HideFrame != Hide)
@@ -153,6 +171,9 @@ void Settings::setHideFrame(bool Hide)
 	}
 }
 
+/*
+  Saving option (staying on top)
+*/
 void Settings::setStayTop(bool top)
 {
 	if(StayTop != top)
@@ -163,18 +184,23 @@ void Settings::setStayTop(bool top)
 	}
 }
 
+/*
+  Saving dialog's params
+*/
 void Settings::setDialogGeometry(const QByteArray& g)
 {
 	DialogGeometry = g;
 	config.setValue("DialogGeometry", DialogGeometry);
 }
-
 void Settings::setDialogState(const QByteArray& g)
 {
 	DialogState = g;
 	config.setValue("DialogState", DialogState);
 }
 
+/*
+  Saving notes's font
+*/
 void Settings::setNoteFont(const QFont& f)
 {
 	if(NoteFont != f)
@@ -185,6 +211,9 @@ void Settings::setNoteFont(const QFont& f)
 	}
 }
 
+/*
+  Saving script's options
+*/
 void Settings::setScriptShowOutput(bool sso)
 {
 	if(ScriptShowOutput != sso)
@@ -193,7 +222,6 @@ void Settings::setScriptShowOutput(bool sso)
 		config.setValue("ScriptShowOutput", ScriptShowOutput);
 	}
 }
-
 void Settings::setScriptCopyOutput(bool sco)
 {
 	if(ScriptCopyOutput != sco)
@@ -203,6 +231,9 @@ void Settings::setScriptCopyOutput(bool sco)
 	}
 }
 
+/*
+  Saving scripts
+*/
 void Settings::setScripts()
 {
 	config.setValue("ComandCount", smodel.rowCount());
@@ -214,10 +245,19 @@ void Settings::setScripts()
 	}
 }
 
+/*
+  Saving toolbar's items
+*/
 void Settings::setToolbarItems(const QVector<int>& v)
 {
 	if(v==tb_items) return;
+	//removing old settings
+	for(int i=0; i<tb_items.size(); ++i) if(tb_items[i]!=itemSeparator)
+	{
+		config.remove(getItemName(tb_items[i])); //dirty hack =(
+	}
 	tb_items = v;
+	//saving settings
 	config.setValue("Toolbar/itemCount", tb_items.size());
 	for(int i=0; i<tb_items.size(); ++i) if(tb_items[i]!=itemSeparator)
 	{
