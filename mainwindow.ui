@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>290</width>
-    <height>390</height>
+    <width>288</width>
+    <height>388</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -15,7 +15,7 @@
   </property>
   <property name="windowIcon">
    <iconset resource="znotes.qrc">
-    <normaloff>:/res/znotes.png</normaloff>:/res/znotes.png</iconset>
+    <normaloff>:/res/znotes32.png</normaloff>:/res/znotes32.png</iconset>
   </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QVBoxLayout" name="verticalLayout">

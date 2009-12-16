@@ -47,6 +47,9 @@ aboutDialog::aboutDialog(QWidget *parent) :
 	strCredits.append(QString("<p><b>%1</b> - <a href='mailto:%2'>%2</a><br/>%3</p>")
 		.arg("Oktay Cetinkaya (xelat)").arg("xelat09@yahoo.de")
 		.arg("Windows"));
+	strCredits.append(QString("<p><b>%1</b> - <a href='mailto:%2'>%2</a><br/>%3</p>")
+		.arg("Elbert Pol").arg("e.pol@chello.nl")
+		.arg("OS/2"));
 	ui->lbCredits->setHtml(strCredits);
 }
 

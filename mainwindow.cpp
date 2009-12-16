@@ -473,3 +473,16 @@ void MainWindow::on_edSearch_returnPressed()
 {
 	Search(true);
 }
+
+void MainWindow::changeEvent(QEvent *e)
+{
+	QMainWindow::changeEvent(e);
+	switch (e->type()) {
+	case QEvent::LanguageChange:
+		ui->retranslateUi(this);
+		break;
+	default:
+		break;
+	}
+}
+

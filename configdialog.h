@@ -18,6 +18,7 @@ public:
 private:
 	Ui::configDialog *m_ui;
 	void SaveSettings();
+	void changeEvent(QEvent *e);
 
 private slots:
 	void currentToolbarActionChanged(QModelIndex, QModelIndex);

@@ -149,3 +149,16 @@ void configDialog::currentListActionChanged(QModelIndex index, QModelIndex)
 //	m_ui->butActionAdd->setEnabled(true);
 	m_ui->butActionAdd->setEnabled(index.isValid() && !m_items.isUsed(index.row()));
 }
+
+void configDialog::changeEvent(QEvent *e)
+{
+	QDialog::changeEvent(e);
+	switch (e->type()) {
+	case QEvent::LanguageChange:
+		m_ui->retranslateUi(this);
+		break;
+	default:
+		break;
+	}
+}
+

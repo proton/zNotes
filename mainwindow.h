@@ -73,6 +73,7 @@ private:
 			default: return new QAction(this);
 		}
 	}
+	void changeEvent(QEvent *e);
 public slots:
 	void SaveCurrentNote();
 	void RemoveCurrentNote();
