@@ -31,7 +31,7 @@ public:
 	inline bool getHideStart()						{ return HideStart; }
 	inline const QByteArray& getDialogGeometry()	{ return DialogGeometry; }
 	inline const QByteArray& getDialogState()		{ return DialogState; }
-	inline bool getHideToolbar()					{ return HideToolbar; }
+	//inline bool getHideToolbar()					{ return HideToolbar; }
 	inline bool getHideFrame()						{ return HideFrame; }
 	inline bool getStayTop()						{ return StayTop; }
 	inline const QFont& getNoteFont()				{ return NoteFont; }
@@ -45,7 +45,7 @@ public:
 	void setHideStart(bool hide);
 	void setDialogGeometry(const QByteArray& g);
 	void setDialogState(const QByteArray& g);
-	void setHideToolbar(bool s);
+	//void setHideToolbar(bool s, bool send_signal = true);
 	void setHideFrame(bool s);
 	void setStayTop(bool s);
 	void setNoteFont(const QFont& f);
@@ -63,7 +63,7 @@ private:
 	QByteArray DialogGeometry;
 	QByteArray DialogState;
 	//
-	bool HideToolbar;
+	//bool HideToolbar;
 	bool HideFrame;
 	bool StayTop;
 	//
@@ -96,7 +96,7 @@ private:
 signals:
 	void NotesPathChanged();
 	void WindowStateChanged();
-	void ToolbarVisChanged();
+	//void ToolbarVisChanged();
 	void NoteFontChanged();
 	void tbHidingChanged();
 	void ToolbarItemsChanged();

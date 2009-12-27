@@ -234,19 +234,19 @@ void MainWindow::notesPathChanged()
 
 void MainWindow::windowStateChanged()
 {
-	bool v = isVisible();
 	Qt::WindowFlags flags = Qt::Window;
 	if(settings.getHideFrame()) flags |= Qt::FramelessWindowHint;
 	if(settings.getStayTop()) flags |= Qt::WindowStaysOnTopHint;
+	bool window_is_visible = isVisible();
 	setWindowFlags(flags);
-	if(v) show();
+	if(window_is_visible) show();
 }
 
-void MainWindow::toolbarVisChanged()
-{
-	if(settings.getHideToolbar()) ui->mainToolBar->hide();
-	else ui->mainToolBar->show();
-}
+//void MainWindow::toolbarVisChanged()
+//{
+//	if(settings.getHideToolbar()) ui->mainToolBar->hide();
+//	else ui->mainToolBar->show();
+//}
 
 void MainWindow::noteFontChanged()
 {
@@ -325,17 +325,17 @@ MainWindow::MainWindow(QWidget *parent)
 	actSearch = new QAction(ToolbarAction(itemSearch).icon(), ToolbarAction(itemSearch).text(), parent);
 	actExit = new QAction(ToolbarAction(itemExit).icon(), ToolbarAction(itemExit).text(), parent);
 	//
-	QObject::connect(actAdd, SIGNAL(triggered()), this, SLOT(NewNote()));
-	QObject::connect(actRemove, SIGNAL(triggered()), this, SLOT(RemoveCurrentNote()));
-	QObject::connect(actRename, SIGNAL(triggered()), this, SLOT(RenameCurrentNote()));
-	QObject::connect(actPrev, SIGNAL(triggered()), this, SLOT(PreviousNote()));
-	QObject::connect(actNext, SIGNAL(triggered()), this, SLOT(NextNote()));
-	QObject::connect(actCopy, SIGNAL(triggered()), this, SLOT(CopyNote()));
-	QObject::connect(actSetup, SIGNAL(triggered()), this, SLOT(showPrefDialog()));
-	QObject::connect(actInfo, SIGNAL(triggered()), this, SLOT(showAboutDialog()));
-	QObject::connect(actRun, SIGNAL(triggered()), this, SLOT(commandMenu()));
-	QObject::connect(actSearch, SIGNAL(triggered()), this, SLOT(showSearchBar()));
-	QObject::connect(actExit, SIGNAL(triggered()), qApp, SLOT(quit()));
+	connect(actAdd, SIGNAL(triggered()), this, SLOT(NewNote()));
+	connect(actRemove, SIGNAL(triggered()), this, SLOT(RemoveCurrentNote()));
+	connect(actRename, SIGNAL(triggered()), this, SLOT(RenameCurrentNote()));
+	connect(actPrev, SIGNAL(triggered()), this, SLOT(PreviousNote()));
+	connect(actNext, SIGNAL(triggered()), this, SLOT(NextNote()));
+	connect(actCopy, SIGNAL(triggered()), this, SLOT(CopyNote()));
+	connect(actSetup, SIGNAL(triggered()), this, SLOT(showPrefDialog()));
+	connect(actInfo, SIGNAL(triggered()), this, SLOT(showAboutDialog()));
+	connect(actRun, SIGNAL(triggered()), this, SLOT(commandMenu()));
+	connect(actSearch, SIGNAL(triggered()), this, SLOT(showSearchBar()));
+	connect(actExit, SIGNAL(triggered()), qApp, SLOT(quit()));
 	//
 	actions_changed(); //Adding toolbar's actions
 	cmd_changed(); //Adding scripts
@@ -371,7 +371,7 @@ MainWindow::MainWindow(QWidget *parent)
 	connect(scSearch, SIGNAL(activated()), this, SLOT(showSearchBar()));
 	connect(scExit, SIGNAL(activated()), qApp, SLOT(quit()));
 	//
-	for(int i=1; i<10; ++i)
+	for(int i=1; i<=9; ++i) //from Alt+1 to Alt+9
 	{
 		QShortcut* shortcut = new QShortcut(QKeySequence(Qt::ALT + Qt::Key_0+i), this);
 		connect(shortcut, SIGNAL(activated()), &alt_mapper, SLOT(map()));
@@ -388,13 +388,15 @@ MainWindow::MainWindow(QWidget *parent)
 	}
 	//
 	connect(&SaveTimer, SIGNAL(timeout()), this, SLOT(SaveAll()));
-	SaveTimer.start(100000);
+	SaveTimer.start(10000);
 	//
+
+	//connect(this, SIGNAL())
+	connect(ui->mainToolBar->toggleViewAction(), SIGNAL(triggered()), ui->mainToolBar, SLOT(show()));
 	connect(&settings, SIGNAL(NotesPathChanged()), this, SLOT(notesPathChanged()));
 	connect(&settings, SIGNAL(WindowStateChanged()), this, SLOT(windowStateChanged()));
-	connect(&settings, SIGNAL(ToolbarVisChanged()), this, SLOT(toolbarVisChanged()));
+	//connect(&settings, SIGNAL(ToolbarVisChanged()), this, SLOT(toolbarVisChanged()));
 	connect(&settings, SIGNAL(NoteFontChanged()), this, SLOT(noteFontChanged()));
-	//connect(&settings, SIGNAL(tbHidingChanged()), this, SLOT(actions_changed()));
 	connect(&settings, SIGNAL(ToolbarItemsChanged()), this, SLOT(actions_changed()));
 	connect(&settings.getScriptModel(), SIGNAL(dataChanged(const QModelIndex &, const QModelIndex &)),
 		this, SLOT(cmd_changed()));
@@ -409,8 +411,8 @@ MainWindow::~MainWindow()
 	//saving title of last note
 	settings.setLastNote(currentNote()->name);
 	//saving dialog's params
-	settings.setDialogGeometry(saveGeometry());
-	settings.setDialogState(saveState());
+	///settings.setDialogGeometry(saveGeometry());
+	///settings.setDialogState(saveState());
 	//saving scrits
 	settings.setScripts();
 }

@@ -1,3 +1,10 @@
+zNotes 0.3.8
+- fixed problems saving toolbar's items
+- added program directory to translation's search paths
+- fixed desktop file (unix only)
+- fixed problems with window's frame hiding
+- removed ability to hide toolbar (If you need in this ability, tell me, please)
+
 zNotes 0.3.7
 * Added ability to configure toolbar's elements
 * Added tab's switch via Alt+n (1<n<=9)

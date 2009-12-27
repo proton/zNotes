@@ -105,7 +105,7 @@ public slots:
 	//
 	void notesPathChanged();
 	void windowStateChanged();
-	void toolbarVisChanged();//TODO:think
+	//void toolbarVisChanged();//TODO:think
 	void noteFontChanged();
 private slots:
 	void on_edSearch_returnPressed();

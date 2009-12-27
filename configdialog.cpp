@@ -21,7 +21,7 @@ configDialog::configDialog(QWidget *parent) :
 	//
 	m_ui->ed_NotesPath->setText(settings.getNotesPath());
 	m_ui->cb_HideStart->setChecked(settings.getHideStart());
-	m_ui->cb_ToolbarHide->setChecked(settings.getHideToolbar());
+	//m_ui->cb_ToolbarHide->setChecked(settings.getHideToolbar());
 	m_ui->cb_FrameHide->setChecked(settings.getHideFrame());
 	m_ui->cb_StayTop->setChecked(settings.getStayTop());
 	m_ui->lb_FontExample->setFont(settings.getNoteFont());
@@ -46,7 +46,7 @@ void configDialog::SaveSettings()
 {
 	settings.setHideStart(m_ui->cb_HideStart->checkState());
 	settings.setNotesPath(m_ui->ed_NotesPath->text());
-	settings.setHideToolbar(m_ui->cb_ToolbarHide->checkState());
+	//settings.setHideToolbar(m_ui->cb_ToolbarHide->checkState());
 	settings.setHideFrame(m_ui->cb_FrameHide->checkState());
 	settings.setStayTop(m_ui->cb_StayTop->checkState());
 	settings.setNoteFont(m_ui->lb_FontExample->font());
@@ -57,23 +57,30 @@ void configDialog::SaveSettings()
 
 void configDialog::on_buttonBox_clicked(QAbstractButton* button)
 {
-	if(button==m_ui->buttonBox->buttons().at(0))
+	const QAbstractButton* BTN_SAVE = m_ui->buttonBox->buttons().at(0);
+	const QAbstractButton* BTN_CLOSE = m_ui->buttonBox->buttons().at(1);
+	const QAbstractButton* BTN_APPLY = m_ui->buttonBox->buttons().at(2);
+	//
+	if(button==BTN_SAVE)
 	{
 		SaveSettings();
 		close();
 	}
-	else if(button==m_ui->buttonBox->buttons().at(2))
+	else if(button==BTN_CLOSE)
+	{
+		close();
+	}
+	else if(button==BTN_APPLY)
 	{
 		SaveSettings();
 	}
-	else close();
 }
 
 void configDialog::on_btn_NotesPath_clicked()
 {
 	QString path = settings.getNotesPath();
 	path = QFileDialog::getExistingDirectory(0,
-			QObject::tr("Select notes directory"),settings.getNotesPath(),
+			tr("Select notes directory"),settings.getNotesPath(),
 			QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks);
 	if(!path.isEmpty()) m_ui->ed_NotesPath->setText(path);
 }

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>495</width>
-    <height>241</height>
+    <width>491</width>
+    <height>237</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -21,7 +21,7 @@
    <item>
     <widget class="QTabWidget" name="tabWidget">
      <property name="currentIndex">
-      <number>2</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="tab">
       <attribute name="title">
@@ -69,20 +69,13 @@
           </widget>
          </item>
          <item row="1" column="0">
-          <widget class="QCheckBox" name="cb_ToolbarHide">
-           <property name="text">
-            <string>Hide toolbar</string>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="1">
           <widget class="QCheckBox" name="cb_FrameHide">
            <property name="text">
             <string>Hide window's frame</string>
            </property>
           </widget>
          </item>
-         <item row="1" column="1">
+         <item row="0" column="1">
           <widget class="QCheckBox" name="cb_StayTop">
            <property name="text">
             <string>Stay on top</string>

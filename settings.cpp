@@ -8,103 +8,125 @@
 */
 Settings::Settings() : config("pDev", "zNotes")
 {
-	NotesPath = config.value("NotesPath").toString();
-	LastNote = config.value("LastNote").toString();
-	HideStart = config.value("HideStart").toBool();
-	//
-	DialogGeometry = config.value("DialogGeometry").toByteArray();
-	DialogState = config.value("DialogState").toByteArray();
-	//
-	HideToolbar = config.value("HideToolbar").toBool();
-	HideFrame = config.value("HideFrame").toBool();
-	StayTop = config.value("StayTop").toBool();
-	//
-	NoteFont.fromString(config.value("NoteFont").toString());
-	//
-	int ScriptCount = config.value("ComandCount").toInt();
-	for(int i=0; i<ScriptCount; ++i)
+	if(config.allKeys().size()>0) //if exist - reading settings
 	{
-		smodel.append(
-			config.value(QString("ComandName%1").arg(i)).toString(),
-			config.value(QString("ComandFile%1").arg(i)).toString(),
-			config.value(QString("ComandIcon%1").arg(i)).toString());
-	}
-	ScriptShowOutput = config.value("ScriptShowOutput").toBool();
-	ScriptCopyOutput = config.value("ScriptCopyOutput").toBool();
-	//
-	///TODO: remove this code, when in version 0.4:
-	//
-	if(config.contains("Toolbar/itemCount"))
-	{
-		tb_items.resize(config.value("Toolbar/itemCount").toInt());
-		for(int i=itemAdd; i<itemMax; ++i)
+		NotesPath = config.value("NotesPath").toString();
+		LastNote = config.value("LastNote").toString();
+		HideStart = config.value("HideStart").toBool();
+		//
+		DialogGeometry = config.value("DialogGeometry").toByteArray();
+		DialogState = config.value("DialogState").toByteArray();
+		//
+		//HideToolbar = config.value("HideToolbar").toBool();
+		HideFrame = config.value("HideFrame").toBool();
+		StayTop = config.value("StayTop").toBool();
+		//
+		NoteFont.fromString(config.value("NoteFont").toString());
+		//
+		int ScriptCount = config.value("ComandCount").toInt();
+		for(int i=0; i<ScriptCount; ++i)
 		{
-			int pos = config.value(getItemName(i), tb_items.size()).toInt();
-			if(pos<tb_items.size()) tb_items[pos] = i;
+			smodel.append(
+				config.value(QString("ComandName%1").arg(i)).toString(),
+				config.value(QString("ComandFile%1").arg(i)).toString(),
+				config.value(QString("ComandIcon%1").arg(i)).toString());
 		}
-	}
-	else
-	{
-		bool old_settings_exist = (
-				config.contains("tbHideEdit") ||
-				config.contains("tbHideMove") ||
-				config.contains("tbHideCopy") ||
-				config.contains("tbHideSetup") ||
-				config.contains("tbHideRun") ||
-				config.contains("tbHideExit") );
-		if(old_settings_exist) //converting old toolbar's settings
+		ScriptShowOutput = config.value("ScriptShowOutput").toBool();
+		ScriptCopyOutput = config.value("ScriptCopyOutput").toBool();
+		//
+		///TODO: remove this code, when in version 0.4.1:
+		//
+		if(config.contains("Toolbar/itemCount"))
 		{
-			if(!config.value("tbHideEdit").toBool())
+			tb_items.resize(config.value("Toolbar/itemCount").toInt());
+			for(int i=itemAdd; i<itemMax; ++i)
+			{
+				int pos = config.value(getItemName(i), tb_items.size()).toInt();
+				if(pos<tb_items.size()) tb_items[pos] = i;
+			}
+		}
+		else
+		{
+			bool old_settings_exist = (
+					config.contains("tbHideEdit") ||
+					config.contains("tbHideMove") ||
+					config.contains("tbHideCopy") ||
+					config.contains("tbHideSetup") ||
+					config.contains("tbHideRun") ||
+					config.contains("tbHideExit") );
+			if(old_settings_exist) //converting old toolbar's settings
+			{
+				if(!config.value("tbHideEdit").toBool())
+				{
+					tb_items.append(itemAdd);
+					tb_items.append(itemRemove);
+					tb_items.append(itemRename);
+					tb_items.append(itemSeparator);
+				}
+				if(!config.value("tbHideMove").toBool())
+				{
+					tb_items.append(itemPrev);
+					tb_items.append(itemNext);
+					tb_items.append(itemSeparator);
+				}
+				if(!config.value("tbHideCopy").toBool())
+				{
+					tb_items.append(itemCopy);
+					tb_items.append(itemSeparator);
+				}
+				if(!config.value("tbHideSetup").toBool())
+				{
+					tb_items.append(itemSetup);
+					tb_items.append(itemInfo);
+					tb_items.append(itemSeparator);
+				}
+				if(!config.value("tbHideRun").toBool())
+				{
+					tb_items.append(itemRun);
+					tb_items.append(itemSearch);
+					tb_items.append(itemSeparator);
+				}
+				if(!config.value("tbHideExit").toBool()) tb_items.append(itemExit);
+			}
+			else //default toolbar's settings
 			{
 				tb_items.append(itemAdd);
 				tb_items.append(itemRemove);
 				tb_items.append(itemRename);
 				tb_items.append(itemSeparator);
-			}
-			if(!config.value("tbHideMove").toBool())
-			{
 				tb_items.append(itemPrev);
 				tb_items.append(itemNext);
 				tb_items.append(itemSeparator);
-			}
-			if(!config.value("tbHideCopy").toBool())
-			{
 				tb_items.append(itemCopy);
 				tb_items.append(itemSeparator);
-			}
-			if(!config.value("tbHideSetup").toBool())
-			{
 				tb_items.append(itemSetup);
 				tb_items.append(itemInfo);
 				tb_items.append(itemSeparator);
-			}
-			if(!config.value("tbHideRun").toBool())
-			{
 				tb_items.append(itemRun);
 				tb_items.append(itemSearch);
 				tb_items.append(itemSeparator);
+				tb_items.append(itemExit);
 			}
-			if(!config.value("tbHideExit").toBool()) tb_items.append(itemExit);
 		}
-		else //default toolbar's settings
-		{
-			tb_items.append(itemAdd);
-			tb_items.append(itemRemove);
-			tb_items.append(itemRename);
-			tb_items.append(itemSeparator);
-			tb_items.append(itemPrev);
-			tb_items.append(itemNext);
-			tb_items.append(itemSeparator);
-			tb_items.append(itemCopy);
-			tb_items.append(itemSeparator);
-			tb_items.append(itemSetup);
-			tb_items.append(itemInfo);
-			tb_items.append(itemSeparator);
-			tb_items.append(itemRun);
-			tb_items.append(itemSearch);
-			tb_items.append(itemSeparator);
-			tb_items.append(itemExit);
-		}
+	}
+	else //if settings don't exist - setup default settings
+	{
+		tb_items.append(itemAdd);
+		tb_items.append(itemRemove);
+		tb_items.append(itemRename);
+		tb_items.append(itemSeparator);
+		tb_items.append(itemPrev);
+		tb_items.append(itemNext);
+		tb_items.append(itemSeparator);
+		tb_items.append(itemCopy);
+		tb_items.append(itemSeparator);
+		tb_items.append(itemSetup);
+		tb_items.append(itemInfo);
+		tb_items.append(itemSeparator);
+		tb_items.append(itemRun);
+		tb_items.append(itemSearch);
+		tb_items.append(itemSeparator);
+		tb_items.append(itemExit);
 	}
 }
 
@@ -148,16 +170,16 @@ void Settings::setHideStart(bool hide)
 /*
   Saving option (toolbar's showing)
 */
-void Settings::setHideToolbar(bool Hide)
-{
-	if(HideToolbar != Hide)
-	{
-		HideToolbar = Hide;
-		config.setValue("HideToolbar", HideToolbar);
-		emit ToolbarVisChanged();
-	}
-}
-
+//void Settings::setHideToolbar(bool Hide, bool send_signal)
+//{
+//	if(HideToolbar != Hide)
+//	{
+//		HideToolbar = Hide;
+//		config.setValue("HideToolbar", HideToolbar);
+//		if(send_signal) emit ToolbarVisChanged();
+//	}
+//}
+//
 /*
   Saving option (hiding window decoration)
 */
@@ -166,7 +188,7 @@ void Settings::setHideFrame(bool Hide)
 	if(HideFrame != Hide)
 	{
 		HideFrame = Hide;
-		config.setValue("HideFrame", HideToolbar);
+		config.setValue("HideFrame", HideFrame);
 		emit WindowStateChanged();
 	}
 }
