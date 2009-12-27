@@ -25,7 +25,11 @@ void ItemModel::setVector(const QVector<int>& nv)
 {
 	for(int i=0; i<nv.size(); ++i)
 	{
-		if(nv[i]!=itemSeparator) v[nv[i]] = true;
+		if(nv[i]!=itemSeparator)
+		{
+			int id =nv[i];
+			v[id] = true;
+		}
 	}
 }
 
@@ -74,18 +78,16 @@ void ItemToolbarModel::up(const QModelIndex &index)
 {
 	int row = index.row();
 	if(row==0) return;
-	int i = v[row];
-	v[row] = v[row-1];
-	v[row-1] = i;
+	qSwap(v[row], v[row-1]);
+	emit reset();
 }
 
 void ItemToolbarModel::down(const QModelIndex &index)
 {
 	int row = index.row();
 	if(row==v.size()-1) return;
-	int i = v[row];
-	v[row] = v[row+1];
-	v[row+1] = i;
+	qSwap(v[row], v[row+1]);
+	emit reset();
 }
 
 void ItemToolbarModel::setVector(const QVector<int>& nv)
