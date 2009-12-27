@@ -258,9 +258,15 @@ void MainWindow::noteFontChanged()
 
 void MainWindow::commandMenu()
 {
-	QPoint p = ui->mainToolBar->actionGeometry(actRun).center();
-	p+=pos();
-	cmd_menu.exec(p);
+	if(cmd_menu.actions().size()>0)
+	{
+		QPoint p = ui->mainToolBar->actionGeometry(actRun).center()+pos();
+		cmd_menu.exec(p);
+	}
+	else
+	{
+		QMessageBox(QMessageBox::Information, tr("Commandlist is clear"), tr("List of commands is clear!\nYou can add new commands in preferences.")).exec();
+	}
 }
 
 void MainWindow::cmdExec(const QString & command)

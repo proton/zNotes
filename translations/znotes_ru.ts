@@ -29,6 +29,17 @@
         <translation>Выбор каталога с заметками</translation>
     </message>
     <message>
+        <location filename="../mainwindow.cpp" line="268"/>
+        <source>Commandlist is clear</source>
+        <translation>Список команд пуст</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="268"/>
+        <source>List of commands is clear!
+You can add new commands in preferences.</source>
+        <translation>Команды не заданы!\nВы можете добавить команды в настройках программы.</translation>
+    </message>
+    <message>
         <source>zNotes - about</source>
         <translation type="obsolete">О программе zNotes</translation>
     </message>
@@ -119,12 +130,12 @@ Do you want to move your notes to new place ?</source>
         <translation type="obsolete">Выход</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="343"/>
+        <location filename="../mainwindow.cpp" line="349"/>
         <source>Show</source>
         <translation>Показать</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="344"/>
+        <location filename="../mainwindow.cpp" line="350"/>
         <source>Hide</source>
         <translation>Скрыть</translation>
     </message>
@@ -137,22 +148,22 @@ Do you want to move your notes to new place ?</source>
         <translation type="obsolete">Выход</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="14"/>
+        <location filename="../mainwindow.ui" line="17"/>
         <source>zNotes</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="38"/>
+        <location filename="../mainwindow.ui" line="41"/>
         <source>1</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="49"/>
+        <location filename="../mainwindow.ui" line="52"/>
         <source>Enter text:</source>
         <translation>Введите текст:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="77"/>
+        <location filename="../mainwindow.ui" line="80"/>
         <source>Show Toolbar</source>
         <translation>Показывать панель инструментов</translation>
     </message>
@@ -160,9 +171,8 @@ Do you want to move your notes to new place ?</source>
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../configdialog.cpp" line="76"/>
         <source>Select notes directory</source>
-        <translation>Выбор каталога с заметками</translation>
+        <translation type="obsolete">Выбор каталога с заметками</translation>
     </message>
     <message>
         <location filename="../toolbaraction.h" line="33"/>
@@ -378,27 +388,26 @@ The text of the license can can be found in the file LICENSE.</source>
         <translation>Запуск свернутым</translation>
     </message>
     <message>
-        <location filename="../configdialog.ui" line="74"/>
         <source>Hide toolbar</source>
-        <translation>Скрыть панель инструментов</translation>
+        <translation type="obsolete">Скрыть панель инструментов</translation>
     </message>
     <message>
-        <location filename="../configdialog.ui" line="81"/>
+        <location filename="../configdialog.ui" line="74"/>
         <source>Hide window&apos;s frame</source>
         <translation>Окно без рамок</translation>
     </message>
     <message>
-        <location filename="../configdialog.ui" line="88"/>
+        <location filename="../configdialog.ui" line="81"/>
         <source>Stay on top</source>
         <translation>Поверх всех окон</translation>
     </message>
     <message>
-        <location filename="../configdialog.ui" line="105"/>
+        <location filename="../configdialog.ui" line="98"/>
         <source>Font:</source>
         <translation>Шрифт:</translation>
     </message>
     <message>
-        <location filename="../configdialog.ui" line="121"/>
+        <location filename="../configdialog.ui" line="114"/>
         <source>The quick brown fox jumps over the lazy dog.</source>
         <translation>Съешь еще этих мягких французских булок, да выпей чаю.</translation>
     </message>
@@ -407,37 +416,37 @@ The text of the license can can be found in the file LICENSE.</source>
         <translation type="obsolete">Съешь еще этих мягких французских булок, да выпей чаю.</translation>
     </message>
     <message>
-        <location filename="../configdialog.ui" line="134"/>
+        <location filename="../configdialog.ui" line="127"/>
         <source>Change</source>
         <translation>Изменить</translation>
     </message>
     <message>
-        <location filename="../configdialog.ui" line="144"/>
+        <location filename="../configdialog.ui" line="137"/>
         <source>Scripts</source>
         <translation>Скрипты</translation>
     </message>
     <message>
-        <location filename="../configdialog.ui" line="162"/>
+        <location filename="../configdialog.ui" line="155"/>
         <source>Add</source>
         <translation>Добавить</translation>
     </message>
     <message>
-        <location filename="../configdialog.ui" line="173"/>
+        <location filename="../configdialog.ui" line="166"/>
         <source>Remove</source>
         <translation>Удалить</translation>
     </message>
     <message>
-        <location filename="../configdialog.ui" line="188"/>
+        <location filename="../configdialog.ui" line="181"/>
         <source>Show script&apos;s output</source>
         <translation>Показать вывод скрипта</translation>
     </message>
     <message>
-        <location filename="../configdialog.ui" line="195"/>
+        <location filename="../configdialog.ui" line="188"/>
         <source>Copy script&apos;s output to clipboard</source>
         <translation>Копировать вывод скрипта</translation>
     </message>
     <message>
-        <location filename="../configdialog.ui" line="205"/>
+        <location filename="../configdialog.ui" line="198"/>
         <source>Toolbar</source>
         <translation>Панель инструментов</translation>
     </message>
@@ -488,6 +497,11 @@ The text of the license can can be found in the file LICENSE.</source>
     <message>
         <source>Exit</source>
         <translation type="obsolete">Выход</translation>
+    </message>
+    <message>
+        <location filename="../configdialog.cpp" line="83"/>
+        <source>Select notes directory</source>
+        <translation>Выбор каталога с заметками</translation>
     </message>
 </context>
 </TS>
