@@ -7,7 +7,7 @@ class ScriptModel : public QStandardItemModel
 {
 public:
 	ScriptModel();
-	void append(const QString& name, const QString& file, const QString& icon);
+	void append(const QString& name = QString(), const QString& file = QString(), const QString& icon = QString());
 	const QString getName(int i) { return data(index(i,0)).toString(); }
 	const QString getFile(int i) { return data(index(i,1)).toString(); }
 	const QString getIcon(int i) { return data(index(i,2)).toString(); }

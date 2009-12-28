@@ -38,8 +38,11 @@ configDialog::configDialog(QWidget *parent) :
 		const QLocale::Language language = translation.next().key();
 		m_ui->cmb_Language->addItem(QLocale::languageToString(language), language);
 	}
-	m_ui->cmb_Language->setEditText(QLocale::languageToString(settings.getLanguageCurrent()));
+	int current_language_index = m_ui->cmb_Language->findData(settings.getLanguageCurrent());
+	m_ui->cmb_Language->setCurrentIndex(current_language_index);
+	//
 	m_ui->cb_LanguageCustom->setChecked(settings.getLanguageCustom());
+	m_ui->cmb_Language->setEnabled(settings.getLanguageCustom());
 	//
 	mt_items.setVector(settings.getToolbarItems());
 	m_items.setVector(settings.getToolbarItems());
@@ -113,7 +116,7 @@ void configDialog::on_btn_ScriptRemove_clicked()
 
 void configDialog::on_btn_ScriptAdd_clicked()
 {
-	settings.getScriptModel().append("","","");
+	settings.getScriptModel().append();
 }
 
 void configDialog::on_butActionAdd_clicked()
@@ -121,7 +124,6 @@ void configDialog::on_butActionAdd_clicked()
 	int id = m_ui->listActions->currentIndex().row();
 	int row = (m_ui->listToolbarActions->selectionModel()->hasSelection())?
 		m_ui->listToolbarActions->currentIndex().row():-1;
-	//qDebug() << id << " " << row;
 	mt_items.insert(id, row);
 	m_items.remove(id);
 }
@@ -138,14 +140,12 @@ void configDialog::on_butActionTop_clicked()
 {
 	QModelIndex index(m_ui->listToolbarActions->currentIndex());
 	mt_items.up(index);
-	//m_ui->listToolbarActions->setCurrentIndex(mt_items.index(index.row()+1,0));
 }
 
 void configDialog::on_butActionBottom_clicked()
 {
 	QModelIndex index(m_ui->listToolbarActions->currentIndex());
 	mt_items.down(index);
-	//m_ui->listToolbarActions->setCurrentIndex(mt_items.index(index.row()-1,0));
 }
 
 void configDialog::currentToolbarActionChanged(QModelIndex index, QModelIndex)

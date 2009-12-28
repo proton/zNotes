@@ -139,6 +139,10 @@ void Settings::load()
 		tb_items.append(itemExit);
 	}
 	loadLanguages();
+	QLocale::Language lang = (LanguageCustom)?LanguageCurrent:QLocale::system().language();
+	if(!translations.contains(lang)) lang = QLocale::English;
+	setLanguage(lang);
+	qApp->installTranslator( &translator);
 }
 
 /*
@@ -345,7 +349,7 @@ void Settings::setLanguageCurrent(QLocale::Language l)
 	if(LanguageCurrent != l)
 	{
 		LanguageCurrent = l;
-		config.setValue("LanguageCurrent", LanguageCurrent);
+		config.setValue("LanguageCurrent", QLocale(LanguageCurrent).name());
 	}
 	if(LanguageCustom) setLanguage(LanguageCurrent);
 }
@@ -369,6 +373,4 @@ void Settings::setLanguageCustom(bool b)
 void Settings::setLanguage(QLocale::Language language)
 {
 	translator.load(translations[language]);
-	qApp->installTranslator( &translator );
-	emit LanguageChanged();
 }

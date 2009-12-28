@@ -109,7 +109,6 @@ signals:
 	void NoteFontChanged();
 	void tbHidingChanged();
 	void ToolbarItemsChanged();
-	void LanguageChanged();
 };
 
 extern Settings settings;

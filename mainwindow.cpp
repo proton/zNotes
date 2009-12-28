@@ -397,7 +397,6 @@ MainWindow::MainWindow(QWidget *parent)
 	connect(&SaveTimer, SIGNAL(timeout()), this, SLOT(SaveAll()));
 	SaveTimer.start(10000);
 	//
-
 	//connect(ui->mainToolBar->toggleViewAction(), SIGNAL(triggered()), ui->mainToolBar, SLOT(show()));
 	connect(&settings, SIGNAL(NotesPathChanged()), this, SLOT(notesPathChanged()));
 	connect(&settings, SIGNAL(WindowStateChanged()), this, SLOT(windowStateChanged()));
