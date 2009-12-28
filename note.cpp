@@ -10,6 +10,7 @@ Note::Note(const QString& fn, const QDir& dir, const QFont& f)
 	{
 		QTextStream in(&file);
 		setPlainText(in.readAll());
+		//appendHtml("<b>123</b><br/><a href='ya.ru'>link</a>"); //ololo! It's support html!!!
 		file.close();
 	}
 	else if(file.open(QIODevice::WriteOnly | QIODevice::Text)) file.close();

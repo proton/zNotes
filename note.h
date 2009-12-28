@@ -6,6 +6,10 @@
 
 class Note : public QPlainTextEdit
 {
+	enum type
+	{
+		text, html
+	};
 	public:
 		Note(const QString& fn, const QDir&, const QFont&);
 		QString name;
