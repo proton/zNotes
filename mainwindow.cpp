@@ -312,6 +312,7 @@ void MainWindow::actions_changed()
 MainWindow::MainWindow(QWidget *parent)
 	: QMainWindow(parent), ui(new Ui::MainWindow), CurrentIndex(-1)
 {
+	settings.load();
 	ui->setupUi(this);
 	ui->wSearch->hide();
 	//restoring window state
@@ -484,12 +485,12 @@ void MainWindow::on_edSearch_returnPressed()
 void MainWindow::changeEvent(QEvent *e)
 {
 	QMainWindow::changeEvent(e);
-	switch (e->type()) {
+	switch (e->type())
+	{
 	case QEvent::LanguageChange:
 		ui->retranslateUi(this);
 		break;
-	default:
-		break;
+	default: break;
 	}
 }
 

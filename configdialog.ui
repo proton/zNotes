@@ -87,14 +87,21 @@
        <item>
         <layout class="QHBoxLayout" name="horizontalLayout_6">
          <item>
-          <widget class="QLabel" name="label_3">
+          <widget class="QCheckBox" name="cb_LanguageCustom">
            <property name="text">
-            <string>Program language:</string>
+            <string>Use custom language</string>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QComboBox" name="cmb_Language"/>
+          <widget class="QComboBox" name="cmb_Language">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+           <property name="insertPolicy">
+            <enum>QComboBox::InsertAlphabetically</enum>
+           </property>
+          </widget>
          </item>
         </layout>
        </item>
@@ -294,5 +301,22 @@
  <resources>
   <include location="znotes.qrc"/>
  </resources>
- <connections/>
+ <connections>
+  <connection>
+   <sender>cb_LanguageCustom</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>cmb_Language</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>140</x>
+     <y>173</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>288</x>
+     <y>173</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>

@@ -10,29 +10,17 @@
 #include <QFont>
 #include <QVector>
 #include <QTranslator>
-//#include <QLocale>
+#include <QLocale>
 
 #include "scriptmodel.h"
 #include "toolbaraction.h"
-
-struct Script
-{
-	QString name;
-	QString icon;
-	QString addr;
-};
-
-//struct Localization
-//{
-//	QLocale::Language language;
-//	QString path;
-//};
 
 class Settings : public QObject
 {
 	Q_OBJECT
 public:
 	Settings();
+	void load();
 	//
 	inline const QString& getNotesPath()			{ return NotesPath; }
 	inline const QString& getLastNote()				{ return LastNote; }
@@ -43,10 +31,13 @@ public:
 	inline bool getHideFrame()						{ return HideFrame; }
 	inline bool getStayTop()						{ return StayTop; }
 	inline const QFont& getNoteFont()				{ return NoteFont; }
-	inline ScriptModel& getScriptModel()			{ return smodel; }
+	inline ScriptModel& getScriptModel()			{ return script_model; }
 	inline bool getScriptShowOutput()				{ return ScriptShowOutput; }
 	inline bool getScriptCopyOutput()				{ return ScriptCopyOutput; }
 	inline const QVector<int>& getToolbarItems()	{ return tb_items; }
+	inline const QMap<QLocale::Language, QString>& getTranslations()	{ return translations; }
+	inline QLocale::Language getLanguageCurrent()	{ return LanguageCurrent; }
+	inline bool getLanguageCustom()					{ return LanguageCustom; }
 	//
 	void setNotesPath(const QString& path);
 	void setLastNote(const QString& name);
@@ -61,12 +52,18 @@ public:
 	void setScriptCopyOutput(bool b);
 	void setScripts();
 	void setToolbarItems(const QVector<int>& v);
-	void setLanguage(int id);
+	void setLanguage(QLocale::Language);
+	void setLanguageCurrent(QLocale::Language);
+	void setLanguageCustom(bool);
 	//
 	void loadLanguages();
 private:
 	QSettings config;
 	QTranslator translator;
+	//
+	QMap<QLocale::Language, QString> translations;
+	QLocale::Language LanguageCurrent;
+	bool LanguageCustom;
 	//
 	QString NotesPath;
 	QString LastNote;
@@ -81,7 +78,7 @@ private:
 	//
 	QFont NoteFont;
 	//
-	ScriptModel smodel;
+	ScriptModel script_model;
 	bool ScriptShowOutput;
 	bool ScriptCopyOutput;
 	//
@@ -91,18 +88,18 @@ private:
 	{
 		switch(i)
 		{
-			case itemAdd: return "Toolbar/itemAdd";
-			case itemRemove: return "Toolbar/itemRemove";
-			case itemRename: return "Toolbar/itemRename";
-			case itemPrev: return "Toolbar/itemPrev";
-			case itemNext: return "Toolbar/itemNext";
-			case itemCopy: return "Toolbar/itemCopy";
-			case itemSetup: return "Toolbar/itemSetup";
-			case itemInfo: return "Toolbar/itemInfo";
-			case itemRun: return "Toolbar/itemRun";
-			case itemSearch: return "Toolbar/itemSearch";
-			case itemExit: return "Toolbar/itemExit";
-			default: return "";
+			case itemAdd:		return "Toolbar/itemAdd";
+			case itemRemove:	return "Toolbar/itemRemove";
+			case itemRename:	return "Toolbar/itemRename";
+			case itemPrev:		return "Toolbar/itemPrev";
+			case itemNext:		return "Toolbar/itemNext";
+			case itemCopy:		return "Toolbar/itemCopy";
+			case itemSetup:		return "Toolbar/itemSetup";
+			case itemInfo:		return "Toolbar/itemInfo";
+			case itemRun:		return "Toolbar/itemRun";
+			case itemSearch:	return "Toolbar/itemSearch";
+			case itemExit:		return "Toolbar/itemExit";
+			default:			return "";
 		}
 	}
 signals:
@@ -112,6 +109,7 @@ signals:
 	void NoteFontChanged();
 	void tbHidingChanged();
 	void ToolbarItemsChanged();
+	void LanguageChanged();
 };
 
 extern Settings settings;

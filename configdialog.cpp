@@ -25,10 +25,21 @@ configDialog::configDialog(QWidget *parent) :
 	m_ui->cb_FrameHide->setChecked(settings.getHideFrame());
 	m_ui->cb_StayTop->setChecked(settings.getStayTop());
 	m_ui->lb_FontExample->setFont(settings.getNoteFont());
+	//
 	m_ui->tabScripts->setModel(&settings.getScriptModel());
 	m_ui->tabScripts->resizeColumnsToContents();
 	m_ui->cb_ScriptShowOutput->setChecked(settings.getScriptShowOutput());
 	m_ui->cb_ScriptCopyOutput->setChecked(settings.getScriptCopyOutput());
+	//
+	const QMap<QLocale::Language, QString> translations = settings.getTranslations();
+	QMapIterator<QLocale::Language, QString> translation(translations);
+	while(translation.hasNext())
+	{
+		const QLocale::Language language = translation.next().key();
+		m_ui->cmb_Language->addItem(QLocale::languageToString(language), language);
+	}
+	m_ui->cmb_Language->setEditText(QLocale::languageToString(settings.getLanguageCurrent()));
+	m_ui->cb_LanguageCustom->setChecked(settings.getLanguageCustom());
 	//
 	mt_items.setVector(settings.getToolbarItems());
 	m_items.setVector(settings.getToolbarItems());
@@ -53,6 +64,8 @@ void configDialog::SaveSettings()
 	settings.setScriptShowOutput(m_ui->cb_ScriptShowOutput->checkState());
 	settings.setScriptCopyOutput(m_ui->cb_ScriptCopyOutput->checkState());
 	settings.setToolbarItems(mt_items.getVector());
+	settings.setLanguageCustom(m_ui->cb_LanguageCustom->isChecked());
+	settings.setLanguageCurrent(QLocale::Language(m_ui->cmb_Language->itemData(m_ui->cmb_Language->currentIndex(), Qt::UserRole).toInt()));
 }
 
 void configDialog::on_buttonBox_clicked(QAbstractButton* button)

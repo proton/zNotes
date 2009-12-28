@@ -3,11 +3,17 @@
 #include <QObject>
 #include <QtDebug>
 #include <QApplication>
+#include <QDir>
+
+Settings::Settings() : config("pDev", "zNotes")
+{
+}
 
 /*
-  Settings loading...
+  Loading settings...
 */
-Settings::Settings() : config("pDev", "zNotes")
+
+void Settings::load()
 {
 	if(config.allKeys().size()>0) //if exist - reading settings
 	{
@@ -27,13 +33,16 @@ Settings::Settings() : config("pDev", "zNotes")
 		int ScriptCount = config.value("ComandCount").toInt();
 		for(int i=0; i<ScriptCount; ++i)
 		{
-			smodel.append(
+			script_model.append(
 				config.value(QString("ComandName%1").arg(i)).toString(),
 				config.value(QString("ComandFile%1").arg(i)).toString(),
 				config.value(QString("ComandIcon%1").arg(i)).toString());
 		}
 		ScriptShowOutput = config.value("ScriptShowOutput").toBool();
 		ScriptCopyOutput = config.value("ScriptCopyOutput").toBool();
+		//
+		LanguageCustom = config.value("LanguageCustom").toBool();
+		LanguageCurrent = QLocale(config.value("LanguageCurrent").toString()).language();
 		//
 		///TODO: remove this code, when in version 0.4.1:
 		//
@@ -135,40 +144,39 @@ Settings::Settings() : config("pDev", "zNotes")
 /*
   Loading list of qm-files...
 */
+
 void Settings::loadLanguages()
 {
-	//#if defined Q_WS_MAC
-	//	QDir qmDir( QApplication::applicationDirPath() );
-	//	qmDir.cdUp();
-	//	qmDir.cd( "Resources" );
-	//#else
-	//	QDir qmDir( SHARE_DIR );
-	//	if ( !qmDir.cd( "loc" ) ) {
-	//		qmDir.cd( QApplication::applicationDirPath() );
-	//		qmDir.cd( "loc" );
-	//	}
-	//#endif
-	//	QStringList fileNames = qmDir.entryList(QStringList("qtwitter_*.qm"));
-	//	fileNames.append( "qtwitter_en.qm" );
-	//	fileNames.sort();
-	//	for (int i = 0; i < fileNames.size(); ++i) {
-	//		QString locale = fileNames[i];
-	//		locale.remove(0, locale.indexOf('_') + 1);
-	//		locale.chop(3);
-	//
-	//		translator.load(fileNames[i], qmDir.absolutePath());
-	//		//: Please put here your translation's language, e.g. "Deutsch", "Francais", "Suomi", etc.
-	//		//: DON'T TRANSLATE "English" TO YOUR LANGUAGE
-	//		QString language = translator.translate( "Settings", "English" );
-	//		if ( language.isEmpty() )
-	//			language = "English";
-	//		ui.languageCombo->addItem( language, locale );
-	//	}
-	//	QString systemLocale = QLocale::system().name();
-	//	ui.languageCombo->insertItem(0, tr( "Default" ), systemLocale );
-	//	//  systemLocale.chop(3);
-	//	qDebug() << systemLocale << ui.languageCombo->findData( systemLocale );
-	//	//  ui.languageCombo->setCurrentIndex( ui.languageCombo->findData( systemLocale ) );
+	//adding translations search paths
+	QStringList translation_dirs;
+	translation_dirs << QCoreApplication::applicationDirPath();
+	translation_dirs << QCoreApplication::applicationDirPath()+"/translations";
+#ifdef PROGRAM_DATA_DIR
+	translation_dirs << QString(PROGRAM_DATA_DIR);
+#endif
+#ifdef Q_WS_MAC
+	translation_dirs << QCoreApplication::applicationDirPath()+"/../Resources";
+#endif
+	//looking for qm-files in translation directories
+	QStringListIterator dir_path(translation_dirs);
+	while(dir_path.hasNext())
+	{
+		QDir dir(dir_path.next());
+		QStringList fileNames = dir.entryList(QStringList("znotes_*.qm"));
+		for(int i=0; i < fileNames.size(); ++i)
+		{
+			QString filename(fileNames[i]);
+			QString fullpath(dir.absoluteFilePath(filename));
+			filename.remove(0, filename.indexOf('_') + 1);
+			filename.chop(3);
+			QLocale locale(filename);
+			if(!translations.contains(locale.language()))
+			{
+				translations[locale.language()]=fullpath;
+			}
+		}
+	}
+	translations[QLocale::English]="";
 }
 
 /*
@@ -299,12 +307,12 @@ void Settings::setScriptCopyOutput(bool sco)
 */
 void Settings::setScripts()
 {
-	config.setValue("ComandCount", smodel.rowCount());
-	for(int i=0; i<smodel.rowCount(); ++i)
+	config.setValue("ComandCount", script_model.rowCount());
+	for(int i=0; i<script_model.rowCount(); ++i)
 	{
-		config.setValue(QString("ComandName%1").arg(i), smodel.getName(i));
-		config.setValue(QString("ComandFile%1").arg(i), smodel.getFile(i));
-		config.setValue(QString("ComandIcon%1").arg(i), smodel.getIcon(i));
+		config.setValue(QString("ComandName%1").arg(i), script_model.getName(i));
+		config.setValue(QString("ComandFile%1").arg(i), script_model.getFile(i));
+		config.setValue(QString("ComandIcon%1").arg(i), script_model.getIcon(i));
 	}
 }
 
@@ -329,44 +337,38 @@ void Settings::setToolbarItems(const QVector<int>& v)
 	emit ToolbarItemsChanged();
 }
 
-void Settings::setLanguage(int id)
+/*
+  Saving custom language
+*/
+void Settings::setLanguageCurrent(QLocale::Language l)
 {
-//#if defined Q_WS_MAC
-//    QDir qmDir( QApplication::applicationDirPath() );
-//    qmDir.cdUp();
-//    qmDir.cd( "Resources" );
-//#else
-//    QDir qmDir( SHARE_DIR );
-//    if ( !qmDir.cd( "loc" ) ) {
-//        qmDir.cd( QApplication::applicationDirPath() );
-//        qmDir.cd( "loc" );
-//    }
-//#endif
-//    QString qmPath( qmDir.absolutePath() );
-//
-//    QString locale = ui.languageCombo->itemData( index ).toString();
-//
-//    qDebug() << "switching language to" << locale << "from" << qmPath;
-//    translator.load( "qtwitter_" + locale, qmPath );
-	qApp->installTranslator( &translator );
-//
-//    retranslateUi();
-//    if ( QTwitterApp::mainWindow() ) {
-//        QTwitterApp::mainWindow()->retranslateUi();
-//    }
-//    core->retranslateUi();
-//    adjustSize();
+	if(LanguageCurrent != l)
+	{
+		LanguageCurrent = l;
+		config.setValue("LanguageCurrent", LanguageCurrent);
+	}
+	if(LanguageCustom) setLanguage(LanguageCurrent);
 }
 
-////Loading translation
-//QTranslator translator, qtranslator;
-//QString locale = QLocale::system().name();
-//qtranslator.load("qt_"+locale, QLibraryInfo::location(QLibraryInfo::TranslationsPath));
-//a.installTranslator( &qtranslator );
-//#ifdef PROGRAM_DATA_DIR
-//if(!translator.load(QString(PROGRAM_DATA_DIR) + "/translations/znotes_" + locale ) )
-//#endif
-//if(!translator.load( QCoreApplication::applicationDirPath() + "/translations/znotes_" + locale ))
-//translator.load( QCoreApplication::applicationDirPath() + "/znotes_" + locale );
-//a.installTranslator(&translator);
-////
+/*
+  Saving option of using cusrom language
+*/
+void Settings::setLanguageCustom(bool b)
+{
+	if(LanguageCustom != b)
+	{
+		LanguageCustom = b;
+		config.setValue("LanguageCustom", LanguageCustom);
+		if(!LanguageCustom) setLanguage(QLocale::system().language());
+	}
+}
+
+/*
+  Setting language
+*/
+void Settings::setLanguage(QLocale::Language language)
+{
+	translator.load(translations[language]);
+	qApp->installTranslator( &translator );
+	emit LanguageChanged();
+}
