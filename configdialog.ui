@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>491</width>
-    <height>237</height>
+    <width>510</width>
+    <height>265</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -81,6 +81,20 @@
             <string>Stay on top</string>
            </property>
           </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_6">
+         <item>
+          <widget class="QLabel" name="label_3">
+           <property name="text">
+            <string>Program language:</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QComboBox" name="cmb_Language"/>
          </item>
         </layout>
        </item>

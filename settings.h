@@ -9,6 +9,8 @@
 #include <QByteArray>
 #include <QFont>
 #include <QVector>
+#include <QTranslator>
+//#include <QLocale>
 
 #include "scriptmodel.h"
 #include "toolbaraction.h"
@@ -19,6 +21,12 @@ struct Script
 	QString icon;
 	QString addr;
 };
+
+//struct Localization
+//{
+//	QLocale::Language language;
+//	QString path;
+//};
 
 class Settings : public QObject
 {
@@ -53,8 +61,12 @@ public:
 	void setScriptCopyOutput(bool b);
 	void setScripts();
 	void setToolbarItems(const QVector<int>& v);
+	void setLanguage(int id);
+	//
+	void loadLanguages();
 private:
 	QSettings config;
+	QTranslator translator;
 	//
 	QString NotesPath;
 	QString LastNote;

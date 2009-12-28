@@ -2,6 +2,7 @@
 
 #include <QObject>
 #include <QtDebug>
+#include <QApplication>
 
 /*
   Settings loading...
@@ -128,6 +129,46 @@ Settings::Settings() : config("pDev", "zNotes")
 		tb_items.append(itemSeparator);
 		tb_items.append(itemExit);
 	}
+	loadLanguages();
+}
+
+/*
+  Loading list of qm-files...
+*/
+void Settings::loadLanguages()
+{
+	//#if defined Q_WS_MAC
+	//	QDir qmDir( QApplication::applicationDirPath() );
+	//	qmDir.cdUp();
+	//	qmDir.cd( "Resources" );
+	//#else
+	//	QDir qmDir( SHARE_DIR );
+	//	if ( !qmDir.cd( "loc" ) ) {
+	//		qmDir.cd( QApplication::applicationDirPath() );
+	//		qmDir.cd( "loc" );
+	//	}
+	//#endif
+	//	QStringList fileNames = qmDir.entryList(QStringList("qtwitter_*.qm"));
+	//	fileNames.append( "qtwitter_en.qm" );
+	//	fileNames.sort();
+	//	for (int i = 0; i < fileNames.size(); ++i) {
+	//		QString locale = fileNames[i];
+	//		locale.remove(0, locale.indexOf('_') + 1);
+	//		locale.chop(3);
+	//
+	//		translator.load(fileNames[i], qmDir.absolutePath());
+	//		//: Please put here your translation's language, e.g. "Deutsch", "Francais", "Suomi", etc.
+	//		//: DON'T TRANSLATE "English" TO YOUR LANGUAGE
+	//		QString language = translator.translate( "Settings", "English" );
+	//		if ( language.isEmpty() )
+	//			language = "English";
+	//		ui.languageCombo->addItem( language, locale );
+	//	}
+	//	QString systemLocale = QLocale::system().name();
+	//	ui.languageCombo->insertItem(0, tr( "Default" ), systemLocale );
+	//	//  systemLocale.chop(3);
+	//	qDebug() << systemLocale << ui.languageCombo->findData( systemLocale );
+	//	//  ui.languageCombo->setCurrentIndex( ui.languageCombo->findData( systemLocale ) );
 }
 
 /*
@@ -287,3 +328,45 @@ void Settings::setToolbarItems(const QVector<int>& v)
 	}
 	emit ToolbarItemsChanged();
 }
+
+void Settings::setLanguage(int id)
+{
+//#if defined Q_WS_MAC
+//    QDir qmDir( QApplication::applicationDirPath() );
+//    qmDir.cdUp();
+//    qmDir.cd( "Resources" );
+//#else
+//    QDir qmDir( SHARE_DIR );
+//    if ( !qmDir.cd( "loc" ) ) {
+//        qmDir.cd( QApplication::applicationDirPath() );
+//        qmDir.cd( "loc" );
+//    }
+//#endif
+//    QString qmPath( qmDir.absolutePath() );
+//
+//    QString locale = ui.languageCombo->itemData( index ).toString();
+//
+//    qDebug() << "switching language to" << locale << "from" << qmPath;
+//    translator.load( "qtwitter_" + locale, qmPath );
+	qApp->installTranslator( &translator );
+//
+//    retranslateUi();
+//    if ( QTwitterApp::mainWindow() ) {
+//        QTwitterApp::mainWindow()->retranslateUi();
+//    }
+//    core->retranslateUi();
+//    adjustSize();
+}
+
+////Loading translation
+//QTranslator translator, qtranslator;
+//QString locale = QLocale::system().name();
+//qtranslator.load("qt_"+locale, QLibraryInfo::location(QLibraryInfo::TranslationsPath));
+//a.installTranslator( &qtranslator );
+//#ifdef PROGRAM_DATA_DIR
+//if(!translator.load(QString(PROGRAM_DATA_DIR) + "/translations/znotes_" + locale ) )
+//#endif
+//if(!translator.load( QCoreApplication::applicationDirPath() + "/translations/znotes_" + locale ))
+//translator.load( QCoreApplication::applicationDirPath() + "/znotes_" + locale );
+//a.installTranslator(&translator);
+////
