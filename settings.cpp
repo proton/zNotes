@@ -99,25 +99,6 @@ void Settings::load()
 				}
 				if(!config.value("tbHideExit").toBool()) tb_items.append(itemExit);
 			}
-			else //default toolbar's settings
-			{
-				tb_items.append(itemAdd);
-				tb_items.append(itemRemove);
-				tb_items.append(itemRename);
-				tb_items.append(itemSeparator);
-				tb_items.append(itemPrev);
-				tb_items.append(itemNext);
-				tb_items.append(itemSeparator);
-				tb_items.append(itemCopy);
-				tb_items.append(itemSeparator);
-				tb_items.append(itemSetup);
-				tb_items.append(itemInfo);
-				tb_items.append(itemSeparator);
-				tb_items.append(itemRun);
-				tb_items.append(itemSearch);
-				tb_items.append(itemSeparator);
-				tb_items.append(itemExit);
-			}
 		}
 	}
 	else //if settings don't exist - setup default settings
@@ -138,8 +119,13 @@ void Settings::load()
 		tb_items.append(itemSearch);
 		tb_items.append(itemSeparator);
 		tb_items.append(itemExit);
-	#ifdef unix
+		config.setValue("Toolbar/itemCount", tb_items.size());
+		for(int i=0; i<tb_items.size(); ++i)
+			if(tb_items[i]!=itemSeparator)
+				config.setValue(getItemName(tb_items[i]), i);
+	#ifdef Q_WS_X11
 		NotesPath = QDir::homePath()+"/.local/share/notes";
+		config.setValue("NotesPath", NotesPath);
 	#endif
 	}
 	loadLanguages();
