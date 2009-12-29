@@ -44,6 +44,8 @@ private:
 	QAction *actAdd, *actRemove, *actRename, *actPrev, *actNext;
 	QAction *actCopy, *actSetup, *actRun, *actExit, *actInfo, *actSearch;
 	//
+	QAction *actShow, *actHide;
+	//
 	QShortcut *scAdd, *scRemove, *scPrev, *scNext, *scExit, *scSearch;
 	//
 	void LoadNotes();

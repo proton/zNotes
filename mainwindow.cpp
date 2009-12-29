@@ -42,8 +42,6 @@ void MainWindow::RemoveCurrentNote()
 		{
 			actRemove->setDisabled(true);
 			actRename->setDisabled(true);
-			cmenu.actions()[4]->setDisabled(true);
-			cmenu.actions()[5]->setDisabled(true);
 		}
 	}
 }
@@ -100,8 +98,6 @@ void MainWindow::NewNote()
 	{
 		actRemove->setEnabled(true);
 		actRename->setEnabled(true);
-		cmenu.actions()[4]->setEnabled(true);
-		cmenu.actions()[5]->setEnabled(true);
 	}
 }
 
@@ -183,15 +179,17 @@ void MainWindow::trayActivated(QSystemTrayIcon::ActivationReason reason)
 
 void MainWindow::hideEvent(QHideEvent */*event*/)
 {
-	cmenu.actions()[0]->setEnabled(true);
-	cmenu.actions()[1]->setDisabled(true);
+	actShow->setEnabled(true);
+	actHide->setDisabled(true);
+	settings.setDialogGeometry(saveGeometry());
 	SaveAll();
 }
 
 void MainWindow::showEvent(QShowEvent */*event*/)
 {
-	cmenu.actions()[0]->setEnabled(false);
-	cmenu.actions()[1]->setDisabled(false);
+	actShow->setEnabled(false);
+	actHide->setDisabled(false);
+	restoreGeometry(settings.getDialogGeometry());
 }
 
 void MainWindow::closeEvent(QCloseEvent *event)
@@ -318,7 +316,7 @@ MainWindow::MainWindow(QWidget *parent)
 	restoreGeometry(settings.getDialogGeometry());
 	restoreState(settings.getDialogState());
 	windowStateChanged();
-	//Creating toolbar actions
+	//Creating toolbar/menu actions
 	actAdd	=	new QAction(ToolbarAction(itemAdd).icon(),		ToolbarAction(itemAdd).text(),		parent);
 	actRemove =	new QAction(ToolbarAction(itemRemove).icon(),	ToolbarAction(itemRemove).text(),	parent);
 	actRename =	new QAction(ToolbarAction(itemRename).icon(),	ToolbarAction(itemRename).text(),	parent);
@@ -330,7 +328,9 @@ MainWindow::MainWindow(QWidget *parent)
 	actRun	=	new QAction(ToolbarAction(itemRun).icon(),		ToolbarAction(itemRun).text(),		parent);
 	actSearch =	new QAction(ToolbarAction(itemSearch).icon(),	ToolbarAction(itemSearch).text(),	parent);
 	actExit =	new QAction(ToolbarAction(itemExit).icon(),		ToolbarAction(itemExit).text(),		parent);
-	//Connecting toolbar actions with slots
+	actShow =	new QAction(tr("Show"),	parent);
+	actHide =	new QAction(tr("Hide"),	parent);
+	//Connecting actions with slots
 	connect(actAdd,		SIGNAL(triggered()), this, SLOT(NewNote()));
 	connect(actRemove,	SIGNAL(triggered()), this, SLOT(RemoveCurrentNote()));
 	connect(actRename,	SIGNAL(triggered()), this, SLOT(RenameCurrentNote()));
@@ -342,21 +342,23 @@ MainWindow::MainWindow(QWidget *parent)
 	connect(actRun,		SIGNAL(triggered()), this, SLOT(commandMenu()));
 	connect(actSearch,	SIGNAL(triggered()), this, SLOT(showSearchBar()));
 	connect(actExit,	SIGNAL(triggered()), qApp, SLOT(quit()));
+	connect(actShow,	SIGNAL(triggered()), this, SLOT(show()));
+	connect(actHide,	SIGNAL(triggered()), this, SLOT(hide()));
 	//
 	actions_changed(); //Adding toolbar's actions
 	cmd_changed(); //Adding scripts
-	//
-	cmenu.addAction(tr("Show"), this, SLOT(show()));
-	cmenu.addAction(tr("Hide"), this, SLOT(hide()));
+	//Adding menu actions
+	cmenu.addAction(actShow);
+	cmenu.addAction(actHide);
 	cmenu.addSeparator();
-	cmenu.addAction(ToolbarAction(itemAdd).icon(), ToolbarAction(itemAdd).text(), this, SLOT(NewNote()));
-	cmenu.addAction(ToolbarAction(itemRemove).icon(), ToolbarAction(itemRemove).text(), this, SLOT(RemoveCurrentNote()));
-	cmenu.addAction(ToolbarAction(itemRename).icon(), ToolbarAction(itemRename).text(), this, SLOT(RenameCurrentNote()));
+	cmenu.addAction(actAdd);
+	cmenu.addAction(actRemove);
+	cmenu.addAction(actRename);
 	cmenu.addSeparator();
-	cmenu.addAction(ToolbarAction(itemSetup).icon(), ToolbarAction(itemSetup).text(), this, SLOT(showPrefDialog()));
-	cmenu.addAction(ToolbarAction(itemInfo).icon(), ToolbarAction(itemInfo).text(), this, SLOT(showAboutDialog()));
+	cmenu.addAction(actSetup);
+	cmenu.addAction(actInfo);
 	cmenu.addSeparator();
-	cmenu.addAction(ToolbarAction(itemExit).icon(), ToolbarAction(itemExit).text(), qApp, SLOT(quit()));
+	cmenu.addAction(actExit);
 	tray.setIcon(QIcon(TRAY_ICON_FILE_NAME));
 	tray.setContextMenu(&cmenu);
 	connect(&tray, SIGNAL(activated(QSystemTrayIcon::ActivationReason)),
@@ -494,15 +496,8 @@ void MainWindow::changeEvent(QEvent *e)
 		actRun->setText(ToolbarAction(itemRun).text());
 		actSearch->setText(ToolbarAction(itemSearch).text());
 		actExit->setText(ToolbarAction(itemExit).text());
-		//
-		cmenu.actions()[0]->setText(tr("Show"));
-		cmenu.actions()[1]->setText(tr("Hide"));
-		cmenu.actions()[3]->setText(ToolbarAction(itemAdd).text());
-		cmenu.actions()[4]->setText(ToolbarAction(itemRemove).text());
-		cmenu.actions()[5]->setText(ToolbarAction(itemRename).text());
-		cmenu.actions()[7]->setText(ToolbarAction(itemSetup).text());
-		cmenu.actions()[8]->setText(ToolbarAction(itemInfo).text());
-		cmenu.actions()[10]->setText(ToolbarAction(itemExit).text());
+		actShow->setText(tr("Show"));
+		actHide->setText(tr("Hide"));
 		//
 		break;
 	default: break;
