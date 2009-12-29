@@ -24,7 +24,7 @@ Settings settings;
 
 void MainWindow::RemoveCurrentNote()
 {
-	if(Notes.count()<1) return;
+	if(Notes.count()==0) return;
 	Note* n = currentNote();
 	QMessageBox msgBox(QMessageBox::Question, tr("Delete Note"),
 		tr("Do you realy want to delete note %1 ?").arg(n->name),
@@ -34,20 +34,23 @@ void MainWindow::RemoveCurrentNote()
 	{
 		n->file.close();
 		n->file.remove(dir.absoluteFilePath(n->name));
-		Notes.remove(ui->tabs->currentIndex());
-		ui->tabs->removeTab(ui->tabs->currentIndex());
+		const int current_index = ui->tabs->currentIndex();
+		ui->tabs->removeTab(current_index);
+		Notes.remove(current_index);
 		delete n;
-		if(Notes.count()<=1)
+		if(Notes.count()==0)
 		{
 			actRemove->setDisabled(true);
+			actRename->setDisabled(true);
 			cmenu.actions()[4]->setDisabled(true);
+			cmenu.actions()[5]->setDisabled(true);
 		}
 	}
 }
 
 void MainWindow::RenameCurrentNote()
 {
-	if(Notes.count()<1) return;
+	if(Notes.count()==0) return;
 	SaveCurrentNote();
 	Note* n = currentNote();
 	bool ok;
@@ -93,10 +96,12 @@ void MainWindow::NewNote()
 	ui->tabs->addTab(Notes[index], fn);
 	ui->tabs->setCurrentIndex(index);
 	QObject::connect(Notes[index], SIGNAL(textChanged()), this, SLOT(currentNoteChanged()));
-	if(Notes.count()>1)
+	if(Notes.count()>0)
 	{
 		actRemove->setEnabled(true);
+		actRename->setEnabled(true);
 		cmenu.actions()[4]->setEnabled(true);
+		cmenu.actions()[5]->setEnabled(true);
 	}
 }
 
