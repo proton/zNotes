@@ -318,30 +318,30 @@ MainWindow::MainWindow(QWidget *parent)
 	restoreGeometry(settings.getDialogGeometry());
 	restoreState(settings.getDialogState());
 	windowStateChanged();
-	//
-	actAdd = new QAction(ToolbarAction(itemAdd).icon(), ToolbarAction(itemAdd).text(), parent);
-	actRemove = new QAction(ToolbarAction(itemRemove).icon(), ToolbarAction(itemRemove).text(), parent);
-	actRename = new QAction(ToolbarAction(itemRename).icon(), ToolbarAction(itemRename).text(), parent);
-	actPrev = new QAction(ToolbarAction(itemPrev).icon(), ToolbarAction(itemPrev).text(), parent);
-	actNext = new QAction(ToolbarAction(itemNext).icon(), ToolbarAction(itemNext).text(), parent);
-	actCopy = new QAction(ToolbarAction(itemCopy).icon(), ToolbarAction(itemCopy).text(), parent);
-	actSetup = new QAction(ToolbarAction(itemSetup).icon(), ToolbarAction(itemSetup).text(), parent);
-	actInfo = new QAction(ToolbarAction(itemInfo).icon(), ToolbarAction(itemInfo).text(), parent);
-	actRun = new QAction(ToolbarAction(itemRun).icon(), ToolbarAction(itemRun).text(), parent);
-	actSearch = new QAction(ToolbarAction(itemSearch).icon(), ToolbarAction(itemSearch).text(), parent);
-	actExit = new QAction(ToolbarAction(itemExit).icon(), ToolbarAction(itemExit).text(), parent);
-	//
-	connect(actAdd, SIGNAL(triggered()), this, SLOT(NewNote()));
-	connect(actRemove, SIGNAL(triggered()), this, SLOT(RemoveCurrentNote()));
-	connect(actRename, SIGNAL(triggered()), this, SLOT(RenameCurrentNote()));
-	connect(actPrev, SIGNAL(triggered()), this, SLOT(PreviousNote()));
-	connect(actNext, SIGNAL(triggered()), this, SLOT(NextNote()));
-	connect(actCopy, SIGNAL(triggered()), this, SLOT(CopyNote()));
-	connect(actSetup, SIGNAL(triggered()), this, SLOT(showPrefDialog()));
-	connect(actInfo, SIGNAL(triggered()), this, SLOT(showAboutDialog()));
-	connect(actRun, SIGNAL(triggered()), this, SLOT(commandMenu()));
-	connect(actSearch, SIGNAL(triggered()), this, SLOT(showSearchBar()));
-	connect(actExit, SIGNAL(triggered()), qApp, SLOT(quit()));
+	//Creating toolbar actions
+	actAdd	=	new QAction(ToolbarAction(itemAdd).icon(),		ToolbarAction(itemAdd).text(),		parent);
+	actRemove =	new QAction(ToolbarAction(itemRemove).icon(),	ToolbarAction(itemRemove).text(),	parent);
+	actRename =	new QAction(ToolbarAction(itemRename).icon(),	ToolbarAction(itemRename).text(),	parent);
+	actPrev =	new QAction(ToolbarAction(itemPrev).icon(),		ToolbarAction(itemPrev).text(),		parent);
+	actNext =	new QAction(ToolbarAction(itemNext).icon(),		ToolbarAction(itemNext).text(),		parent);
+	actCopy =	new QAction(ToolbarAction(itemCopy).icon(),		ToolbarAction(itemCopy).text(),		parent);
+	actSetup =	new QAction(ToolbarAction(itemSetup).icon(),	ToolbarAction(itemSetup).text(),	parent);
+	actInfo =	new QAction(ToolbarAction(itemInfo).icon(),		ToolbarAction(itemInfo).text(),		parent);
+	actRun	=	new QAction(ToolbarAction(itemRun).icon(),		ToolbarAction(itemRun).text(),		parent);
+	actSearch =	new QAction(ToolbarAction(itemSearch).icon(),	ToolbarAction(itemSearch).text(),	parent);
+	actExit =	new QAction(ToolbarAction(itemExit).icon(),		ToolbarAction(itemExit).text(),		parent);
+	//Connecting toolbar actions with slots
+	connect(actAdd,		SIGNAL(triggered()), this, SLOT(NewNote()));
+	connect(actRemove,	SIGNAL(triggered()), this, SLOT(RemoveCurrentNote()));
+	connect(actRename,	SIGNAL(triggered()), this, SLOT(RenameCurrentNote()));
+	connect(actPrev,	SIGNAL(triggered()), this, SLOT(PreviousNote()));
+	connect(actNext,	SIGNAL(triggered()), this, SLOT(NextNote()));
+	connect(actCopy,	SIGNAL(triggered()), this, SLOT(CopyNote()));
+	connect(actSetup,	SIGNAL(triggered()), this, SLOT(showPrefDialog()));
+	connect(actInfo,	SIGNAL(triggered()), this, SLOT(showAboutDialog()));
+	connect(actRun,		SIGNAL(triggered()), this, SLOT(commandMenu()));
+	connect(actSearch,	SIGNAL(triggered()), this, SLOT(showSearchBar()));
+	connect(actExit,	SIGNAL(triggered()), qApp, SLOT(quit()));
 	//
 	actions_changed(); //Adding toolbar's actions
 	cmd_changed(); //Adding scripts
@@ -362,20 +362,20 @@ MainWindow::MainWindow(QWidget *parent)
 	connect(&tray, SIGNAL(activated(QSystemTrayIcon::ActivationReason)),
 			this, SLOT(trayActivated(QSystemTrayIcon::ActivationReason)));
 	tray.show();
-	//
-	scAdd = new QShortcut(QKeySequence::New, this);
-	scRemove = new QShortcut(QKeySequence::Delete, this);
-	scPrev = new QShortcut(QKeySequence::Back, this);
-	scNext = new QShortcut(QKeySequence::Forward, this);
-	scSearch = new QShortcut(QKeySequence::Find, this);
-	scExit = new QShortcut(QKeySequence::Close, this);
-	//
-	connect(scAdd, SIGNAL(activated()), this, SLOT(NewNote()));
-	connect(scRemove, SIGNAL(activated()), this, SLOT(RemoveCurrentNote()));
-	connect(scPrev, SIGNAL(activated()), this, SLOT(PreviousNote()));
-	connect(scNext, SIGNAL(activated()), this, SLOT(NextNote()));
-	connect(scSearch, SIGNAL(activated()), this, SLOT(showSearchBar()));
-	connect(scExit, SIGNAL(activated()), qApp, SLOT(quit()));
+	//Creating shortcuts
+	scAdd	=	new QShortcut(QKeySequence::New,	this);
+	scRemove =	new QShortcut(QKeySequence::Delete,	this);
+	scPrev =	new QShortcut(QKeySequence::Back,	this);
+	scNext =	new QShortcut(QKeySequence::Forward,this);
+	scSearch =	new QShortcut(QKeySequence::Find,	this);
+	scExit =	new QShortcut(QKeySequence::Close,	this);
+	//Connecting shortcuts with slots
+	connect(scAdd,		SIGNAL(activated()), this, SLOT(NewNote()));
+	connect(scRemove,	SIGNAL(activated()), this, SLOT(RemoveCurrentNote()));
+	connect(scPrev,		SIGNAL(activated()), this, SLOT(PreviousNote()));
+	connect(scNext,		SIGNAL(activated()), this, SLOT(NextNote()));
+	connect(scSearch,	SIGNAL(activated()), this, SLOT(showSearchBar()));
+	connect(scExit,		SIGNAL(activated()), qApp, SLOT(quit()));
 	//
 	for(int i=1; i<=9; ++i) //from Alt+1 to Alt+9
 	{
@@ -387,11 +387,6 @@ MainWindow::MainWindow(QWidget *parent)
 	//
 	LoadNotes();
 	if(Notes.count()==0) NewNote();
-	if(Notes.count()<2)
-	{
-		ui->mainToolBar->actions()[1]->setDisabled(true);
-		cmenu.actions()[4]->setDisabled(true);
-	}
 	//
 	connect(&SaveTimer, SIGNAL(timeout()), this, SLOT(SaveAll()));
 	SaveTimer.start(10000);
@@ -425,8 +420,8 @@ void MainWindow::on_tabs_currentChanged(int index)
 {
 	SaveNote(CurrentIndex);
 	CurrentIndex = index;
-	actPrev->setDisabled(index==0);
-	actNext->setDisabled(index==Notes.count()-1);
+	actPrev->setDisabled(index==0); //first note
+	actNext->setDisabled(index==Notes.count()-1); //last note
 }
 
 void MainWindow::showSearchBar()

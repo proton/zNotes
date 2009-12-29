@@ -4,22 +4,22 @@
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../mainwindow.cpp" line="28"/>
+        <location filename="../mainwindow.cpp" line="29"/>
         <source>Delete Note</source>
         <translation>Удаление заметки</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="29"/>
+        <location filename="../mainwindow.cpp" line="30"/>
         <source>Do you realy want to delete note %1 ?</source>
         <translation>Вы действительно хотите удалить заметку %1 ?</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="52"/>
+        <location filename="../mainwindow.cpp" line="57"/>
         <source>Rename note</source>
         <translation>Переименование заметки</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="53"/>
+        <location filename="../mainwindow.cpp" line="58"/>
         <source>New name:</source>
         <translation>Новое имя:</translation>
     </message>
@@ -29,12 +29,12 @@
         <translation>Выбор каталога с заметками</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="268"/>
+        <location filename="../mainwindow.cpp" line="267"/>
         <source>Commandlist is clear</source>
         <translation>Список команд пуст</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="268"/>
+        <location filename="../mainwindow.cpp" line="267"/>
         <source>List of commands is clear!
 You can add new commands in preferences.</source>
         <translation>Команды не заданы!\nВы можете добавить команды в настройках программы.</translation>
@@ -64,24 +64,24 @@ psavichev@gmail.com
 2009г.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="221"/>
+        <location filename="../mainwindow.cpp" line="220"/>
         <source>Move Notes</source>
         <translation>Перемещение заметок</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="222"/>
+        <location filename="../mainwindow.cpp" line="221"/>
         <source>Notes path changed!
 Do you want to move your notes to new place ?</source>
         <translation>Каталог с заметками изменен!
 Перенести заметки в новое место?</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="231"/>
+        <location filename="../mainwindow.cpp" line="230"/>
         <source>Notes path change</source>
         <translation>Изменение места хранения заметок</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="232"/>
+        <location filename="../mainwindow.cpp" line="231"/>
         <source>You need restart application to get effect.</source>
         <translation>Необходимо перезапустить приложения, чтобы изменения вступили в силу.</translation>
     </message>
@@ -130,14 +130,14 @@ Do you want to move your notes to new place ?</source>
         <translation type="obsolete">Выход</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="350"/>
-        <location filename="../mainwindow.cpp" line="504"/>
+        <location filename="../mainwindow.cpp" line="349"/>
+        <location filename="../mainwindow.cpp" line="503"/>
         <source>Show</source>
         <translation>Показать</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="351"/>
-        <location filename="../mainwindow.cpp" line="505"/>
+        <location filename="../mainwindow.cpp" line="350"/>
+        <location filename="../mainwindow.cpp" line="504"/>
         <source>Hide</source>
         <translation>Скрыть</translation>
     </message>
