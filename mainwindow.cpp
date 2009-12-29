@@ -488,6 +488,28 @@ void MainWindow::changeEvent(QEvent *e)
 	{
 	case QEvent::LanguageChange:
 		ui->retranslateUi(this);
+		//
+		actAdd->setText(ToolbarAction(itemAdd).text());
+		actRemove->setText(ToolbarAction(itemRemove).text());
+		actRename->setText(ToolbarAction(itemRename).text());
+		actPrev->setText(ToolbarAction(itemPrev).text());
+		actNext->setText(ToolbarAction(itemNext).text());
+		actCopy->setText(ToolbarAction(itemCopy).text());
+		actSetup->setText(ToolbarAction(itemSetup).text());
+		actInfo->setText(ToolbarAction(itemInfo).text());
+		actRun->setText(ToolbarAction(itemRun).text());
+		actSearch->setText(ToolbarAction(itemSearch).text());
+		actExit->setText(ToolbarAction(itemExit).text());
+		//
+		cmenu.actions()[0]->setText(tr("Show"));
+		cmenu.actions()[1]->setText(tr("Hide"));
+		cmenu.actions()[3]->setText(ToolbarAction(itemAdd).text());
+		cmenu.actions()[4]->setText(ToolbarAction(itemRemove).text());
+		cmenu.actions()[5]->setText(ToolbarAction(itemRename).text());
+		cmenu.actions()[7]->setText(ToolbarAction(itemSetup).text());
+		cmenu.actions()[8]->setText(ToolbarAction(itemInfo).text());
+		cmenu.actions()[10]->setText(ToolbarAction(itemExit).text());
+		//
 		break;
 	default: break;
 	}

@@ -3,6 +3,7 @@
 #include <QObject>
 #include <QtDebug>
 #include <QApplication>
+#include <QLibraryInfo>
 #include <QDir>
 
 Settings::Settings() : config("pDev", "zNotes")
@@ -141,8 +142,10 @@ void Settings::load()
 	loadLanguages();
 	QLocale::Language lang = (LanguageCustom)?LanguageCurrent:QLocale::system().language();
 	if(!translations.contains(lang)) lang = QLocale::English;
+	qtranslator.load("qt_"+QLocale(lang).name(), QLibraryInfo::location(QLibraryInfo::TranslationsPath));
+	qApp->installTranslator(&qtranslator);
 	setLanguage(lang);
-	qApp->installTranslator( &translator);
+	qApp->installTranslator(&translator);
 }
 
 /*
@@ -156,7 +159,7 @@ void Settings::loadLanguages()
 	translation_dirs << QCoreApplication::applicationDirPath();
 	translation_dirs << QCoreApplication::applicationDirPath()+"/translations";
 #ifdef PROGRAM_DATA_DIR
-	translation_dirs << QString(PROGRAM_DATA_DIR);
+	translation_dirs << QString(PROGRAM_DATA_DIR)+"/translations";
 #endif
 #ifdef Q_WS_MAC
 	translation_dirs << QCoreApplication::applicationDirPath()+"/../Resources";
@@ -372,5 +375,6 @@ void Settings::setLanguageCustom(bool b)
 */
 void Settings::setLanguage(QLocale::Language language)
 {
+	qtranslator.load("qt_"+QLocale(language).name(), QLibraryInfo::location(QLibraryInfo::TranslationsPath));
 	translator.load(translations[language]);
 }

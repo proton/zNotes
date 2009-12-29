@@ -60,6 +60,7 @@ public:
 private:
 	QSettings config;
 	QTranslator translator;
+	QTranslator qtranslator;
 	//
 	QMap<QLocale::Language, QString> translations;
 	QLocale::Language LanguageCurrent;
