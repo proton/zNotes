@@ -138,6 +138,9 @@ void Settings::load()
 		tb_items.append(itemSearch);
 		tb_items.append(itemSeparator);
 		tb_items.append(itemExit);
+	#ifdef unix
+		NotesPath = QDir::homePath()+"/.local/share/notes";
+	#endif
 	}
 	loadLanguages();
 	QLocale::Language lang = (LanguageCustom)?LanguageCurrent:QLocale::system().language();

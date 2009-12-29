@@ -89,7 +89,7 @@
          <item>
           <widget class="QCheckBox" name="cb_LanguageCustom">
            <property name="text">
-            <string>Use custom language</string>
+            <string>Use custom language:</string>
            </property>
           </widget>
          </item>

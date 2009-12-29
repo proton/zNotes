@@ -67,7 +67,7 @@ void MainWindow::SaveCurrentNote()
 
 void MainWindow::SaveNote(int i)
 {
-	if(i!=-1 && Notes[i]->hasChange)
+	if(false && i!=-1 && Notes[i]->hasChange)//TODO:
 	{
 		if(!Notes[i]->file.open(QFile::WriteOnly | QFile::Text)) return;
 		QTextStream out(&Notes[i]->file);
@@ -123,15 +123,8 @@ void MainWindow::LoadNotes()
 {
 	ui->tabs->clear();
 	dir.setPath(settings.getNotesPath());
-#ifdef unix
-	if(dir.path().isEmpty())
-	{
-		dir.setPath(dir.homePath()+"/.local/share/notes");
-		if(!dir.exists()) if(!dir.mkpath(dir.path())) dir.setPath("");
-		if(!dir.isReadable()) dir.setPath("");
-		if(!dir.path().isEmpty()) settings.setNotesPath(dir.path());
-	}
-#endif
+	if(!dir.exists()) if(!dir.mkpath(dir.path())) dir.setPath("");
+	if(!dir.isReadable()) dir.setPath("");
 	while(dir.path().isEmpty())
 	{
 		dir.setPath(QFileDialog::getExistingDirectory(0,
@@ -139,8 +132,7 @@ void MainWindow::LoadNotes()
 			QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks));
 		if(!dir.path().isEmpty()) settings.setNotesPath(dir.path());
 	}
-	if(!dir.exists()) dir.mkpath(dir.path());
-	dir.setFilter(QDir::Files);
+	dir.setFilter(QDir::Files | QDir::Readable);
 	QFileInfoList flist = dir.entryInfoList();
 	Notes.resize(flist.size());
 	const QString& old_note = settings.getLastNote();
@@ -416,8 +408,8 @@ MainWindow::~MainWindow()
 	//saving title of last note
 	settings.setLastNote(currentNote()->name);
 	//saving dialog's params
-	///settings.setDialogGeometry(saveGeometry());
-	///settings.setDialogState(saveState());
+	settings.setDialogGeometry(saveGeometry());
+	settings.setDialogState(saveState());
 	//saving scrits
 	settings.setScripts();
 }

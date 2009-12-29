@@ -130,12 +130,14 @@ Do you want to move your notes to new place ?</source>
         <translation type="obsolete">Выход</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="349"/>
+        <location filename="../mainwindow.cpp" line="350"/>
+        <location filename="../mainwindow.cpp" line="504"/>
         <source>Show</source>
         <translation>Показать</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="350"/>
+        <location filename="../mainwindow.cpp" line="351"/>
+        <location filename="../mainwindow.cpp" line="505"/>
         <source>Hide</source>
         <translation>Скрыть</translation>
     </message>
@@ -402,12 +404,16 @@ The text of the license can can be found in the file LICENSE.</source>
         <translation>Поверх всех окон</translation>
     </message>
     <message>
-        <location filename="../configdialog.ui" line="98"/>
+        <source>Use custom language</source>
+        <translation type="obsolete">Использовать нестандартный язык:</translation>
+    </message>
+    <message>
+        <location filename="../configdialog.ui" line="119"/>
         <source>Font:</source>
         <translation>Шрифт:</translation>
     </message>
     <message>
-        <location filename="../configdialog.ui" line="114"/>
+        <location filename="../configdialog.ui" line="135"/>
         <source>The quick brown fox jumps over the lazy dog.</source>
         <translation>Съешь еще этих мягких французских булок, да выпей чаю.</translation>
     </message>
@@ -416,37 +422,42 @@ The text of the license can can be found in the file LICENSE.</source>
         <translation type="obsolete">Съешь еще этих мягких французских булок, да выпей чаю.</translation>
     </message>
     <message>
-        <location filename="../configdialog.ui" line="127"/>
+        <location filename="../configdialog.ui" line="92"/>
+        <source>Use custom language:</source>
+        <translation>Использовать нестандартный язык:</translation>
+    </message>
+    <message>
+        <location filename="../configdialog.ui" line="148"/>
         <source>Change</source>
         <translation>Изменить</translation>
     </message>
     <message>
-        <location filename="../configdialog.ui" line="137"/>
+        <location filename="../configdialog.ui" line="158"/>
         <source>Scripts</source>
         <translation>Скрипты</translation>
     </message>
     <message>
-        <location filename="../configdialog.ui" line="155"/>
+        <location filename="../configdialog.ui" line="176"/>
         <source>Add</source>
         <translation>Добавить</translation>
     </message>
     <message>
-        <location filename="../configdialog.ui" line="166"/>
+        <location filename="../configdialog.ui" line="187"/>
         <source>Remove</source>
         <translation>Удалить</translation>
     </message>
     <message>
-        <location filename="../configdialog.ui" line="181"/>
+        <location filename="../configdialog.ui" line="202"/>
         <source>Show script&apos;s output</source>
         <translation>Показать вывод скрипта</translation>
     </message>
     <message>
-        <location filename="../configdialog.ui" line="188"/>
+        <location filename="../configdialog.ui" line="209"/>
         <source>Copy script&apos;s output to clipboard</source>
         <translation>Копировать вывод скрипта</translation>
     </message>
     <message>
-        <location filename="../configdialog.ui" line="198"/>
+        <location filename="../configdialog.ui" line="219"/>
         <source>Toolbar</source>
         <translation>Панель инструментов</translation>
     </message>
@@ -499,7 +510,7 @@ The text of the license can can be found in the file LICENSE.</source>
         <translation type="obsolete">Выход</translation>
     </message>
     <message>
-        <location filename="../configdialog.cpp" line="83"/>
+        <location filename="../configdialog.cpp" line="99"/>
         <source>Select notes directory</source>
         <translation>Выбор каталога с заметками</translation>
     </message>

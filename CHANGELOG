@@ -1,9 +1,9 @@
 zNotes 0.3.8
-* fixed problems saving toolbar's items
-* added program directory to translation's search paths
-* fixed desktop file (unix only)
-* fixed problems with window's frame hiding
-* removed ability to hide toolbar (If you need in this ability, tell me, please)
+* Fixed problems saving toolbar's items
+* Added program directory to translation's search paths
+* Fixed desktop file (unix only)
+* Fixed problems with window's frame hiding
+* Removed ability to hide toolbar (If you need in this ability, tell me, please)
 
 zNotes 0.3.7
 * Added ability to configure toolbar's elements
