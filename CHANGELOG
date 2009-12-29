@@ -1,3 +1,11 @@
+zNotes 0.3.9:
+* Fixed some problems in toolbar editor
+* Fixed tray icon on windows
+* Fixed application icon on windows
+* Improved  toolbar editor
+* Added abilty to change application language
+* Updated russian translate
+
 zNotes 0.3.8
 * Fixed problems saving toolbar's items
 * Added program directory to translation's search paths

@@ -67,7 +67,7 @@ void MainWindow::SaveCurrentNote()
 
 void MainWindow::SaveNote(int i)
 {
-	if(false && i!=-1 && Notes[i]->hasChange)//TODO:
+	if(i!=-1 && Notes[i]->hasChange)
 	{
 		if(!Notes[i]->file.open(QFile::WriteOnly | QFile::Text)) return;
 		QTextStream out(&Notes[i]->file);
