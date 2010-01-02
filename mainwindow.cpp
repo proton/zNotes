@@ -10,6 +10,7 @@
 #include <QFileDialog>
 #include <QClipboard>
 #include <QProcess>
+#include <QCloseEvent>
 
 /*
 	Tray icon on windows is very small
