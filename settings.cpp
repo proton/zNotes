@@ -25,7 +25,6 @@ void Settings::load()
 		DialogGeometry = config.value("DialogGeometry").toByteArray();
 		DialogState = config.value("DialogState").toByteArray();
 		//
-		//HideToolbar = config.value("HideToolbar").toBool();
 		HideFrame = config.value("HideFrame").toBool();
 		StayTop = config.value("StayTop").toBool();
 		//
@@ -216,19 +215,6 @@ void Settings::setHideStart(bool hide)
 	}
 }
 
-/*
-  Saving option (toolbar's showing)
-*/
-//void Settings::setHideToolbar(bool Hide, bool send_signal)
-//{
-//	if(HideToolbar != Hide)
-//	{
-//		HideToolbar = Hide;
-//		config.setValue("HideToolbar", HideToolbar);
-//		if(send_signal) emit ToolbarVisChanged();
-//	}
-//}
-//
 /*
   Saving option (hiding window decoration)
 */

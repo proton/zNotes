@@ -1,5 +1,5 @@
 <RCC>
-    <qresource prefix="/" >
+    <qresource prefix="/">
         <file>res/add.png</file>
         <file>res/close.png</file>
         <file>res/exit.png</file>
@@ -18,5 +18,8 @@
         <file>res/te/left.png</file>
         <file>res/te/right.png</file>
         <file>res/te/up.png</file>
+        <file>res/format_bold.png</file>
+        <file>res/format_strikeout.png</file>
+        <file>res/format_underline.png</file>
     </qresource>
 </RCC>

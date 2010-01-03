@@ -43,6 +43,7 @@ private:
 	//
 	QAction *actAdd, *actRemove, *actRename, *actPrev, *actNext;
 	QAction *actCopy, *actSetup, *actRun, *actExit, *actInfo, *actSearch;
+	QAction *actFormatBold, *actFormatStrikeout, *actFormatUnderline;
 	//
 	QAction *actShow, *actHide;
 	//
@@ -60,17 +61,20 @@ private:
 	{
 		switch(i)
 		{
-			case itemAdd: return actAdd;
-			case itemRemove: return actRemove;
-			case itemRename: return actRename;
-			case itemPrev: return actPrev;
-			case itemNext: return actNext;
-			case itemCopy: return actCopy;
-			case itemSetup: return actSetup;
-			case itemInfo: return actInfo;
-			case itemRun: return actRun;
-			case itemSearch: return actSearch;
-			case itemExit: return actExit;
+			case itemAdd:			return actAdd;
+			case itemRemove:		return actRemove;
+			case itemRename:		return actRename;
+			case itemPrev:			return actPrev;
+			case itemNext:			return actNext;
+			case itemCopy:			return actCopy;
+			case itemSetup:			return actSetup;
+			case itemInfo:			return actInfo;
+			case itemRun:			return actRun;
+			case itemSearch:		return actSearch;
+			case itemExit:			return actExit;
+			case itemFormatBold:	return actFormatBold;
+			case itemFormatStrikeout: return actFormatStrikeout;
+			case itemFormatUnderline: return actFormatUnderline;
 			default: return new QAction(this);
 		}
 	}

@@ -114,7 +114,7 @@ QWidget* Note::widget()
 	}
 }
 
-void Note::copy()
+void Note::copy() const
 {
 	QClipboard* clipboard = QApplication::clipboard();
 	switch(type)
@@ -136,6 +136,15 @@ bool Note::find(const QString& text, bool next)
 		default: return false;
 	}
 }
+
+void Note::applySelFormat(const QTextCharFormat& format)
+{
+	if(type!=type_html) return;
+	QTextCursor cursor = text_edit->textCursor();
+	cursor.setCharFormat(format);
+}
+
+//------------------------------------------------------------------------------
 
 void Note::contentChanged()
 {

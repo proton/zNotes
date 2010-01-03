@@ -63,7 +63,6 @@ void configDialog::SaveSettings()
 {
 	settings.setHideStart(m_ui->cb_HideStart->checkState());
 	settings.setNotesPath(m_ui->ed_NotesPath->text());
-	//settings.setHideToolbar(m_ui->cb_ToolbarHide->checkState());
 	settings.setHideFrame(m_ui->cb_FrameHide->checkState());
 	settings.setStayTop(m_ui->cb_StayTop->checkState());
 	settings.setNoteFont(m_ui->lb_FontExample->font());

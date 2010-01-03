@@ -77,7 +77,6 @@ private:
 	QByteArray DialogGeometry;
 	QByteArray DialogState;
 	//
-	//bool HideToolbar;
 	bool HideFrame;
 	bool StayTop;
 	//
@@ -106,13 +105,15 @@ private:
 			case itemRun:		return "Toolbar/itemRun";
 			case itemSearch:	return "Toolbar/itemSearch";
 			case itemExit:		return "Toolbar/itemExit";
+			case itemFormatBold:		return "Toolbar/itemFormatBold";
+			case itemFormatStrikeout:	return "Toolbar/itemFormatStrikeout";
+			case itemFormatUnderline:	return "Toolbar/itemFormatUnderline";
 			default:			return "";
 		}
 	}
 signals:
 	void NotesPathChanged();
 	void WindowStateChanged();
-	//void ToolbarVisChanged();
 	void NoteFontChanged();
 	void NoteHighlightChanged();
 	void NoteLinkOpenChanged();

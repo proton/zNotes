@@ -42,7 +42,7 @@ private:
 class Note : public QObject
 {
 	Q_OBJECT
-private:
+public:
 	enum Type { type_text, type_html };
 public:
 	Note(const QFileInfo& fileinfo);
@@ -59,8 +59,10 @@ public:
 	void move(const QString& new_dir);
 	bool remove(); //Removing note from harddisk
 	//
-	void copy();
+	void copy() const;
 	bool find(const QString& text, bool next=false);
+	//
+	void applySelFormat(const QTextCharFormat& format);
 private:
 	Type type;
 	QString note_title;

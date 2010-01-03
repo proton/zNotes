@@ -288,6 +288,9 @@ MainWindow::MainWindow(QWidget *parent)
 	actRun	=	new QAction(ToolbarAction(itemRun).icon(),		ToolbarAction(itemRun).text(),		parent);
 	actSearch =	new QAction(ToolbarAction(itemSearch).icon(),	ToolbarAction(itemSearch).text(),	parent);
 	actExit =	new QAction(ToolbarAction(itemExit).icon(),		ToolbarAction(itemExit).text(),		parent);
+	actFormatBold =	   new QAction(ToolbarAction(itemFormatBold).icon(),	  ToolbarAction(itemFormatBold).text(),		parent);
+	actFormatStrikeout=new QAction(ToolbarAction(itemFormatStrikeout).icon(), ToolbarAction(itemFormatStrikeout).text(),parent);
+	actFormatUnderline=new QAction(ToolbarAction(itemFormatUnderline).icon(), ToolbarAction(itemFormatUnderline).text(),parent);
 	actShow =	new QAction(tr("Show"),	parent);
 	actHide =	new QAction(tr("Hide"),	parent);
 	//Connecting actions with slots
@@ -395,6 +398,7 @@ void MainWindow::showSearchBar()
 */
 void MainWindow::Search(bool next)
 {
+	Q_UNUSED(next);
 	if(Notes.count()==0) return;
 	QString text = ui->edSearch->text();
 	if(text.isEmpty()) return;

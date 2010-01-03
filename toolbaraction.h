@@ -19,6 +19,9 @@ enum item_enum
 	itemRun,
 	itemSearch,
 	itemExit,
+	itemFormatBold,
+	itemFormatStrikeout,
+	itemFormatUnderline,
 	itemMax
 };
 
@@ -30,18 +33,21 @@ public:
 	{
 		switch(item_id)
 		{
-			case itemSeparator: return QObject::tr("Separator");
-			case itemAdd: return QObject::tr("Create new note");
-			case itemRemove: return QObject::tr("Remove this note");
-			case itemRename: return QObject::tr("Rename this note");
-			case itemPrev: return QObject::tr("Prev note");
-			case itemNext: return QObject::tr("Next note");
-			case itemCopy: return QObject::tr("Copy this note to clipboard");
-			case itemSetup: return QObject::tr("Preferences");
-			case itemInfo: return QObject::tr("Info");
-			case itemRun: return QObject::tr("Commands");
-			case itemSearch: return QObject::tr("Search");
-			case itemExit: return QObject::tr("Exit");
+			case itemSeparator:	return QObject::tr("Separator");
+			case itemAdd:		return QObject::tr("Create new note");
+			case itemRemove:	return QObject::tr("Remove this note");
+			case itemRename:	return QObject::tr("Rename this note");
+			case itemPrev:		return QObject::tr("Prev note");
+			case itemNext:		return QObject::tr("Next note");
+			case itemCopy:		return QObject::tr("Copy this note to clipboard");
+			case itemSetup:		return QObject::tr("Preferences");
+			case itemInfo:		return QObject::tr("Info");
+			case itemRun:		return QObject::tr("Commands");
+			case itemSearch:	return QObject::tr("Search");
+			case itemExit:		return QObject::tr("Exit");
+			case itemFormatBold:		return QObject::tr("Bold");
+			case itemFormatStrikeout:	return QObject::tr("Strikeout");
+			case itemFormatUnderline:	return QObject::tr("Underline");
 			default: return 0;
 		}
 	}
@@ -49,17 +55,20 @@ public:
 	{
 		switch(item_id)
 		{
-			case itemAdd: return QIcon(":/res/add.png");
-			case itemRemove: return QIcon(":/res/remove.png");
-			case itemRename: return QIcon(":/res/rename.png");
-			case itemPrev: return QIcon(":/res/prev.png");
-			case itemNext: return QIcon(":/res/next.png");
-			case itemCopy: return QIcon(":/res/copy.png");
-			case itemSetup: return QIcon(":/res/settings.png");
-			case itemInfo: return QIcon(":/res/info.png");
-			case itemRun: return QIcon(":/res/exec.png");
-			case itemSearch: return QIcon(":/res/find.png");
-			case itemExit: return QIcon(":/res/exit.png");
+			case itemAdd:		return QIcon(":/res/add.png");
+			case itemRemove:	return QIcon(":/res/remove.png");
+			case itemRename:	return QIcon(":/res/rename.png");
+			case itemPrev:		return QIcon(":/res/prev.png");
+			case itemNext:		return QIcon(":/res/next.png");
+			case itemCopy:		return QIcon(":/res/copy.png");
+			case itemSetup:		return QIcon(":/res/settings.png");
+			case itemInfo:		return QIcon(":/res/info.png");
+			case itemRun:		return QIcon(":/res/exec.png");
+			case itemSearch:	return QIcon(":/res/find.png");
+			case itemExit:		return QIcon(":/res/exit.png");
+			case itemFormatBold:		return QIcon(":/res/format_bold.png");
+			case itemFormatStrikeout:	return QIcon(":/res/format_strikeout.png");
+			case itemFormatUnderline:	return QIcon(":/res/format_underline.png");
 			default: return QIcon();
 		}
 	}
