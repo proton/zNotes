@@ -53,10 +53,11 @@ public:
 	//
 	QWidget* widget();
 	//
-	void load();
-	void save();
+	void load(); //Reading note's content
+	void save(); //Saving note's content
 	void rename(const QString& new_name);
-	bool remove();
+	void move(const QString& new_dir);
+	bool remove(); //Removing note from harddisk
 	//
 	void copy();
 	bool find(const QString& text);

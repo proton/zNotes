@@ -195,10 +195,9 @@ void MainWindow::notesPathChanged()
 	int ret = msgBox.exec();
 	if(ret == QMessageBox::Yes)
 	{
-		//TODO:
-//		dir.setPath(settings.getNotesPath());
-//		for(int i=0; i<Notes.count(); ++i)
-//			Notes[i]->file.rename(dir.absoluteFilePath(Notes[i]->name));
+		dir.setPath(settings.getNotesPath());
+		QString dir_path = dir.absolutePath();
+		for(int i=0; i<Notes.count(); ++i) Notes[i]->move(dir_path);
 	}
 	else QMessageBox::information(this, tr("Notes path change"),
 		tr("You need restart application to get effect."));

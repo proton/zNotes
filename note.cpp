@@ -89,6 +89,15 @@ void Note::rename(const QString& new_name)
 	file_info.setFile(file);
 }
 
+void Note::move(const QString& new_dirname)
+{
+	file.close();
+	QString filename = file_info.fileName();
+	QString absolute_file_path = QDir(new_dirname).absoluteFilePath(filename);
+	file.rename(absolute_file_path);
+	file_info.setFile(file);
+}
+
 bool Note::remove()
 {
 	file.close();
