@@ -67,23 +67,23 @@ void MainWindow::RenameCurrentNote()
 
 void MainWindow::NewNote()
 {
-	//TODO:
-//	int n = Notes.size(), index = Notes.size();
-//	QString fn = QString::number(n);
-//	QFile f(dir.absoluteFilePath(fn));
-//	while(f.exists())
-//	{
-//		fn = QString::number(++n);
-//		f.setFileName(dir.absoluteFilePath(fn));
-//	}
-//	Notes.append(new Note(fn, dir));
-//	ui->tabs->addTab(Notes[index], fn);
-//	ui->tabs->setCurrentIndex(index);
-//	if(Notes.count()>0)
-//	{
-//		actRemove->setEnabled(true);
-//		actRename->setEnabled(true);
-//	}
+	int n = 0;
+	QString filename = QString::number(n);
+	QFile file(dir.absoluteFilePath(filename));
+	while(file.exists())
+	{
+		filename = QString::number(++n);
+		file.setFileName(dir.absoluteFilePath(filename));
+	}
+	Note* note = new Note(file);
+	Notes.append(note);
+	ui->tabs->addTab(note->widget(), note->title());
+	ui->tabs->setCurrentWidget(note->widget());
+	if(Notes.count()>0)
+	{
+		actRemove->setEnabled(true);
+		actRename->setEnabled(true);
+	}
 }
 
 void MainWindow::PreviousNote()
@@ -401,19 +401,19 @@ void MainWindow::showSearchBar()
 */
 void MainWindow::Search(bool next)
 {
+	QString text = ui->edSearch->text();
+	if(text.isEmpty()) return;
+	//
 	//TODO:
-//	QString text = ui->edSearch->text();
-//	if(text.isEmpty()) return;
-//	//
 //	int start_index = CurrentIndex;
 //	//
-//	if(!next) Notes[start_index]->unsetCursor();
+//	//if(!next) Notes[start_index]->unsetCursor();
 //	//
 //	if(Notes[start_index]->find(text)) return;
 //	//
 //	for(int i=start_index+1; i<Notes.size(); ++i)
 //	{
-//		Notes[i]->setTextCursor(QTextCursor());
+//		//Notes[i]->setTextCursor(QTextCursor());
 //		if(Notes[i]->find(text))
 //		{
 //			ui->tabs->setCurrentIndex(i);
@@ -422,7 +422,7 @@ void MainWindow::Search(bool next)
 //	}
 //	for(int i=0; i<start_index; ++i)
 //	{
-//		Notes[i]->setTextCursor(QTextCursor());
+//		//Notes[i]->setTextCursor(QTextCursor());
 //		if(Notes[i]->find(text))
 //		{
 //			ui->tabs->setCurrentIndex(i);
