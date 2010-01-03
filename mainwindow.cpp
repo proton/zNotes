@@ -26,80 +26,64 @@ Settings settings;
 void MainWindow::RemoveCurrentNote()
 {
 	if(Notes.count()==0) return;
-	Note* n = currentNote();
+	Note* note = currentNote();
 	QMessageBox msgBox(QMessageBox::Question, tr("Delete Note"),
-		tr("Do you realy want to delete note %1 ?").arg(n->name),
+		tr("Do you realy want to delete note %1 ?").arg(note->title()),
 		QMessageBox::Yes | QMessageBox::No);
 	int ret = msgBox.exec();
 	if(ret == QMessageBox::Yes)
 	{
-		n->file.close();
-		n->file.remove(dir.absoluteFilePath(n->name));
-		const int current_index = ui->tabs->currentIndex();
-		ui->tabs->removeTab(current_index);
-		Notes.remove(current_index);
-		delete n;
-		if(Notes.count()==0)
-		{
-			actRemove->setDisabled(true);
-			actRename->setDisabled(true);
-		}
+		//TODO:
+//		QFile::remove(note->absolutePath());
+//		const int current_index = ui->tabs->currentIndex();
+//		ui->tabs->removeTab(current_index);
+//		Notes.remove(current_index);
+//		delete note;
+//		if(Notes.count()==0)
+//		{
+//			actRemove->setDisabled(true);
+//			actRename->setDisabled(true);
+//		}
 	}
 }
 
 void MainWindow::RenameCurrentNote()
 {
 	if(Notes.count()==0) return;
-	SaveCurrentNote();
-	Note* n = currentNote();
+	//
+	Note* note = currentNote();
+	note->save();
 	bool ok;
-	QString text = QInputDialog::getText(this, tr("Rename note"),
-							tr("New name:"), QLineEdit::Normal, n->name, &ok);
+	QString text = QInputDialog::getText(this, tr("Rename note"), tr("New name:"), QLineEdit::Normal, note->title(), &ok);
 	if (ok && !text.isEmpty())
 	{
-		n->file.close();
-		n->file.rename(dir.absoluteFilePath(text));
-		n->name = text;
-		ui->tabs->setTabText(ui->tabs->currentIndex(), text);
-	}
-}
-
-void MainWindow::SaveCurrentNote()
-{
-	SaveNote(CurrentIndex);
-}
-
-void MainWindow::SaveNote(int i)
-{
-	if(i!=-1 && Notes[i]->hasChange)
-	{
-		if(!Notes[i]->file.open(QFile::WriteOnly | QFile::Text)) return;
-		QTextStream out(&Notes[i]->file);
-		out << Notes[i]->toPlainText();
-		Notes[i]->file.close();
-		Notes[i]->hasChange = false;
+		//TODO:
+//		n->file.close();
+//		n->file.rename(dir.absoluteFilePath(text));
+//		n->name = text;
+//		ui->tabs->setTabText(ui->tabs->currentIndex(), text);
 	}
 }
 
 void MainWindow::NewNote()
 {
-	int n = Notes.size(), index = Notes.size();
-	QString fn = QString::number(n);
-	QFile f(dir.absoluteFilePath(fn));
-	while(f.exists())
-	{
-		fn = QString::number(++n);
-		f.setFileName(dir.absoluteFilePath(fn));
-	}
-	Notes.append(new Note(fn, dir, settings.getNoteFont()));
-	ui->tabs->addTab(Notes[index], fn);
-	ui->tabs->setCurrentIndex(index);
-	QObject::connect(Notes[index], SIGNAL(textChanged()), this, SLOT(currentNoteChanged()));
-	if(Notes.count()>0)
-	{
-		actRemove->setEnabled(true);
-		actRename->setEnabled(true);
-	}
+	//TODO:
+//	int n = Notes.size(), index = Notes.size();
+//	QString fn = QString::number(n);
+//	QFile f(dir.absoluteFilePath(fn));
+//	while(f.exists())
+//	{
+//		fn = QString::number(++n);
+//		f.setFileName(dir.absoluteFilePath(fn));
+//	}
+//	Notes.append(new Note(fn, dir));
+//	ui->tabs->addTab(Notes[index], fn);
+//	ui->tabs->setCurrentIndex(index);
+//	if(Notes.count()>0)
+//	{
+//		actRemove->setEnabled(true);
+//		actRename->setEnabled(true);
+//	}
 }
 
 void MainWindow::PreviousNote()
@@ -120,12 +104,13 @@ void MainWindow::ToNote(int n)
 
 void MainWindow::CopyNote()
 {
-	QApplication::clipboard()->setText(currentNote()->toPlainText());
+	currentNote()->copy();
 }
 
 void MainWindow::LoadNotes()
 {
-	ui->tabs->clear();
+	ui->tabs->clear(); //Clearing tabs
+	//Setting directory
 	dir.setPath(settings.getNotesPath());
 	if(!dir.exists()) if(!dir.mkpath(dir.path())) dir.setPath("");
 	if(!dir.isReadable()) dir.setPath("");
@@ -136,32 +121,25 @@ void MainWindow::LoadNotes()
 			QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks));
 		if(!dir.path().isEmpty()) settings.setNotesPath(dir.path());
 	}
+	//Loading files' list
 	dir.setFilter(QDir::Files | QDir::Readable);
 	QFileInfoList flist = dir.entryInfoList();
-	Notes.resize(flist.size());
 	const QString& old_note = settings.getLastNote();
 	int old_index=-1;
 	for(int i=0; i<flist.size(); ++i)
 	{
-		Notes[i] = new Note(flist.at(i).fileName(), dir, settings.getNoteFont());
-		ui->tabs->addTab(Notes[i], Notes[i]->name);
-		QObject::connect(Notes[i], SIGNAL(textChanged()), this, SLOT(currentNoteChanged()));
-		if(old_index==-1 && Notes[i]->name==old_note) old_index = i;
+		//Loading note
+		Note* note = new Note(flist.at(i));
+		Notes.append(note);
+		ui->tabs->addTab(note->widget(), note->title());
+		if(old_index==-1 && note->title()==old_note) old_index = i;
 	}
 	if(old_index!=-1) ui->tabs->setCurrentIndex(old_index);
 }
 
-void MainWindow::currentNoteChanged()
-{
-	currentNote()->hasChange = true;
-}
-
 void MainWindow::SaveAll()
 {
-	for(int i=0; i<Notes.size(); ++i)
-	{
-		SaveNote(i);
-	}
+	for(int i=0; i<Notes.size(); ++i) Notes[i]->save();
 }
 
 void MainWindow::trayActivated(QSystemTrayIcon::ActivationReason reason)
@@ -222,9 +200,10 @@ void MainWindow::notesPathChanged()
 	int ret = msgBox.exec();
 	if(ret == QMessageBox::Yes)
 	{
-		dir.setPath(settings.getNotesPath());
-		for(int i=0; i<Notes.count(); ++i)
-			Notes[i]->file.rename(dir.absoluteFilePath(Notes[i]->name));
+		//TODO:
+//		dir.setPath(settings.getNotesPath());
+//		for(int i=0; i<Notes.count(); ++i)
+//			Notes[i]->file.rename(dir.absoluteFilePath(Notes[i]->name));
 	}
 	else QMessageBox::information(this, tr("Notes path change"),
 		tr("You need restart application to get effect."));
@@ -238,20 +217,6 @@ void MainWindow::windowStateChanged()
 	bool window_is_visible = isVisible();
 	setWindowFlags(flags);
 	if(window_is_visible) show();
-}
-
-//void MainWindow::toolbarVisChanged()
-//{
-//	if(settings.getHideToolbar()) ui->mainToolBar->hide();
-//	else ui->mainToolBar->show();
-//}
-
-void MainWindow::noteFontChanged()
-{
-	for(int i=0; i<Notes.count(); ++i)
-	{
-		Notes[i]->setFont(settings.getNoteFont());
-	}
 }
 
 void MainWindow::commandMenu()
@@ -271,7 +236,7 @@ void MainWindow::cmdExec(const QString & command)
 {
 	QProcess p;
 	QStringList args;
-	args << dir.absoluteFilePath(currentNote()->file.fileName());
+	args << currentNote()->absolutePath();
 	p.start(command, args);
 	if(p.waitForStarted())
 	{
@@ -394,11 +359,8 @@ MainWindow::MainWindow(QWidget *parent)
 	connect(&SaveTimer, SIGNAL(timeout()), this, SLOT(SaveAll()));
 	SaveTimer.start(10000);
 	//
-	//connect(ui->mainToolBar->toggleViewAction(), SIGNAL(triggered()), ui->mainToolBar, SLOT(show()));
 	connect(&settings, SIGNAL(NotesPathChanged()), this, SLOT(notesPathChanged()));
 	connect(&settings, SIGNAL(WindowStateChanged()), this, SLOT(windowStateChanged()));
-	//connect(&settings, SIGNAL(ToolbarVisChanged()), this, SLOT(toolbarVisChanged()));
-	connect(&settings, SIGNAL(NoteFontChanged()), this, SLOT(noteFontChanged()));
 	connect(&settings, SIGNAL(ToolbarItemsChanged()), this, SLOT(actions_changed()));
 	connect(&settings.getScriptModel(), SIGNAL(dataChanged(const QModelIndex &, const QModelIndex &)),
 		this, SLOT(cmd_changed()));
@@ -411,7 +373,7 @@ MainWindow::~MainWindow()
 	//saving notes
 	SaveAll();
 	//saving title of last note
-	settings.setLastNote(currentNote()->name);
+	settings.setLastNote(currentNote()->title());
 	//saving dialog's params
 	settings.setDialogGeometry(saveGeometry());
 	settings.setDialogState(saveState());
@@ -421,7 +383,8 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_tabs_currentChanged(int index)
 {
-	SaveNote(CurrentIndex);
+	if(index==-1) return;
+	if(CurrentIndex!=-1) currentNote()->save();
 	CurrentIndex = index;
 	actPrev->setDisabled(index==0); //first note
 	actNext->setDisabled(index==Notes.count()-1); //last note
@@ -438,33 +401,34 @@ void MainWindow::showSearchBar()
 */
 void MainWindow::Search(bool next)
 {
-	QString text = ui->edSearch->text();
-	if(text.isEmpty()) return;
-	//
-	int start_index = CurrentIndex;
-	//
-	if(!next) Notes[start_index]->unsetCursor();
-	//
-	if(Notes[start_index]->find(text)) return;
-	//
-	for(int i=start_index+1; i<Notes.size(); ++i)
-	{
-		Notes[i]->setTextCursor(QTextCursor());
-		if(Notes[i]->find(text))
-		{
-			ui->tabs->setCurrentIndex(i);
-			return;
-		}
-	}
-	for(int i=0; i<start_index; ++i)
-	{
-		Notes[i]->setTextCursor(QTextCursor());
-		if(Notes[i]->find(text))
-		{
-			ui->tabs->setCurrentIndex(i);
-			return;
-		}
-	}
+	//TODO:
+//	QString text = ui->edSearch->text();
+//	if(text.isEmpty()) return;
+//	//
+//	int start_index = CurrentIndex;
+//	//
+//	if(!next) Notes[start_index]->unsetCursor();
+//	//
+//	if(Notes[start_index]->find(text)) return;
+//	//
+//	for(int i=start_index+1; i<Notes.size(); ++i)
+//	{
+//		Notes[i]->setTextCursor(QTextCursor());
+//		if(Notes[i]->find(text))
+//		{
+//			ui->tabs->setCurrentIndex(i);
+//			return;
+//		}
+//	}
+//	for(int i=0; i<start_index; ++i)
+//	{
+//		Notes[i]->setTextCursor(QTextCursor());
+//		if(Notes[i]->find(text))
+//		{
+//			ui->tabs->setCurrentIndex(i);
+//			return;
+//		}
+//	}
 }
 
 void MainWindow::on_edSearch_textChanged(QString text)

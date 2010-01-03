@@ -304,6 +304,7 @@ void Settings::setNoteLinksOpen(bool b)
 	{
 		NoteLinksOpen = b;
 		config.setValue("NoteLinksOpen", NoteLinksOpen);
+		emit NoteLinkOpenChanged();
 	}
 }
 

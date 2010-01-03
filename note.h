@@ -4,45 +4,73 @@
 #include <QTextEdit>
 #include <QFile>
 #include <QDir>
-#include <QSyntaxHighlighter>
 
-class Highlighter : public QSyntaxHighlighter
-{
-	//Q_OBJECT
-public:
-	Highlighter(QTextDocument *parent = 0);
-protected:
-	void highlightBlock(const QString &text);
-private:
-	struct HighlightingRule
-	{
-		QRegExp pattern;
-		QTextCharFormat format;
-	};
-	QVector<HighlightingRule> highlightingRules;
-public:
-	QTextCharFormat linkFormat;
-};
+#include "highlighter.h"
 
-class Note : public QTextEdit
+class TextEdit : public QTextEdit
 {
-	//Q_OBJECT
-private:
-	enum type
-	{
-		text, html
-	};
 public:
-	Note(const QString& fn, const QDir&, const QFont&);
-	QString name;
-	QFile file;
-	bool hasChange;
+	enum TextType { type_text, type_html };
+public:
+	TextEdit(TextType new_type);
+	//
+	inline const QString text() const
+	{
+		switch(type)
+		{
+			case type_text: return toPlainText();
+			case type_html: return toHtml();
+		}
+	}
+	inline void setText(const QString& text)
+	{
+		switch(type)
+		{
+			case type_text: return setPlainText(text);
+			case type_html: return setHtml(text);
+		}
+	}
 private:
-	Highlighter *highlighter;
+	TextType type;
+	Highlighter* highlighter;
+	//
 	void mousePressEvent(QMouseEvent *e);
 	void mouseMoveEvent(QMouseEvent *e);
 	void focusOutEvent(QFocusEvent *e);
-	inline bool isOnLink(const QTextCursor& cursor, int& pos_start, int& pos_end) const;
+};
+
+class Note : public QObject
+{
+	Q_OBJECT
+private:
+	enum Type { type_text, type_html };
+public:
+	Note(const QFileInfo& fileinfo);
+	//
+	inline const QString& title() { return note_title; }
+	inline const QString absolutePath() { return file_info.absoluteFilePath(); }
+	//
+	QWidget* widget();
+	//
+	void load();
+	void save();
+	void rename();
+	void remove();
+	//
+	void copy();
+	bool find(const QString& text);
+private:
+	TextEdit* text_edit;
+	//
+	Type type;
+	QString note_title;
+	QFileInfo file_info;
+	QFile file;
+	bool content_changed;
+private slots:
+	void contentChanged();
+	void noteFontChanged();
+	void noteLinkOpenChanged();
 };
 
 #endif // NOTE_H

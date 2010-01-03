@@ -54,7 +54,6 @@ private:
 		return Notes[CurrentIndex];
 	}
 	int currentIndex;
-	void SaveNote(int i);
 	//
 	void Search(bool next);
 	inline QAction* getAction(int i)
@@ -77,7 +76,6 @@ private:
 	}
 	void changeEvent(QEvent *e);
 public slots:
-	void SaveCurrentNote();
 	void RemoveCurrentNote();
 	void RenameCurrentNote();
 	void NewNote();
@@ -88,7 +86,6 @@ public slots:
 	//
 	void CopyNote();
 	//
-	void currentNoteChanged();
 	void on_tabs_currentChanged(int index);
 	//
 	void SaveAll();
@@ -107,8 +104,6 @@ public slots:
 	//
 	void notesPathChanged();
 	void windowStateChanged();
-	//void toolbarVisChanged();//TODO:think
-	void noteFontChanged();
 private slots:
 	void on_edSearch_returnPressed();
 	void on_edSearch_textChanged(QString text);

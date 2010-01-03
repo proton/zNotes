@@ -115,6 +115,7 @@ signals:
 	//void ToolbarVisChanged();
 	void NoteFontChanged();
 	void NoteHighlightChanged();
+	void NoteLinkOpenChanged();
 	void tbHidingChanged();
 	void ToolbarItemsChanged();
 };

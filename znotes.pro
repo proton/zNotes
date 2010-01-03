@@ -17,7 +17,8 @@ SOURCES += main.cpp \
     note.cpp \
     scriptmodel.cpp \
     aboutDialog.cpp \
-    toolbarmodel.cpp
+    toolbarmodel.cpp \
+    highlighter.cpp
 HEADERS += mainwindow.h \
     configdialog.h \
     settings.h \
@@ -25,7 +26,8 @@ HEADERS += mainwindow.h \
     scriptmodel.h \
     aboutDialog.h \
     toolbaraction.h \
-    toolbarmodel.h
+    toolbarmodel.h \
+    highlighter.h
 FORMS += mainwindow.ui \
     configdialog.ui \
     aboutDialog.ui

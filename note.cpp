@@ -1,35 +1,133 @@
 #include <QTextStream>
 
 #include <QRegExp>
-#include <QtDebug>
 #include <QMouseEvent>
 #include <QUrl>
 #include <QDesktopServices>
+#include <QClipboard>
+#include <QApplication>
+
+#include <QtDebug>
 
 #include "note.h"
 #include "settings.h"
 
-Note::Note(const QString& fn, const QDir& dir, const QFont& f)
-	: QTextEdit(), name(fn), file(dir.absoluteFilePath(fn))
+Note::Note(const QFileInfo& fileinfo)
+	: file_info(fileinfo), content_changed(false)
 {
-	setMouseTracking(true);// only is set open links
-	highlighter = new Highlighter(this->document());
-	connect(&settings, SIGNAL(NoteHighlightChanged()), highlighter, SLOT(rehighlight()));
-	if(file.open(QIODevice::ReadOnly | QIODevice::Text))
+	type = (file_info.suffix()=="htm")?type_html:type_text;
+	file.setFileName(file_info.absoluteFilePath());
+	note_title = file_info.baseName();
+	//
+	load();
+	switch(type)
 	{
-		QTextStream in(&file);
-		setPlainText(in.readAll());
-//		setHtml(content);
-		file.close();
+	case type_text:
+	case type_html:
+		text_edit->setMouseTracking(settings.getNoteLinksOpen());
+		connect(&settings, SIGNAL(NoteLinkOpenChanged()), this, SLOT(noteLinkOpenChanged()));
+		//
+		text_edit->setFont(settings.getNoteFont());
+		connect(&settings, SIGNAL(NoteFontChanged()), this, SLOT(noteFontChanged()));
+		//
+		connect(text_edit, SIGNAL(textChanged()), this, SLOT(contentChanged()));
+		break;
+	default:
+		break;
 	}
-	else if(file.open(QIODevice::WriteOnly | QIODevice::Text)) file.close(); //If file don't exist, we creating itt
-	setFont(f);
 }
 
-inline bool Note::isOnLink(const QTextCursor& cursor, int& pos_start, int& pos_end) const
+void Note::load()
+{
+	switch(type)
+	{
+	case type_text:
+	case type_html:
+		text_edit = new TextEdit(TextEdit::TextType(type));
+		if(file.open(QIODevice::ReadOnly | QIODevice::Text))
+		{
+			QTextStream in(&file);
+			QString text = in.readAll();
+			if(type==type_text) text_edit->setPlainText(text);
+			else if(type==type_html) text_edit->setHtml(text);
+			file.close();
+		}
+		else if(file.open(QIODevice::WriteOnly | QIODevice::Text)) file.close(); //If file don't exist, we creating it
+		break;
+	}
+}
+
+void Note::save()
+{
+	if(!content_changed) return;
+	if(!file.open(QFile::WriteOnly | QFile::Text)) return;
+	QTextStream out(&file);
+	switch(type)
+	{
+		case type_text: out << text_edit->toPlainText(); break;
+		case type_html: out << text_edit->toHtml(); break;
+	}
+	file.close();
+	content_changed = false;
+}
+
+QWidget* Note::widget()
+{
+	switch(type)
+	{
+		case type_text:
+		case type_html:
+			return text_edit;
+	}
+}
+
+void Note::copy()
+{
+	QClipboard* clipboard = QApplication::clipboard();
+	switch(type)
+	{
+		case type_text: clipboard->setText(text_edit->toPlainText()); break;
+		case type_html: clipboard->setText(text_edit->toHtml()); break;
+	}
+}
+
+bool Note::find(const QString& text)
+{
+	switch(type)
+	{
+		case type_text:
+		case type_html:
+			return text_edit->find(text);
+		default: return false;
+	}
+}
+
+void Note::contentChanged()
+{
+	content_changed = true;
+}
+
+void Note::noteLinkOpenChanged()
+{
+	bool is_link_open = settings.getNoteLinksOpen();
+	text_edit->setMouseTracking(is_link_open);
+	if(!is_link_open)
+	{
+		text_edit->setExtraSelections(QList<QTextEdit::ExtraSelection>());
+		text_edit->viewport()->setCursor(Qt::IBeamCursor);
+	}
+}
+
+void Note::noteFontChanged()
+{
+	text_edit->setFont(settings.getNoteFont());
+}
+
+//------------------------------------------------------------------------------
+
+inline bool isOnLink(const QTextDocument& document, const QTextCursor& cursor, int& pos_start, int& pos_end)
 {
 	int position = cursor.position();
-	const QTextDocument& document = *(this->document());
 	if(!document.characterAt(position).isSpace())
 	{
 		pos_start = position;
@@ -59,7 +157,16 @@ inline bool Note::isOnLink(const QTextCursor& cursor, int& pos_start, int& pos_e
 	return false;
 }
 
-void Note::mousePressEvent(QMouseEvent *e)
+//------------------------------------------------------------------------------
+
+TextEdit::TextEdit(TextType new_type)
+	: QTextEdit(), type(new_type)
+{
+	highlighter = new Highlighter(document());
+	connect(&settings, SIGNAL(NoteHighlightChanged()), highlighter, SLOT(rehighlight()));
+}
+
+void TextEdit::mousePressEvent(QMouseEvent *e)
 {
 	if(settings.getNoteLinksOpen() && e->buttons()==Qt::LeftButton && e->modifiers()&Qt::ControlModifier) //Ctrl+LeftMouseButton
 	{
@@ -68,7 +175,7 @@ void Note::mousePressEvent(QMouseEvent *e)
 		if(e->buttons()==Qt::NoButton && e->modifiers()&Qt::ControlModifier)
 		{
 			const QTextCursor cursor = cursorForPosition(e->pos());
-			onLink = isOnLink(cursor, position_start, position_end);
+			onLink = isOnLink(*document(), cursor, position_start, position_end);
 		}
 		if(onLink)
 		{
@@ -79,14 +186,14 @@ void Note::mousePressEvent(QMouseEvent *e)
 	else QTextEdit::mousePressEvent(e);
 }
 
-void Note::mouseMoveEvent(QMouseEvent *e)
+void TextEdit::mouseMoveEvent(QMouseEvent *e)
 {
 	bool onLink = false;
 	int position_start, position_end;
 	if(settings.getNoteLinksOpen() && e->buttons()==Qt::NoButton && e->modifiers()&Qt::ControlModifier)
 	{
 		const QTextCursor cursor = cursorForPosition(e->pos());
-		onLink = isOnLink(cursor, position_start, position_end);
+		onLink = isOnLink(*document(), cursor, position_start, position_end);
 	}
 	if(onLink)
 	{
@@ -107,38 +214,7 @@ void Note::mouseMoveEvent(QMouseEvent *e)
 	QTextEdit::mouseMoveEvent(e);
 }
 
-void Note::focusOutEvent(QFocusEvent*)
+void TextEdit::focusOutEvent(QFocusEvent*)
 {
 	setExtraSelections(QList<QTextEdit::ExtraSelection>());
-	viewport()->setCursor(Qt::IBeamCursor);
-}
-
-Highlighter::Highlighter(QTextDocument *parent)
-	: QSyntaxHighlighter(parent)
-{
-	HighlightingRule rule;
-
-	linkFormat.setForeground(Qt::blue);
-	rule.format = linkFormat;
-	rule.pattern = QRegExp("http://\\S+");
-	highlightingRules.append(rule);
-}
-
-void Highlighter::highlightBlock(const QString &text)
-{
-	if(settings.getNoteLinksHighlight())
-	{
-		foreach (const HighlightingRule &rule, highlightingRules)
-		{
-			QRegExp expression(rule.pattern);
-			int index = expression.indexIn(text);
-			while (index >= 0)
-			{
-				int length = expression.matchedLength();
-				setFormat(index, length, rule.format);
-				index = expression.indexIn(text, index + length);
-			}
-		}
-	}
-	setCurrentBlockState(0);
 }
