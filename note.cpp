@@ -124,12 +124,14 @@ void Note::copy()
 	}
 }
 
-bool Note::find(const QString& text)
+bool Note::find(const QString& text, bool next)
 {
 	switch(type)
 	{
 		case type_text:
 		case type_html:
+			if(next) text_edit->setTextCursor(QTextCursor());
+			else text_edit->unsetCursor();
 			return text_edit->find(text);
 		default: return false;
 	}

@@ -397,32 +397,27 @@ void MainWindow::Search(bool next)
 {
 	QString text = ui->edSearch->text();
 	if(text.isEmpty()) return;
-	//
-	//TODO:
-//	int start_index = CurrentIndex;
-//	//
-//	//if(!next) Notes[start_index]->unsetCursor();
-//	//
-//	if(Notes[start_index]->find(text)) return;
-//	//
-//	for(int i=start_index+1; i<Notes.size(); ++i)
-//	{
-//		//Notes[i]->setTextCursor(QTextCursor());
-//		if(Notes[i]->find(text))
-//		{
-//			ui->tabs->setCurrentIndex(i);
-//			return;
-//		}
-//	}
-//	for(int i=0; i<start_index; ++i)
-//	{
-//		//Notes[i]->setTextCursor(QTextCursor());
-//		if(Notes[i]->find(text))
-//		{
-//			ui->tabs->setCurrentIndex(i);
-//			return;
-//		}
-//	}
+	//Searching in current note
+	int start_index = CurrentIndex;
+	if(Notes[start_index]->find(text, false)) return;
+	//Searching from current note to last note
+	for(int i=start_index+1; i<Notes.size(); ++i)
+	{
+		if(Notes[i]->find(text, true))
+		{
+			ui->tabs->setCurrentIndex(i);
+			return;
+		}
+	}
+	//Searching from first note to current note
+	for(int i=0; i<=start_index; ++i)
+	{
+		if(Notes[i]->find(text, true))
+		{
+			ui->tabs->setCurrentIndex(i);
+			return;
+		}
+	}
 }
 
 void MainWindow::on_edSearch_textChanged(QString text)

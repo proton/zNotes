@@ -60,7 +60,7 @@ public:
 	bool remove(); //Removing note from harddisk
 	//
 	void copy();
-	bool find(const QString& text);
+	bool find(const QString& text, bool next=false);
 private:
 	Type type;
 	QString note_title;
