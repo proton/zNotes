@@ -31,19 +31,17 @@ void MainWindow::RemoveCurrentNote()
 		tr("Do you realy want to delete note %1 ?").arg(note->title()),
 		QMessageBox::Yes | QMessageBox::No);
 	int ret = msgBox.exec();
-	if(ret == QMessageBox::Yes)
+	if(ret == QMessageBox::Yes && note->remove())
 	{
-		//TODO:
-//		QFile::remove(note->absolutePath());
-//		const int current_index = ui->tabs->currentIndex();
-//		ui->tabs->removeTab(current_index);
-//		Notes.remove(current_index);
-//		delete note;
-//		if(Notes.count()==0)
-//		{
-//			actRemove->setDisabled(true);
-//			actRename->setDisabled(true);
-//		}
+		const int current_index = ui->tabs->currentIndex();
+		ui->tabs->removeTab(current_index);
+		Notes.remove(current_index);
+		delete note;
+		if(Notes.count()==0)
+		{
+			actRemove->setDisabled(true);
+			actRename->setDisabled(true);
+		}
 	}
 }
 

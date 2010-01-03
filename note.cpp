@@ -13,7 +13,7 @@
 #include "settings.h"
 
 Note::Note(const QFileInfo& fileinfo)
-	: file_info(fileinfo), content_changed(false)
+	: file_info(fileinfo), text_edit(0), content_changed(false)
 {
 	type = (file_info.suffix()=="htm")?type_html:type_text;
 	file.setFileName(file_info.absoluteFilePath());
@@ -35,6 +35,11 @@ Note::Note(const QFileInfo& fileinfo)
 	default:
 		break;
 	}
+}
+
+Note::~Note()
+{
+	if(text_edit) delete text_edit;
 }
 
 void Note::load()
@@ -82,6 +87,12 @@ void Note::rename(const QString& new_name)
 	QString absolute_file_path = file_info.dir().absoluteFilePath(fullname);
 	file.rename(absolute_file_path);
 	file_info.setFile(file);
+}
+
+bool Note::remove()
+{
+	file.close();
+	return file.remove();
 }
 
 QWidget* Note::widget()

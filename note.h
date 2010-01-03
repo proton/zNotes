@@ -46,6 +46,7 @@ private:
 	enum Type { type_text, type_html };
 public:
 	Note(const QFileInfo& fileinfo);
+	~Note();
 	//
 	inline const QString& title() { return note_title; }
 	inline const QString absolutePath() { return file_info.absoluteFilePath(); }
@@ -55,17 +56,18 @@ public:
 	void load();
 	void save();
 	void rename(const QString& new_name);
-	void remove();
+	bool remove();
 	//
 	void copy();
 	bool find(const QString& text);
 private:
-	TextEdit* text_edit;
-	//
 	Type type;
 	QString note_title;
 	QFileInfo file_info;
 	QFile file;
+	//
+	TextEdit* text_edit;
+	//
 	bool content_changed;
 private slots:
 	void contentChanged();
