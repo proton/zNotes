@@ -32,16 +32,44 @@ Note::Note(const QString& fn, const QDir& dir, const QFont& f)
 	{
 		QTextStream in(&file);
 		setPlainText(in.readAll());
-//		QString content = in.readAll();
-//		text2links(content);
-//		qDebug() << content;
-//		content.replace("\n","<br/>");
-//		qDebug() << content;
 //		setHtml(content);
 		file.close();
 	}
 	else if(file.open(QIODevice::WriteOnly | QIODevice::Text)) file.close(); //If file don't exist, we creating itt
 	setFont(f);
+}
+
+inline bool Note::isOnLink(const QTextCursor& cursor, int& pos_start, int& pos_end) const
+{
+	int position = cursor.position();
+	const QTextDocument& document = *(this->document());
+	if(!document.characterAt(position).isSpace())
+	{
+		pos_start = position;
+		while(pos_start>0 && !document.characterAt(pos_start-1).isSpace()) --pos_start;
+		const int characterCount = document.characterCount();
+		pos_end = position;
+		while(pos_end<characterCount && !document.characterAt(pos_end).isSpace()) ++pos_end;
+		//
+		const QString priznak("http://");
+		const int link_lenght = pos_end-pos_start;
+		if(link_lenght>priznak.size())
+		{
+			bool isLink = true;
+			int i = 0;
+			while(i<priznak.size())
+			{
+				if(document.characterAt(pos_start+i)!=priznak.at(i))
+				{
+					isLink = false;
+					break;
+				}
+				++i;
+			}
+			if(isLink) return true;
+		}
+	}
+	return false;
 }
 
 void Note::mousePressEvent(QMouseEvent *e)
@@ -53,33 +81,7 @@ void Note::mousePressEvent(QMouseEvent *e)
 		if(e->buttons()==Qt::NoButton && e->modifiers()&Qt::ControlModifier)
 		{
 			const QTextCursor cursor = cursorForPosition(e->pos());
-			//
-			int position = cursor.position();
-			if(!document()->characterAt(position).isSpace())
-			{
-				position_start = position;
-				while(position_start>0 && !document()->characterAt(position_start-1).isSpace()) --position_start;
-				const int characterCount = document()->characterCount();
-				position_end = position;
-				while(position_end<characterCount && !document()->characterAt(position_end).isSpace()) ++position_end;
-				//
-				const QString priznak("http://");
-				if((position_end-position_start)>priznak.size())
-				{
-					bool isLink = true;
-					int i = 0;
-					while(i<priznak.size())
-					{
-						if(document()->characterAt(position_start+i)!=priznak.at(i))
-						{
-							isLink = false;
-							break;
-						}
-						++i;
-					}
-					if(isLink) onLink=true;
-				}
-			}
+			onLink = isOnLink(cursor, position_start, position_end);
 		}
 		if(onLink)
 		{
@@ -97,33 +99,7 @@ void Note::mouseMoveEvent(QMouseEvent *e)
 	if(e->buttons()==Qt::NoButton && e->modifiers()&Qt::ControlModifier)
 	{
 		const QTextCursor cursor = cursorForPosition(e->pos());
-		//
-		int position = cursor.position();
-		if(!document()->characterAt(position).isSpace())
-		{
-			position_start = position;
-			while(position_start>0 && !document()->characterAt(position_start-1).isSpace()) --position_start;
-			const int characterCount = document()->characterCount();
-			position_end = position;
-			while(position_end<characterCount && !document()->characterAt(position_end).isSpace()) ++position_end;
-			//
-			const QString priznak("http://");
-			if((position_end-position_start)>priznak.size())
-			{
-				bool isLink = true;
-				int i = 0;
-				while(i<priznak.size())
-				{
-					if(document()->characterAt(position_start+i)!=priznak.at(i))
-					{
-						isLink = false;
-						break;
-					}
-					++i;
-				}
-				if(isLink) onLink=true;
-			}
-		}
+		onLink = isOnLink(cursor, position_start, position_end);
 	}
 	if(onLink)
 	{

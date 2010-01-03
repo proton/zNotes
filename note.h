@@ -41,7 +41,7 @@ private:
 	Highlighter *highlighter;
 	void mousePressEvent(QMouseEvent *e);
 	void mouseMoveEvent(QMouseEvent *e);
-	bool isOnLink(const QTextCursor& cursor) const;
+	inline bool isOnLink(const QTextCursor& cursor, int& pos_start, int& pos_end) const;
 };
 
 #endif // NOTE_H
