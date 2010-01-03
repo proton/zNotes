@@ -39,6 +39,7 @@ Note::Note(const QFileInfo& fileinfo)
 
 void Note::load()
 {
+	file.close();
 	switch(type)
 	{
 	case type_text:
@@ -60,6 +61,7 @@ void Note::load()
 void Note::save()
 {
 	if(!content_changed) return;
+	file.close();
 	if(!file.open(QFile::WriteOnly | QFile::Text)) return;
 	QTextStream out(&file);
 	switch(type)
@@ -69,6 +71,17 @@ void Note::save()
 	}
 	file.close();
 	content_changed = false;
+}
+
+void Note::rename(const QString& new_name)
+{
+	file.close();
+	note_title = new_name;
+	QString suffix = file_info.completeSuffix();
+	QString fullname = QString("%1.%2").arg(note_title).arg(suffix);
+	QString absolute_file_path = file_info.dir().absoluteFilePath(fullname);
+	file.rename(absolute_file_path);
+	file_info.setFile(file);
 }
 
 QWidget* Note::widget()

@@ -54,14 +54,11 @@ void MainWindow::RenameCurrentNote()
 	Note* note = currentNote();
 	note->save();
 	bool ok;
-	QString text = QInputDialog::getText(this, tr("Rename note"), tr("New name:"), QLineEdit::Normal, note->title(), &ok);
-	if (ok && !text.isEmpty())
+	QString new_name = QInputDialog::getText(this, tr("Rename note"), tr("New name:"), QLineEdit::Normal, note->title(), &ok);
+	if(ok && !new_name.isEmpty())
 	{
-		//TODO:
-//		n->file.close();
-//		n->file.rename(dir.absoluteFilePath(text));
-//		n->name = text;
-//		ui->tabs->setTabText(ui->tabs->currentIndex(), text);
+		note->rename(new_name);
+		ui->tabs->setTabText(ui->tabs->currentIndex(), new_name);
 	}
 }
 

@@ -54,7 +54,7 @@ public:
 	//
 	void load();
 	void save();
-	void rename();
+	void rename(const QString& new_name);
 	void remove();
 	//
 	void copy();
