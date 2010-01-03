@@ -7,27 +7,14 @@
 #include <QDesktopServices>
 
 #include "note.h"
-
-inline void text2links(QString& text)
-{
-	const QRegExp regexp("\\s");
-	int start_index, last_index = 0;
-	while((start_index = text.indexOf("http://", last_index)) != -1)
-	{
-		last_index = text.indexOf(regexp, start_index);
-		if(last_index==-1) last_index = text.size();
-		QString link(text.mid(start_index, last_index));
-		QString html_link = QString("<a href='%1'>%1</a>").arg(link);
-		text.replace(start_index, last_index, html_link);
-		last_index+=(html_link.size()-link.size()+1);
-	}
-}
+#include "settings.h"
 
 Note::Note(const QString& fn, const QDir& dir, const QFont& f)
 	: QTextEdit(), name(fn), file(dir.absoluteFilePath(fn))
 {
 	setMouseTracking(true);// only is set open links
 	highlighter = new Highlighter(this->document());
+	connect(&settings, SIGNAL(NoteHighlightChanged()), highlighter, SLOT(rehighlight()));
 	if(file.open(QIODevice::ReadOnly | QIODevice::Text))
 	{
 		QTextStream in(&file);
@@ -74,7 +61,7 @@ inline bool Note::isOnLink(const QTextCursor& cursor, int& pos_start, int& pos_e
 
 void Note::mousePressEvent(QMouseEvent *e)
 {
-	if(e->buttons()==Qt::LeftButton && e->modifiers()&Qt::ControlModifier) //Ctrl+LeftMouseButton
+	if(settings.getNoteLinksOpen() && e->buttons()==Qt::LeftButton && e->modifiers()&Qt::ControlModifier) //Ctrl+LeftMouseButton
 	{
 		bool onLink = false;
 		int position_start, position_end;
@@ -96,7 +83,7 @@ void Note::mouseMoveEvent(QMouseEvent *e)
 {
 	bool onLink = false;
 	int position_start, position_end;
-	if(e->buttons()==Qt::NoButton && e->modifiers()&Qt::ControlModifier)
+	if(settings.getNoteLinksOpen() && e->buttons()==Qt::NoButton && e->modifiers()&Qt::ControlModifier)
 	{
 		const QTextCursor cursor = cursorForPosition(e->pos());
 		onLink = isOnLink(cursor, position_start, position_end);
@@ -120,6 +107,12 @@ void Note::mouseMoveEvent(QMouseEvent *e)
 	QTextEdit::mouseMoveEvent(e);
 }
 
+void Note::focusOutEvent(QFocusEvent*)
+{
+	setExtraSelections(QList<QTextEdit::ExtraSelection>());
+	viewport()->setCursor(Qt::IBeamCursor);
+}
+
 Highlighter::Highlighter(QTextDocument *parent)
 	: QSyntaxHighlighter(parent)
 {
@@ -133,15 +126,18 @@ Highlighter::Highlighter(QTextDocument *parent)
 
 void Highlighter::highlightBlock(const QString &text)
 {
-	foreach (const HighlightingRule &rule, highlightingRules)
+	if(settings.getNoteLinksHighlight())
 	{
-		QRegExp expression(rule.pattern);
-		int index = expression.indexIn(text);
-		while (index >= 0)
+		foreach (const HighlightingRule &rule, highlightingRules)
 		{
-			int length = expression.matchedLength();
-			setFormat(index, length, rule.format);
-			index = expression.indexIn(text, index + length);
+			QRegExp expression(rule.pattern);
+			int index = expression.indexIn(text);
+			while (index >= 0)
+			{
+				int length = expression.matchedLength();
+				setFormat(index, length, rule.format);
+				index = expression.indexIn(text, index + length);
+			}
 		}
 	}
 	setCurrentBlockState(0);

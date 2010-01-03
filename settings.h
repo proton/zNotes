@@ -114,6 +114,7 @@ signals:
 	void WindowStateChanged();
 	//void ToolbarVisChanged();
 	void NoteFontChanged();
+	void NoteHighlightChanged();
 	void tbHidingChanged();
 	void ToolbarItemsChanged();
 };

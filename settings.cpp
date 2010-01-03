@@ -291,7 +291,7 @@ void Settings::setNoteLinksHighlight(bool b)
 	{
 		NoteLinksHighlight = b;
 		config.setValue("NoteLinksHighlight", NoteLinksHighlight);
-		//emit NoteFontChanged();
+		emit NoteHighlightChanged();
 	}
 }
 
@@ -304,7 +304,6 @@ void Settings::setNoteLinksOpen(bool b)
 	{
 		NoteLinksOpen = b;
 		config.setValue("NoteLinksOpen", NoteLinksOpen);
-		//emit NoteFontChanged();
 	}
 }
 
