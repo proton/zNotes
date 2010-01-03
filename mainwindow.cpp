@@ -395,23 +395,16 @@ void MainWindow::showSearchBar()
 */
 void MainWindow::Search(bool next)
 {
+	if(Notes.count()==0) return;
 	QString text = ui->edSearch->text();
 	if(text.isEmpty()) return;
 	//Searching in current note
-	int start_index = CurrentIndex;
-	if(Notes[start_index]->find(text, false)) return;
-	//Searching from current note to last note
-	for(int i=start_index+1; i<Notes.size(); ++i)
+	if(currentNote()->find(text)) return;
+	//Searching in all notes
+	const int max = Notes.count()+CurrentIndex;
+	for(int n=CurrentIndex+1; n<=max; ++n)
 	{
-		if(Notes[i]->find(text, true))
-		{
-			ui->tabs->setCurrentIndex(i);
-			return;
-		}
-	}
-	//Searching from first note to current note
-	for(int i=0; i<=start_index; ++i)
-	{
+		int i = n%Notes.count(); //secret formula of success search
 		if(Notes[i]->find(text, true))
 		{
 			ui->tabs->setCurrentIndex(i);
