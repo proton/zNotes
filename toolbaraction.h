@@ -20,6 +20,7 @@ enum item_enum
 	itemSearch,
 	itemExit,
 	itemFormatBold,
+	itemFormatItalic,
 	itemFormatStrikeout,
 	itemFormatUnderline,
 	itemMax
@@ -46,6 +47,7 @@ public:
 			case itemSearch:	return QObject::tr("Search");
 			case itemExit:		return QObject::tr("Exit");
 			case itemFormatBold:		return QObject::tr("Bold");
+			case itemFormatItalic:		return QObject::tr("Italic");
 			case itemFormatStrikeout:	return QObject::tr("Strikeout");
 			case itemFormatUnderline:	return QObject::tr("Underline");
 			default: return 0;
@@ -67,6 +69,7 @@ public:
 			case itemSearch:	return QIcon(":/res/find.png");
 			case itemExit:		return QIcon(":/res/exit.png");
 			case itemFormatBold:		return QIcon(":/res/format_bold.png");
+			case itemFormatItalic:		return QIcon(":/res/format_italic.png");
 			case itemFormatStrikeout:	return QIcon(":/res/format_strikeout.png");
 			case itemFormatUnderline:	return QIcon(":/res/format_underline.png");
 			default: return QIcon();

@@ -43,7 +43,7 @@ private:
 	//
 	QAction *actAdd, *actRemove, *actRename, *actPrev, *actNext;
 	QAction *actCopy, *actSetup, *actRun, *actExit, *actInfo, *actSearch;
-	QAction *actFormatBold, *actFormatStrikeout, *actFormatUnderline;
+	QAction *actFormatBold, *actFormatItalic, *actFormatStrikeout, *actFormatUnderline;
 	//
 	QAction *actShow, *actHide;
 	//
@@ -73,6 +73,7 @@ private:
 			case itemSearch:		return actSearch;
 			case itemExit:			return actExit;
 			case itemFormatBold:	return actFormatBold;
+			case itemFormatItalic:	return actFormatItalic;
 			case itemFormatStrikeout: return actFormatStrikeout;
 			case itemFormatUnderline: return actFormatUnderline;
 			default: return new QAction(this);
@@ -100,6 +101,11 @@ public slots:
 	void showAboutDialog();
 	void showPrefDialog();
 	void showSearchBar();
+	//
+	void formatBold();
+	void formatItalic();
+	void formatStrikeout();
+	void formatUnderline();
 	//
 	void actions_changed();
 	//

@@ -137,11 +137,17 @@ bool Note::find(const QString& text, bool next)
 	}
 }
 
-void Note::applySelFormat(const QTextCharFormat& format)
+void Note::setSelFormat(const QTextCharFormat& format)
 {
 	if(type!=type_html) return;
 	QTextCursor cursor = text_edit->textCursor();
 	cursor.setCharFormat(format);
+}
+const QTextCharFormat Note::getSelFormat() const
+{
+	if(type!=type_html) return QTextCharFormat();
+	QTextCursor cursor = text_edit->textCursor();
+	return cursor.charFormat();
 }
 
 //------------------------------------------------------------------------------

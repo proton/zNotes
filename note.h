@@ -62,7 +62,8 @@ public:
 	void copy() const;
 	bool find(const QString& text, bool next=false);
 	//
-	void applySelFormat(const QTextCharFormat& format);
+	void setSelFormat(const QTextCharFormat& format);
+	const QTextCharFormat getSelFormat() const;
 private:
 	Type type;
 	QString note_title;

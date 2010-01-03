@@ -106,6 +106,7 @@ private:
 			case itemSearch:	return "Toolbar/itemSearch";
 			case itemExit:		return "Toolbar/itemExit";
 			case itemFormatBold:		return "Toolbar/itemFormatBold";
+			case itemFormatItalic:		return "Toolbar/itemFormatItalic";
 			case itemFormatStrikeout:	return "Toolbar/itemFormatStrikeout";
 			case itemFormatUnderline:	return "Toolbar/itemFormatUnderline";
 			default:			return "";

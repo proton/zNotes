@@ -21,5 +21,6 @@
         <file>res/format_bold.png</file>
         <file>res/format_strikeout.png</file>
         <file>res/format_underline.png</file>
+        <file>res/format_italic.png</file>
     </qresource>
 </RCC>

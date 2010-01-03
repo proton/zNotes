@@ -266,6 +266,54 @@ void MainWindow::actions_changed()
 	}
 }
 
+void MainWindow::formatBold()
+{
+	if(Notes.count()==0) return;
+	QTextCharFormat format(currentNote()->getSelFormat());
+	QFont font(format.font());
+	font.setBold(!font.bold());
+	format.setFont(font);
+	currentNote()->setSelFormat(format);
+}
+
+void MainWindow::formatItalic()
+{
+	if(Notes.count()==0) return;
+	QTextCharFormat format(currentNote()->getSelFormat());
+	QFont font(format.font());
+	font.setItalic(!font.italic());
+	format.setFont(font);
+	currentNote()->setSelFormat(format);
+}
+
+void MainWindow::formatStrikeout()
+{
+	if(Notes.count()==0) return;
+	QTextCharFormat format(currentNote()->getSelFormat());
+	QFont font(format.font());
+	font.setStrikeOut(!font.strikeOut());
+	format.setFont(font);
+	currentNote()->setSelFormat(format);
+}
+
+void MainWindow::formatUnderline()
+{
+	if(Notes.count()==0) return;
+	QTextCharFormat format(currentNote()->getSelFormat());
+	QFont font(format.font());
+	font.setUnderline(!font.underline());
+	format.setFont(font);
+	currentNote()->setSelFormat(format);
+}
+
+inline QAction* GenerateAction(item_enum item, bool checkable = false)
+{
+	ToolbarAction toolbar_action(item);
+	QAction* action = new QAction(toolbar_action.icon(), toolbar_action.text(), 0);
+	action->setCheckable(checkable);
+	return action;
+}
+
 MainWindow::MainWindow(QWidget *parent)
 	: QMainWindow(parent), ui(new Ui::MainWindow), CurrentIndex(-1)
 {
@@ -277,20 +325,21 @@ MainWindow::MainWindow(QWidget *parent)
 	restoreState(settings.getDialogState());
 	windowStateChanged();
 	//Creating toolbar/menu actions
-	actAdd	=	new QAction(ToolbarAction(itemAdd).icon(),		ToolbarAction(itemAdd).text(),		parent);
-	actRemove =	new QAction(ToolbarAction(itemRemove).icon(),	ToolbarAction(itemRemove).text(),	parent);
-	actRename =	new QAction(ToolbarAction(itemRename).icon(),	ToolbarAction(itemRename).text(),	parent);
-	actPrev =	new QAction(ToolbarAction(itemPrev).icon(),		ToolbarAction(itemPrev).text(),		parent);
-	actNext =	new QAction(ToolbarAction(itemNext).icon(),		ToolbarAction(itemNext).text(),		parent);
-	actCopy =	new QAction(ToolbarAction(itemCopy).icon(),		ToolbarAction(itemCopy).text(),		parent);
-	actSetup =	new QAction(ToolbarAction(itemSetup).icon(),	ToolbarAction(itemSetup).text(),	parent);
-	actInfo =	new QAction(ToolbarAction(itemInfo).icon(),		ToolbarAction(itemInfo).text(),		parent);
-	actRun	=	new QAction(ToolbarAction(itemRun).icon(),		ToolbarAction(itemRun).text(),		parent);
-	actSearch =	new QAction(ToolbarAction(itemSearch).icon(),	ToolbarAction(itemSearch).text(),	parent);
-	actExit =	new QAction(ToolbarAction(itemExit).icon(),		ToolbarAction(itemExit).text(),		parent);
-	actFormatBold =	   new QAction(ToolbarAction(itemFormatBold).icon(),	  ToolbarAction(itemFormatBold).text(),		parent);
-	actFormatStrikeout=new QAction(ToolbarAction(itemFormatStrikeout).icon(), ToolbarAction(itemFormatStrikeout).text(),parent);
-	actFormatUnderline=new QAction(ToolbarAction(itemFormatUnderline).icon(), ToolbarAction(itemFormatUnderline).text(),parent);
+	actAdd = GenerateAction(itemAdd);
+	actRemove = GenerateAction(itemRemove);
+	actRename = GenerateAction(itemRename);
+	actPrev = GenerateAction(itemPrev);
+	actNext = GenerateAction(itemNext);
+	actCopy = GenerateAction(itemCopy);
+	actSetup = GenerateAction(itemSetup);
+	actInfo = GenerateAction(itemInfo);
+	actRun = GenerateAction(itemRun);
+	actSearch = GenerateAction(itemSearch);
+	actExit = GenerateAction(itemExit);
+	actFormatBold = GenerateAction(itemFormatBold, true);
+	actFormatItalic = GenerateAction(itemFormatItalic, true);
+	actFormatStrikeout = GenerateAction(itemFormatStrikeout, true);
+	actFormatUnderline = GenerateAction(itemFormatUnderline, true);
 	actShow =	new QAction(tr("Show"),	parent);
 	actHide =	new QAction(tr("Hide"),	parent);
 	//Connecting actions with slots
@@ -305,6 +354,11 @@ MainWindow::MainWindow(QWidget *parent)
 	connect(actRun,		SIGNAL(triggered()), this, SLOT(commandMenu()));
 	connect(actSearch,	SIGNAL(triggered()), this, SLOT(showSearchBar()));
 	connect(actExit,	SIGNAL(triggered()), qApp, SLOT(quit()));
+	connect(actFormatBold,	SIGNAL(triggered()), this, SLOT(formatBold()));
+	connect(actFormatItalic,	SIGNAL(triggered()), this, SLOT(formatItalic()));
+	connect(actFormatStrikeout,	SIGNAL(triggered()), this, SLOT(formatStrikeout()));
+	connect(actFormatUnderline,	SIGNAL(triggered()), this, SLOT(formatUnderline()));
+	//
 	connect(actShow,	SIGNAL(triggered()), this, SLOT(show()));
 	connect(actHide,	SIGNAL(triggered()), this, SLOT(hide()));
 	//
