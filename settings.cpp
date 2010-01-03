@@ -30,6 +30,8 @@ void Settings::load()
 		StayTop = config.value("StayTop").toBool();
 		//
 		NoteFont.fromString(config.value("NoteFont").toString());
+		NoteLinksHighlight = config.value("NoteLinksHighlight").toBool();
+		NoteLinksOpen = config.value("NoteLinksOpen").toBool();
 		//
 		int ScriptCount = config.value("ComandCount").toInt();
 		for(int i=0; i<ScriptCount; ++i)
@@ -127,6 +129,8 @@ void Settings::load()
 		NotesPath = QDir::homePath()+"/.local/share/notes";
 		config.setValue("NotesPath", NotesPath);
 	#endif
+		NoteLinksHighlight = true;
+		config.setValue("NoteLinksHighlight", NoteLinksHighlight);
 	}
 	loadLanguages();
 	QLocale::Language lang = (LanguageCustom)?LanguageCurrent:QLocale::system().language();
@@ -275,6 +279,32 @@ void Settings::setNoteFont(const QFont& f)
 		NoteFont = f;
 		config.setValue("NoteFont", NoteFont.toString());
 		emit NoteFontChanged();
+	}
+}
+
+/*
+  Saving notes's links highlight option
+*/
+void Settings::setNoteLinksHighlight(bool b)
+{
+	if(NoteLinksHighlight != b)
+	{
+		NoteLinksHighlight = b;
+		config.setValue("NoteLinksHighlight", NoteLinksHighlight);
+		//emit NoteFontChanged();
+	}
+}
+
+/*
+  Saving notes's links highlight option
+*/
+void Settings::setNoteLinksOpen(bool b)
+{
+	if(NoteLinksOpen != b)
+	{
+		NoteLinksOpen = b;
+		config.setValue("NoteLinksOpen", NoteLinksOpen);
+		//emit NoteFontChanged();
 	}
 }
 

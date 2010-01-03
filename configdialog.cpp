@@ -24,12 +24,15 @@ configDialog::configDialog(QWidget *parent) :
 	//m_ui->cb_ToolbarHide->setChecked(settings.getHideToolbar());
 	m_ui->cb_FrameHide->setChecked(settings.getHideFrame());
 	m_ui->cb_StayTop->setChecked(settings.getStayTop());
-	m_ui->lb_FontExample->setFont(settings.getNoteFont());
 	//
 	m_ui->tabScripts->setModel(&settings.getScriptModel());
 	m_ui->tabScripts->resizeColumnsToContents();
 	m_ui->cb_ScriptShowOutput->setChecked(settings.getScriptShowOutput());
 	m_ui->cb_ScriptCopyOutput->setChecked(settings.getScriptCopyOutput());
+	//
+	m_ui->lb_FontExample->setFont(settings.getNoteFont());
+	m_ui->cb_NoteLinksHighlight->setChecked(settings.getNoteLinksHighlight());
+	m_ui->cb_NoteLinksOpen->setChecked(settings.getNoteLinksOpen());
 	//
 	const QMap<QLocale::Language, QString> translations = settings.getTranslations();
 	QMapIterator<QLocale::Language, QString> translation(translations);
@@ -64,6 +67,8 @@ void configDialog::SaveSettings()
 	settings.setHideFrame(m_ui->cb_FrameHide->checkState());
 	settings.setStayTop(m_ui->cb_StayTop->checkState());
 	settings.setNoteFont(m_ui->lb_FontExample->font());
+	settings.setNoteLinksHighlight(m_ui->cb_NoteLinksHighlight->checkState());
+	settings.setNoteLinksOpen(m_ui->cb_NoteLinksOpen->checkState());
 	settings.setScriptShowOutput(m_ui->cb_ScriptShowOutput->checkState());
 	settings.setScriptCopyOutput(m_ui->cb_ScriptCopyOutput->checkState());
 	settings.setToolbarItems(mt_items.getVector());

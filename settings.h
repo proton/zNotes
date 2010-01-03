@@ -38,6 +38,8 @@ public:
 	inline const QMap<QLocale::Language, QString>& getTranslations()	{ return translations; }
 	inline QLocale::Language getLanguageCurrent()	{ return LanguageCurrent; }
 	inline bool getLanguageCustom()					{ return LanguageCustom; }
+	inline bool getNoteLinksHighlight()				{ return NoteLinksHighlight; }
+	inline bool getNoteLinksOpen()					{ return NoteLinksOpen; }
 	//
 	void setNotesPath(const QString& path);
 	void setLastNote(const QString& name);
@@ -55,6 +57,8 @@ public:
 	void setLanguage(QLocale::Language);
 	void setLanguageCurrent(QLocale::Language);
 	void setLanguageCustom(bool);
+	void setNoteLinksHighlight(bool);
+	void setNoteLinksOpen(bool);
 	//
 	void loadLanguages();
 private:
@@ -78,6 +82,8 @@ private:
 	bool StayTop;
 	//
 	QFont NoteFont;
+	bool NoteLinksHighlight;
+	bool NoteLinksOpen;
 	//
 	ScriptModel script_model;
 	bool ScriptShowOutput;
