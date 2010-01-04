@@ -266,43 +266,51 @@ void MainWindow::actions_changed()
 	}
 }
 
+void MainWindow::formatChanged(const QFont& font)
+{
+	actFormatBold->setChecked(font.bold());
+	actFormatItalic->setChecked(font.italic());
+	actFormatStrikeout->setChecked(font.strikeOut());
+	actFormatUnderline->setChecked(font.underline());
+}
+
 void MainWindow::formatBold()
 {
 	if(Notes.count()==0) return;
-	QTextCharFormat format(currentNote()->getSelFormat());
-	QFont font(format.font());
-	font.setBold(!font.bold());
-	format.setFont(font);
+	if(currentNote()->noteType()!=Note::type_html) return;
+	QTextCharFormat format;
+	QTextCharFormat selformat(currentNote()->getSelFormat());
+	format.setFontWeight((selformat.fontWeight()==QFont::Normal)?QFont::Bold : QFont::Normal);
 	currentNote()->setSelFormat(format);
 }
 
 void MainWindow::formatItalic()
 {
 	if(Notes.count()==0) return;
-	QTextCharFormat format(currentNote()->getSelFormat());
-	QFont font(format.font());
-	font.setItalic(!font.italic());
-	format.setFont(font);
+	if(currentNote()->noteType()!=Note::type_html) return;
+	QTextCharFormat format;
+	QTextCharFormat selformat(currentNote()->getSelFormat());
+	format.setFontItalic(!selformat.fontItalic());
 	currentNote()->setSelFormat(format);
 }
 
 void MainWindow::formatStrikeout()
 {
 	if(Notes.count()==0) return;
-	QTextCharFormat format(currentNote()->getSelFormat());
-	QFont font(format.font());
-	font.setStrikeOut(!font.strikeOut());
-	format.setFont(font);
+	if(currentNote()->noteType()!=Note::type_html) return;
+	QTextCharFormat format;
+	QTextCharFormat selformat(currentNote()->getSelFormat());
+	format.setFontStrikeOut(!selformat.fontStrikeOut());
 	currentNote()->setSelFormat(format);
 }
 
 void MainWindow::formatUnderline()
 {
 	if(Notes.count()==0) return;
-	QTextCharFormat format(currentNote()->getSelFormat());
-	QFont font(format.font());
-	font.setUnderline(!font.underline());
-	format.setFont(font);
+	if(currentNote()->noteType()!=Note::type_html) return;
+	QTextCharFormat format;
+	QTextCharFormat selformat(currentNote()->getSelFormat());
+	format.setFontUnderline(!selformat.fontUnderline());
 	currentNote()->setSelFormat(format);
 }
 
@@ -388,6 +396,10 @@ MainWindow::MainWindow(QWidget *parent)
 	scNext =	new QShortcut(QKeySequence::Forward,this);
 	scSearch =	new QShortcut(QKeySequence::Find,	this);
 	scExit =	new QShortcut(QKeySequence::Close,	this);
+	scFormatBold =		new QShortcut(Qt::CTRL + Qt::Key_B,	this);
+	scFormatItalic =	new QShortcut(Qt::CTRL + Qt::Key_I,	this);
+	scFormatStrikeout = new QShortcut(Qt::CTRL + Qt::Key_S,	this);
+	scFormatUnderline = new QShortcut(Qt::CTRL + Qt::Key_U,	this);
 	//Connecting shortcuts with slots
 	connect(scAdd,		SIGNAL(activated()), this, SLOT(NewNote()));
 	connect(scRemove,	SIGNAL(activated()), this, SLOT(RemoveCurrentNote()));
@@ -395,6 +407,10 @@ MainWindow::MainWindow(QWidget *parent)
 	connect(scNext,		SIGNAL(activated()), this, SLOT(NextNote()));
 	connect(scSearch,	SIGNAL(activated()), this, SLOT(showSearchBar()));
 	connect(scExit,		SIGNAL(activated()), qApp, SLOT(quit()));
+	connect(scFormatBold,	SIGNAL(activated()), this, SLOT(formatBold()));
+	connect(scFormatItalic,	SIGNAL(activated()), this, SLOT(formatItalic()));
+	connect(scFormatStrikeout,	SIGNAL(activated()), this, SLOT(formatStrikeout()));
+	connect(scFormatUnderline,	SIGNAL(activated()), this, SLOT(formatUnderline()));
 	//
 	for(int i=1; i<=9; ++i) //from Alt+1 to Alt+9
 	{
@@ -435,10 +451,39 @@ MainWindow::~MainWindow()
 void MainWindow::on_tabs_currentChanged(int index)
 {
 	if(index==-1) return;
-	if(CurrentIndex!=-1) currentNote()->save();
-	CurrentIndex = index;
-	actPrev->setDisabled(index==0); //first note
-	actNext->setDisabled(index==Notes.count()-1); //last note
+	if(CurrentIndex!=-1)
+	{
+		currentNote()->save();
+		disconnect(currentNote(), SIGNAL(formatChanged(QFont)), 0, 0);
+	}
+	CurrentIndex = index; //Changing current note
+	actPrev->setDisabled(index==0); //if first note
+	actNext->setDisabled(index==Notes.count()-1); //if last note
+	switch(currentNote()->noteType())
+	{
+ case Note::type_html:
+		{
+			QFont font(currentNote()->getSelFormat().font());
+			actFormatBold->setChecked(font.bold());
+			actFormatItalic->setChecked(font.italic());
+			actFormatStrikeout->setChecked(font.strikeOut());
+			actFormatUnderline->setChecked(font.underline());
+			connect(currentNote(), SIGNAL(formatChanged(QFont)), this, SLOT(formatChanged(QFont)));
+			actFormatBold->setEnabled(true);
+			actFormatItalic->setEnabled(true);
+			actFormatStrikeout->setEnabled(true);
+			actFormatUnderline->setEnabled(true);
+		}
+		break;
+ default:
+		{
+			actFormatBold->setEnabled(false);
+			actFormatItalic->setEnabled(false);
+			actFormatStrikeout->setEnabled(false);
+			actFormatUnderline->setEnabled(false);
+		}
+		break;
+	}
 }
 
 void MainWindow::showSearchBar()

@@ -31,6 +31,8 @@ Note::Note(const QFileInfo& fileinfo)
 		connect(&settings, SIGNAL(NoteFontChanged()), this, SLOT(noteFontChanged()));
 		//
 		connect(text_edit, SIGNAL(textChanged()), this, SLOT(contentChanged()));
+		if(type==type_html) connect(text_edit, SIGNAL(currentCharFormatChanged(const QTextCharFormat &)),
+			this, SLOT(currentCharFormatChanged(const QTextCharFormat &)));
 		break;
 	default:
 		break;
@@ -137,12 +139,19 @@ bool Note::find(const QString& text, bool next)
 	}
 }
 
+void Note::currentCharFormatChanged(const QTextCharFormat& format)
+{
+	emit formatChanged(format.font());
+}
+
 void Note::setSelFormat(const QTextCharFormat& format)
 {
 	if(type!=type_html) return;
 	QTextCursor cursor = text_edit->textCursor();
-	cursor.setCharFormat(format);
+	if(!cursor.hasSelection()) cursor.select(QTextCursor::WordUnderCursor);
+	cursor.mergeCharFormat(format);
 }
+
 const QTextCharFormat Note::getSelFormat() const
 {
 	if(type!=type_html) return QTextCharFormat();

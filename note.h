@@ -50,6 +50,7 @@ public:
 	//
 	inline const QString& title() { return note_title; }
 	inline const QString absolutePath() { return file_info.absoluteFilePath(); }
+	inline Type noteType() { return type; }
 	//
 	QWidget* widget();
 	//
@@ -77,6 +78,10 @@ private slots:
 	void contentChanged();
 	void noteFontChanged();
 	void noteLinkOpenChanged();
+	//
+	void currentCharFormatChanged(const QTextCharFormat&);
+signals:
+	void formatChanged(const QFont& font);
 };
 
 #endif // NOTE_H

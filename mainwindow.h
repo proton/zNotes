@@ -48,6 +48,7 @@ private:
 	QAction *actShow, *actHide;
 	//
 	QShortcut *scAdd, *scRemove, *scPrev, *scNext, *scExit, *scSearch;
+	QShortcut *scFormatBold, *scFormatItalic, *scFormatStrikeout, *scFormatUnderline;
 	//
 	void LoadNotes();
 	inline Note* currentNote()
@@ -102,6 +103,7 @@ public slots:
 	void showPrefDialog();
 	void showSearchBar();
 	//
+	void formatChanged(const QFont& font);
 	void formatBold();
 	void formatItalic();
 	void formatStrikeout();
