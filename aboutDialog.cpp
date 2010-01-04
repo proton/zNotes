@@ -12,7 +12,7 @@ aboutDialog::aboutDialog(QWidget *parent) :
 	ui->lbAbout->setText(QString("zNotes\n%1\n%2 %3\n%4\n%5\n\n%6")
 		.arg(tr("Simple Qt-based notes aplication"))
 		.arg(tr("version")).arg(VERSION)
-		.arg(tr("Copyright (c) 2009"))
+		.arg(tr("Copyright (c) 2010"))
 		.arg(tr("by Peter Savichev (proton)"))
 		.arg(tr("Distributed under the GPL license version 3 or later")));
 	//

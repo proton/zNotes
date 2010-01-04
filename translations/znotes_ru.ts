@@ -14,27 +14,27 @@
         <translation>Вы действительно хотите удалить заметку %1 ?</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="56"/>
+        <location filename="../mainwindow.cpp" line="55"/>
         <source>Rename note</source>
         <translation>Переименование заметки</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="57"/>
+        <location filename="../mainwindow.cpp" line="55"/>
         <source>New name:</source>
         <translation>Новое имя:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="135"/>
+        <location filename="../mainwindow.cpp" line="115"/>
         <source>Select notes directory</source>
         <translation>Выбор каталога с заметками</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="266"/>
+        <location filename="../mainwindow.cpp" line="225"/>
         <source>Commandlist is clear</source>
         <translation>Список команд пуст</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="266"/>
+        <location filename="../mainwindow.cpp" line="225"/>
         <source>List of commands is clear!
 You can add new commands in preferences.</source>
         <translation>Команды не заданы!\nВы можете добавить команды в настройках программы.</translation>
@@ -64,24 +64,24 @@ psavichev@gmail.com
 2009г.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="219"/>
+        <location filename="../mainwindow.cpp" line="192"/>
         <source>Move Notes</source>
         <translation>Перемещение заметок</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="220"/>
+        <location filename="../mainwindow.cpp" line="193"/>
         <source>Notes path changed!
 Do you want to move your notes to new place ?</source>
         <translation>Каталог с заметками изменен!
 Перенести заметки в новое место?</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="229"/>
+        <location filename="../mainwindow.cpp" line="202"/>
         <source>Notes path change</source>
         <translation>Изменение места хранения заметок</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="230"/>
+        <location filename="../mainwindow.cpp" line="203"/>
         <source>You need restart application to get effect.</source>
         <translation>Необходимо перезапустить приложения, чтобы изменения вступили в силу.</translation>
     </message>
@@ -130,14 +130,14 @@ Do you want to move your notes to new place ?</source>
         <translation type="obsolete">Выход</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="332"/>
-        <location filename="../mainwindow.cpp" line="500"/>
+        <location filename="../mainwindow.cpp" line="351"/>
+        <location filename="../mainwindow.cpp" line="549"/>
         <source>Show</source>
         <translation>Показать</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="333"/>
-        <location filename="../mainwindow.cpp" line="501"/>
+        <location filename="../mainwindow.cpp" line="352"/>
+        <location filename="../mainwindow.cpp" line="550"/>
         <source>Hide</source>
         <translation>Скрыть</translation>
     </message>
@@ -177,64 +177,84 @@ Do you want to move your notes to new place ?</source>
         <translation type="obsolete">Выбор каталога с заметками</translation>
     </message>
     <message>
-        <location filename="../toolbaraction.h" line="33"/>
+        <location filename="../toolbaraction.h" line="37"/>
         <source>Separator</source>
         <translation>Разделитель</translation>
     </message>
     <message>
-        <location filename="../toolbaraction.h" line="34"/>
+        <location filename="../toolbaraction.h" line="38"/>
         <source>Create new note</source>
         <translation>Новая заметка</translation>
     </message>
     <message>
-        <location filename="../toolbaraction.h" line="35"/>
+        <location filename="../toolbaraction.h" line="39"/>
         <source>Remove this note</source>
         <translation>Удалить заметку</translation>
     </message>
     <message>
-        <location filename="../toolbaraction.h" line="36"/>
+        <location filename="../toolbaraction.h" line="40"/>
         <source>Rename this note</source>
         <translation>Пререименовать заметку</translation>
     </message>
     <message>
-        <location filename="../toolbaraction.h" line="37"/>
+        <location filename="../toolbaraction.h" line="41"/>
         <source>Prev note</source>
         <translation>Предыдущая заметка</translation>
     </message>
     <message>
-        <location filename="../toolbaraction.h" line="38"/>
+        <location filename="../toolbaraction.h" line="42"/>
         <source>Next note</source>
         <translation>Следующая заметка</translation>
     </message>
     <message>
-        <location filename="../toolbaraction.h" line="39"/>
+        <location filename="../toolbaraction.h" line="43"/>
         <source>Copy this note to clipboard</source>
         <translation>Скопировать содержимое в буффер обмена</translation>
     </message>
     <message>
-        <location filename="../toolbaraction.h" line="40"/>
+        <location filename="../toolbaraction.h" line="44"/>
         <source>Preferences</source>
         <translation>Настройки</translation>
     </message>
     <message>
-        <location filename="../toolbaraction.h" line="41"/>
+        <location filename="../toolbaraction.h" line="45"/>
         <source>Info</source>
         <translation>Информация</translation>
     </message>
     <message>
-        <location filename="../toolbaraction.h" line="42"/>
+        <location filename="../toolbaraction.h" line="46"/>
         <source>Commands</source>
         <translation>Комманды</translation>
     </message>
     <message>
-        <location filename="../toolbaraction.h" line="43"/>
+        <location filename="../toolbaraction.h" line="47"/>
         <source>Search</source>
         <translation>Поиск</translation>
     </message>
     <message>
-        <location filename="../toolbaraction.h" line="44"/>
+        <location filename="../toolbaraction.h" line="48"/>
         <source>Exit</source>
         <translation>Выход</translation>
+    </message>
+    <message>
+        <location filename="../toolbaraction.h" line="49"/>
+        <source>Bold</source>
+        <translation>Жирный</translation>
+    </message>
+    <message>
+        <location filename="../toolbaraction.h" line="50"/>
+        <source>Italic</source>
+        <translation>Курсив</translation>
+    </message>
+    <message>
+        <location filename="../toolbaraction.h" line="51"/>
+        <source>Strikeout</source>
+        <translation>Зачеркнутый</translation>
+    </message>
+    <message>
+        <location filename="../toolbaraction.h" line="52"/>
+        <source>Underline</source>
+        <translation>Подчеркнутый</translation>
     </message>
 </context>
 <context>
@@ -268,9 +288,13 @@ Do you want to move your notes to new place ?</source>
         <translation>версия</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="15"/>
         <source>Copyright (c) 2009</source>
-        <translation>Copyright (c) 2009</translation>
+        <translation type="obsolete">Copyright (c) 2009</translation>
+    </message>
+    <message>
+        <location filename="../aboutDialog.cpp" line="15"/>
+        <source>Copyright (c) 2010</source>
+        <translation>Copyright (c) 2010</translation>
     </message>
     <message>
         <location filename="../aboutDialog.cpp" line="16"/>
@@ -408,12 +432,12 @@ The text of the license can can be found in the file LICENSE.</source>
         <translation type="obsolete">Использовать нестандартный язык:</translation>
     </message>
     <message>
-        <location filename="../configdialog.ui" line="119"/>
+        <location filename="../configdialog.ui" line="260"/>
         <source>Font:</source>
         <translation>Шрифт:</translation>
     </message>
     <message>
-        <location filename="../configdialog.ui" line="135"/>
+        <location filename="../configdialog.ui" line="276"/>
         <source>The quick brown fox jumps over the lazy dog.</source>
         <translation>Съешь ещё этих мягких французских булок, да выпей чаю.</translation>
     </message>
@@ -427,39 +451,54 @@ The text of the license can can be found in the file LICENSE.</source>
         <translation>Использовать нестандартный язык:</translation>
     </message>
     <message>
-        <location filename="../configdialog.ui" line="148"/>
+        <location filename="../configdialog.ui" line="246"/>
+        <source>Notes</source>
+        <translation>Заметки</translation>
+    </message>
+    <message>
+        <location filename="../configdialog.ui" line="289"/>
         <source>Change</source>
         <translation>Изменить</translation>
     </message>
     <message>
-        <location filename="../configdialog.ui" line="158"/>
+        <location filename="../configdialog.ui" line="112"/>
         <source>Scripts</source>
         <translation>Скрипты</translation>
     </message>
     <message>
-        <location filename="../configdialog.ui" line="176"/>
+        <location filename="../configdialog.ui" line="130"/>
         <source>Add</source>
         <translation>Добавить</translation>
     </message>
     <message>
-        <location filename="../configdialog.ui" line="187"/>
+        <location filename="../configdialog.ui" line="141"/>
         <source>Remove</source>
         <translation>Удалить</translation>
     </message>
     <message>
-        <location filename="../configdialog.ui" line="202"/>
+        <location filename="../configdialog.ui" line="156"/>
         <source>Show script&apos;s output</source>
         <translation>Показать вывод скрипта</translation>
     </message>
     <message>
-        <location filename="../configdialog.ui" line="209"/>
+        <location filename="../configdialog.ui" line="163"/>
         <source>Copy script&apos;s output to clipboard</source>
         <translation>Копировать вывод скрипта</translation>
     </message>
     <message>
-        <location filename="../configdialog.ui" line="219"/>
+        <location filename="../configdialog.ui" line="173"/>
         <source>Toolbar</source>
         <translation>Панель инструментов</translation>
+    </message>
+    <message>
+        <location filename="../configdialog.ui" line="298"/>
+        <source>Highlight links in notes</source>
+        <translation>Подсвечивать ссылки в тексте заметок</translation>
+    </message>
+    <message>
+        <location filename="../configdialog.ui" line="305"/>
+        <source>Open links (with pressed CTRL)</source>
+        <translation>Открывать ссылки (при зажатом CTRL)</translation>
     </message>
     <message>
         <source>Hide edit section</source>
@@ -510,7 +549,7 @@ The text of the license can can be found in the file LICENSE.</source>
         <translation type="obsolete">Выход</translation>
     </message>
     <message>
-        <location filename="../configdialog.cpp" line="99"/>
+        <location filename="../configdialog.cpp" line="103"/>
         <source>Select notes directory</source>
         <translation>Выбор каталога с заметками</translation>
     </message>

@@ -2,42 +2,52 @@
 #define NOTE_H
 
 #include <QTextEdit>
+#include <QTextBrowser>
 #include <QFile>
 #include <QDir>
 
 #include "highlighter.h"
 
-class TextEdit : public QTextEdit
+template<class T> class TextEdit : public T
 {
 public:
-	enum TextType { type_text, type_html };
-public:
-	TextEdit(TextType new_type);
-	//
-	inline const QString text() const
-	{
-		switch(type)
-		{
-			case type_text: return toPlainText();
-			case type_html: return toHtml();
-		}
-	}
-	inline void setText(const QString& text)
-	{
-		switch(type)
-		{
-			case type_text: return setPlainText(text);
-			case type_html: return setHtml(text);
-		}
-	}
+	TextEdit();
 private:
-	TextType type;
 	Highlighter* highlighter;
 	//
 	void mousePressEvent(QMouseEvent *e);
 	void mouseMoveEvent(QMouseEvent *e);
 	void focusOutEvent(QFocusEvent *e);
 };
+
+template<> class TextEdit<QTextEdit> : public QTextEdit
+{
+	void initialize();
+public:
+	inline const QString text() const
+	{
+		return QTextEdit::toPlainText();
+	}
+	inline void setText(const QString& text)
+	{
+		QTextEdit::setPlainText(text);
+	}
+};
+
+template<> class TextEdit<QTextBrowser> : public QTextBrowser
+{
+	void initialize();
+public:
+	inline const QString text() const
+	{
+		return QTextBrowser::toHtml();
+	}
+	inline void setText(const QString& text)
+	{
+		QTextBrowser::setHtml(text);
+	}
+};
+
 
 class Note : public QObject
 {
@@ -71,7 +81,8 @@ private:
 	QFileInfo file_info;
 	QFile file;
 	//
-	TextEdit* text_edit;
+	TextEdit<QTextEdit>* text_edit;
+	TextEdit<QTextBrowser>* html_edit;
 	//
 	bool content_changed;
 private slots:
