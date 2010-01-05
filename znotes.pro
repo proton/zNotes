@@ -18,7 +18,8 @@ SOURCES += main.cpp \
     scriptmodel.cpp \
     aboutDialog.cpp \
     toolbarmodel.cpp \
-    highlighter.cpp
+    highlighter.cpp \
+    textedit.cpp
 HEADERS += mainwindow.h \
     configdialog.h \
     settings.h \
@@ -27,7 +28,8 @@ HEADERS += mainwindow.h \
     aboutDialog.h \
     toolbaraction.h \
     toolbarmodel.h \
-    highlighter.h
+    highlighter.h \
+    textedit.h
 FORMS += mainwindow.ui \
     configdialog.ui \
     aboutDialog.ui

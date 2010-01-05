@@ -1,53 +1,9 @@
 #ifndef NOTE_H
 #define NOTE_H
 
-#include <QTextEdit>
-#include <QTextBrowser>
+#include "textedit.h"
+
 #include <QFile>
-#include <QDir>
-
-#include "highlighter.h"
-
-template<class T> class TextEdit : public T
-{
-public:
-	TextEdit();
-private:
-	Highlighter* highlighter;
-	//
-	void mousePressEvent(QMouseEvent *e);
-	void mouseMoveEvent(QMouseEvent *e);
-	void focusOutEvent(QFocusEvent *e);
-};
-
-template<> class TextEdit<QTextEdit> : public QTextEdit
-{
-	void initialize();
-public:
-	inline const QString text() const
-	{
-		return QTextEdit::toPlainText();
-	}
-	inline void setText(const QString& text)
-	{
-		QTextEdit::setPlainText(text);
-	}
-};
-
-template<> class TextEdit<QTextBrowser> : public QTextBrowser
-{
-	void initialize();
-public:
-	inline const QString text() const
-	{
-		return QTextBrowser::toHtml();
-	}
-	inline void setText(const QString& text)
-	{
-		QTextBrowser::setHtml(text);
-	}
-};
-
 
 class Note : public QObject
 {
