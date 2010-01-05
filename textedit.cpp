@@ -8,6 +8,7 @@
 
 #include <QtDebug>
 
+//Checking note's text for link
 inline bool isOnLink(const QTextDocument& document, const QTextCursor& cursor, int& pos_start, int& pos_end)
 {
 	int position = cursor.position();

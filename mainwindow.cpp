@@ -132,9 +132,13 @@ void MainWindow::LoadNotes()
 	if(old_index!=-1) ui->tabs->setCurrentIndex(old_index);
 }
 
+//Saving all notes
 void MainWindow::SaveAll()
 {
-	for(int i=0; i<Notes.size(); ++i) Notes[i]->save();
+	for(int i=0; i<Notes.size(); ++i)
+	{
+		Notes[i]->save(true);//Forced saving
+	}
 }
 
 void MainWindow::trayActivated(QSystemTrayIcon::ActivationReason reason)
@@ -314,6 +318,9 @@ void MainWindow::formatUnderline()
 	currentNote()->setSelFormat(format);
 }
 
+//------------------------------------------------------------------------------
+
+//Function for fast generating actions
 inline QAction* GenerateAction(item_enum item, bool checkable = false)
 {
 	ToolbarAction toolbar_action(item);

@@ -10,14 +10,15 @@
 Note::Note(const QFileInfo& fileinfo)
 	: file_info(fileinfo), text_edit(0), html_edit(0), content_changed(false)
 {
-	type = ((file_info.suffix()=="htm")||(file_info.suffix()=="html"))?type_html:type_text;
+	type = ((file_info.suffix()=="htm")||(file_info.suffix()=="html"))?type_html:type_text;//detecting note's type
 	file.setFileName(file_info.absoluteFilePath());
 	note_title = file_info.baseName();
 	//
-	load();
+	load(); //loading note's content
 	switch(type)
 	{
 	case type_text:
+	case type_html:
 		text_edit->setMouseTracking(settings.getNoteLinksOpen());
 		connect(&settings, SIGNAL(NoteLinkOpenChanged()), this, SLOT(noteLinkOpenChanged()));
 		//
@@ -25,17 +26,12 @@ Note::Note(const QFileInfo& fileinfo)
 		connect(&settings, SIGNAL(NoteFontChanged()), this, SLOT(noteFontChanged()));
 		//
 		connect(text_edit, SIGNAL(textChanged()), this, SLOT(contentChanged()));
-		break;
-	case type_html:
-		html_edit->setMouseTracking(settings.getNoteLinksOpen());
-		connect(&settings, SIGNAL(NoteLinkOpenChanged()), this, SLOT(noteLinkOpenChanged()));
 		//
-		html_edit->setFont(settings.getNoteFont());
-		connect(&settings, SIGNAL(NoteFontChanged()), this, SLOT(noteFontChanged()));
-		//
-		connect(html_edit, SIGNAL(textChanged()), this, SLOT(contentChanged()));
-		connect(html_edit, SIGNAL(currentCharFormatChanged(const QTextCharFormat &)),
-			this, SLOT(currentCharFormatChanged(const QTextCharFormat &)));
+		if(type==type_html)
+		{
+			connect(html_edit, SIGNAL(currentCharFormatChanged(const QTextCharFormat &)),
+				this, SLOT(currentCharFormatChanged(const QTextCharFormat &)));
+		}
 		break;
 	default:
 		break;
@@ -48,6 +44,7 @@ Note::~Note()
 	if(html_edit) delete html_edit;
 }
 
+//Reading file
 void Note::load()
 {
 	file.close();
@@ -71,9 +68,10 @@ void Note::load()
 	}
 }
 
-void Note::save()
+//Saving note
+void Note::save(bool forced)
 {
-	if(!content_changed) return;
+	if(!(content_changed || forced)) return; //If file doesn't need in saving, exiting from function
 	file.close();
 	if(!file.open(QFile::WriteOnly | QFile::Text)) return;
 	QTextStream out(&file);
@@ -92,6 +90,7 @@ void Note::save()
 	content_changed = false;
 }
 
+//Renaming note
 void Note::rename(const QString& new_name)
 {
 	file.close();
@@ -103,6 +102,7 @@ void Note::rename(const QString& new_name)
 	file_info.setFile(file);
 }
 
+//Moving note to another folder
 void Note::move(const QString& new_dirname)
 {
 	file.close();
@@ -112,12 +112,14 @@ void Note::move(const QString& new_dirname)
 	file_info.setFile(file);
 }
 
+//Removing note
 bool Note::remove()
 {
 	file.close();
 	return file.remove();
 }
 
+//Returning widget (it's can be placed to tabwidget)
 QWidget* Note::widget()
 {
 	switch(type)
@@ -129,6 +131,7 @@ QWidget* Note::widget()
 	}
 }
 
+//Coping note's content to clipboard
 void Note::copy() const
 {
 	QClipboard* clipboard = QApplication::clipboard();
@@ -139,27 +142,33 @@ void Note::copy() const
 	}
 }
 
+//Searching in a note's content
 bool Note::find(const QString& text, bool next)
 {
 	switch(type)
 	{
 		case type_text:
-			if(next) text_edit->setTextCursor(QTextCursor());
-			else text_edit->unsetCursor();
-			return text_edit->find(text);
 		case type_html:
-			if(next) html_edit->setTextCursor(QTextCursor());
-			else html_edit->unsetCursor();
-			return html_edit->find(text);
+		{
+			QTextEdit* editor;
+			if(type==type_text) editor=text_edit;
+			else if(type==type_html) editor=html_edit;
+			//
+			if(next) editor->setTextCursor(QTextCursor()); //search next
+			else editor->unsetCursor(); //new search
+			return editor->find(text);
+		}
 		default: return false;
 	}
 }
 
+//Sending signal about changing format of a text under cursor
 void Note::currentCharFormatChanged(const QTextCharFormat& format)
 {
 	emit formatChanged(format.font());
 }
 
+//Returning format of selected text
 void Note::setSelFormat(const QTextCharFormat& format)
 {
 	if(type!=type_html) return;
@@ -168,6 +177,7 @@ void Note::setSelFormat(const QTextCharFormat& format)
 	cursor.mergeCharFormat(format);
 }
 
+//Applying format to selected text
 const QTextCharFormat Note::getSelFormat() const
 {
 	if(type!=type_html) return QTextCharFormat();
@@ -196,6 +206,7 @@ void Note::noteLinkOpenChanged()
 	}
 }
 
+//If notes' font changed in the preferences, applying font to note
 void Note::noteFontChanged()
 {
 	if(type==type_text) text_edit->setFont(settings.getNoteFont());

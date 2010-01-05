@@ -21,13 +21,13 @@ public:
 	QWidget* widget();
 	//
 	void load(); //Reading note's content
-	void save(); //Saving note's content
+	void save(bool forced); //Saving note's content
 	void rename(const QString& new_name);
 	void move(const QString& new_dir);
 	bool remove(); //Removing note from harddisk
 	//
-	void copy() const;
-	bool find(const QString& text, bool next=false);
+	void copy() const; //Coping note's content to clipboard
+	bool find(const QString& text, bool next=false); //Searching text in a note's content
 	//
 	void setSelFormat(const QTextCharFormat& format);
 	const QTextCharFormat getSelFormat() const;
