@@ -42,23 +42,25 @@ inline bool isOnLink(const QTextDocument& document, const QTextCursor& cursor, i
 
 //------------------------------------------------------------------------------
 
-template<class T> TextEdit<T>::TextEdit()
-	: T()
+template<> TextEdit<QTextEdit>::TextEdit()
+	: QTextEdit()
 {
-	qDebug() << "TextEdit<T>::TextEdit()";
-	highlighter = new Highlighter(T::document());
-	T::connect(&settings, SIGNAL(NoteHighlightChanged()), highlighter, SLOT(rehighlight()));
-	TextEdit<T>::initialize();
+	highlighter = new Highlighter(QTextEdit::document());
+	QTextEdit::connect(&settings, SIGNAL(NoteHighlightChanged()), highlighter, SLOT(rehighlight()));
 }
 
-template<> void TextEdit<QTextEdit>::initialize()
+template<> TextEdit<QTextBrowser>::TextEdit()
+	: QTextBrowser()
 {
-	qDebug() << "TextEdit<QTextEdit>::initialize()";
+	highlighter = new Highlighter(QTextBrowser::document());
+	QTextBrowser::connect(&settings, SIGNAL(NoteHighlightChanged()), highlighter, SLOT(rehighlight()));
+	setReadOnly(false);
+	setOpenLinks(true);
+	setOpenExternalLinks(true);
 }
 
 template<> const QString TextEdit<QTextEdit>::text() const
 {
-	qDebug() << "TextEdit<QTextEdit>::text()";
 	return QTextEdit::toPlainText();
 }
 
@@ -67,17 +69,8 @@ template<> void TextEdit<QTextEdit>::setText(const QString& text)
 	setPlainText(text);
 }
 
-template<> void TextEdit<QTextBrowser>::initialize()
-{
-	qDebug() << "TextEdit<QTextEdit>::initialize()";
-	setReadOnly(false);
-	setOpenLinks(true);
-	setOpenExternalLinks(true);
-}
-
 template<> const QString TextEdit<QTextBrowser>::text() const
 {
-	qDebug() << "TextEdit<QTextBrowser>::text()";
 	return QTextBrowser::toHtml();
 }
 
@@ -92,14 +85,14 @@ template<class T> void TextEdit<T>::mousePressEvent(QMouseEvent *e)
 	{
 		bool onLink = false;
 		int position_start, position_end;
-		if(e->buttons()==Qt::NoButton && e->modifiers()&Qt::ControlModifier)
+		if(e->buttons()==Qt::LeftButton && e->modifiers()&Qt::ControlModifier)
 		{
 			const QTextCursor cursor = T::cursorForPosition(e->pos());
 			onLink = isOnLink(*T::document(), cursor, position_start, position_end);
 		}
 		if(onLink)
 		{
-			const QUrl link(T::toPlainText().mid(position_start, position_end));
+			const QUrl link(T::toPlainText().mid(position_start, position_end-position_start));
 			QDesktopServices::openUrl(link);
 		}
 	}
@@ -112,7 +105,7 @@ template<class T> void TextEdit<T>::mouseMoveEvent(QMouseEvent *e)
 	int position_start, position_end;
 	if(settings.getNoteLinksOpen() && e->buttons()==Qt::NoButton && e->modifiers()&Qt::ControlModifier)
 	{
-		const QTextCursor cursor = T::cursorForPosition(e->pos());
+		QTextCursor cursor = T::cursorForPosition(e->pos());
 		onLink = isOnLink(*T::document(), cursor, position_start, position_end);
 	}
 	if(onLink)

@@ -18,8 +18,6 @@ private:
 	void mousePressEvent(QMouseEvent *e);
 	void mouseMoveEvent(QMouseEvent *e);
 	void focusOutEvent(QFocusEvent *e);
-	//
-	void initialize();
 public:
 	const QString text() const;
 	void setText(const QString& text);

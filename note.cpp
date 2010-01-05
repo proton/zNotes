@@ -1,6 +1,8 @@
 #include "note.h"
 #include "settings.h"
 
+#include <QtDebug>
+
 #include <QTextStream>
 #include <QClipboard>
 #include <QApplication>
