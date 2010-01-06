@@ -11,14 +11,14 @@
 //Checking note's text for link
 inline bool isOnLink(const QTextDocument& document, const QTextCursor& cursor, int& pos_start, int& pos_end)
 {
-	int position = cursor.position();
+	const int position = cursor.position();
 	if(!document.characterAt(position).isSpace())
 	{
 		pos_start = position;
-		while(pos_start>0 && !document.characterAt(pos_start-1).isSpace()) --pos_start;
+		while(pos_start>0 && !document.characterAt(pos_start-1).isSpace()) --pos_start; //Detecting start on the word
 		const int characterCount = document.characterCount();
 		pos_end = position;
-		while(pos_end<characterCount && !document.characterAt(pos_end).isSpace()) ++pos_end;
+		while(pos_end<characterCount && !document.characterAt(pos_end).isSpace()) ++pos_end; //Detecting end on the word
 		//
 		const QString priznak("http://");
 		const int link_lenght = pos_end-pos_start;
@@ -80,18 +80,17 @@ template<> void TextEdit<QTextBrowser>::setText(const QString& text)
 	QTextBrowser::setHtml(text);
 }
 
+//Mouse pressing
 template<class T> void TextEdit<T>::mousePressEvent(QMouseEvent *e)
 {
 	if(settings.getNoteLinksOpen() && e->buttons()==Qt::LeftButton && e->modifiers()&Qt::ControlModifier) //Ctrl+LeftMouseButton
 	{
 		bool onLink = false;
 		int position_start, position_end;
-		if(e->buttons()==Qt::LeftButton && e->modifiers()&Qt::ControlModifier)
-		{
-			const QTextCursor cursor = T::cursorForPosition(e->pos());
-			onLink = isOnLink(*T::document(), cursor, position_start, position_end);
-		}
-		if(onLink)
+		const QTextCursor cursor = T::cursorForPosition(e->pos());
+		onLink = isOnLink(*T::document(), cursor, position_start, position_end);
+		//
+		if(onLink) //if link under cursor
 		{
 			const QUrl link(T::toPlainText().mid(position_start, position_end-position_start));
 			QDesktopServices::openUrl(link);
@@ -100,16 +99,17 @@ template<class T> void TextEdit<T>::mousePressEvent(QMouseEvent *e)
 	else T::mousePressEvent(e);
 }
 
+//Mouse moving
 template<class T> void TextEdit<T>::mouseMoveEvent(QMouseEvent *e)
 {
 	bool onLink = false;
 	int position_start, position_end;
-	if(settings.getNoteLinksOpen() && e->buttons()==Qt::NoButton && e->modifiers()&Qt::ControlModifier)
+	if(settings.getNoteLinksOpen() && e->buttons()==Qt::NoButton && e->modifiers()&Qt::ControlModifier) //Ctrl+NoMouseButton
 	{
 		QTextCursor cursor = T::cursorForPosition(e->pos());
 		onLink = isOnLink(*T::document(), cursor, position_start, position_end);
 	}
-	if(onLink)
+	if(onLink) //if link under cursor
 	{
 		QTextEdit::ExtraSelection sel;
 		sel.cursor = T::textCursor();
@@ -117,18 +117,19 @@ template<class T> void TextEdit<T>::mouseMoveEvent(QMouseEvent *e)
 		sel.cursor.setPosition(position_end, QTextCursor::KeepAnchor);
 		sel.format = highlighter->linkFormat;
 		sel.format.setFontUnderline(true);
-		T::setExtraSelections(QList<QTextEdit::ExtraSelection>() << sel);
+		T::setExtraSelections(QList<QTextEdit::ExtraSelection>() << sel); //Underlining link
 		T::viewport()->setCursor(Qt::PointingHandCursor);
 	}
 	else
 	{
-		T::setExtraSelections(QList<QTextEdit::ExtraSelection>());
+		T::setExtraSelections(QList<QTextEdit::ExtraSelection>()); //Clearing
 		T::viewport()->setCursor(Qt::IBeamCursor);
 	}
 	T::mouseMoveEvent(e);
 }
 
+//Focus out
 template<class T> void TextEdit<T>::focusOutEvent(QFocusEvent*)
 {
-	T::setExtraSelections(QList<QTextEdit::ExtraSelection>());
+	T::setExtraSelections(QList<QTextEdit::ExtraSelection>()); //Clearing
 }

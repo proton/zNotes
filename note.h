@@ -21,7 +21,7 @@ public:
 	QWidget* widget();
 	//
 	void load(); //Reading note's content
-	void save(bool forced); //Saving note's content
+	void save(bool forced = false); //Saving note's content
 	void rename(const QString& new_name);
 	void move(const QString& new_dir);
 	bool remove(); //Removing note from harddisk

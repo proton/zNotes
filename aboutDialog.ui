@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>349</width>
-    <height>298</height>
+    <width>347</width>
+    <height>296</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -34,7 +34,7 @@
    <item>
     <widget class="QTabWidget" name="tabWidget">
      <property name="currentIndex">
-      <number>0</number>
+      <number>4</number>
      </property>
      <widget class="QWidget" name="tpAbout">
       <attribute name="title">
@@ -94,6 +94,16 @@ See the GNU General Public License for more details.
 The text of the license can can be found in the file LICENSE.</string>
          </property>
         </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="tpHelp">
+      <attribute name="title">
+       <string>Help</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_6">
+       <item>
+        <widget class="QTextBrowser" name="lbHelp"/>
        </item>
       </layout>
      </widget>
