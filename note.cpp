@@ -19,13 +19,17 @@ Note::Note(const QFileInfo& fileinfo)
 	{
 	case type_text:
 	case type_html:
-		text_edit->setMouseTracking(settings.getNoteLinksOpen());
+		QTextEdit* editor;
+		if(type==type_text) editor=text_edit;
+		else if(type==type_html) editor=html_edit;
+		//
+		editor->setMouseTracking(settings.getNoteLinksOpen());
 		connect(&settings, SIGNAL(NoteLinkOpenChanged()), this, SLOT(noteLinkOpenChanged()));
 		//
-		text_edit->setFont(settings.getNoteFont());
+		editor->setFont(settings.getNoteFont());
 		connect(&settings, SIGNAL(NoteFontChanged()), this, SLOT(noteFontChanged()));
 		//
-		connect(text_edit, SIGNAL(textChanged()), this, SLOT(contentChanged()));
+		connect(editor, SIGNAL(textChanged()), this, SLOT(contentChanged()));
 		//
 		if(type==type_html)
 		{

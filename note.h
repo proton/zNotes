@@ -4,6 +4,7 @@
 #include "textedit.h"
 
 #include <QFile>
+#include <QWebView>
 
 class Note : public QObject
 {

@@ -65,7 +65,7 @@ void MainWindow::NewNote()
 	int n = 0;
 	QString filename = QString::number(n);
 	QFile file(dir.absoluteFilePath(filename));
-	while(file.exists())
+	while(file.exists()) //Searching for free filename
 	{
 		filename = QString::number(++n);
 		file.setFileName(dir.absoluteFilePath(filename));
@@ -399,8 +399,11 @@ MainWindow::MainWindow(QWidget *parent)
 	//Creating shortcuts
 	scAdd	=	new QShortcut(QKeySequence::New,	this);
 	scRemove =	new QShortcut(QKeySequence::Delete,	this);
-	scPrev =	new QShortcut(QKeySequence::Back,	this);
-	scNext =	new QShortcut(QKeySequence::Forward,this);
+	scRename =	new QShortcut(Qt::Key_F2,	this);
+	scBack =	new QShortcut(QKeySequence::Back,	this);
+	scForward =	new QShortcut(QKeySequence::Forward,this);
+	scPrev =	new QShortcut(QKeySequence::PreviousChild,	this);
+	scNext =	new QShortcut(QKeySequence::NextChild,this);
 	scSearch =	new QShortcut(QKeySequence::Find,	this);
 	scExit =	new QShortcut(QKeySequence::Close,	this);
 	scFormatBold =		new QShortcut(Qt::CTRL + Qt::Key_B,	this);
@@ -410,6 +413,9 @@ MainWindow::MainWindow(QWidget *parent)
 	//Connecting shortcuts with slots
 	connect(scAdd,		SIGNAL(activated()), this, SLOT(NewNote()));
 	connect(scRemove,	SIGNAL(activated()), this, SLOT(RemoveCurrentNote()));
+	connect(scRename,	SIGNAL(activated()), this, SLOT(RenameCurrentNote()));
+	connect(scBack,		SIGNAL(activated()), this, SLOT(PreviousNote()));
+	connect(scForward,	SIGNAL(activated()), this, SLOT(NextNote()));
 	connect(scPrev,		SIGNAL(activated()), this, SLOT(PreviousNote()));
 	connect(scNext,		SIGNAL(activated()), this, SLOT(NextNote()));
 	connect(scSearch,	SIGNAL(activated()), this, SLOT(showSearchBar()));

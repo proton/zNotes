@@ -55,7 +55,8 @@ template<> TextEdit<QTextBrowser>::TextEdit()
 {
 	highlighter = new Highlighter(QTextBrowser::document());
 	QTextBrowser::connect(&settings, SIGNAL(NoteHighlightChanged()), highlighter, SLOT(rehighlight()));
-	setReadOnly(false);
+	//setReadOnly(false);
+	QTextBrowser::page()->setContentEditable(true);
 	setOpenLinks(true);
 	setOpenExternalLinks(true);
 }

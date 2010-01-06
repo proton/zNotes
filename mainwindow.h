@@ -47,7 +47,7 @@ private:
 	//
 	QAction *actShow, *actHide;
 	//
-	QShortcut *scAdd, *scRemove, *scPrev, *scNext, *scExit, *scSearch;
+	QShortcut *scAdd, *scRemove, *scRename, *scBack, *scForward, *scPrev, *scNext, *scExit, *scSearch;
 	QShortcut *scFormatBold, *scFormatItalic, *scFormatStrikeout, *scFormatUnderline;
 	//
 	void LoadNotes();
