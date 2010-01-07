@@ -132,7 +132,16 @@ void Settings::load()
 		config.setValue("NoteLinksHighlight", NoteLinksHighlight);
 	}
 	loadLanguages();
-	QLocale::Language lang = (LanguageCustom)?LanguageCurrent:QLocale::system().language();
+	//
+#ifdef unix
+	//Fixing Qt's problem on unix systems...
+	QString system_lang(qgetenv("LANG").constData());
+	system_lang.truncate(system_lang.indexOf('_'));
+	system_language = QLocale(system_lang).language();
+#else
+	system_language = QLocale::system().language();
+#endif
+	QLocale::Language lang = (LanguageCustom)?LanguageCurrent:system_language;
 	if(!translations.contains(lang)) lang = QLocale::English;
 	qtranslator.load("qt_"+QLocale(lang).name(), QLibraryInfo::location(QLibraryInfo::TranslationsPath));
 	qApp->installTranslator(&qtranslator);
@@ -371,7 +380,7 @@ void Settings::setLanguageCustom(bool b)
 	{
 		LanguageCustom = b;
 		config.setValue("LanguageCustom", LanguageCustom);
-		if(!LanguageCustom) setLanguage(QLocale::system().language());
+		if(!LanguageCustom) setLanguage(QLocale(system_language).language());
 	}
 }
 

@@ -112,6 +112,7 @@ private:
 			default:			return "";
 		}
 	}
+	QLocale::Language system_language;
 signals:
 	void NotesPathChanged();
 	void WindowStateChanged();
