@@ -52,8 +52,9 @@ aboutDialog::aboutDialog(QWidget *parent) :
 		.arg("OS/2"));
 	ui->lbCredits->setHtml(strCredits);
 	QString strHelp;
-	//strCredits.append(QString("<p><b>%1</b><p>").arg(tr("Testing:")));
-	ui->lbCredits->setHtml(strHelp);
+	strHelp.append(QString("<p><b>%1</b><p>").arg(tr("Shortcuts:")));
+	strHelp.append(QString("<b>%1</b> - %2<br/>").arg("F2").arg("Rename current note"));
+	ui->lbHelp->setHtml(strHelp);
 	adjustSize();
 }
 
