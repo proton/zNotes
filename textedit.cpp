@@ -66,10 +66,10 @@ void TextEdit::mousePressEvent(QMouseEvent *e)
 			QDesktopServices::openUrl(link);
 		}
 	}
-	else mousePressEvent(e);
+	else QTextEdit::mousePressEvent(e);
 }
 
-//Mouse moving
+////Mouse moving
 void TextEdit::mouseMoveEvent(QMouseEvent *e)
 {
 	bool onLink = false;
@@ -95,7 +95,7 @@ void TextEdit::mouseMoveEvent(QMouseEvent *e)
 		setExtraSelections(QList<QTextEdit::ExtraSelection>()); //Clearing
 		viewport()->setCursor(Qt::IBeamCursor);
 	}
-	mouseMoveEvent(e);
+	QTextEdit::mouseMoveEvent(e);
 }
 
 //Focus out

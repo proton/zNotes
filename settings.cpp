@@ -136,7 +136,7 @@ void Settings::load()
 #ifdef unix
 	//Fixing Qt's problem on unix systems...
 	QString system_lang(qgetenv("LANG").constData());
-	system_lang.truncate(system_lang.indexOf('_'));
+	system_lang.truncate(system_lang.indexOf('.'));
 	system_language = QLocale(system_lang).language();
 #else
 	system_language = QLocale::system().language();
