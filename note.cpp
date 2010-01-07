@@ -8,7 +8,7 @@
 #include <QApplication>
 
 Note::Note(const QFileInfo& fileinfo)
-	: file_info(fileinfo), text_edit(0), html_edit(0), content_changed(false)
+	: file_info(fileinfo), text_edit(0), content_changed(false)
 {
 	type = ((file_info.suffix()=="htm")||(file_info.suffix()=="html"))?type_html:type_text;//detecting note's type
 	file.setFileName(file_info.absoluteFilePath());
@@ -19,21 +19,17 @@ Note::Note(const QFileInfo& fileinfo)
 	{
 	case type_text:
 	case type_html:
-		QTextEdit* editor;
-		if(type==type_text) editor=text_edit;
-		else if(type==type_html) editor=html_edit;
-		//
-		editor->setMouseTracking(settings.getNoteLinksOpen());
+		text_edit->setMouseTracking(settings.getNoteLinksOpen());
 		connect(&settings, SIGNAL(NoteLinkOpenChanged()), this, SLOT(noteLinkOpenChanged()));
 		//
-		editor->setFont(settings.getNoteFont());
+		text_edit->setFont(settings.getNoteFont());
 		connect(&settings, SIGNAL(NoteFontChanged()), this, SLOT(noteFontChanged()));
 		//
-		connect(editor, SIGNAL(textChanged()), this, SLOT(contentChanged()));
+		connect(text_edit, SIGNAL(textChanged()), this, SLOT(contentChanged()));
 		//
 		if(type==type_html)
 		{
-			connect(html_edit, SIGNAL(currentCharFormatChanged(const QTextCharFormat &)),
+			connect(text_edit, SIGNAL(currentCharFormatChanged(const QTextCharFormat &)),
 				this, SLOT(currentCharFormatChanged(const QTextCharFormat &)));
 		}
 		break;
@@ -45,7 +41,6 @@ Note::Note(const QFileInfo& fileinfo)
 Note::~Note()
 {
 	if(text_edit) delete text_edit;
-	if(html_edit) delete html_edit;
 }
 
 //Reading file
@@ -55,8 +50,10 @@ void Note::load()
 	switch(type)
 	{
 	case type_text:
-		if(type==type_text) text_edit = new TextEdit();
-		else if(type==type_html) html_edit = new QWebView();
+	case type_html:
+	{
+		TextEdit::TextType text_type = (type==type_text)?TextEdit::type_text:TextEdit::type_html;
+		text_edit = new TextEdit(text_type);
 		if(file.open(QIODevice::ReadOnly | QIODevice::Text))
 		{
 			QTextStream in(&file);
@@ -66,19 +63,7 @@ void Note::load()
 		}
 		else if(file.open(QIODevice::WriteOnly | QIODevice::Text)) file.close(); //If file don't exist, we creating it
 		break;
-	case type_html://TODO:
-//		if(type==type_text) text_edit = new TextEdit();
-//		else if(type==type_html) html_edit = new QWebView();
-//		if(file.open(QIODevice::ReadOnly | QIODevice::Text))
-//		{
-//			QTextStream in(&file);
-//			QString text = in.readAll();
-//			if(type==type_text) text_edit->setText(text);
-//			else if(type==type_html) html_edit->setText(text);
-//			file.close();
-//		}
-		else if(file.open(QIODevice::WriteOnly | QIODevice::Text)) file.close(); //If file don't exist, we creating it
-		break;
+	}
 	default: break;
 	}
 }
@@ -93,10 +78,8 @@ void Note::save(bool forced)
 	switch(type)
 	{
 		case type_text:
+ case type_html:
 			out << text_edit->text();
-			break;
-		case type_html:
-			out << html_edit->text();
 			break;
 		default:
 			break;
@@ -140,9 +123,8 @@ QWidget* Note::widget()
 	switch(type)
 	{
 		case type_text:
-			return text_edit;
 		case type_html:
-			return html_edit;
+			return text_edit;
 	}
 }
 
@@ -152,8 +134,10 @@ void Note::copy() const
 	QClipboard* clipboard = QApplication::clipboard();
 	switch(type)
 	{
-		case type_text: clipboard->setText(text_edit->text()); break;
-		case type_html: clipboard->setText(html_edit->text()); break;
+		case type_text:
+		case type_html:
+			clipboard->setText(text_edit->text());
+			break;
 	}
 }
 
@@ -165,13 +149,9 @@ bool Note::find(const QString& text, bool next)
 		case type_text:
 		case type_html:
 		{
-			QTextEdit* editor;
-			if(type==type_text) editor=text_edit;
-			else if(type==type_html) editor=html_edit;
-			//
-			if(next) editor->setTextCursor(QTextCursor()); //search next
-			else editor->unsetCursor(); //new search
-			return editor->find(text);
+			if(next) text_edit->setTextCursor(QTextCursor()); //search next
+			else text_edit->unsetCursor(); //new search
+			return text_edit->find(text);
 		}
 		default: return false;
 	}
@@ -187,7 +167,7 @@ void Note::currentCharFormatChanged(const QTextCharFormat& format)
 void Note::setSelFormat(const QTextCharFormat& format)
 {
 	if(type!=type_html) return;
-	QTextCursor cursor = html_edit->textCursor();
+	QTextCursor cursor = text_edit->textCursor();
 	if(!cursor.hasSelection()) cursor.select(QTextCursor::WordUnderCursor);
 	cursor.mergeCharFormat(format);
 }
@@ -196,7 +176,7 @@ void Note::setSelFormat(const QTextCharFormat& format)
 const QTextCharFormat Note::getSelFormat() const
 {
 	if(type!=type_html) return QTextCharFormat();
-	QTextCursor cursor = html_edit->textCursor();
+	QTextCursor cursor = text_edit->textCursor();
 	return cursor.charFormat();
 }
 
@@ -210,20 +190,16 @@ void Note::contentChanged()
 void Note::noteLinkOpenChanged()
 {
 	bool is_link_open = settings.getNoteLinksOpen();
-	QTextEdit* editor;
-	if(type==type_text) editor=text_edit;
-	else if(type==type_html) editor=html_edit;
-	editor->setMouseTracking(is_link_open);
+	text_edit->setMouseTracking(is_link_open);
 	if(!is_link_open)
 	{
-		editor->setExtraSelections(QList<QTextEdit::ExtraSelection>());
-		editor->viewport()->setCursor(Qt::IBeamCursor);
+		text_edit->setExtraSelections(QList<QTextEdit::ExtraSelection>());
+		text_edit->viewport()->setCursor(Qt::IBeamCursor);
 	}
 }
 
 //If notes' font changed in the preferences, applying font to note
 void Note::noteFontChanged()
 {
-	if(type==type_text) text_edit->setFont(settings.getNoteFont());
-	else if(type==type_html) html_edit->setFont(settings.getNoteFont());
+	text_edit->setFont(settings.getNoteFont());
 }

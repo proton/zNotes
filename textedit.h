@@ -10,11 +10,12 @@
 class TextEdit : public QTextEdit
 {
 public:
-	TextEdit(TextType new_type);
-public:
 	enum TextType { type_text, type_html };
+public:
+	TextEdit(TextType new_type);
 private:
 	Highlighter* highlighter;
+	TextType type;
 	//
 	void mousePressEvent(QMouseEvent *e);
 	void mouseMoveEvent(QMouseEvent *e);

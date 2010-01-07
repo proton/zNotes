@@ -26,7 +26,7 @@ aboutDialog::aboutDialog(QWidget *parent) :
 		.arg(tr("Russian translation")));
 	strAuthors.append(QString("<p><b>%1</b></p>").arg(tr("Icons:")));
 	strAuthors.append(QString("%1\n<a hreh='%2'>%2</a>")
-		.arg(tr("All icons from Oxygen project")).arg("http://www.oxygen-icons.org"));
+		.arg(tr("All icons are modified icons from Oxygen project")).arg("http://www.oxygen-icons.org"));
 	ui->lbAuthors->setHtml(strAuthors);
 	//
 	QString strCredits;
@@ -54,6 +54,7 @@ aboutDialog::aboutDialog(QWidget *parent) :
 	QString strHelp;
 	//strCredits.append(QString("<p><b>%1</b><p>").arg(tr("Testing:")));
 	ui->lbCredits->setHtml(strHelp);
+	adjustSize();
 }
 
 aboutDialog::~aboutDialog()

@@ -38,7 +38,7 @@ private:
 	QFile file;
 	//
 	TextEdit* text_edit;
-	QWebView* html_edit;
+	//QWebView* html_edit;
 	//
 	bool content_changed;
 private slots:

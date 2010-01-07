@@ -43,94 +43,63 @@ inline bool isOnLink(const QTextDocument& document, const QTextCursor& cursor, i
 
 //------------------------------------------------------------------------------
 
-template<> TextEdit<QTextEdit>::TextEdit()
-	: QTextEdit()
+TextEdit::TextEdit(TextType new_type)
+	: QTextEdit(), type(new_type)
 {
-	highlighter = new Highlighter(QTextEdit::document());
-	QTextEdit::connect(&settings, SIGNAL(NoteHighlightChanged()), highlighter, SLOT(rehighlight()));
-}
-
-template<> TextEdit<QTextBrowser>::TextEdit()
-	: QTextBrowser()
-{
-	highlighter = new Highlighter(QTextBrowser::document());
-	QTextBrowser::connect(&settings, SIGNAL(NoteHighlightChanged()), highlighter, SLOT(rehighlight()));
-	//setReadOnly(false);
-	QTextBrowser::page()->setContentEditable(true);
-	setOpenLinks(true);
-	setOpenExternalLinks(true);
-}
-
-template<> const QString TextEdit<QTextEdit>::text() const
-{
-	return QTextEdit::toPlainText();
-}
-
-template<> void TextEdit<QTextEdit>::setText(const QString& text)
-{
-	setPlainText(text);
-}
-
-template<> const QString TextEdit<QTextBrowser>::text() const
-{
-	return QTextBrowser::toHtml();
-}
-
-template<> void TextEdit<QTextBrowser>::setText(const QString& text)
-{
-	QTextBrowser::setHtml(text);
+	highlighter = new Highlighter(document());
+	connect(&settings, SIGNAL(NoteHighlightChanged()), highlighter, SLOT(rehighlight()));
 }
 
 //Mouse pressing
-template<class T> void TextEdit<T>::mousePressEvent(QMouseEvent *e)
+void TextEdit::mousePressEvent(QMouseEvent *e)
 {
 	if(settings.getNoteLinksOpen() && e->buttons()==Qt::LeftButton && e->modifiers()&Qt::ControlModifier) //Ctrl+LeftMouseButton
 	{
 		bool onLink = false;
 		int position_start, position_end;
-		const QTextCursor cursor = T::cursorForPosition(e->pos());
-		onLink = isOnLink(*T::document(), cursor, position_start, position_end);
+		const QTextCursor cursor = cursorForPosition(e->pos());
+		onLink = isOnLink(*document(), cursor, position_start, position_end);
 		//
 		if(onLink) //if link under cursor
 		{
-			const QUrl link(T::toPlainText().mid(position_start, position_end-position_start));
+			const QUrl link(toPlainText().mid(position_start, position_end-position_start));
 			QDesktopServices::openUrl(link);
 		}
 	}
-	else T::mousePressEvent(e);
+	else mousePressEvent(e);
 }
 
 //Mouse moving
-template<class T> void TextEdit<T>::mouseMoveEvent(QMouseEvent *e)
+void TextEdit::mouseMoveEvent(QMouseEvent *e)
 {
 	bool onLink = false;
 	int position_start, position_end;
 	if(settings.getNoteLinksOpen() && e->buttons()==Qt::NoButton && e->modifiers()&Qt::ControlModifier) //Ctrl+NoMouseButton
 	{
-		QTextCursor cursor = T::cursorForPosition(e->pos());
-		onLink = isOnLink(*T::document(), cursor, position_start, position_end);
+		QTextCursor cursor = cursorForPosition(e->pos());
+		onLink = isOnLink(*document(), cursor, position_start, position_end);
 	}
 	if(onLink) //if link under cursor
 	{
 		QTextEdit::ExtraSelection sel;
-		sel.cursor = T::textCursor();
+		sel.cursor = textCursor();
 		sel.cursor.setPosition(position_start);
 		sel.cursor.setPosition(position_end, QTextCursor::KeepAnchor);
 		sel.format = highlighter->linkFormat;
 		sel.format.setFontUnderline(true);
-		T::setExtraSelections(QList<QTextEdit::ExtraSelection>() << sel); //Underlining link
-		T::viewport()->setCursor(Qt::PointingHandCursor);
+		setExtraSelections(QList<QTextEdit::ExtraSelection>() << sel); //Underlining link
+		viewport()->setCursor(Qt::PointingHandCursor);
 	}
 	else
 	{
-		T::setExtraSelections(QList<QTextEdit::ExtraSelection>()); //Clearing
-		T::viewport()->setCursor(Qt::IBeamCursor);
+		setExtraSelections(QList<QTextEdit::ExtraSelection>()); //Clearing
+		viewport()->setCursor(Qt::IBeamCursor);
 	}
-	T::mouseMoveEvent(e);
+	mouseMoveEvent(e);
 }
 
 //Focus out
-template<class T> void TextEdit<T>::focusOutEvent(QFocusEvent*)
+void TextEdit::focusOutEvent(QFocusEvent*)
 {
-	T::setExtraSelections(QList<QTextEdit::ExtraSelection>()); //Clearing
+	setExtraSelections(QList<QTextEdit::ExtraSelection>()); //Clearing
 }
