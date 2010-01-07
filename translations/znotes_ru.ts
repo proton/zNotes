@@ -29,15 +29,16 @@
         <translation>Выбор каталога с заметками</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="225"/>
+        <location filename="../mainwindow.cpp" line="229"/>
         <source>Commandlist is clear</source>
         <translation>Список команд пуст</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="225"/>
+        <location filename="../mainwindow.cpp" line="229"/>
         <source>List of commands is clear!
 You can add new commands in preferences.</source>
-        <translation>Команды не заданы!\nВы можете добавить команды в настройках программы.</translation>
+        <translation>Команды не заданы!
+Вы можете добавить команды в настройках программы.</translation>
     </message>
     <message>
         <source>zNotes - about</source>
@@ -64,24 +65,24 @@ psavichev@gmail.com
 2009г.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="192"/>
+        <location filename="../mainwindow.cpp" line="196"/>
         <source>Move Notes</source>
         <translation>Перемещение заметок</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="193"/>
+        <location filename="../mainwindow.cpp" line="197"/>
         <source>Notes path changed!
 Do you want to move your notes to new place ?</source>
         <translation>Каталог с заметками изменен!
 Перенести заметки в новое место?</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="202"/>
+        <location filename="../mainwindow.cpp" line="206"/>
         <source>Notes path change</source>
         <translation>Изменение места хранения заметок</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="203"/>
+        <location filename="../mainwindow.cpp" line="207"/>
         <source>You need restart application to get effect.</source>
         <translation>Необходимо перезапустить приложения, чтобы изменения вступили в силу.</translation>
     </message>
@@ -130,14 +131,14 @@ Do you want to move your notes to new place ?</source>
         <translation type="obsolete">Выход</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="351"/>
-        <location filename="../mainwindow.cpp" line="549"/>
+        <location filename="../mainwindow.cpp" line="358"/>
+        <location filename="../mainwindow.cpp" line="562"/>
         <source>Show</source>
         <translation>Показать</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="352"/>
-        <location filename="../mainwindow.cpp" line="550"/>
+        <location filename="../mainwindow.cpp" line="359"/>
+        <location filename="../mainwindow.cpp" line="563"/>
         <source>Hide</source>
         <translation>Скрыть</translation>
     </message>
@@ -328,8 +329,17 @@ Do you want to move your notes to new place ?</source>
     </message>
     <message>
         <location filename="../aboutDialog.cpp" line="29"/>
+        <source>All icons are modified icons from Oxygen project</source>
+        <translation>Все иконки взяты из проекта Oxygen и модифицированы</translation>
+    </message>
+    <message>
+        <location filename="../aboutDialog.cpp" line="55"/>
+        <source>Shortcuts:</source>
+        <translation>Сочетания клавиш:</translation>
+    </message>
+    <message>
         <source>All icons from Oxygen project</source>
-        <translation>Все иконки взяты из проекта Oxygen</translation>
+        <translation type="obsolete">Все иконки взяты из проекта Oxygen</translation>
     </message>
     <message>
         <location filename="../aboutDialog.cpp" line="33"/>
@@ -381,7 +391,12 @@ The text of the license can can be found in the file LICENSE.</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../aboutDialog.ui" line="120"/>
+        <location filename="../aboutDialog.ui" line="102"/>
+        <source>Help</source>
+        <translation>Справка</translation>
+    </message>
+    <message>
+        <location filename="../aboutDialog.ui" line="130"/>
         <source>Close</source>
         <translation>Закрыть</translation>
     </message>
