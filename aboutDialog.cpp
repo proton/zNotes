@@ -53,7 +53,18 @@ aboutDialog::aboutDialog(QWidget *parent) :
 	ui->lbCredits->setHtml(strCredits);
 	QString strHelp;
 	strHelp.append(QString("<p><b>%1</b><p>").arg(tr("Shortcuts:")));
-	strHelp.append(QString("<b>%1</b> - %2<br/>").arg("F2").arg("Rename current note"));
+	strHelp.append(QString("<b>%1</b> - %2<br/>").arg("Alt+Fn").arg(tr("Go to note n")));
+	strHelp.append(QString("<b>%1</b> - %2<br/>").arg("Alt+Left").arg(tr("Go to previous note")));
+	strHelp.append(QString("<b>%1</b> - %2<br/>").arg("Alt+Right").arg(tr("Go to next note")));
+	strHelp.append(QString("<b>%1</b> - %2<br/>").arg("Insert").arg(tr("Create new note")));
+	strHelp.append(QString("<b>%1</b> - %2<br/>").arg("Delete").arg(tr("Remove current note")));
+	strHelp.append(QString("<b>%1</b> - %2<br/>").arg("F2").arg(tr("Rename current note")));
+	strHelp.append(QString("<b>%1</b> - %2<br/>").arg("Ctrl+F").arg(tr("Search in the note's text")));
+	strHelp.append(QString("<b>%1</b> - %2<br/>").arg("Ctrl+B").arg(tr("Apply bold format to selected text")));
+	strHelp.append(QString("<b>%1</b> - %2<br/>").arg("Ctrl+I").arg(tr("Apply italic format to selected text")));
+	strHelp.append(QString("<b>%1</b> - %2<br/>").arg("Ctrl+S").arg(tr("Apply strikeout format to selected text")));
+	strHelp.append(QString("<b>%1</b> - %2<br/>").arg("Ctrl+U").arg(tr("Apply underline format to selected text")));
+	strHelp.append(QString("<b>%1</b> - %2<br/>").arg("Ctrl+Q").arg(tr("Exit program")));
 	ui->lbHelp->setHtml(strHelp);
 	adjustSize();
 }
