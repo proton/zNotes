@@ -55,17 +55,28 @@ void Note::load()
 	switch(type)
 	{
 	case type_text:
-	case type_html:
-		if(type==type_text) text_edit = new TextEdit<QTextEdit>();
-		else if(type==type_html) html_edit = new TextEdit<QTextBrowser>();
+		if(type==type_text) text_edit = new TextEdit();
+		else if(type==type_html) html_edit = new QWebView();
 		if(file.open(QIODevice::ReadOnly | QIODevice::Text))
 		{
 			QTextStream in(&file);
 			QString text = in.readAll();
-			if(type==type_text) text_edit->setText(text);
-			else if(type==type_html) html_edit->setText(text);
+			text_edit->setText(text);
 			file.close();
 		}
+		else if(file.open(QIODevice::WriteOnly | QIODevice::Text)) file.close(); //If file don't exist, we creating it
+		break;
+	case type_html://TODO:
+//		if(type==type_text) text_edit = new TextEdit();
+//		else if(type==type_html) html_edit = new QWebView();
+//		if(file.open(QIODevice::ReadOnly | QIODevice::Text))
+//		{
+//			QTextStream in(&file);
+//			QString text = in.readAll();
+//			if(type==type_text) text_edit->setText(text);
+//			else if(type==type_html) html_edit->setText(text);
+//			file.close();
+//		}
 		else if(file.open(QIODevice::WriteOnly | QIODevice::Text)) file.close(); //If file don't exist, we creating it
 		break;
 	default: break;

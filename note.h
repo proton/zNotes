@@ -4,7 +4,6 @@
 #include "textedit.h"
 
 #include <QFile>
-#include <QWebView>
 
 class Note : public QObject
 {
@@ -38,8 +37,8 @@ private:
 	QFileInfo file_info;
 	QFile file;
 	//
-	TextEdit<QTextEdit>* text_edit;
-	TextEdit<QTextBrowser>* html_edit;
+	TextEdit* text_edit;
+	QWebView* html_edit;
 	//
 	bool content_changed;
 private slots:

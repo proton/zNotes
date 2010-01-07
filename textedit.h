@@ -7,10 +7,12 @@
 
 #include "highlighter.h"
 
-template<class T> class TextEdit : public T
+class TextEdit : public QTextEdit
 {
 public:
-	TextEdit();
+	TextEdit(TextType new_type);
+public:
+	enum TextType { type_text, type_html };
 private:
 	Highlighter* highlighter;
 	//
@@ -18,8 +20,22 @@ private:
 	void mouseMoveEvent(QMouseEvent *e);
 	void focusOutEvent(QFocusEvent *e);
 public:
-	const QString text() const;
-	void setText(const QString& text);
+	inline const QString text() const
+	{
+		switch(type)
+		{
+			case type_text: return toPlainText();
+			case type_html: return toHtml();
+		}
+	}
+	inline void setText(const QString& text)
+	{
+		switch(type)
+		{
+			case type_text: return setPlainText(text);
+			case type_html: return setHtml(text);
+		}
+	}
 };
 
 #endif // TEXTEDIT_H
