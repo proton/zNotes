@@ -338,6 +338,70 @@ Do you want to move your notes to new place ?</source>
         <translation>Сочетания клавиш:</translation>
     </message>
     <message>
+        <location filename="../aboutDialog.cpp" line="56"/>
+        <source>Go to note n</source>
+        <translation>Перейти к заметке n</translation>
+    </message>
+    <message>
+        <location filename="../aboutDialog.cpp" line="57"/>
+        <source>Go to previous note</source>
+        <translation>Перейти к предыдущей заметке</translation>
+    </message>
+    <message>
+        <location filename="../aboutDialog.cpp" line="58"/>
+        <source>Go to next note</source>
+        <translation>Перейти к следующей заметке</translation>
+    </message>
+    <message>
+        <location filename="../aboutDialog.cpp" line="59"/>
+        <source>Create new note</source>
+        <translation>Добавить новую заметку</translation>
+    </message>
+    <message>
+        <location filename="../aboutDialog.cpp" line="60"/>
+        <source>Remove current note</source>
+        <translation>Удалить текущую заметку</translation>
+    </message>
+    <message>
+        <location filename="../aboutDialog.cpp" line="61"/>
+        <source>Rename current note</source>
+        <translation>Переименовать текущую заметку</translation>
+    </message>
+    <message>
+        <location filename="../aboutDialog.cpp" line="62"/>
+        <source>Search in the notes&apos; text</source>
+        <translation>Поиск в тексте заметок</translation>
+    </message>
+    <message>
+        <source>Search in the note&apos;s text</source>
+        <translation type="obsolete">Поиск в тексте заметок</translation>
+    </message>
+    <message>
+        <location filename="../aboutDialog.cpp" line="63"/>
+        <source>Apply bold format to selected text</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../aboutDialog.cpp" line="64"/>
+        <source>Apply italic format to selected text</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../aboutDialog.cpp" line="65"/>
+        <source>Apply strikeout format to selected text</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../aboutDialog.cpp" line="66"/>
+        <source>Apply underline format to selected text</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../aboutDialog.cpp" line="67"/>
+        <source>Exit program</source>
+        <translation>Выход из программы</translation>
+    </message>
+    <message>
         <source>All icons from Oxygen project</source>
         <translation type="obsolete">Все иконки взяты из проекта Oxygen</translation>
     </message>
