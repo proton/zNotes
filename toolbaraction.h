@@ -30,7 +30,8 @@ class ToolbarAction
 {
 public:
 	ToolbarAction(item_enum id):item_id(id) {}
-	inline QString text()
+	//Returning action's title
+	inline const QString text() const
 	{
 		switch(item_id)
 		{
@@ -53,7 +54,8 @@ public:
 			default: return 0;
 		}
 	}
-	inline QIcon icon()
+	//Returning action's icon
+	inline QIcon icon() const
 	{
 		switch(item_id)
 		{
@@ -73,6 +75,29 @@ public:
 			case itemFormatStrikeout:	return QIcon(":/res/format_strikeout.png");
 			case itemFormatUnderline:	return QIcon(":/res/format_underline.png");
 			default: return QIcon();
+		}
+	}
+	//Returning action's identifiactor in configuration file
+	inline const QString pref_name() const
+	{
+		switch(item_id)
+		{
+			case itemAdd:		return "Toolbar/itemAdd";
+			case itemRemove:	return "Toolbar/itemRemove";
+			case itemRename:	return "Toolbar/itemRename";
+			case itemPrev:		return "Toolbar/itemPrev";
+			case itemNext:		return "Toolbar/itemNext";
+			case itemCopy:		return "Toolbar/itemCopy";
+			case itemSetup:		return "Toolbar/itemSetup";
+			case itemInfo:		return "Toolbar/itemInfo";
+			case itemRun:		return "Toolbar/itemRun";
+			case itemSearch:	return "Toolbar/itemSearch";
+			case itemExit:		return "Toolbar/itemExit";
+			case itemFormatBold:		return "Toolbar/itemFormatBold";
+			case itemFormatItalic:		return "Toolbar/itemFormatItalic";
+			case itemFormatStrikeout:	return "Toolbar/itemFormatStrikeout";
+			case itemFormatUnderline:	return "Toolbar/itemFormatUnderline";
+			default:			return "";
 		}
 	}
 	inline bool isSeparator() { return item_id==itemSeparator; }

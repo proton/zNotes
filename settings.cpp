@@ -1,4 +1,5 @@
 #include "settings.h"
+#include "toolbaraction.h"
 
 #include <QObject>
 #include <QtDebug>
@@ -53,8 +54,8 @@ void Settings::load()
 			tb_items.resize(config.value("Toolbar/itemCount").toInt());
 			for(int i=itemAdd; i<itemMax; ++i)
 			{
-				int pos = config.value(getItemName(i), tb_items.size()).toInt();
-				if(pos<tb_items.size()) tb_items[pos] = i;
+				int pos = config.value(ToolbarAction(item_enum(i)).pref_name(), tb_items.size()).toInt();
+				if(pos<tb_items.size()) tb_items[pos] = i; //Item's position
 			}
 		}
 		else
@@ -123,7 +124,7 @@ void Settings::load()
 		config.setValue("Toolbar/itemCount", tb_items.size());
 		for(int i=0; i<tb_items.size(); ++i)
 			if(tb_items[i]!=itemSeparator)
-				config.setValue(getItemName(tb_items[i]), i);
+				config.setValue(ToolbarAction(item_enum(tb_items[i])).pref_name(), i);
 	#ifdef Q_WS_X11
 		NotesPath = QDir::homePath()+"/.local/share/notes";
 		config.setValue("NotesPath", NotesPath);
@@ -137,7 +138,8 @@ void Settings::load()
 	//Fixing Qt's problem on unix systems...
 	QString system_lang(qgetenv("LANG").constData());
 	system_lang.truncate(system_lang.indexOf('.'));
-	system_language = QLocale(system_lang).language();
+	if(system_lang.size()>0) system_language = QLocale(system_lang).language();
+	else system_language = QLocale::system().language();
 #else
 	system_language = QLocale::system().language();
 #endif
@@ -346,14 +348,14 @@ void Settings::setToolbarItems(const QVector<int>& v)
 	//removing old settings
 	for(int i=0; i<tb_items.size(); ++i) if(tb_items[i]!=itemSeparator)
 	{
-		config.remove(getItemName(tb_items[i])); //dirty hack =(
+		config.remove(ToolbarAction(item_enum(tb_items[i])).pref_name()); //dirty hack =(
 	}
 	tb_items = v;
 	//saving settings
 	config.setValue("Toolbar/itemCount", tb_items.size());
 	for(int i=0; i<tb_items.size(); ++i) if(tb_items[i]!=itemSeparator)
 	{
-		config.setValue(getItemName(tb_items[i]), i);
+		config.setValue(ToolbarAction(item_enum(tb_items[i])).pref_name(), i);
 	}
 	emit ToolbarItemsChanged();
 }

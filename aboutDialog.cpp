@@ -9,13 +9,14 @@ aboutDialog::aboutDialog(QWidget *parent) :
 	QDialog(parent), ui(new Ui::aboutDialog)
 {
 	ui->setupUi(this);
+	//Adding program information
 	ui->lbAbout->setText(QString("zNotes\n%1\n%2 %3\n%4\n%5\n\n%6")
 		.arg(tr("Simple Qt-based notes aplication"))
 		.arg(tr("version")).arg(VERSION)
 		.arg(tr("Copyright (c) 2010"))
 		.arg(tr("by Peter Savichev (proton)"))
 		.arg(tr("Distributed under the GPL license version 3 or later")));
-	//
+	//Adding authors information
 	QString strAuthors;
 	strAuthors.append(QString("<p><b>%1</b> - <a href='mailto:%2'>%2</a><br/>%3<p>")
 		.arg("Peter Savichev (proton)").arg("psavichev@gmail.com")
@@ -28,7 +29,7 @@ aboutDialog::aboutDialog(QWidget *parent) :
 	strAuthors.append(QString("%1\n<a hreh='%2'>%2</a>")
 		.arg(tr("All icons are modified icons from Oxygen project")).arg("http://www.oxygen-icons.org"));
 	ui->lbAuthors->setHtml(strAuthors);
-	//
+	//Adding credits information
 	QString strCredits;
 	strCredits.append(QString("<p><b>%1</b><p>").arg(tr("Testing:")));
 	strCredits.append(QString("<b>%1</b> - <a href='mailto:%2'>%2</a><br/>").arg("Nikolay Edigaryev").arg("edigaryev@gmail.com"));
@@ -51,6 +52,7 @@ aboutDialog::aboutDialog(QWidget *parent) :
 		.arg("Elbert Pol").arg("e.pol@chello.nl")
 		.arg("OS/2"));
 	ui->lbCredits->setHtml(strCredits);
+	//Adding help information
 	QString strHelp;
 	strHelp.append(QString("<p><b>%1</b><p>").arg(tr("Shortcuts:")));
 	strHelp.append(QString("<b>%1</b> - %2<br/>").arg("Alt+Fn").arg(tr("Go to note n")));

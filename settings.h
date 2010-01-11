@@ -13,7 +13,6 @@
 #include <QLocale>
 
 #include "scriptmodel.h"
-#include "toolbaraction.h"
 
 class Settings : public QObject
 {
@@ -90,28 +89,6 @@ private:
 	//
 	QVector<int> tb_items;
 	//
-	inline const char* getItemName(int i)
-	{
-		switch(i)
-		{
-			case itemAdd:		return "Toolbar/itemAdd";
-			case itemRemove:	return "Toolbar/itemRemove";
-			case itemRename:	return "Toolbar/itemRename";
-			case itemPrev:		return "Toolbar/itemPrev";
-			case itemNext:		return "Toolbar/itemNext";
-			case itemCopy:		return "Toolbar/itemCopy";
-			case itemSetup:		return "Toolbar/itemSetup";
-			case itemInfo:		return "Toolbar/itemInfo";
-			case itemRun:		return "Toolbar/itemRun";
-			case itemSearch:	return "Toolbar/itemSearch";
-			case itemExit:		return "Toolbar/itemExit";
-			case itemFormatBold:		return "Toolbar/itemFormatBold";
-			case itemFormatItalic:		return "Toolbar/itemFormatItalic";
-			case itemFormatStrikeout:	return "Toolbar/itemFormatStrikeout";
-			case itemFormatUnderline:	return "Toolbar/itemFormatUnderline";
-			default:			return "";
-		}
-	}
 	QLocale::Language system_language;
 signals:
 	void NotesPathChanged();

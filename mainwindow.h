@@ -12,6 +12,7 @@
 
 #include "note.h"
 #include "settings.h"
+#include "toolbaraction.h"
 
 namespace Ui
 {

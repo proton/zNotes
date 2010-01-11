@@ -33,7 +33,8 @@ HEADERS += mainwindow.h \
 FORMS += mainwindow.ui \
     configdialog.ui \
     aboutDialog.ui
-TRANSLATIONS += translations/znotes_ru.ts
+TRANSLATIONS += translations/znotes_ru.ts \
+	translations/znotes_cs.ts
 RESOURCES += znotes.qrc
 
 # This makes qmake generate translations
