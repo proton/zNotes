@@ -178,82 +178,82 @@ Do you want to move your notes to new place ?</source>
         <translation type="obsolete">Выбор каталога с заметками</translation>
     </message>
     <message>
-        <location filename="../toolbaraction.h" line="37"/>
+        <location filename="../toolbaraction.h" line="38"/>
         <source>Separator</source>
         <translation>Разделитель</translation>
     </message>
     <message>
-        <location filename="../toolbaraction.h" line="38"/>
+        <location filename="../toolbaraction.h" line="39"/>
         <source>Create new note</source>
         <translation>Новая заметка</translation>
     </message>
     <message>
-        <location filename="../toolbaraction.h" line="39"/>
+        <location filename="../toolbaraction.h" line="40"/>
         <source>Remove this note</source>
         <translation>Удалить заметку</translation>
     </message>
     <message>
-        <location filename="../toolbaraction.h" line="40"/>
+        <location filename="../toolbaraction.h" line="41"/>
         <source>Rename this note</source>
         <translation>Пререименовать заметку</translation>
     </message>
     <message>
-        <location filename="../toolbaraction.h" line="41"/>
+        <location filename="../toolbaraction.h" line="42"/>
         <source>Prev note</source>
         <translation>Предыдущая заметка</translation>
     </message>
     <message>
-        <location filename="../toolbaraction.h" line="42"/>
+        <location filename="../toolbaraction.h" line="43"/>
         <source>Next note</source>
         <translation>Следующая заметка</translation>
     </message>
     <message>
-        <location filename="../toolbaraction.h" line="43"/>
+        <location filename="../toolbaraction.h" line="44"/>
         <source>Copy this note to clipboard</source>
         <translation>Скопировать содержимое в буффер обмена</translation>
     </message>
     <message>
-        <location filename="../toolbaraction.h" line="44"/>
+        <location filename="../toolbaraction.h" line="45"/>
         <source>Preferences</source>
         <translation>Настройки</translation>
     </message>
     <message>
-        <location filename="../toolbaraction.h" line="45"/>
+        <location filename="../toolbaraction.h" line="46"/>
         <source>Info</source>
         <translation>Информация</translation>
     </message>
     <message>
-        <location filename="../toolbaraction.h" line="46"/>
+        <location filename="../toolbaraction.h" line="47"/>
         <source>Commands</source>
         <translation>Комманды</translation>
     </message>
     <message>
-        <location filename="../toolbaraction.h" line="47"/>
+        <location filename="../toolbaraction.h" line="48"/>
         <source>Search</source>
         <translation>Поиск</translation>
     </message>
     <message>
-        <location filename="../toolbaraction.h" line="48"/>
+        <location filename="../toolbaraction.h" line="49"/>
         <source>Exit</source>
         <translation>Выход</translation>
     </message>
     <message>
-        <location filename="../toolbaraction.h" line="49"/>
+        <location filename="../toolbaraction.h" line="50"/>
         <source>Bold</source>
         <translation>Жирный</translation>
     </message>
     <message>
-        <location filename="../toolbaraction.h" line="50"/>
+        <location filename="../toolbaraction.h" line="51"/>
         <source>Italic</source>
         <translation>Курсив</translation>
     </message>
     <message>
-        <location filename="../toolbaraction.h" line="51"/>
+        <location filename="../toolbaraction.h" line="52"/>
         <source>Strikeout</source>
         <translation>Зачеркнутый</translation>
     </message>
     <message>
-        <location filename="../toolbaraction.h" line="52"/>
+        <location filename="../toolbaraction.h" line="53"/>
         <source>Underline</source>
         <translation>Подчеркнутый</translation>
     </message>
@@ -279,12 +279,12 @@ Do you want to move your notes to new place ?</source>
 <context>
     <name>aboutDialog</name>
     <message>
-        <location filename="../aboutDialog.cpp" line="13"/>
+        <location filename="../aboutDialog.cpp" line="14"/>
         <source>Simple Qt-based notes aplication</source>
         <translation>Простая программа для ведения заметок</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="14"/>
+        <location filename="../aboutDialog.cpp" line="15"/>
         <source>version</source>
         <translation>версия</translation>
     </message>
@@ -293,82 +293,87 @@ Do you want to move your notes to new place ?</source>
         <translation type="obsolete">Copyright (c) 2009</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="15"/>
+        <location filename="../aboutDialog.cpp" line="16"/>
         <source>Copyright (c) 2010</source>
         <translation>Copyright (c) 2010</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="16"/>
+        <location filename="../aboutDialog.cpp" line="17"/>
         <source>by Peter Savichev (proton)</source>
         <translation>Петр Савичев (proton)</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="17"/>
+        <location filename="../aboutDialog.cpp" line="18"/>
         <source>Distributed under the GPL license version 3 or later</source>
         <translation>Распространяется под лицензией GPL версии 3 или более поздней</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="22"/>
+        <location filename="../aboutDialog.cpp" line="23"/>
         <source>Application concept and main development</source>
         <translation>Основные идеи и реализация</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="23"/>
+        <location filename="../aboutDialog.cpp" line="24"/>
         <source>Translations:</source>
         <translation>Переводы:</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="26"/>
+        <location filename="../aboutDialog.cpp" line="27"/>
+        <source>Czech translation</source>
+        <translation>Чешский перевод</translation>
+    </message>
+    <message>
+        <location filename="../aboutDialog.cpp" line="30"/>
         <source>Russian translation</source>
         <translation>Русский перевод</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="27"/>
+        <location filename="../aboutDialog.cpp" line="31"/>
         <source>Icons:</source>
         <translation>Иконки:</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="29"/>
+        <location filename="../aboutDialog.cpp" line="33"/>
         <source>All icons are modified icons from Oxygen project</source>
         <translation>Все иконки взяты из проекта Oxygen и модифицированы</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="55"/>
+        <location filename="../aboutDialog.cpp" line="60"/>
         <source>Shortcuts:</source>
         <translation>Сочетания клавиш:</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="56"/>
+        <location filename="../aboutDialog.cpp" line="61"/>
         <source>Go to note n</source>
         <translation>Перейти к заметке n</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="57"/>
+        <location filename="../aboutDialog.cpp" line="62"/>
         <source>Go to previous note</source>
         <translation>Перейти к предыдущей заметке</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="58"/>
+        <location filename="../aboutDialog.cpp" line="63"/>
         <source>Go to next note</source>
         <translation>Перейти к следующей заметке</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="59"/>
+        <location filename="../aboutDialog.cpp" line="64"/>
         <source>Create new note</source>
         <translation>Добавить новую заметку</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="60"/>
+        <location filename="../aboutDialog.cpp" line="65"/>
         <source>Remove current note</source>
         <translation>Удалить текущую заметку</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="61"/>
+        <location filename="../aboutDialog.cpp" line="66"/>
         <source>Rename current note</source>
         <translation>Переименовать текущую заметку</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="62"/>
+        <location filename="../aboutDialog.cpp" line="67"/>
         <source>Search in the notes&apos; text</source>
         <translation>Поиск в тексте заметок</translation>
     </message>
@@ -377,27 +382,27 @@ Do you want to move your notes to new place ?</source>
         <translation type="obsolete">Поиск в тексте заметок</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="63"/>
+        <location filename="../aboutDialog.cpp" line="68"/>
         <source>Apply bold format to selected text</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="64"/>
+        <location filename="../aboutDialog.cpp" line="69"/>
         <source>Apply italic format to selected text</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="65"/>
+        <location filename="../aboutDialog.cpp" line="70"/>
         <source>Apply strikeout format to selected text</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="66"/>
+        <location filename="../aboutDialog.cpp" line="71"/>
         <source>Apply underline format to selected text</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="67"/>
+        <location filename="../aboutDialog.cpp" line="72"/>
         <source>Exit program</source>
         <translation>Выход из программы</translation>
     </message>
@@ -406,12 +411,12 @@ Do you want to move your notes to new place ?</source>
         <translation type="obsolete">Все иконки взяты из проекта Oxygen</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="33"/>
+        <location filename="../aboutDialog.cpp" line="37"/>
         <source>Testing:</source>
         <translation>Тестирование:</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="39"/>
+        <location filename="../aboutDialog.cpp" line="43"/>
         <source>Releasing:</source>
         <translation>Сборка:</translation>
     </message>
