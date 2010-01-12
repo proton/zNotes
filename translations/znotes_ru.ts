@@ -257,23 +257,35 @@ Do you want to move your notes to new place ?</source>
         <source>Underline</source>
         <translation>Подчеркнутый</translation>
     </message>
-</context>
-<context>
-    <name>ScriptModel</name>
     <message>
-        <location filename="../scriptmodel.cpp" line="6"/>
+        <location filename="../scriptmodel.cpp" line="32"/>
         <source>Name</source>
         <translation>Название</translation>
     </message>
     <message>
-        <location filename="../scriptmodel.cpp" line="7"/>
+        <location filename="../scriptmodel.cpp" line="33"/>
         <source>File</source>
         <translation>Файл</translation>
     </message>
     <message>
-        <location filename="../scriptmodel.cpp" line="8"/>
+        <location filename="../scriptmodel.cpp" line="34"/>
         <source>Icon</source>
         <translation>Значок</translation>
+    </message>
+</context>
+<context>
+    <name>ScriptModel</name>
+    <message>
+        <source>Name</source>
+        <translation type="obsolete">Название</translation>
+    </message>
+    <message>
+        <source>File</source>
+        <translation type="obsolete">Файл</translation>
+    </message>
+    <message>
+        <source>Icon</source>
+        <translation type="obsolete">Значок</translation>
     </message>
 </context>
 <context>

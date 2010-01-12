@@ -257,23 +257,35 @@ Chcete své poznámky přesunout na nové místo?</translation>
         <source>Underline</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <location filename="../scriptmodel.cpp" line="32"/>
+        <source>Name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../scriptmodel.cpp" line="33"/>
+        <source>File</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../scriptmodel.cpp" line="34"/>
+        <source>Icon</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ScriptModel</name>
     <message>
-        <location filename="../scriptmodel.cpp" line="6"/>
         <source>Name</source>
-        <translation>Název</translation>
+        <translation type="obsolete">Název</translation>
     </message>
     <message>
-        <location filename="../scriptmodel.cpp" line="7"/>
         <source>File</source>
-        <translation>Soubor</translation>
+        <translation type="obsolete">Soubor</translation>
     </message>
     <message>
-        <location filename="../scriptmodel.cpp" line="8"/>
         <source>Icon</source>
-        <translation>Ikona</translation>
+        <translation type="obsolete">Ikona</translation>
     </message>
 </context>
 <context>

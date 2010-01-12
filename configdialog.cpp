@@ -180,6 +180,9 @@ void configDialog::changeEvent(QEvent *e)
 	switch (e->type()) {
 	case QEvent::LanguageChange:
 		m_ui->retranslateUi(this);
+		//
+		//m_ui->tabScripts->
+		//
 		break;
 	default:
 		break;
