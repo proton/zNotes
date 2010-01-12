@@ -258,17 +258,17 @@ Do you want to move your notes to new place ?</source>
         <translation>Подчеркнутый</translation>
     </message>
     <message>
-        <location filename="../scriptmodel.cpp" line="32"/>
+        <location filename="../scriptmodel.cpp" line="30"/>
         <source>Name</source>
         <translation>Название</translation>
     </message>
     <message>
-        <location filename="../scriptmodel.cpp" line="33"/>
+        <location filename="../scriptmodel.cpp" line="31"/>
         <source>File</source>
         <translation>Файл</translation>
     </message>
     <message>
-        <location filename="../scriptmodel.cpp" line="34"/>
+        <location filename="../scriptmodel.cpp" line="32"/>
         <source>Icon</source>
         <translation>Значок</translation>
     </message>
@@ -390,28 +390,28 @@ Do you want to move your notes to new place ?</source>
         <translation>Поиск в тексте заметок</translation>
     </message>
     <message>
-        <source>Search in the note&apos;s text</source>
-        <translation type="obsolete">Поиск в тексте заметок</translation>
-    </message>
-    <message>
         <location filename="../aboutDialog.cpp" line="68"/>
-        <source>Apply bold format to selected text</source>
-        <translation type="unfinished"></translation>
+        <source>Make selected text bold</source>
+        <translation>Сделать выделенный текст жирным</translation>
     </message>
     <message>
         <location filename="../aboutDialog.cpp" line="69"/>
-        <source>Apply italic format to selected text</source>
-        <translation type="unfinished"></translation>
+        <source>Make selected text italic</source>
+        <translation>Сделать выделенный текст курсивом</translation>
     </message>
     <message>
         <location filename="../aboutDialog.cpp" line="70"/>
-        <source>Apply strikeout format to selected text</source>
-        <translation type="unfinished"></translation>
+        <source>Make selected text strikeout</source>
+        <translation>Сделать выделенный текст зачеркнутым</translation>
     </message>
     <message>
         <location filename="../aboutDialog.cpp" line="71"/>
-        <source>Apply underline format to selected text</source>
-        <translation></translation>
+        <source>Make selected text underline</source>
+        <translation>Сделать выделенный текст подчеркнутым</translation>
+    </message>
+    <message>
+        <source>Search in the note&apos;s text</source>
+        <translation type="obsolete">Поиск в тексте заметок</translation>
     </message>
     <message>
         <location filename="../aboutDialog.cpp" line="72"/>

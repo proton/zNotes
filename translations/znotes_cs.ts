@@ -258,17 +258,17 @@ Chcete své poznámky přesunout na nové místo?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../scriptmodel.cpp" line="32"/>
+        <location filename="../scriptmodel.cpp" line="30"/>
         <source>Name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../scriptmodel.cpp" line="33"/>
+        <location filename="../scriptmodel.cpp" line="31"/>
         <source>File</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../scriptmodel.cpp" line="34"/>
+        <location filename="../scriptmodel.cpp" line="32"/>
         <source>Icon</source>
         <translation type="unfinished"></translation>
     </message>
@@ -391,22 +391,22 @@ Chcete své poznámky přesunout na nové místo?</translation>
     </message>
     <message>
         <location filename="../aboutDialog.cpp" line="68"/>
-        <source>Apply bold format to selected text</source>
+        <source>Make selected text bold</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../aboutDialog.cpp" line="69"/>
-        <source>Apply italic format to selected text</source>
+        <source>Make selected text italic</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../aboutDialog.cpp" line="70"/>
-        <source>Apply strikeout format to selected text</source>
+        <source>Make selected text strikeout</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../aboutDialog.cpp" line="71"/>
-        <source>Apply underline format to selected text</source>
+        <source>Make selected text underline</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
