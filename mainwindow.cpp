@@ -81,6 +81,27 @@ void MainWindow::NewNote()
 	}
 }
 
+void MainWindow::NewNoteHTML()
+{
+	int n = 0;
+	QString filename = QString("%1.htm").arg(n);
+	QFile file(dir.absoluteFilePath(filename));
+	while(file.exists()) //Searching for free filename
+	{
+		filename = QString("%1.htm").arg(++n);
+		file.setFileName(dir.absoluteFilePath(filename));
+	}
+	Note* note = new Note(file);
+	Notes.append(note);
+	ui->tabs->addTab(note->widget(), note->title());
+	ui->tabs->setCurrentWidget(note->widget());
+	if(Notes.count()>0)
+	{
+		actRemove->setEnabled(true);
+		actRename->setEnabled(true);
+	}
+}
+
 void MainWindow::PreviousNote()
 {
 	ui->tabs->setCurrentIndex(ui->tabs->currentIndex()-1);
@@ -341,6 +362,7 @@ MainWindow::MainWindow(QWidget *parent)
 	windowStateChanged();
 	//Creating toolbar/menu actions
 	actAdd = GenerateAction(itemAdd);
+	actAddHtml = GenerateAction(itemAddHtml);
 	actRemove = GenerateAction(itemRemove);
 	actRename = GenerateAction(itemRename);
 	actPrev = GenerateAction(itemPrev);
@@ -359,6 +381,7 @@ MainWindow::MainWindow(QWidget *parent)
 	actHide =	new QAction(tr("Hide"),	parent);
 	//Connecting actions with slots
 	connect(actAdd,		SIGNAL(triggered()), this, SLOT(NewNote()));
+	connect(actAddHtml,	SIGNAL(triggered()), this, SLOT(NewNoteHTML()));
 	connect(actRemove,	SIGNAL(triggered()), this, SLOT(RemoveCurrentNote()));
 	connect(actRename,	SIGNAL(triggered()), this, SLOT(RenameCurrentNote()));
 	connect(actPrev,	SIGNAL(triggered()), this, SLOT(PreviousNote()));

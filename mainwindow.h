@@ -42,7 +42,7 @@ private:
 	QSignalMapper alt_mapper;
 	QTimer SaveTimer;
 	//
-	QAction *actAdd, *actRemove, *actRename, *actPrev, *actNext;
+	QAction *actAdd, *actAddHtml, *actRemove, *actRename, *actPrev, *actNext;
 	QAction *actCopy, *actSetup, *actRun, *actExit, *actInfo, *actSearch;
 	QAction *actFormatBold, *actFormatItalic, *actFormatStrikeout, *actFormatUnderline;
 	//
@@ -64,6 +64,7 @@ private:
 		switch(i)
 		{
 			case itemAdd:			return actAdd;
+			case itemAddHtml:		return actAddHtml;
 			case itemRemove:		return actRemove;
 			case itemRename:		return actRename;
 			case itemPrev:			return actPrev;
@@ -86,6 +87,7 @@ public slots:
 	void RemoveCurrentNote();
 	void RenameCurrentNote();
 	void NewNote();
+	void NewNoteHTML();
 	//
 	void PreviousNote();
 	void NextNote();
