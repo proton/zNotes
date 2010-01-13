@@ -1,6 +1,7 @@
 #include "aboutDialog.h"
 #include "ui_aboutDialog.h"
 
+//Fixed problems with compilation, if program version is undefined
 #ifndef VERSION
 #define VERSION "unknown"
 #endif
