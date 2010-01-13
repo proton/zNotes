@@ -33,14 +33,13 @@ HEADERS += mainwindow.h \
 FORMS += mainwindow.ui \
     configdialog.ui \
     aboutDialog.ui
-TRANSLATIONS += translations/znotes_ru.ts \
-	translations/znotes_cs.ts
+TRANSLATIONS += translations/znotes_ru.ts translations/znotes_cs.ts
 RESOURCES += znotes.qrc
 
 # This makes qmake generate translations
 isEmpty(QMAKE_LRELEASE):QMAKE_LRELEASE = $$[QT_INSTALL_BINS]/lrelease
 TS_OUT = $$TRANSLATIONS
-TS_OUT ~= s/.ts/.qm
+TS_OUT ~= s/.ts/.qm/g
 TSQM.name = lrelease \
     ${QMAKE_FILE_IN}
 TSQM.input = TRANSLATIONS
@@ -51,7 +50,7 @@ TSQM.CONFIG = no_link
 QMAKE_EXTRA_COMPILERS += TSQM
 PRE_TARGETDEPS += $$TS_OUT
 !os2:DEFINES += VERSION=\\\"$$VERSION\\\"
-unix { 
+unix {
     PREFIX = $$(PREFIX)
     isEmpty( PREFIX ):PREFIX = /usr
     DEFINES += PROGRAM_DATA_DIR=\\\"$$PREFIX/share/znotes/\\\"
@@ -67,7 +66,7 @@ unix {
         pixmap \
         desktop
 }
-os2 { 
+os2 {
     DEFINES += VERSION=\"$$VERSION\"
     RC_FILE = znotes_os2.rc
 }
