@@ -10,7 +10,7 @@
 #include <QAction>
 #include <QShortcut>
 
-#include "note.h"
+#include "notelist.h"
 #include "settings.h"
 #include "toolbaraction.h"
 
@@ -33,8 +33,9 @@ private:
 	Ui::MainWindow *ui;
 	//
 	QDir dir;
-	QVector<Note*> Notes;
-	int CurrentIndex;
+	NoteList Notes;
+	//QVector<Note*> Notes;
+
 	QSystemTrayIcon tray;
 	QMenu cmenu;
 	QMenu cmd_menu;
@@ -52,11 +53,6 @@ private:
 	QShortcut *scFormatBold, *scFormatItalic, *scFormatStrikeout, *scFormatUnderline;
 	//
 	void LoadNotes();
-	inline Note* currentNote()
-	{
-		return Notes[CurrentIndex];
-	}
-	int currentIndex;
 	//
 	void Search(bool next);
 	inline QAction* getAction(int i)

@@ -26,7 +26,7 @@ Settings settings;
 void MainWindow::RemoveCurrentNote()
 {
 	if(Notes.count()==0) return;
-	Note* note = currentNote();
+	Note* note = Notes.current();
 	QMessageBox msgBox(QMessageBox::Question, tr("Delete Note"),
 		tr("Do you realy want to delete note %1 ?").arg(note->title()),
 		QMessageBox::Yes | QMessageBox::No);
@@ -49,7 +49,7 @@ void MainWindow::RenameCurrentNote()
 {
 	if(Notes.count()==0) return;
 	//
-	Note* note = currentNote();
+	Note* note = Notes.current();
 	note->save();
 	bool ok;
 	QString new_name = QInputDialog::getText(this, tr("Rename note"), tr("New name:"), QLineEdit::Normal, note->title(), &ok);
@@ -71,7 +71,7 @@ void MainWindow::NewNote()
 		file.setFileName(dir.absoluteFilePath(filename));
 	}
 	Note* note = new Note(file);
-	Notes.append(note);
+	Notes.add(note);
 	ui->tabs->addTab(note->widget(), note->title());
 	ui->tabs->setCurrentWidget(note->widget());
 	if(Notes.count()>0)
@@ -92,7 +92,7 @@ void MainWindow::NewNoteHTML()
 		file.setFileName(dir.absoluteFilePath(filename));
 	}
 	Note* note = new Note(file);
-	Notes.append(note);
+	Notes.add(note);
 	ui->tabs->addTab(note->widget(), note->title());
 	ui->tabs->setCurrentWidget(note->widget());
 	if(Notes.count()>0)
@@ -114,13 +114,13 @@ void MainWindow::NextNote()
 
 void MainWindow::ToNote(int n)
 {
-	if(n>=Notes.size()) return;
+	if(n>=Notes.count()) return;
 	ui->tabs->setCurrentIndex(n);
 }
 
 void MainWindow::CopyNote()
 {
-	currentNote()->copy();
+	Notes.current()->copy();
 }
 
 void MainWindow::LoadNotes()
@@ -146,7 +146,7 @@ void MainWindow::LoadNotes()
 	{
 		//Loading note
 		Note* note = new Note(flist.at(i));
-		Notes.append(note);
+		Notes.add(note);
 		ui->tabs->addTab(note->widget(), note->title());
 		if(old_index==-1 && note->title()==old_note) old_index = i;
 	}
@@ -156,7 +156,7 @@ void MainWindow::LoadNotes()
 //Saving all notes
 void MainWindow::SaveAll()
 {
-	for(int i=0; i<Notes.size(); ++i)
+	for(int i=0; i<Notes.count(); ++i)
 	{
 		Notes[i]->save(true);//Forced saving
 	}
@@ -255,7 +255,7 @@ void MainWindow::cmdExec(const QString & command)
 {
 	QProcess p;
 	QStringList args;
-	args << currentNote()->absolutePath();
+	args << Notes.current()->absolutePath();
 	p.start(command, args);
 	if(p.waitForStarted())
 	{
@@ -302,41 +302,41 @@ void MainWindow::formatChanged(const QFont& font)
 void MainWindow::formatBold()
 {
 	if(Notes.count()==0) return;
-	if(currentNote()->noteType()!=Note::type_html) return;
+	if(Notes.current()->noteType()!=Note::type_html) return;
 	QTextCharFormat format;
-	QTextCharFormat selformat(currentNote()->getSelFormat());
+	QTextCharFormat selformat(Notes.current()->getSelFormat());
 	format.setFontWeight((selformat.fontWeight()==QFont::Normal)?QFont::Bold : QFont::Normal);
-	currentNote()->setSelFormat(format);
+	Notes.current()->setSelFormat(format);
 }
 
 void MainWindow::formatItalic()
 {
 	if(Notes.count()==0) return;
-	if(currentNote()->noteType()!=Note::type_html) return;
+	if(Notes.current()->noteType()!=Note::type_html) return;
 	QTextCharFormat format;
-	QTextCharFormat selformat(currentNote()->getSelFormat());
+	QTextCharFormat selformat(Notes.current()->getSelFormat());
 	format.setFontItalic(!selformat.fontItalic());
-	currentNote()->setSelFormat(format);
+	Notes.current()->setSelFormat(format);
 }
 
 void MainWindow::formatStrikeout()
 {
 	if(Notes.count()==0) return;
-	if(currentNote()->noteType()!=Note::type_html) return;
+	if(Notes.current()->noteType()!=Note::type_html) return;
 	QTextCharFormat format;
-	QTextCharFormat selformat(currentNote()->getSelFormat());
+	QTextCharFormat selformat(Notes.current()->getSelFormat());
 	format.setFontStrikeOut(!selformat.fontStrikeOut());
-	currentNote()->setSelFormat(format);
+	Notes.current()->setSelFormat(format);
 }
 
 void MainWindow::formatUnderline()
 {
 	if(Notes.count()==0) return;
-	if(currentNote()->noteType()!=Note::type_html) return;
+	if(Notes.current()->noteType()!=Note::type_html) return;
 	QTextCharFormat format;
-	QTextCharFormat selformat(currentNote()->getSelFormat());
+	QTextCharFormat selformat(Notes.current()->getSelFormat());
 	format.setFontUnderline(!selformat.fontUnderline());
-	currentNote()->setSelFormat(format);
+	Notes.current()->setSelFormat(format);
 }
 
 //------------------------------------------------------------------------------
@@ -351,7 +351,7 @@ inline QAction* GenerateAction(item_enum item, bool checkable = false)
 }
 
 MainWindow::MainWindow(QWidget *parent)
-	: QMainWindow(parent), ui(new Ui::MainWindow), CurrentIndex(-1)
+	: QMainWindow(parent), ui(new Ui::MainWindow)
 {
 	settings.load();
 	ui->setupUi(this);
@@ -476,7 +476,7 @@ MainWindow::~MainWindow()
 	//saving notes
 	SaveAll();
 	//saving title of last note
-	settings.setLastNote(currentNote()->title());
+	settings.setLastNote(Notes.current()->title());
 	//saving dialog's params
 	settings.setDialogGeometry(saveGeometry());
 	settings.setDialogState(saveState());
@@ -487,24 +487,24 @@ MainWindow::~MainWindow()
 void MainWindow::on_tabs_currentChanged(int index)
 {
 	if(index==-1) return;
-	if(CurrentIndex!=-1)
+	if(!Notes.empty())
 	{
-		currentNote()->save();
-		disconnect(currentNote(), SIGNAL(formatChanged(QFont)), 0, 0);
+		Notes.current()->save();
+		disconnect(Notes.current(), SIGNAL(formatChanged(QFont)), 0, 0);
 	}
-	CurrentIndex = index; //Changing current note
+	Notes.setCurrent(index); //Changing current note
 	actPrev->setDisabled(index==0); //if first note
 	actNext->setDisabled(index==Notes.count()-1); //if last note
-	switch(currentNote()->noteType())
+	switch(Notes.current()->noteType())
 	{
  case Note::type_html:
 		{
-			QFont font(currentNote()->getSelFormat().font());
+			QFont font(Notes.current()->getSelFormat().font());
 			actFormatBold->setChecked(font.bold());
 			actFormatItalic->setChecked(font.italic());
 			actFormatStrikeout->setChecked(font.strikeOut());
 			actFormatUnderline->setChecked(font.underline());
-			connect(currentNote(), SIGNAL(formatChanged(QFont)), this, SLOT(formatChanged(QFont)));
+			connect(Notes.current(), SIGNAL(formatChanged(QFont)), this, SLOT(formatChanged(QFont)));
 			actFormatBold->setEnabled(true);
 			actFormatItalic->setEnabled(true);
 			actFormatStrikeout->setEnabled(true);
@@ -538,10 +538,10 @@ void MainWindow::Search(bool next)
 	QString text = ui->edSearch->text();
 	if(text.isEmpty()) return;
 	//Searching in current note
-	if(currentNote()->find(text)) return;
+	if(Notes.current()->find(text)) return;
 	//Searching in all notes
-	const int max = Notes.count()+CurrentIndex;
-	for(int n=CurrentIndex+1; n<=max; ++n)
+	const int max = Notes.count()+Notes.currentIndex();
+	for(int n=Notes.currentIndex()+1; n<=max; ++n)
 	{
 		int i = n%Notes.count(); //secret formula of success search
 		if(Notes[i]->find(text, true))
