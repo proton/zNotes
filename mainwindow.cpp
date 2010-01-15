@@ -70,15 +70,16 @@ void MainWindow::NewNote()
 		filename = QString::number(++n);
 		file.setFileName(dir.absoluteFilePath(filename));
 	}
-	Note* note = new Note(file);
-	Notes.add(note);
-	ui->tabs->addTab(note->widget(), note->title());
-	ui->tabs->setCurrentWidget(note->widget());
-	if(Notes.count()>0)
-	{
-		actRemove->setEnabled(true);
-		actRename->setEnabled(true);
-	}
+	//TODO:
+//	Note* note = new Note(file);
+//	Notes.add(note);
+//	ui->tabs->addTab(note->widget(), note->title());
+//	ui->tabs->setCurrentWidget(note->widget());
+//	if(Notes.count()>0)
+//	{
+//		actRemove->setEnabled(true);
+//		actRename->setEnabled(true);
+//	}
 }
 
 void MainWindow::NewNoteHTML()
@@ -142,6 +143,7 @@ void MainWindow::LoadNotes()
 	QFileInfoList flist = dir.entryInfoList();
 	const QString& old_note = settings.getLastNote();
 	int old_index=-1;
+	//TODO:
 	for(int i=0; i<flist.size(); ++i)
 	{
 		//Loading note
@@ -487,7 +489,7 @@ MainWindow::~MainWindow()
 void MainWindow::on_tabs_currentChanged(int index)
 {
 	if(index==-1) return;
-	if(!Notes.empty())
+	if(Notes.currentIndex()!=-1)
 	{
 		Notes.current()->save();
 		disconnect(Notes.current(), SIGNAL(formatChanged(QFont)), 0, 0);
