@@ -488,7 +488,11 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_tabs_currentChanged(int index)
 {
-	if(index==-1) return;
+	if(index==-1)
+	{
+		Notes.setCurrent(index);
+		return;
+	}
 	if(Notes.currentIndex()!=-1)
 	{
 		Notes.current()->save();
