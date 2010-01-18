@@ -4,7 +4,6 @@
 #include "settings.h"
 #include "toolbarmodel.h"
 
-#include <QtDebug>
 #include <QFileDialog>
 #include <QFontDialog>
 #include <QColorDialog>

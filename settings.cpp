@@ -2,7 +2,6 @@
 #include "toolbaraction.h"
 
 #include <QObject>
-#include <QtDebug>
 #include <QApplication>
 #include <QLibraryInfo>
 #include <QDir>

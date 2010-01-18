@@ -476,7 +476,7 @@ MainWindow::~MainWindow()
 {
 	delete ui;
 	//saving notes
-	SaveAll();
+	//SaveAll();
 	//saving title of last note
 	settings.setLastNote(Notes.current()->title());
 	//saving dialog's params
@@ -484,6 +484,7 @@ MainWindow::~MainWindow()
 	settings.setDialogState(saveState());
 	//saving scrits
 	settings.setScripts();
+	hide();
 }
 
 void MainWindow::on_tabs_currentChanged(int index)
