@@ -9,6 +9,7 @@
 #include <QSignalMapper>
 #include <QAction>
 #include <QShortcut>
+#include <QSessionManager>
 
 #include "notelist.h"
 #include "settings.h"
