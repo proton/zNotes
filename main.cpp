@@ -1,13 +1,15 @@
 #include <QtGui/QApplication>
 #include "mainwindow.h"
-#include <QtDebug>
 
 class zApplication: public QApplication
 {
 public:
 	zApplication(int &argc, char **argv) : QApplication(argc, argv) {}
 	~zApplication() {}
-	void commitData(QSessionManager &) {} //fixing "KDE kogout was cancelled by zNotes" bug
+	void commitData(QSessionManager &)//fixing "KDE kogout was cancelled by zNotes" bug
+	{
+		settings.save();
+	}
 };
 
 int main(int argc, char *argv[])

@@ -12,6 +12,8 @@
 #include <QTranslator>
 #include <QLocale>
 
+#include <QtDebug> //TODO: comment
+
 #include "scriptmodel.h"
 
 class Settings : public QObject
@@ -26,7 +28,6 @@ public:
 	inline bool getHideStart()						{ return HideStart; }
 	inline const QByteArray& getDialogGeometry()	{ return DialogGeometry; }
 	inline const QByteArray& getDialogState()		{ return DialogState; }
-	//inline bool getHideToolbar()					{ return HideToolbar; }
 	inline bool getHideFrame()						{ return HideFrame; }
 	inline bool getStayTop()						{ return StayTop; }
 	inline const QFont& getNoteFont()				{ return NoteFont; }
@@ -45,7 +46,6 @@ public:
 	void setHideStart(bool hide);
 	void setDialogGeometry(const QByteArray& g);
 	void setDialogState(const QByteArray& g);
-	//void setHideToolbar(bool s, bool send_signal = true);
 	void setHideFrame(bool s);
 	void setStayTop(bool s);
 	void setNoteFont(const QFont& f);
@@ -60,6 +60,8 @@ public:
 	void setNoteLinksOpen(bool);
 	//
 	void loadLanguages();
+	//
+	inline void save() { config.sync(); }
 private:
 	QSettings config;
 	QTranslator translator;

@@ -4,7 +4,6 @@
 #include "configdialog.h"
 #include "aboutDialog.h"
 
-#include <QtDebug>
 #include <QInputDialog>
 #include <QMessageBox>
 #include <QFileDialog>
@@ -306,8 +305,8 @@ void MainWindow::formatBold()
 	if(Notes.count()==0) return;
 	if(Notes.current()->noteType()!=Note::type_html) return;
 	QTextCharFormat format;
-	QTextCharFormat selformat(Notes.current()->getSelFormat());
-	format.setFontWeight((selformat.fontWeight()==QFont::Normal)?QFont::Bold : QFont::Normal);
+	bool is_bold = actFormatBold->isChecked();
+	format.setFontWeight(is_bold?QFont::Bold : QFont::Normal);
 	Notes.current()->setSelFormat(format);
 }
 
@@ -316,8 +315,8 @@ void MainWindow::formatItalic()
 	if(Notes.count()==0) return;
 	if(Notes.current()->noteType()!=Note::type_html) return;
 	QTextCharFormat format;
-	QTextCharFormat selformat(Notes.current()->getSelFormat());
-	format.setFontItalic(!selformat.fontItalic());
+	bool is_italic = actFormatBold->isChecked();
+	format.setFontItalic(!is_italic);
 	Notes.current()->setSelFormat(format);
 }
 
@@ -326,8 +325,8 @@ void MainWindow::formatStrikeout()
 	if(Notes.count()==0) return;
 	if(Notes.current()->noteType()!=Note::type_html) return;
 	QTextCharFormat format;
-	QTextCharFormat selformat(Notes.current()->getSelFormat());
-	format.setFontStrikeOut(!selformat.fontStrikeOut());
+	bool is_strikeout = actFormatBold->isChecked();
+	format.setFontStrikeOut(!is_strikeout);
 	Notes.current()->setSelFormat(format);
 }
 
@@ -336,8 +335,8 @@ void MainWindow::formatUnderline()
 	if(Notes.count()==0) return;
 	if(Notes.current()->noteType()!=Note::type_html) return;
 	QTextCharFormat format;
-	QTextCharFormat selformat(Notes.current()->getSelFormat());
-	format.setFontUnderline(!selformat.fontUnderline());
+	bool is_underline = actFormatBold->isChecked();
+	format.setFontUnderline(!is_underline);
 	Notes.current()->setSelFormat(format);
 }
 
@@ -569,6 +568,7 @@ void MainWindow::on_edSearch_returnPressed()
 	Search(true);
 }
 
+//Retranslating ui on language change
 void MainWindow::changeEvent(QEvent *e)
 {
 	QMainWindow::changeEvent(e);

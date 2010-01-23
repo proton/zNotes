@@ -49,7 +49,7 @@ configDialog::configDialog(QWidget *parent) :
 	mt_items.setVector(settings.getToolbarItems());
 	m_items.setVector(settings.getToolbarItems());
 	//
-	connect(m_ui->listActions->selectionModel(), SIGNAL(currentRowChanged(QModelIndex,QModelIndex)), this, SLOT(currentListActionChanged(QModelIndex,QModelIndex)));
+	connect(m_ui->listActions->selectionModel(), SIGNAL(currentRowChanged(QModelIndex,QModelIndex)), this, SLOT(currentListActionChanged(QModelIndex,QModelIndex))); //TODO: selection changed
 	connect(m_ui->listToolbarActions->selectionModel(), SIGNAL(currentRowChanged(QModelIndex,QModelIndex)), this, SLOT(currentToolbarActionChanged(QModelIndex,QModelIndex)));
 }
 
@@ -133,6 +133,7 @@ void configDialog::on_butActionAdd_clicked()
 
 void configDialog::on_butActionRemove_clicked()
 {
+	m_ui->butActionRemove->setDisabled(true);
 	QModelIndex index = m_ui->listToolbarActions->currentIndex();
 	int id = mt_items.getId(index);
 	mt_items.remove(index);
@@ -151,6 +152,7 @@ void configDialog::on_butActionBottom_clicked()
 	mt_items.down(index);
 }
 
+//On changing selection in toolar actions list
 void configDialog::currentToolbarActionChanged(QModelIndex index, QModelIndex)
 {
 	m_ui->butActionRemove->setEnabled(index.isValid());
@@ -159,6 +161,7 @@ void configDialog::currentToolbarActionChanged(QModelIndex index, QModelIndex)
 	m_ui->butActionBottom->setEnabled(row<(mt_items.rowCount()-1));
 }
 
+//On changing selection in current toolar actions list
 void configDialog::currentListActionChanged(QModelIndex index, QModelIndex)
 {
 //	QModelIndexList list = m_ui->listActions->selectionModel()->selectedRows(0);
@@ -173,15 +176,13 @@ void configDialog::currentListActionChanged(QModelIndex index, QModelIndex)
 	m_ui->butActionAdd->setEnabled(index.isValid() && !m_items.isUsed(index.row()));
 }
 
+//Retranslating ui on language change
 void configDialog::changeEvent(QEvent *e)
 {
 	QDialog::changeEvent(e);
 	switch (e->type()) {
 	case QEvent::LanguageChange:
 		m_ui->retranslateUi(this);
-		//
-		//m_ui->tabScripts->
-		//
 		break;
 	default:
 		break;

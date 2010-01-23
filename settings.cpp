@@ -102,7 +102,7 @@ void Settings::load()
 				if(!config.value("tbHideExit").toBool()) tb_items.append(itemExit);
 			}
 		}
-	}
+	}//TODO:
 	else //if settings don't exist - setup default settings
 	{
 		//Setting default toolbar items
