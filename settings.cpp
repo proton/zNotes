@@ -46,9 +46,6 @@ void Settings::load()
 		LanguageCustom = config.value("LanguageCustom").toBool();
 		LanguageCurrent = QLocale(config.value("LanguageCurrent").toString()).language();
 		//
-		///Deprecated:
-		///TODO: remove this code, when in version 0.4.1:
-		//
 		if(config.contains("Toolbar/itemCount"))
 		{
 			tb_items.resize(config.value("Toolbar/itemCount").toInt());
@@ -58,6 +55,10 @@ void Settings::load()
 				if(pos<tb_items.size()) tb_items[pos] = i; //Item's position
 			}
 		}
+		//
+		///Deprecated:
+		///TODO: remove this code, when in version 0.4.1:
+		//
 		else
 		{
 			bool old_settings_exist = (
@@ -103,7 +104,40 @@ void Settings::load()
 			}
 		}
 	}//TODO:
-	else //if settings don't exist - setup default settings
+	//If settings don't exist - setup default settings
+#ifdef Q_WS_X11
+	//Setting default path to notes
+	if(NotesPath.isEmpty())
+	{
+		NotesPath = QDir::homePath()+"/.local/share/notes";
+		config.setValue("NotesPath", NotesPath);
+	}
+#endif
+	//Setting default note options
+	if(config.contains("NoteLinksHighlight"))
+	{
+		NoteLinksHighlight = true;
+		config.setValue("NoteLinksHighlight", NoteLinksHighlight);
+	}
+	if(config.contains("NoteLinksOpen"))
+	{
+		NoteLinksOpen = true;
+		config.setValue("NoteLinksOpen", NoteLinksOpen);
+	}
+	//Setting default scripts
+	if((script_model.rowCount()==0) && !config.contains("ComandCount"))
+	{
+		script_model.append("Print note's content", "cat", "");
+		script_model.append("Upload to pasterbin", "/usr/bin/pastebin", "");
+		config.setValue("ComandCount", script_model.rowCount());
+		for(int i=0; i<script_model.rowCount(); ++i)
+		{
+			config.setValue(QString("ComandName%1").arg(i), script_model.getName(i));
+			config.setValue(QString("ComandFile%1").arg(i), script_model.getFile(i));
+			config.setValue(QString("ComandIcon%1").arg(i), script_model.getIcon(i));
+		}
+	}
+	if((tb_items.size()==0) && !config.contains("Toolbar/itemCount"))
 	{
 		//Setting default toolbar items
 		tb_items.append(itemAdd);
@@ -126,26 +160,6 @@ void Settings::load()
 		for(int i=0; i<tb_items.size(); ++i)
 			if(tb_items[i]!=itemSeparator)
 				config.setValue(ToolbarAction(item_enum(tb_items[i])).pref_name(), i);
-		//Setting default path to notes
-	#ifdef Q_WS_X11
-		NotesPath = QDir::homePath()+"/.local/share/notes";
-		config.setValue("NotesPath", NotesPath);
-	#endif
-		//Setting default note options
-		NoteLinksHighlight = true;
-		config.setValue("NoteLinksHighlight", NoteLinksHighlight);
-		NoteLinksOpen = true;
-		config.setValue("NoteLinksOpen", NoteLinksOpen);
-		//Setting default scripts
-		script_model.append("Print note's content", "cat", "");
-		script_model.append("Upload to pasterbin", "/usr/bin/pastebin", "");
-		config.setValue("ComandCount", script_model.rowCount());
-		for(int i=0; i<script_model.rowCount(); ++i)
-		{
-			config.setValue(QString("ComandName%1").arg(i), script_model.getName(i));
-			config.setValue(QString("ComandFile%1").arg(i), script_model.getFile(i));
-			config.setValue(QString("ComandIcon%1").arg(i), script_model.getIcon(i));
-		}
 	}
 	loadLanguages();
 	//
