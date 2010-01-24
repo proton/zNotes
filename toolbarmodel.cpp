@@ -34,6 +34,7 @@ QVariant ItemModel::data(const QModelIndex &index, int role) const
 
 void ItemModel::setVector(const QVector<int>& nv)
 {
+	for(int i=0; i<v.size(); ++i) v[i]=false;
 	for(int i=0; i<nv.size(); ++i)
 	{
 		int id = nv[i];

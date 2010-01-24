@@ -20,7 +20,6 @@ configDialog::configDialog(QWidget *parent) :
 	//
 	m_ui->ed_NotesPath->setText(settings.getNotesPath());
 	m_ui->cb_HideStart->setChecked(settings.getHideStart());
-	//m_ui->cb_ToolbarHide->setChecked(settings.getHideToolbar());
 	m_ui->cb_FrameHide->setChecked(settings.getHideFrame());
 	m_ui->cb_StayTop->setChecked(settings.getStayTop());
 	//

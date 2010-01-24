@@ -12,7 +12,7 @@
 #include <QTranslator>
 #include <QLocale>
 
-//#include <QtDebug>
+#include <QtDebug>
 
 #include "scriptmodel.h"
 
