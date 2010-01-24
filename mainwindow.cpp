@@ -315,7 +315,7 @@ void MainWindow::formatItalic()
 	if(Notes.count()==0) return;
 	if(Notes.current()->noteType()!=Note::type_html) return;
 	QTextCharFormat format;
-	bool is_italic = actFormatBold->isChecked();
+	bool is_italic = actFormatItalic->isChecked();
 	format.setFontItalic(!is_italic);
 	Notes.current()->setSelFormat(format);
 }
@@ -325,7 +325,7 @@ void MainWindow::formatStrikeout()
 	if(Notes.count()==0) return;
 	if(Notes.current()->noteType()!=Note::type_html) return;
 	QTextCharFormat format;
-	bool is_strikeout = actFormatBold->isChecked();
+	bool is_strikeout = actFormatStrikeout->isChecked();
 	format.setFontStrikeOut(!is_strikeout);
 	Notes.current()->setSelFormat(format);
 }
@@ -335,7 +335,7 @@ void MainWindow::formatUnderline()
 	if(Notes.count()==0) return;
 	if(Notes.current()->noteType()!=Note::type_html) return;
 	QTextCharFormat format;
-	bool is_underline = actFormatBold->isChecked();
+	bool is_underline = actFormatUnderline->isChecked();
 	format.setFontUnderline(!is_underline);
 	Notes.current()->setSelFormat(format);
 }
