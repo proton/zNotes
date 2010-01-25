@@ -69,16 +69,15 @@ void MainWindow::NewNote()
 		filename = QString::number(++n);
 		file.setFileName(dir.absoluteFilePath(filename));
 	}
-	//TODO:
-//	Note* note = new Note(file);
-//	Notes.add(note);
-//	ui->tabs->addTab(note->widget(), note->title());
-//	ui->tabs->setCurrentWidget(note->widget());
-//	if(Notes.count()>0)
-//	{
-//		actRemove->setEnabled(true);
-//		actRename->setEnabled(true);
-//	}
+	Note* note = new Note(file);
+	Notes.add(note);
+	ui->tabs->addTab(note->widget(), note->title());
+	ui->tabs->setCurrentWidget(note->widget());
+	if(Notes.count()>0)
+	{
+		actRemove->setEnabled(true);
+		actRename->setEnabled(true);
+	}
 }
 
 void MainWindow::NewNoteHTML()
