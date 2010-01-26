@@ -190,7 +190,7 @@ Chcete své poznámky přesunout na nové místo?</translation>
     <message>
         <location filename="../toolbaraction.h" line="41"/>
         <source>Create new HTML note</source>
-        <translation type="unfinished"></translation>
+        <translation>Vytvořit novou poznámku HTML</translation>
     </message>
     <message>
         <location filename="../toolbaraction.h" line="42"/>
@@ -245,37 +245,37 @@ Chcete své poznámky přesunout na nové místo?</translation>
     <message>
         <location filename="../toolbaraction.h" line="52"/>
         <source>Bold</source>
-        <translation type="unfinished"></translation>
+        <translation>Tučné</translation>
     </message>
     <message>
         <location filename="../toolbaraction.h" line="53"/>
         <source>Italic</source>
-        <translation type="unfinished"></translation>
+        <translation>Kurzíva</translation>
     </message>
     <message>
         <location filename="../toolbaraction.h" line="54"/>
         <source>Strikeout</source>
-        <translation type="unfinished"></translation>
+        <translation>Přeškrtnuté</translation>
     </message>
     <message>
         <location filename="../toolbaraction.h" line="55"/>
         <source>Underline</source>
-        <translation type="unfinished"></translation>
+        <translation>Podtržení</translation>
     </message>
     <message>
         <location filename="../scriptmodel.cpp" line="30"/>
         <source>Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Název</translation>
     </message>
     <message>
         <location filename="../scriptmodel.cpp" line="31"/>
         <source>File</source>
-        <translation type="unfinished"></translation>
+        <translation>Soubor</translation>
     </message>
     <message>
         <location filename="../scriptmodel.cpp" line="32"/>
         <source>Icon</source>
-        <translation type="unfinished"></translation>
+        <translation>Ikona</translation>
     </message>
 </context>
 <context>
@@ -312,7 +312,7 @@ Chcete své poznámky přesunout na nové místo?</translation>
     <message>
         <location filename="../aboutDialog.cpp" line="17"/>
         <source>Copyright (c) 2010</source>
-        <translation type="unfinished"></translation>
+        <translation>Autorské právo (c) 2010</translation>
     </message>
     <message>
         <location filename="../aboutDialog.cpp" line="18"/>
@@ -337,7 +337,7 @@ Chcete své poznámky přesunout na nové místo?</translation>
     <message>
         <location filename="../aboutDialog.cpp" line="28"/>
         <source>Czech translation</source>
-        <translation type="unfinished"></translation>
+        <translation>Překlad do češtiny</translation>
     </message>
     <message>
         <location filename="../aboutDialog.cpp" line="31"/>
@@ -347,77 +347,77 @@ Chcete své poznámky přesunout na nové místo?</translation>
     <message>
         <location filename="../aboutDialog.cpp" line="32"/>
         <source>Icons:</source>
-        <translation>Ikonky:</translation>
+        <translation>Ikony:</translation>
     </message>
     <message>
         <location filename="../aboutDialog.cpp" line="34"/>
         <source>All icons are modified icons from Oxygen project</source>
-        <translation type="unfinished"></translation>
+        <translation>Všechny ikonky jsou upravenými ikonkami z projektu Oxygen</translation>
     </message>
     <message>
         <location filename="../aboutDialog.cpp" line="61"/>
         <source>Shortcuts:</source>
-        <translation type="unfinished"></translation>
+        <translation>Klávesové zkratky:</translation>
     </message>
     <message>
         <location filename="../aboutDialog.cpp" line="62"/>
         <source>Go to note n</source>
-        <translation type="unfinished"></translation>
+        <translation>Jít na poznámku n</translation>
     </message>
     <message>
         <location filename="../aboutDialog.cpp" line="63"/>
         <source>Go to previous note</source>
-        <translation type="unfinished"></translation>
+        <translation>Jít na předchozí poznámku</translation>
     </message>
     <message>
         <location filename="../aboutDialog.cpp" line="64"/>
         <source>Go to next note</source>
-        <translation type="unfinished"></translation>
+        <translation>Jít na další poznámku</translation>
     </message>
     <message>
         <location filename="../aboutDialog.cpp" line="65"/>
         <source>Create new note</source>
-        <translation type="unfinished"></translation>
+        <translation>Vytvořit novou poznámku</translation>
     </message>
     <message>
         <location filename="../aboutDialog.cpp" line="66"/>
         <source>Remove current note</source>
-        <translation type="unfinished"></translation>
+        <translation>Odstranit nynější poznámku</translation>
     </message>
     <message>
         <location filename="../aboutDialog.cpp" line="67"/>
         <source>Rename current note</source>
-        <translation type="unfinished"></translation>
+        <translation>Přejmenovat nynější poznámku</translation>
     </message>
     <message>
         <location filename="../aboutDialog.cpp" line="68"/>
         <source>Search in the notes&apos; text</source>
-        <translation type="unfinished"></translation>
+        <translation>Hledat v textu poznámky</translation>
     </message>
     <message>
         <location filename="../aboutDialog.cpp" line="69"/>
         <source>Make selected text bold</source>
-        <translation type="unfinished"></translation>
+        <translation>Udělat vybraný text tučný</translation>
     </message>
     <message>
         <location filename="../aboutDialog.cpp" line="70"/>
         <source>Make selected text italic</source>
-        <translation type="unfinished"></translation>
+        <translation>Udělat vybraný text kurzívní</translation>
     </message>
     <message>
         <location filename="../aboutDialog.cpp" line="71"/>
         <source>Make selected text strikeout</source>
-        <translation type="unfinished"></translation>
+        <translation>Udělat vybraný text přeškrtnutý</translation>
     </message>
     <message>
         <location filename="../aboutDialog.cpp" line="72"/>
         <source>Make selected text underline</source>
-        <translation type="unfinished"></translation>
+        <translation>Udělat vybraný text podtrhnutý</translation>
     </message>
     <message>
         <location filename="../aboutDialog.cpp" line="73"/>
         <source>Exit program</source>
-        <translation type="unfinished"></translation>
+        <translation>Ukončit program</translation>
     </message>
     <message>
         <source>All icons from Oxygen project</source>
@@ -480,7 +480,7 @@ Text licence lze nalézt v souboru LICENSE.</translation>
     <message>
         <location filename="../aboutDialog.ui" line="102"/>
         <source>Help</source>
-        <translation type="unfinished"></translation>
+        <translation>Nápověda</translation>
     </message>
     <message>
         <location filename="../aboutDialog.ui" line="130"/>
@@ -555,7 +555,7 @@ Text licence lze nalézt v souboru LICENSE.</translation>
     <message>
         <location filename="../configdialog.ui" line="246"/>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Poznámky</translation>
     </message>
     <message>
         <location filename="../configdialog.ui" line="289"/>
@@ -595,12 +595,12 @@ Text licence lze nalézt v souboru LICENSE.</translation>
     <message>
         <location filename="../configdialog.ui" line="298"/>
         <source>Highlight links in notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Zvýraznit odkazy v poznámkách</translation>
     </message>
     <message>
         <location filename="../configdialog.ui" line="305"/>
         <source>Open links (with pressed CTRL)</source>
-        <translation type="unfinished"></translation>
+        <translation>Otevřít poznámky (za současného stisku Ctrl)</translation>
     </message>
     <message>
         <source>Hide edit section</source>
