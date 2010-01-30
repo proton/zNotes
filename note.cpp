@@ -11,6 +11,7 @@ Note::Note(const QFileInfo& fileinfo)
 	type = ((file_info.suffix()=="htm")||(file_info.suffix()=="html"))?type_html:type_text;//detecting note's type
 	file.setFileName(file_info.absoluteFilePath());
 	note_title = file_info.baseName();
+	if(note_title.isEmpty()) note_title = file_info.fileName(); //fix for filenames starting with dot
 	//
 	load(); //loading note's content
 	switch(type)

@@ -137,11 +137,11 @@ void MainWindow::LoadNotes()
 		if(!dir.path().isEmpty()) settings.setNotesPath(dir.path());
 	}
 	//Loading files' list
-	dir.setFilter(QDir::Files | QDir::Readable);
+	//dir.setFilter(QDir::Files | QDir::Readable);
+	dir.setFilter(QDir::Files | QDir::Hidden | QDir::Readable);
 	QFileInfoList flist = dir.entryInfoList();
 	const QString& old_note = settings.getLastNote();
 	int old_index=-1;
-	//TODO:
 	for(int i=0; i<flist.size(); ++i)
 	{
 		//Loading note
