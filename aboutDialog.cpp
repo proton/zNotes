@@ -50,6 +50,9 @@ aboutDialog::aboutDialog(QWidget *parent) :
 		.arg("Nikita Lyalin (tinman321)").arg("tinman321@gmail.com")
 		.arg("ArchLinux"));
 	strCredits.append(QString("<p><b>%1</b> - <a href='mailto:%2'>%2</a><br/>%3</p>")
+		.arg("Eugene Pivnev (ti.eugene)").arg("ti.eugene@gmail.com")
+		.arg("Fedora, Mandriva, OpenSuse, Ubuntu"));
+	strCredits.append(QString("<p><b>%1</b> - <a href='mailto:%2'>%2</a><br/>%3</p>")
 		.arg("Oktay Cetinkaya (xelat)").arg("xelat09@yahoo.de")
 		.arg("Windows"));
 	strCredits.append(QString("<p><b>%1</b> - <a href='mailto:%2'>%2</a><br/>%3</p>")
