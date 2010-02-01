@@ -41,11 +41,11 @@ RESOURCES += znotes.qrc
 
 # This makes qmake generate translations
 isEmpty(QMAKE_LRELEASE):QMAKE_LRELEASE = $$[QT_INSTALL_BINS]/lrelease
-TSQM.name = lrelease \
+TSQM.name = $$QMAKE_LRELEASE \
     ${QMAKE_FILE_IN}
 TSQM.input = TRANSLATIONS
 TSQM.output = ${QMAKE_FILE_BASE}.qm
-TSQM.commands = lrelease \
+TSQM.commands = $$QMAKE_LRELEASE \
     ${QMAKE_FILE_IN}
 TSQM.CONFIG = no_link
 QMAKE_EXTRA_COMPILERS += TSQM
