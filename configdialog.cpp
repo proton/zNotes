@@ -19,6 +19,8 @@ configDialog::configDialog(QWidget *parent) :
 	m_ui->listToolbarActions->setModel(&mt_items);
 	//
 	m_ui->ed_NotesPath->setText(settings.getNotesPath());
+	m_ui->cb_ShowHidden->setChecked(settings.getShowHidden());
+	m_ui->cb_ShowExtensions->setChecked(settings.getShowExtensions());
 	m_ui->cb_HideStart->setChecked(settings.getHideStart());
 	m_ui->cb_FrameHide->setChecked(settings.getHideFrame());
 	m_ui->cb_StayTop->setChecked(settings.getStayTop());
@@ -61,6 +63,8 @@ void configDialog::SaveSettings()
 {
 	settings.setHideStart(m_ui->cb_HideStart->checkState());
 	settings.setNotesPath(m_ui->ed_NotesPath->text());
+	settings.setShowHidden(m_ui->cb_ShowHidden->checkState());
+	settings.setShowExtensions(m_ui->cb_ShowExtensions->checkState());
 	settings.setHideFrame(m_ui->cb_FrameHide->checkState());
 	settings.setStayTop(m_ui->cb_StayTop->checkState());
 	settings.setNoteFont(m_ui->lb_FontExample->font());

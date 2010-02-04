@@ -28,6 +28,8 @@ public:
 	inline bool getHideStart()						{ return HideStart; }
 	inline const QByteArray& getDialogGeometry()	{ return DialogGeometry; }
 	inline const QByteArray& getDialogState()		{ return DialogState; }
+	inline bool getShowHidden()						{ return ShowHidden; }
+	inline bool getShowExtensions()					{ return ShowExtensions; }
 	inline bool getHideFrame()						{ return HideFrame; }
 	inline bool getStayTop()						{ return StayTop; }
 	inline const QFont& getNoteFont()				{ return NoteFont; }
@@ -46,6 +48,8 @@ public:
 	void setHideStart(bool hide);
 	void setDialogGeometry(const QByteArray& g);
 	void setDialogState(const QByteArray& g);
+	void setShowHidden(bool s);
+	void setShowExtensions(bool s);
 	void setHideFrame(bool s);
 	void setStayTop(bool s);
 	void setNoteFont(const QFont& f);
@@ -78,6 +82,8 @@ private:
 	QByteArray DialogGeometry;
 	QByteArray DialogState;
 	//
+	bool ShowHidden;
+	bool ShowExtensions;
 	bool HideFrame;
 	bool StayTop;
 	//

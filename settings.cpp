@@ -25,6 +25,9 @@ void Settings::load()
 		DialogGeometry = config.value("DialogGeometry").toByteArray();
 		DialogState = config.value("DialogState").toByteArray();
 		//
+		ShowHidden = config.value("ShowHidden").toBool();
+		ShowExtensions = config.value("ShowExtensions").toBool();
+		//
 		HideFrame = config.value("HideFrame").toBool();
 		StayTop = config.value("StayTop").toBool();
 		//
@@ -204,6 +207,26 @@ void Settings::setHideStart(bool hide)
 	{
 		HideStart = hide;
 		config.setValue("HideStart", HideStart);
+	}
+}
+
+void Settings::setShowHidden(bool v)
+{
+	if(ShowHidden != v)
+	{
+		ShowHidden = v;
+		config.setValue("ShowHidden", ShowHidden);
+		//emit WindowStateChanged();
+	}
+}
+
+void Settings::setShowExtensions(bool v)
+{
+	if(ShowExtensions != v)
+	{
+		ShowExtensions = v;
+		config.setValue("ShowExtensions", ShowExtensions);
+		//emit WindowStateChanged();
 	}
 }
 
