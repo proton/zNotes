@@ -55,55 +55,7 @@ void Settings::load()
 				if(pos<tb_items.size()) tb_items[pos] = i; //Item's position
 			}
 		}
-		//
-		///Deprecated:
-		///TODO: remove this code, when in version 0.4.1:
-		//
-		else
-		{
-			bool old_settings_exist = (
-					config.contains("tbHideEdit") ||
-					config.contains("tbHideMove") ||
-					config.contains("tbHideCopy") ||
-					config.contains("tbHideSetup") ||
-					config.contains("tbHideRun") ||
-					config.contains("tbHideExit") );
-			if(old_settings_exist) //converting old toolbar's settings
-			{
-				if(!config.value("tbHideEdit").toBool())
-				{
-					tb_items.append(itemAdd);
-					tb_items.append(itemRemove);
-					tb_items.append(itemRename);
-					tb_items.append(itemSeparator);
-				}
-				if(!config.value("tbHideMove").toBool())
-				{
-					tb_items.append(itemPrev);
-					tb_items.append(itemNext);
-					tb_items.append(itemSeparator);
-				}
-				if(!config.value("tbHideCopy").toBool())
-				{
-					tb_items.append(itemCopy);
-					tb_items.append(itemSeparator);
-				}
-				if(!config.value("tbHideSetup").toBool())
-				{
-					tb_items.append(itemSetup);
-					tb_items.append(itemInfo);
-					tb_items.append(itemSeparator);
-				}
-				if(!config.value("tbHideRun").toBool())
-				{
-					tb_items.append(itemRun);
-					tb_items.append(itemSearch);
-					tb_items.append(itemSeparator);
-				}
-				if(!config.value("tbHideExit").toBool()) tb_items.append(itemExit);
-			}
-		}
-	}//TODO:
+	}
 	//If settings don't exist - setup default settings
 #ifdef Q_WS_X11
 	//Setting default path to notes
