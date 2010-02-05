@@ -333,6 +333,7 @@ MainWindow::MainWindow(QWidget *parent)
 	settings.load();
 	ui->setupUi(this);
 	Notes = new NoteList(ui->centralWidget);
+	ui->layout->addWidget(Notes->getWidget());
 	connect(Notes, SIGNAL(currentNoteChanged(int,int)), this, SLOT(currentNoteChanged(int,int)));
 	ui->wSearch->hide();
 	//restoring window state
@@ -465,7 +466,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::currentNoteChanged(int old_index, int new_index)
 {
-	disconnect(Notes->get(old_index), SIGNAL(formatChanged(QFont)), 0, 0); //disconnecting old note
+	if(old_index!=-1) disconnect(Notes->get(old_index), SIGNAL(formatChanged(QFont)), 0, 0); //disconnecting old note
 	//
 	actPrev->setDisabled(new_index==0); //if first note
 	actNext->setDisabled(new_index==Notes->last()); //if last note

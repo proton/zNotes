@@ -23,6 +23,9 @@
   <widget class="QWidget" name="centralWidget">
    <layout class="QVBoxLayout" name="verticalLayout">
     <item>
+     <layout class="QHBoxLayout" name="layout"/>
+    </item>
+    <item>
      <widget class="QWidget" name="wSearch" native="true">
       <layout class="QHBoxLayout" name="horizontalLayout">
        <item>
