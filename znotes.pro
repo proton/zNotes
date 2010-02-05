@@ -3,8 +3,7 @@
 # -------------------------------------------------
 TARGET = znotes
 VERSION = "0.4.1"
-QT += core \
-    gui
+QT += core gui
 TEMPLATE = app
 OBJECTS_DIR = build
 UI_DIR = build

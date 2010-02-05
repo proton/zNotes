@@ -12,7 +12,7 @@
 #include <QTranslator>
 #include <QLocale>
 
-//#include <QtDebug>
+#include <QtDebug>
 
 #include "scriptmodel.h"
 
@@ -100,6 +100,7 @@ private:
 	QLocale::Language system_language;
 signals:
 	void NotesPathChanged();
+	void ShowExtensionsChanged(bool show_extensions);
 	void WindowStateChanged();
 	void NoteFontChanged();
 	void NoteHighlightChanged();

@@ -59,7 +59,9 @@ void Settings::load()
 			}
 		}
 	}
-	//If settings don't exist - setup default settings
+	/*
+	* If settings don't exist - setup default settings
+	*/
 #ifdef Q_WS_X11
 	//Setting default path to notes
 	if(NotesPath.isEmpty())
@@ -69,12 +71,12 @@ void Settings::load()
 	}
 #endif
 	//Setting default note options
-	if(config.contains("NoteLinksHighlight"))
+	if(!config.contains("NoteLinksHighlight"))
 	{
 		NoteLinksHighlight = true;
 		config.setValue("NoteLinksHighlight", NoteLinksHighlight);
 	}
-	if(config.contains("NoteLinksOpen"))
+	if(!config.contains("NoteLinksOpen"))
 	{
 		NoteLinksOpen = true;
 		config.setValue("NoteLinksOpen", NoteLinksOpen);
@@ -92,9 +94,9 @@ void Settings::load()
 			config.setValue(QString("ComandIcon%1").arg(i), script_model.getIcon(i));
 		}
 	}
+	//Setting default toolbar items
 	if((tb_items.size()==0) && !config.contains("Toolbar/itemCount"))
 	{
-		//Setting default toolbar items
 		tb_items.append(itemAdd);
 		tb_items.append(itemRemove);
 		tb_items.append(itemRename);
@@ -217,6 +219,7 @@ void Settings::setShowHidden(bool v)
 		ShowHidden = v;
 		config.setValue("ShowHidden", ShowHidden);
 		//emit WindowStateChanged();
+		//TODO "show you must restart to take effect"
 	}
 }
 
@@ -226,7 +229,7 @@ void Settings::setShowExtensions(bool v)
 	{
 		ShowExtensions = v;
 		config.setValue("ShowExtensions", ShowExtensions);
-		//emit WindowStateChanged();
+		emit ShowExtensionsChanged(ShowExtensions);
 	}
 }
 

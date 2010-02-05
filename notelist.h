@@ -4,9 +4,11 @@
 #include "note.h"
 
 #include <QVector>
+#include <QObject>
 
-class NoteList
+class NoteList : public QObject
 {
+	Q_OBJECT
 public:
 	NoteList();
 	//
@@ -19,6 +21,8 @@ public:
 	inline int currentIndex() const { return current_index; }
 	//
 	void remove(int i);
+public slots:
+	void ShowExtensionsChanged(bool show_extensions);
 private:
 	QVector<Note*> vec;
 	int current_index;

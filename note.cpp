@@ -9,18 +9,7 @@ Note::Note(const QFileInfo& fileinfo)
 	: file_info(fileinfo), text_edit(0), content_changed(false)
 {
 	type = ((file_info.suffix()=="htm")||(file_info.suffix()=="html"))?type_html:type_text;//detecting note's type
-	file.setFileName(file_info.absoluteFilePath());
-	if(settings.getShowExtensions()) note_title = file_info.fileName();
-	else
-	{
-		note_title = file_info.baseName();
-		//fix for filenames starting with dot
-		if(note_title.isEmpty() && file_info.fileName()[0]=='.') note_title = file_info.fileName();
-	}
-	if(note_title.isEmpty())
-	{
-		note_title = '/'; //fix for operating systems with filesystems which supported slashes in filenames
-	}
+	setTitle(settings.getShowExtensions());
 	load(); //loading note's content
 	switch(type)
 	{
@@ -48,6 +37,23 @@ Note::Note(const QFileInfo& fileinfo)
 Note::~Note()
 {
 	if(text_edit) delete text_edit;
+}
+
+//Setting note title
+void Note::setTitle(bool show_extensions)
+{
+	file.setFileName(file_info.absoluteFilePath());
+	if(show_extensions) note_title = file_info.fileName();
+	else
+	{
+		note_title = file_info.baseName();
+		//fix for filenames starting with dot
+		if(note_title.isEmpty() && file_info.fileName()[0]=='.') note_title = file_info.fileName();
+	}
+	if(note_title.isEmpty())
+	{
+		note_title = '/'; //fix for operating systems with filesystems which supported slashes in filenames
+	}
 }
 
 //Reading file

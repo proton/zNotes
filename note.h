@@ -20,6 +20,7 @@ public:
 	//
 	QWidget* widget();
 	//
+	void setTitle(bool show_extensions);
 	void load(); //Reading note's content
 	void save(bool forced = false); //Saving note's content
 	void rename(const QString& new_name);
