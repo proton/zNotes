@@ -14,11 +14,13 @@ Note::Note(const QFileInfo& fileinfo)
 	else
 	{
 		note_title = file_info.baseName();
+		//fix for filenames starting with dot
 		if(note_title.isEmpty() && file_info.fileName()[0]=='.') note_title = file_info.fileName();
 	}
-	//TODO:
-	if(note_title.isEmpty()) note_title = file_info.fileName(); //fix for filenames starting with dot
-	//
+	if(note_title.isEmpty())
+	{
+		note_title = '/'; //fix for operating systems with filesystems which supported slashes in filenames
+	}
 	load(); //loading note's content
 	switch(type)
 	{
