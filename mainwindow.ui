@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>282</width>
-    <height>382</height>
+    <width>280</width>
+    <height>380</height>
    </rect>
   </property>
   <property name="contextMenuPolicy">
@@ -22,27 +22,6 @@
   </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QVBoxLayout" name="verticalLayout">
-    <item>
-     <widget class="QTabWidget" name="tabs">
-      <property name="sizePolicy">
-       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-        <horstretch>0</horstretch>
-        <verstretch>0</verstretch>
-       </sizepolicy>
-      </property>
-      <property name="tabPosition">
-       <enum>QTabWidget::West</enum>
-      </property>
-      <property name="documentMode">
-       <bool>true</bool>
-      </property>
-      <widget class="QWidget" name="note1">
-       <attribute name="title">
-        <string>1</string>
-       </attribute>
-      </widget>
-     </widget>
-    </item>
     <item>
      <widget class="QWidget" name="wSearch" native="true">
       <layout class="QHBoxLayout" name="horizontalLayout">

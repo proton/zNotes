@@ -34,9 +34,8 @@ private:
 	Ui::MainWindow *ui;
 	//
 	QDir dir;
-	NoteList Notes;
-	//QVector<Note*> Notes;
-
+	NoteList* Notes;
+	//
 	QSystemTrayIcon tray;
 	QMenu cmenu;
 	QMenu cmd_menu;
@@ -92,9 +91,7 @@ public slots:
 	//
 	void CopyNote();
 	//
-	void on_tabs_currentChanged(int index);
-	//
-	void SaveAll();
+	void currentNoteChanged(int old_index, int new_index);
 	//
 	void trayActivated(QSystemTrayIcon::ActivationReason reason);
 	//

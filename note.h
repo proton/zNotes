@@ -14,9 +14,10 @@ public:
 	Note(const QFileInfo& fileinfo);
 	~Note();
 	//
-	inline const QString& title() { return note_title; }
-	inline const QString absolutePath() { return file_info.absoluteFilePath(); }
-	inline Type noteType() { return type; }
+	inline const QString& title() const { return note_title; }
+	inline const QString absolutePath() const { return file_info.absoluteFilePath(); }
+	inline const QString fileName() const { return file_info.fileName(); }
+	inline Type noteType() const { return type; }
 	//
 	QWidget* widget();
 	//
