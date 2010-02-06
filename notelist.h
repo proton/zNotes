@@ -6,6 +6,7 @@
 #include <QVector>
 #include <QObject>
 #include <QTabWidget>
+#include <QSet>
 
 class NoteList : public QObject
 {
@@ -26,6 +27,8 @@ public:
 	void remove(int i);
 	void rename(int index, const QString& title);
 	//
+	inline bool has(const QString& filename) const { return notes_filenames.contains(filename); }
+	//
 	void move(const QString& path);
 	//
 	void search(const QString& text);
@@ -34,10 +37,12 @@ public:
 public slots:
 	void CurrentTabChanged(int index);
 	void ShowExtensionsChanged(bool show_extensions);
+	void TabPositionChanged();
 	void SaveAll();
 signals:
 	void currentNoteChanged(int old_index, int new_index);
 private:
+	QSet<QString> notes_filenames;
 	QVector<Note*> vec;
 	int current_index;
 	QTabWidget* tabs;

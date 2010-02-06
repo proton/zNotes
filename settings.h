@@ -16,6 +16,8 @@
 
 #include "scriptmodel.h"
 
+enum TabPosition { North, South, West, East };
+
 class Settings : public QObject
 {
 	Q_OBJECT
@@ -28,6 +30,7 @@ public:
 	inline bool getHideStart()						{ return HideStart; }
 	inline const QByteArray& getDialogGeometry()	{ return DialogGeometry; }
 	inline const QByteArray& getDialogState()		{ return DialogState; }
+	inline TabPosition getTabPosition()				{ return tab_position; }
 	inline bool getShowHidden()						{ return ShowHidden; }
 	inline bool getShowExtensions()					{ return ShowExtensions; }
 	inline bool getHideFrame()						{ return HideFrame; }
@@ -48,6 +51,7 @@ public:
 	void setHideStart(bool hide);
 	void setDialogGeometry(const QByteArray& g);
 	void setDialogState(const QByteArray& g);
+	void setTabPosition(TabPosition v);
 	void setShowHidden(bool s);
 	void setShowExtensions(bool s);
 	void setHideFrame(bool s);
@@ -82,6 +86,7 @@ private:
 	QByteArray DialogGeometry;
 	QByteArray DialogState;
 	//
+	TabPosition tab_position;
 	bool ShowHidden;
 	bool ShowExtensions;
 	bool HideFrame;
@@ -101,6 +106,8 @@ private:
 signals:
 	void NotesPathChanged();
 	void ShowExtensionsChanged(bool show_extensions);
+	void ShowHiddenChanged();
+	void TabPositionChanged();
 	void WindowStateChanged();
 	void NoteFontChanged();
 	void NoteHighlightChanged();

@@ -5,8 +5,11 @@ NoteList::NoteList(QWidget* parent)
 	: QObject(), vec(), current_index(-1)
 {
 	tabs = new QTabWidget(parent);
+	tabs->setDocumentMode(true);
+	tabs->setTabPosition(QTabWidget::TabPosition(settings.getTabPosition()));
 	connect(tabs, SIGNAL(currentChanged(int)), this, SLOT(CurrentTabChanged(int)));
 	connect(&settings, SIGNAL(ShowExtensionsChanged(bool)), this, SLOT(ShowExtensionsChanged(bool)));
+	connect(&settings, SIGNAL(TabPositionChanged()), this, SLOT(TabPositionChanged()));
 }
 
 void NoteList::add(const QFileInfo& fileinfo)
@@ -14,6 +17,7 @@ void NoteList::add(const QFileInfo& fileinfo)
 	Note* note = new Note(fileinfo);
 	vec.append(note);
 	tabs->addTab(note->widget(), note->title());
+	notes_filenames.insert(fileinfo.fileName());
 	//tabs->setCurrentWidget(note->widget());
 }
 
@@ -22,6 +26,7 @@ bool NoteList::load(const QFileInfo& fileinfo, const QString& old_title)
 	Note* note = new Note(fileinfo);
 	vec.append(note);
 	tabs->addTab(note->widget(), note->title());
+	notes_filenames.insert(fileinfo.fileName());
 	return (note->title()==old_title);
 }
 
@@ -81,6 +86,11 @@ void NoteList::ShowExtensionsChanged(bool show_extensions)
 		vec[i]->setTitle(show_extensions);
 		tabs->setTabText(i, vec[i]->title());
 	}
+}
+
+void NoteList::TabPositionChanged()
+{
+	tabs->setTabPosition(QTabWidget::TabPosition(settings.getTabPosition()));
 }
 
 //Saving all notes

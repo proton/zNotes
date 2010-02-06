@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>506</width>
-    <height>261</height>
+    <width>504</width>
+    <height>259</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -49,6 +49,41 @@
            <property name="text">
             <string>...</string>
            </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_8">
+         <item>
+          <widget class="QLabel" name="label_3">
+           <property name="text">
+            <string>Tabs position:</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QComboBox" name="cmb_TabPosition">
+           <item>
+            <property name="text">
+             <string>North</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>South</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>West</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>East</string>
+            </property>
+           </item>
           </widget>
          </item>
         </layout>
@@ -368,12 +403,12 @@
    <slot>setEnabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>140</x>
-     <y>173</y>
+     <x>149</x>
+     <y>207</y>
     </hint>
     <hint type="destinationlabel">
-     <x>288</x>
-     <y>173</y>
+     <x>488</x>
+     <y>210</y>
     </hint>
    </hints>
   </connection>

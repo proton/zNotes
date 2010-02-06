@@ -25,6 +25,7 @@ void Settings::load()
 		DialogGeometry = config.value("DialogGeometry").toByteArray();
 		DialogState = config.value("DialogState").toByteArray();
 		//
+		tab_position = TabPosition(config.value("TabPosition").toInt());
 		ShowHidden = config.value("ShowHidden").toBool();
 		ShowExtensions = config.value("ShowExtensions").toBool();
 		//
@@ -93,6 +94,12 @@ void Settings::load()
 			config.setValue(QString("ComandFile%1").arg(i), script_model.getFile(i));
 			config.setValue(QString("ComandIcon%1").arg(i), script_model.getIcon(i));
 		}
+	}
+	//Setting default tab position
+	if(!config.contains("TabPosition"))
+	{
+		tab_position = West;
+		config.setValue("TabPosition", tab_position);
 	}
 	//Setting default toolbar items
 	if((tb_items.size()==0) && !config.contains("Toolbar/itemCount"))
@@ -218,8 +225,7 @@ void Settings::setShowHidden(bool v)
 	{
 		ShowHidden = v;
 		config.setValue("ShowHidden", ShowHidden);
-		//emit WindowStateChanged();
-		//TODO "show you must restart to take effect"
+		emit ShowHiddenChanged();
 	}
 }
 
@@ -271,6 +277,16 @@ void Settings::setDialogState(const QByteArray& g)
 {
 	DialogState = g;
 	config.setValue("DialogState", DialogState);
+}
+
+/*
+  Setting tabs position
+*/
+void Settings::setTabPosition(TabPosition v)
+{
+	tab_position = v;
+	config.setValue("TabPosition", tab_position);
+	emit TabPositionChanged();
 }
 
 /*

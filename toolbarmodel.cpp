@@ -61,8 +61,8 @@ bool ItemModel::isUsed(int row) const
 	return v[row];
 }
 
-
 //------------------------------------------------------------------------------
+
 /*
   This model contains items, added on toolbar
 */
@@ -87,20 +87,24 @@ QVariant ItemToolbarModel::data(const QModelIndex &index, int role) const
 	}
 }
 
-void ItemToolbarModel::up(const QModelIndex &index)
+const QModelIndex& ItemToolbarModel::up(const QModelIndex &index)
 {
 	int row = index.row();
-	if(row==0) return;
+	if(row==0) return index; //if this item first
 	qSwap(v[row], v[row-1]);
 	emit reset();
+	QModelIndex new_index(this->index(row-1, index.column()));
+	return new_index;
 }
 
-void ItemToolbarModel::down(const QModelIndex &index)
+const QModelIndex& ItemToolbarModel::down(const QModelIndex &index)
 {
 	int row = index.row();
-	if(row==v.size()-1) return;
+	if(row==v.size()-1) return index; //if this item last
 	qSwap(v[row], v[row+1]);
 	emit reset();
+	QModelIndex new_index(this->index(row+1, index.column()));
+	return new_index;
 }
 
 void ItemToolbarModel::setVector(const QVector<int>& nv)

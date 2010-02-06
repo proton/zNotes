@@ -113,6 +113,10 @@ public slots:
 	//
 	void notesPathChanged();
 	void windowStateChanged();
+	//
+	void scanForNewFiles();
+	//
+	void warningSettingsChanged();
 private slots:
 	void on_edSearch_returnPressed();
 	void on_edSearch_textChanged(QString text);

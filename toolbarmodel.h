@@ -25,19 +25,19 @@ class ItemToolbarModel : public QAbstractListModel
 {
 public:
 	ItemToolbarModel();
-	int rowCount(const QModelIndex & = QModelIndex()) const;
-	QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;
+	int rowCount(const QModelIndex& = QModelIndex()) const;
+	QVariant data(const QModelIndex& index, int role = Qt::DisplayRole) const;
 	//
 	void setVector(const QVector<int>& nv);
 	const QVector<int>& getVector() const;
 	//
-	void up(const QModelIndex &index);
-	void down(const QModelIndex &index);
+	const QModelIndex& up(const QModelIndex& index);
+	const QModelIndex& down(const QModelIndex& index);
 	//
-	inline int getId(const QModelIndex & index) const { return v[index.row()]; }
+	inline int getId(const QModelIndex& index) const { return v[index.row()]; }
 	//
 	void insert(int, int);
-	void remove(const QModelIndex &);
+	void remove(const QModelIndex& index);
 private:
 	QVector<int> v;
 };

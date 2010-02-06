@@ -215,6 +215,26 @@ void MainWindow::windowStateChanged()
 	if(window_is_visible) show();
 }
 
+void MainWindow::scanForNewFiles()
+{
+	if(settings.getShowHidden()) dir.setFilter(QDir::Files | QDir::Hidden | QDir::Readable);
+	else dir.setFilter(QDir::Files | QDir::Readable);
+	dir.refresh();
+	QFileInfoList flist = dir.entryInfoList();
+	for(int i=0; i<flist.size(); ++i)
+	{
+		//Loading note
+		bool exists = Notes->has(flist.at(i).fileName());
+		if(!exists) Notes->add(flist.at(i));
+	}
+}
+
+void MainWindow::warningSettingsChanged()
+{
+	QMessageBox::information(this, tr("Settings changed"),
+			tr("You need restart application to get effect."));
+}
+
 void MainWindow::commandMenu()
 {
 	if(cmd_menu.actions().size()>0)
@@ -443,6 +463,7 @@ MainWindow::MainWindow(QWidget *parent)
 	SaveTimer.start(15000);
 	//
 	connect(&settings, SIGNAL(NotesPathChanged()), this, SLOT(notesPathChanged()));
+	connect(&settings, SIGNAL(ShowHiddenChanged()), this, SLOT(warningSettingsChanged()));
 	connect(&settings, SIGNAL(WindowStateChanged()), this, SLOT(windowStateChanged()));
 	connect(&settings, SIGNAL(ToolbarItemsChanged()), this, SLOT(actions_changed()));
 	connect(&settings.getScriptModel(), SIGNAL(dataChanged(const QModelIndex &, const QModelIndex &)),
