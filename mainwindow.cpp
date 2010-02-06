@@ -461,6 +461,11 @@ MainWindow::MainWindow(QWidget *parent)
 	//
 	connect(&SaveTimer, SIGNAL(timeout()), Notes, SLOT(SaveAll()));
 	SaveTimer.start(15000);
+	if(settings.getFileScanner())
+	{
+		connect(&ScanTimer, SIGNAL(timeout()), this, SLOT(scanForNewFiles()));
+		ScanTimer.start(settings.getFileScannerTimeout());
+	}
 	//
 	connect(&settings, SIGNAL(NotesPathChanged()), this, SLOT(notesPathChanged()));
 	connect(&settings, SIGNAL(ShowHiddenChanged()), this, SLOT(warningSettingsChanged()));

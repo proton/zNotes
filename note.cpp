@@ -105,12 +105,10 @@ void Note::save(bool forced)
 void Note::rename(const QString& new_name)
 {
 	file.close();
-	note_title = new_name;
-	QString suffix = file_info.completeSuffix();
-	QString fullname = QString("%1.%2").arg(note_title).arg(suffix);
-	QString absolute_file_path = file_info.dir().absoluteFilePath(fullname);
+	QString absolute_file_path = file_info.dir().absoluteFilePath(new_name);
 	file.rename(absolute_file_path);
 	file_info.setFile(file);
+	setTitle(settings.getShowExtensions());
 }
 
 //Moving note to another folder

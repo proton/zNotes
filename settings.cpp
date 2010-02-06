@@ -32,6 +32,9 @@ void Settings::load()
 		HideFrame = config.value("HideFrame").toBool();
 		StayTop = config.value("StayTop").toBool();
 		//
+		file_scanner = config.value("FileScanner").toBool();
+		file_scanner_timeout = config.value("FileScannerTimeout").toInt();
+		//
 		NoteFont.fromString(config.value("NoteFont").toString());
 		NoteLinksHighlight = config.value("NoteLinksHighlight").toBool();
 		NoteLinksOpen = config.value("NoteLinksOpen").toBool();

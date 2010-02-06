@@ -35,6 +35,8 @@ public:
 	inline bool getShowExtensions()					{ return ShowExtensions; }
 	inline bool getHideFrame()						{ return HideFrame; }
 	inline bool getStayTop()						{ return StayTop; }
+	inline bool getFileScanner()					{ return file_scanner; }
+	inline int getFileScannerTimeout()				{ return file_scanner_timeout; }
 	inline const QFont& getNoteFont()				{ return NoteFont; }
 	inline ScriptModel& getScriptModel()			{ return script_model; }
 	inline bool getScriptShowOutput()				{ return ScriptShowOutput; }
@@ -91,6 +93,9 @@ private:
 	bool ShowExtensions;
 	bool HideFrame;
 	bool StayTop;
+	//
+	bool file_scanner;
+	int file_scanner_timeout;
 	//
 	QFont NoteFont;
 	bool NoteLinksHighlight;

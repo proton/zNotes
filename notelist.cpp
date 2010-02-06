@@ -18,7 +18,7 @@ void NoteList::add(const QFileInfo& fileinfo)
 	vec.append(note);
 	tabs->addTab(note->widget(), note->title());
 	notes_filenames.insert(fileinfo.fileName());
-	//tabs->setCurrentWidget(note->widget());
+	tabs->setCurrentWidget(note->widget());
 }
 
 bool NoteList::load(const QFileInfo& fileinfo, const QString& old_title)

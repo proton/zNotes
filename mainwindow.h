@@ -42,6 +42,7 @@ private:
 	QSignalMapper cmd_mapper;
 	QSignalMapper alt_mapper;
 	QTimer SaveTimer;
+	QTimer ScanTimer;
 	//
 	QAction *actAdd, *actAddHtml, *actRemove, *actRename, *actPrev, *actNext;
 	QAction *actCopy, *actSetup, *actRun, *actExit, *actInfo, *actSearch;
