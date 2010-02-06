@@ -4,37 +4,42 @@
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../mainwindow.cpp" line="30"/>
+        <location filename="../mainwindow.cpp" line="29"/>
         <source>Delete Note</source>
         <translation>Smazat poznámku</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="31"/>
+        <location filename="../mainwindow.cpp" line="30"/>
         <source>Do you realy want to delete note %1 ?</source>
         <translation>Opravdu chcete smazat poznámku %1?</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="55"/>
+        <location filename="../mainwindow.cpp" line="50"/>
         <source>Rename note</source>
         <translation>Přejmenovat poznámku</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="55"/>
+        <location filename="../mainwindow.cpp" line="50"/>
         <source>New name:</source>
         <translation>Nový název:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="136"/>
+        <location filename="../mainwindow.cpp" line="123"/>
         <source>Select notes directory</source>
         <translation>Vybrat adresář s poznámkami</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="250"/>
+        <location filename="../mainwindow.cpp" line="234"/>
+        <source>Settings changed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="247"/>
         <source>Commandlist is clear</source>
         <translation>Seznam s příkazy je prázdný</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="250"/>
+        <location filename="../mainwindow.cpp" line="247"/>
         <source>List of commands is clear!
 You can add new commands in preferences.</source>
         <translation>Seznam s příkazy je prázdný!
@@ -65,24 +70,25 @@ psavichev@gmail.com
 2009г.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="217"/>
+        <location filename="../mainwindow.cpp" line="194"/>
         <source>Move Notes</source>
         <translation>Přesunout poznámky</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="218"/>
+        <location filename="../mainwindow.cpp" line="195"/>
         <source>Notes path changed!
 Do you want to move your notes to new place ?</source>
         <translation>Cesta k poznámkám byla změněna!
 Chcete své poznámky přesunout na nové místo?</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="227"/>
+        <location filename="../mainwindow.cpp" line="204"/>
         <source>Notes path change</source>
         <translation>Změna cesty k poznámkám</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="228"/>
+        <location filename="../mainwindow.cpp" line="205"/>
+        <location filename="../mainwindow.cpp" line="235"/>
         <source>You need restart application to get effect.</source>
         <translation>Aby se změna projevila, musíte aplikaci spustit znovu.</translation>
     </message>
@@ -132,13 +138,13 @@ Chcete své poznámky přesunout na nové místo?</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="380"/>
-        <location filename="../mainwindow.cpp" line="585"/>
+        <location filename="../mainwindow.cpp" line="571"/>
         <source>Show</source>
         <translation>Ukázat </translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="381"/>
-        <location filename="../mainwindow.cpp" line="586"/>
+        <location filename="../mainwindow.cpp" line="572"/>
         <source>Hide</source>
         <translation>Skrýt</translation>
     </message>
@@ -156,17 +162,16 @@ Chcete své poznámky přesunout na nové místo?</translation>
         <translation>zNotes</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="41"/>
         <source>1</source>
-        <translation>1</translation>
+        <translation type="obsolete">1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="52"/>
+        <location filename="../mainwindow.ui" line="34"/>
         <source>Enter text:</source>
         <translation>Zadat text:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="80"/>
+        <location filename="../mainwindow.ui" line="62"/>
         <source>Show Toolbar</source>
         <translation>Ukázat pruh s nástroji</translation>
     </message>
@@ -355,67 +360,67 @@ Chcete své poznámky přesunout na nové místo?</translation>
         <translation>Všechny ikonky jsou upravenými ikonkami z projektu Oxygen</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="61"/>
+        <location filename="../aboutDialog.cpp" line="67"/>
         <source>Shortcuts:</source>
         <translation>Klávesové zkratky:</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="62"/>
+        <location filename="../aboutDialog.cpp" line="68"/>
         <source>Go to note n</source>
         <translation>Jít na poznámku n</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="63"/>
+        <location filename="../aboutDialog.cpp" line="69"/>
         <source>Go to previous note</source>
         <translation>Jít na předchozí poznámku</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="64"/>
+        <location filename="../aboutDialog.cpp" line="70"/>
         <source>Go to next note</source>
         <translation>Jít na další poznámku</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="65"/>
+        <location filename="../aboutDialog.cpp" line="71"/>
         <source>Create new note</source>
         <translation>Vytvořit novou poznámku</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="66"/>
+        <location filename="../aboutDialog.cpp" line="72"/>
         <source>Remove current note</source>
         <translation>Odstranit nynější poznámku</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="67"/>
+        <location filename="../aboutDialog.cpp" line="73"/>
         <source>Rename current note</source>
         <translation>Přejmenovat nynější poznámku</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="68"/>
+        <location filename="../aboutDialog.cpp" line="74"/>
         <source>Search in the notes&apos; text</source>
         <translation>Hledat v textu poznámky</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="69"/>
+        <location filename="../aboutDialog.cpp" line="75"/>
         <source>Make selected text bold</source>
         <translation>Udělat vybraný text tučný</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="70"/>
+        <location filename="../aboutDialog.cpp" line="76"/>
         <source>Make selected text italic</source>
         <translation>Udělat vybraný text kurzívní</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="71"/>
+        <location filename="../aboutDialog.cpp" line="77"/>
         <source>Make selected text strikeout</source>
         <translation>Udělat vybraný text přeškrtnutý</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="72"/>
+        <location filename="../aboutDialog.cpp" line="78"/>
         <source>Make selected text underline</source>
         <translation>Udělat vybraný text podtrhnutý</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="73"/>
+        <location filename="../aboutDialog.cpp" line="79"/>
         <source>Exit program</source>
         <translation>Ukončit program</translation>
     </message>
@@ -449,22 +454,22 @@ Chcete své poznámky přesunout na nové místo?</translation>
         <translation></translation>
     </message>
     <message>
-        <location filename="../aboutDialog.ui" line="61"/>
+        <location filename="../aboutDialog.ui" line="64"/>
         <source>Authors</source>
         <translation>Autoři</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.ui" line="71"/>
+        <location filename="../aboutDialog.ui" line="74"/>
         <source>Credits</source>
         <translation>Poděkování</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.ui" line="81"/>
+        <location filename="../aboutDialog.ui" line="84"/>
         <source>License</source>
         <translation>Licence</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.ui" line="90"/>
+        <location filename="../aboutDialog.ui" line="93"/>
         <source>This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
 This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 See the GNU General Public License for more details.
@@ -478,12 +483,12 @@ Tento balík je šířen v naději, že bude užitečný, ale BEZ JAKÉKOLI ZÁR
 Text licence lze nalézt v souboru LICENSE.</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.ui" line="102"/>
+        <location filename="../aboutDialog.ui" line="105"/>
         <source>Help</source>
         <translation>Nápověda</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.ui" line="130"/>
+        <location filename="../aboutDialog.ui" line="133"/>
         <source>Close</source>
         <translation>Zavřít</translation>
     </message>
@@ -511,7 +516,7 @@ Text licence lze nalézt v souboru LICENSE.</translation>
         <translation></translation>
     </message>
     <message>
-        <location filename="../configdialog.ui" line="67"/>
+        <location filename="../configdialog.ui" line="127"/>
         <source>Hide in tray on start</source>
         <translation>Po spuštění skrýt v liště</translation>
     </message>
@@ -520,12 +525,12 @@ Text licence lze nalézt v souboru LICENSE.</translation>
         <translation type="obsolete">Скрыть панель инструментов</translation>
     </message>
     <message>
-        <location filename="../configdialog.ui" line="74"/>
+        <location filename="../configdialog.ui" line="141"/>
         <source>Hide window&apos;s frame</source>
         <translation>Skrýt rámeček okna</translation>
     </message>
     <message>
-        <location filename="../configdialog.ui" line="81"/>
+        <location filename="../configdialog.ui" line="134"/>
         <source>Stay on top</source>
         <translation>Zůstat v popředí</translation>
     </message>
@@ -534,12 +539,12 @@ Text licence lze nalézt v souboru LICENSE.</translation>
         <translation type="obsolete">Использовать нестандартный язык:</translation>
     </message>
     <message>
-        <location filename="../configdialog.ui" line="260"/>
+        <location filename="../configdialog.ui" line="333"/>
         <source>Font:</source>
         <translation>Písmo:</translation>
     </message>
     <message>
-        <location filename="../configdialog.ui" line="276"/>
+        <location filename="../configdialog.ui" line="349"/>
         <source>The quick brown fox jumps over the lazy dog.</source>
         <translation>Rychlá hnědá liška přeskakuje líného psa..</translation>
     </message>
@@ -548,57 +553,92 @@ Text licence lze nalézt v souboru LICENSE.</translation>
         <translation type="obsolete">Съешь еще этих мягких французских булок, да выпей чаю.</translation>
     </message>
     <message>
-        <location filename="../configdialog.ui" line="92"/>
+        <location filename="../configdialog.ui" line="165"/>
         <source>Use custom language:</source>
         <translation>Použít vlastní jazyk:</translation>
     </message>
     <message>
-        <location filename="../configdialog.ui" line="246"/>
+        <location filename="../configdialog.ui" line="319"/>
         <source>Notes</source>
         <translation>Poznámky</translation>
     </message>
     <message>
-        <location filename="../configdialog.ui" line="289"/>
+        <location filename="../configdialog.ui" line="362"/>
         <source>Change</source>
         <translation>Změnit</translation>
     </message>
     <message>
-        <location filename="../configdialog.ui" line="112"/>
+        <location filename="../configdialog.ui" line="185"/>
         <source>Scripts</source>
         <translation>Skripty</translation>
     </message>
     <message>
-        <location filename="../configdialog.ui" line="130"/>
+        <location filename="../configdialog.ui" line="61"/>
+        <source>Tabs position:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../configdialog.ui" line="69"/>
+        <source>North</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../configdialog.ui" line="74"/>
+        <source>South</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../configdialog.ui" line="79"/>
+        <source>West</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../configdialog.ui" line="84"/>
+        <source>East</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../configdialog.ui" line="96"/>
+        <source>Show hidden files</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../configdialog.ui" line="103"/>
+        <source>Show files extensions</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../configdialog.ui" line="203"/>
         <source>Add</source>
         <translation>Přidat</translation>
     </message>
     <message>
-        <location filename="../configdialog.ui" line="141"/>
+        <location filename="../configdialog.ui" line="214"/>
         <source>Remove</source>
         <translation>Odstranit</translation>
     </message>
     <message>
-        <location filename="../configdialog.ui" line="156"/>
+        <location filename="../configdialog.ui" line="229"/>
         <source>Show script&apos;s output</source>
         <translation>Ukázat výstup skriptu</translation>
     </message>
     <message>
-        <location filename="../configdialog.ui" line="163"/>
+        <location filename="../configdialog.ui" line="236"/>
         <source>Copy script&apos;s output to clipboard</source>
         <translation>Kopírovat výstup skriptu do schránky</translation>
     </message>
     <message>
-        <location filename="../configdialog.ui" line="173"/>
+        <location filename="../configdialog.ui" line="246"/>
         <source>Toolbar</source>
         <translation>Pruh s nástroji</translation>
     </message>
     <message>
-        <location filename="../configdialog.ui" line="298"/>
+        <location filename="../configdialog.ui" line="371"/>
         <source>Highlight links in notes</source>
         <translation>Zvýraznit odkazy v poznámkách</translation>
     </message>
     <message>
-        <location filename="../configdialog.ui" line="305"/>
+        <location filename="../configdialog.ui" line="378"/>
         <source>Open links (with pressed CTRL)</source>
         <translation>Otevřít poznámky (za současného stisku Ctrl)</translation>
     </message>
@@ -651,7 +691,7 @@ Text licence lze nalézt v souboru LICENSE.</translation>
         <translation type="obsolete">Выход</translation>
     </message>
     <message>
-        <location filename="../configdialog.cpp" line="103"/>
+        <location filename="../configdialog.cpp" line="107"/>
         <source>Select notes directory</source>
         <translation>Vybrat adresář s poznámkami</translation>
     </message>
