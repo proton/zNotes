@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>381</width>
-    <height>301</height>
+    <width>428</width>
+    <height>320</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -24,7 +24,7 @@
       <string/>
      </property>
      <property name="pixmap">
-      <pixmap resource="znotes.qrc">:/res/znotes32.png</pixmap>
+      <pixmap resource="znotes.qrc">:/res/znotes64.png</pixmap>
      </property>
      <property name="alignment">
       <set>Qt::AlignCenter</set>

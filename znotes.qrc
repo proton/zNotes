@@ -22,5 +22,6 @@
         <file>res/format_strikeout.png</file>
         <file>res/format_underline.png</file>
         <file>res/format_italic.png</file>
+        <file>res/znotes64.png</file>
     </qresource>
 </RCC>
