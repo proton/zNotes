@@ -32,10 +32,12 @@ bool NoteList::load(const QFileInfo& fileinfo, const QString& old_title)
 
 void NoteList::remove(int i)
 {
-	Note* current_note = current();
+	Note* note = vec[i];
+	QString filename = note->fileName();
 	tabs->removeTab(i);
-	delete current_note;
+	delete note;
 	vec.remove(i);
+	notes_filenames.remove(filename);
 }
 
 void NoteList::move(const QString& path)
@@ -67,8 +69,10 @@ void NoteList::rename(int index, const QString& title)
 {
 	Note* note = vec[index];
 	note->save();
+	notes_filenames.remove(note->fileName());
 	note->rename(title);
 	tabs->setTabText(index, note->title());
+	notes_filenames.insert(note->fileName());
 }
 
 void NoteList::CurrentTabChanged(int index)

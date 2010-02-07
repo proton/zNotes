@@ -43,17 +43,9 @@ Note::~Note()
 void Note::setTitle(bool show_extensions)
 {
 	file.setFileName(file_info.absoluteFilePath());
-	if(show_extensions) note_title = file_info.fileName();
-	else
-	{
-		note_title = file_info.baseName();
-		//fix for filenames starting with dot
-		if(note_title.isEmpty() && file_info.fileName()[0]=='.') note_title = file_info.fileName();
-	}
-	if(note_title.isEmpty())
-	{
-		note_title = '/'; //fix for operating systems with filesystems which supported slashes in filenames
-	}
+	note_title =
+		(show_extensions || (file_info.fileName()[0]=='.'))?
+			file_info.fileName() : file_info.baseName();
 }
 
 //Reading file

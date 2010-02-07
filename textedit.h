@@ -17,9 +17,9 @@ private:
 	Highlighter* highlighter;
 	TextType type;
 	//
-	void mousePressEvent(QMouseEvent *e);
-	void mouseMoveEvent(QMouseEvent *e);
-	void focusOutEvent(QFocusEvent *e);
+	void mousePressEvent(QMouseEvent* e);
+	void mouseMoveEvent(QMouseEvent* e);
+	void focusOutEvent(QFocusEvent* e);
 public:
 	inline const QString text() const
 	{
