@@ -78,7 +78,7 @@ aboutDialog::aboutDialog(QWidget *parent) :
 	strHelp.append(QString("<b>%1</b> - %2<br/>").arg("Ctrl+U").arg(tr("Make selected text underline")));
 	strHelp.append(QString("<b>%1</b> - %2<br/>").arg("Ctrl+Q").arg(tr("Exit program")));
 	ui->lbHelp->setHtml(strHelp);
-	adjustSize();
+	//adjustSize();
 }
 
 aboutDialog::~aboutDialog()
