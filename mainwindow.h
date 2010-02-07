@@ -113,6 +113,8 @@ public slots:
 	void cmdExec(const QString &);
 	//
 	void notesPathChanged();
+	void fileScannerEnChanged(bool);
+	void fileScannerTimeoutChanged(int);
 	void windowStateChanged();
 	//
 	void scanForNewFiles();

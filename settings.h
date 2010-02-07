@@ -58,6 +58,8 @@ public:
 	void setShowExtensions(bool s);
 	void setHideFrame(bool s);
 	void setStayTop(bool s);
+	void setFileScanner(bool v);
+	void setFileScannerTimeout(int v);
 	void setNoteFont(const QFont& f);
 	void setScriptShowOutput(bool b);
 	void setScriptCopyOutput(bool b);
@@ -110,6 +112,8 @@ private:
 	QLocale::Language system_language;
 signals:
 	void NotesPathChanged();
+	void FileScannerEnChanged(bool);
+	void FileScannerTimeoutChanged(int);
 	void ShowExtensionsChanged(bool show_extensions);
 	void ShowHiddenChanged();
 	void TabPositionChanged();

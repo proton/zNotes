@@ -205,6 +205,17 @@ void MainWindow::notesPathChanged()
 		tr("You need restart application to get effect."));
 }
 
+void MainWindow::fileScannerEnChanged(bool enabled)
+{
+	if(enabled) ScanTimer.start();
+	else ScanTimer.stop();
+}
+
+void MainWindow::fileScannerTimeoutChanged(int period)
+{
+	ScanTimer.setInterval(period);
+}
+
 void MainWindow::windowStateChanged()
 {
 	Qt::WindowFlags flags = Qt::Window;
@@ -466,6 +477,8 @@ MainWindow::MainWindow(QWidget *parent)
 		connect(&ScanTimer, SIGNAL(timeout()), this, SLOT(scanForNewFiles()));
 		ScanTimer.start(settings.getFileScannerTimeout());
 	}
+	connect(&settings, SIGNAL(FileScannerEnChanged(bool)), this, SLOT(fileScannerEnChanged(bool)));
+	connect(&settings, SIGNAL(FileScannerTimeoutChanged(int)), this, SLOT(fileScannerTimeoutChanged(int)));
 	//
 	connect(&settings, SIGNAL(NotesPathChanged()), this, SLOT(notesPathChanged()));
 	connect(&settings, SIGNAL(ShowHiddenChanged()), this, SLOT(warningSettingsChanged()));

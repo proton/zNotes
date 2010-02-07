@@ -98,6 +98,12 @@ void Settings::load()
 			config.setValue(QString("ComandIcon%1").arg(i), script_model.getIcon(i));
 		}
 	}
+	//Setting default filescanner timeout
+	if(!config.contains("FileScannerTimeout"))
+	{
+		file_scanner_timeout = 500;//500 msec
+		config.setValue("FileScannerTimeout", file_scanner_timeout);
+	}
 	//Setting default tab position
 	if(!config.contains("TabPosition"))
 	{
@@ -265,6 +271,37 @@ void Settings::setStayTop(bool top)
 		StayTop = top;
 		config.setValue("StayTop", StayTop);
 		emit WindowStateChanged();
+	}
+}
+
+/*
+  Saving option (scanning for new files)
+*/
+void setFileScanner(bool v);
+
+/*
+  Saving option (file scan timeout)
+*/
+void Settings::setFileScanner(bool v)
+{
+	if(file_scanner != v)
+	{
+		file_scanner = v;
+		config.setValue("FileScanner", file_scanner);
+		emit FileScannerEnChanged(file_scanner);
+	}
+}
+
+/*
+  Saving option (hiding window decoration)
+*/
+void Settings::setFileScannerTimeout(int v)
+{
+	if(file_scanner_timeout != v)
+	{
+		file_scanner_timeout = v;
+		config.setValue("FileScannerTimeout", file_scanner_timeout);
+		emit FileScannerTimeoutChanged(file_scanner_timeout);
 	}
 }
 
