@@ -31,7 +31,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="245"/>
         <source>Settings changed</source>
-        <translation type="unfinished"></translation>
+        <translation>Nastavení změněna</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="258"/>
@@ -575,47 +575,47 @@ Text licence lze nalézt v souboru LICENSE.</translation>
     <message>
         <location filename="../configdialog.ui" line="61"/>
         <source>Scan for new files in directory every </source>
-        <translation type="unfinished"></translation>
+        <translation>Prohledávat kvůli novým souborům v adresáři každých </translation>
     </message>
     <message>
         <location filename="../configdialog.ui" line="71"/>
         <source> ms</source>
-        <translation type="unfinished"></translation>
+        <translation> ms</translation>
     </message>
     <message>
         <location filename="../configdialog.ui" line="88"/>
         <source>Tabs position:</source>
-        <translation type="unfinished"></translation>
+        <translation>Poloha karet:</translation>
     </message>
     <message>
         <location filename="../configdialog.ui" line="96"/>
         <source>North</source>
-        <translation type="unfinished"></translation>
+        <translation>Nahoře</translation>
     </message>
     <message>
         <location filename="../configdialog.ui" line="101"/>
         <source>South</source>
-        <translation type="unfinished"></translation>
+        <translation>Dole</translation>
     </message>
     <message>
         <location filename="../configdialog.ui" line="106"/>
         <source>West</source>
-        <translation type="unfinished"></translation>
+        <translation>Vlevo</translation>
     </message>
     <message>
         <location filename="../configdialog.ui" line="111"/>
         <source>East</source>
-        <translation type="unfinished"></translation>
+        <translation>Vpravo</translation>
     </message>
     <message>
         <location filename="../configdialog.ui" line="123"/>
         <source>Show hidden files</source>
-        <translation type="unfinished"></translation>
+        <translation>Ukázat skryté soubory</translation>
     </message>
     <message>
         <location filename="../configdialog.ui" line="130"/>
         <source>Show files extensions</source>
-        <translation type="unfinished"></translation>
+        <translation>Ukázat souborové přípony</translation>
     </message>
     <message>
         <location filename="../configdialog.ui" line="230"/>
