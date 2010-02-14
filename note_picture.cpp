@@ -21,8 +21,12 @@ PictureNote::PictureNote(const QFileInfo& fileinfo, Note::Type type_new)
 
 PictureNote::~PictureNote()
 {
-	delete scroll_area;
-	delete label;
+	QLabel* tmp_label = label;
+	QScrollArea* tmp_scroll_area = scroll_area;
+	label=0;
+	scroll_area=0;
+	delete tmp_label;
+	delete tmp_scroll_area;
 }
 
 //Reading file

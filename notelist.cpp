@@ -65,10 +65,10 @@ bool NoteList::load(const QFileInfo& fileinfo, const QString& old_title)
 void NoteList::remove(int i)
 {
 	Note* note = vec[i];
-	QString filename = note->fileName();
 	tabs->removeTab(i);
-	delete note;
 	vec.remove(i);
+	QString filename = note->fileName();
+	delete note;
 	notes_filenames.remove(filename);
 }
 
