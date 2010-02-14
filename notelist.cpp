@@ -1,9 +1,19 @@
 #include "notelist.h"
 #include "settings.h"
 
+#include "note_text.h"
+#include "note_html.h"
+//#include "note_picture.h"
+
 NoteList::NoteList(QWidget* parent)
 	: QObject(), vec(), current_index(-1)
 {
+	//NOTE_TYPE_MAP init
+	NOTE_TYPE_MAP[""] = Note::type_text;
+	NOTE_TYPE_MAP["txt"] = Note::type_text;
+	NOTE_TYPE_MAP["htm"] = Note::type_html;
+	NOTE_TYPE_MAP["html"] = Note::type_html;
+
 	tabs = new QTabWidget(parent);
 	tabs->setDocumentMode(true);
 	tabs->setTabPosition(QTabWidget::TabPosition(settings.getTabPosition()));
@@ -12,21 +22,38 @@ NoteList::NoteList(QWidget* parent)
 	connect(&settings, SIGNAL(TabPositionChanged()), this, SLOT(TabPositionChanged()));
 }
 
-void NoteList::add(const QFileInfo& fileinfo)
+NoteList::~NoteList()
 {
-	Note* note = new Note(fileinfo);
+	tabs->clear();
+}
+
+Note::Type NoteList::getType(const QFileInfo& fileinfo) const
+{
+	return NOTE_TYPE_MAP[fileinfo.suffix()];
+}
+
+Note* NoteList::add(const QFileInfo& fileinfo, bool set_current)
+{
+	Note* note;
+
+	Note::Type type = getType(fileinfo);
+	switch(type)
+	{
+		case Note::type_text: note = new TextNote(fileinfo, type); break;
+		case Note::type_html: note = new HtmlNote(fileinfo, type); break;
+		default: note = new TextNote(fileinfo, type); break;
+	}
+
 	vec.append(note);
 	tabs->addTab(note->widget(), note->title());
 	notes_filenames.insert(fileinfo.fileName());
-	tabs->setCurrentWidget(note->widget());
+	if(set_current) tabs->setCurrentWidget(note->widget());
+	return note;
 }
 
 bool NoteList::load(const QFileInfo& fileinfo, const QString& old_title)
 {
-	Note* note = new Note(fileinfo);
-	vec.append(note);
-	tabs->addTab(note->widget(), note->title());
-	notes_filenames.insert(fileinfo.fileName());
+	Note* note = add(fileinfo, false);
 	return (note->title()==old_title);
 }
 

@@ -3,6 +3,7 @@
 #include "settings.h"
 #include "configdialog.h"
 #include "aboutDialog.h"
+#include "note_html.h"
 
 #include <QInputDialog>
 #include <QMessageBox>
@@ -10,6 +11,7 @@
 #include <QClipboard>
 #include <QProcess>
 #include <QCloseEvent>
+#include <QTextCharFormat>
 
 /*
 	Tray icon on windows is very small
@@ -310,7 +312,7 @@ void MainWindow::formatChanged(const QFont& font)
 void MainWindow::formatBold()
 {
 	if(Notes->empty()) return;
-	if(Notes->current()->noteType()!=Note::type_html) return;
+	if(Notes->current()->type()!=Note::type_html) return;
 	QTextCharFormat format;
 	bool is_bold = actFormatBold->isChecked();
 	format.setFontWeight(is_bold?QFont::Bold : QFont::Normal);
@@ -320,7 +322,7 @@ void MainWindow::formatBold()
 void MainWindow::formatItalic()
 {
 	if(Notes->empty()) return;
-	if(Notes->current()->noteType()!=Note::type_html) return;
+	if(Notes->current()->type()!=Note::type_html) return;
 	QTextCharFormat format;
 	bool is_italic = actFormatItalic->isChecked();
 	format.setFontItalic(is_italic);
@@ -330,7 +332,7 @@ void MainWindow::formatItalic()
 void MainWindow::formatStrikeout()
 {
 	if(Notes->empty()) return;
-	if(Notes->current()->noteType()!=Note::type_html) return;
+	if(Notes->current()->type()!=Note::type_html) return;
 	QTextCharFormat format;
 	bool is_strikeout = actFormatStrikeout->isChecked();
 	format.setFontStrikeOut(is_strikeout);
@@ -340,7 +342,7 @@ void MainWindow::formatStrikeout()
 void MainWindow::formatUnderline()
 {
 	if(Notes->empty()) return;
-	if(Notes->current()->noteType()!=Note::type_html) return;
+	if(Notes->current()->type()!=Note::type_html) return;
 	QTextCharFormat format;
 	bool is_underline = actFormatUnderline->isChecked();
 	format.setFontUnderline(is_underline);
@@ -501,25 +503,33 @@ MainWindow::~MainWindow()
 	settings.setDialogState(saveState());
 	//saving scrits
 	settings.setScripts();
+	//
+	delete Notes;
 }
 
 void MainWindow::currentNoteChanged(int old_index, int new_index)
 {
-	if(old_index!=-1) disconnect(Notes->get(old_index), SIGNAL(formatChanged(QFont)), 0, 0); //disconnecting old note
+	if(old_index!=-1)
+	{
+		Note* note = Notes->get(old_index);
+		if(note->type()==Note::type_html) disconnect(note, SIGNAL(formatChanged(QFont)), 0, 0); //disconnecting old note
+	}
 	//
 	actPrev->setDisabled(new_index==0); //if first note
 	actNext->setDisabled(new_index==Notes->last()); //if last note
 	//
-	switch(Notes->current()->noteType())
+	Note* note = Notes->current();
+	switch(note->type())
 	{
  case Note::type_html:
 		{
-			QFont font(Notes->current()->getSelFormat().font());
+			HtmlNote* htmlnote = dynamic_cast<HtmlNote*> (note);
+			QFont font(htmlnote->getSelFormat().font());
 			actFormatBold->setChecked(font.bold());
 			actFormatItalic->setChecked(font.italic());
 			actFormatStrikeout->setChecked(font.strikeOut());
 			actFormatUnderline->setChecked(font.underline());
-			connect(Notes->current(), SIGNAL(formatChanged(QFont)), this, SLOT(formatChanged(QFont))); //connecting old note
+			connect(htmlnote, SIGNAL(formatChanged(QFont)), this, SLOT(formatChanged(QFont))); //connecting old note
 			actFormatBold->setEnabled(true);
 			actFormatItalic->setEnabled(true);
 			actFormatStrikeout->setEnabled(true);

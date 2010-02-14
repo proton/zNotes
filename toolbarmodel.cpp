@@ -87,7 +87,7 @@ QVariant ItemToolbarModel::data(const QModelIndex &index, int role) const
 	}
 }
 
-const QModelIndex& ItemToolbarModel::up(const QModelIndex &index)
+QModelIndex ItemToolbarModel::up(const QModelIndex &index)
 {
 	int row = index.row();
 	if(row==0) return index; //if this item first
@@ -97,7 +97,7 @@ const QModelIndex& ItemToolbarModel::up(const QModelIndex &index)
 	return new_index;
 }
 
-const QModelIndex& ItemToolbarModel::down(const QModelIndex &index)
+QModelIndex ItemToolbarModel::down(const QModelIndex &index)
 {
 	int row = index.row();
 	if(row==v.size()-1) return index; //if this item last

@@ -31,8 +31,8 @@ public:
 	void setVector(const QVector<int>& nv);
 	const QVector<int>& getVector() const;
 	//
-	const QModelIndex& up(const QModelIndex& index);
-	const QModelIndex& down(const QModelIndex& index);
+	QModelIndex up(const QModelIndex& index);
+	QModelIndex down(const QModelIndex& index);
 	//
 	inline int getId(const QModelIndex& index) const { return v[index.row()]; }
 	//
