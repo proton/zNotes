@@ -22,7 +22,8 @@ SOURCES += main.cpp \
     textedit.cpp \
     notelist.cpp \
     note_text.cpp \
-    note_html.cpp
+    note_html.cpp \
+    note_picture.cpp
 HEADERS += mainwindow.h \
     configdialog.h \
     settings.h \
@@ -35,7 +36,8 @@ HEADERS += mainwindow.h \
     textedit.h \
     notelist.h \
     note_text.h \
-    note_html.h
+    note_html.h \
+    note_picture.h
 FORMS += mainwindow.ui \
     configdialog.ui \
     aboutDialog.ui
