@@ -1,3 +1,14 @@
+zNotes 0.4.1:
+* Added automatic scaning for new files
+* Some arhitecture changes
+* Added ability to change tabbar position
+* Added optional showing note's files extensions
+* Added optional showing hidden files
+* Improved toolbar editor
+* Fixed bug with loading default settings
+* Fixed bug with note's renaming
+* Fixed bug with pasting formatted text to text note
+
 zNotes 0.4.0:
 * Major architectural changes
 * Optimized source code
