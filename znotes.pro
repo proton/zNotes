@@ -3,7 +3,8 @@
 # -------------------------------------------------
 TARGET = znotes
 VERSION = "0.4.1"
-QT += core gui
+QT += core \
+    gui
 TEMPLATE = app
 OBJECTS_DIR = build
 UI_DIR = build
@@ -19,7 +20,10 @@ SOURCES += main.cpp \
     toolbarmodel.cpp \
     highlighter.cpp \
     textedit.cpp \
-    notelist.cpp
+    notelist.cpp \
+    note_text.cpp \
+    note_html.cpp \
+    note_picture.cpp
 HEADERS += mainwindow.h \
     configdialog.h \
     settings.h \
@@ -30,7 +34,10 @@ HEADERS += mainwindow.h \
     toolbarmodel.h \
     highlighter.h \
     textedit.h \
-    notelist.h
+    notelist.h \
+    note_text.h \
+    note_html.h \
+    note_picture.h
 FORMS += mainwindow.ui \
     configdialog.ui \
     aboutDialog.ui
@@ -49,9 +56,8 @@ TSQM.commands = $$QMAKE_LRELEASE \
 TSQM.CONFIG = no_link
 QMAKE_EXTRA_COMPILERS += TSQM
 PRE_TARGETDEPS += compiler_TSQM_make_all
-
 !os2:DEFINES += VERSION=\\\"$$VERSION\\\"
-unix {
+unix { 
     PREFIX = $$(PREFIX)
     isEmpty( PREFIX ):PREFIX = /usr
     DEFINES += PROGRAM_DATA_DIR=\\\"$$PREFIX/share/znotes/\\\"
@@ -67,7 +73,7 @@ unix {
         pixmap \
         desktop
 }
-os2 {
+os2 { 
     DEFINES += VERSION=\"$$VERSION\"
     RC_FILE = znotes_os2.rc
 }

@@ -1,56 +1,58 @@
 #ifndef NOTE_H
 #define NOTE_H
 
-#include "textedit.h"
+#include "settings.h"
 
+#include <QFileInfo>
 #include <QFile>
+#include <QTextCharFormat>
 
 class Note : public QObject
 {
 	Q_OBJECT
 public:
-	enum Type { type_text, type_html };
+	enum Type { type_text, type_html, type_picture };
 public:
-	Note(const QFileInfo& fileinfo);
-	~Note();
-	//
-	inline const QString& title() const { return note_title; }
+	Note(const QFileInfo& fileinfo, Note::Type type_new);
+	virtual ~Note();
+
+	inline const QString& title() const { return _title; }
 	inline const QString absolutePath() const { return file_info.absoluteFilePath(); }
 	inline const QString fileName() const { return file_info.fileName(); }
-	inline Type noteType() const { return type; }
-	//
-	QWidget* widget();
-	//
+	inline Type type() const { return _type; }
+
+	virtual QWidget* widget() = 0;
+
 	void setTitle(bool show_extensions);
-	void load(); //Reading note's content
-	void save(bool forced = false); //Saving note's content
+
+	virtual void load() = 0; //Reading note's content
+	virtual void save(bool forced = false) = 0; //Saving note's content
+
 	void rename(const QString& new_name);
 	void move(const QString& new_dir);
 	bool remove(); //Removing note from harddisk
-	//
-	void copy() const; //Coping note's content to clipboard
-	bool find(const QString& text, bool next=false); //Searching text in a note's content
-	//
-	void setSelFormat(const QTextCharFormat& format);
-	const QTextCharFormat getSelFormat() const;
+
+	virtual void copy() const = 0; //Coping note's content to clipboard
+	virtual bool find(const QString& text, bool next=false); //Searching text in a note's content
+
+	virtual void setSelFormat(const QTextCharFormat& format)
+	{
+		Q_UNUSED(format)
+	}
+	virtual QTextCharFormat getSelFormat() const
+	{
+		return QTextCharFormat();
+	}
 private:
-	Type type;
-	QString note_title;
+	Type _type;
+	QString _title;
 	QFileInfo file_info;
+protected:
 	QFile file;
-	//
-	TextEdit* text_edit;
-	//QWebView* html_edit;
 	//
 	bool content_changed;
 private slots:
 	void contentChanged();
-	void noteFontChanged();
-	void noteLinkOpenChanged();
-	//
-	void currentCharFormatChanged(const QTextCharFormat&);
-signals:
-	void formatChanged(const QFont& font);
 };
 
 #endif // NOTE_H

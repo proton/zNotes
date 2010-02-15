@@ -41,10 +41,9 @@ inline bool isOnLink(const QTextDocument& document, const QTextCursor& cursor, i
 
 //------------------------------------------------------------------------------
 
-TextEdit::TextEdit(TextType new_type)
-	: QTextEdit(), type(new_type)
+TextEdit::TextEdit()
+	: QTextEdit()
 {
-	setAcceptRichText(type==type_html);
 	highlighter = new Highlighter(document());
 	connect(&settings, SIGNAL(NoteHighlightChanged()), highlighter, SLOT(rehighlight()));
 }
