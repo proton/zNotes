@@ -46,7 +46,7 @@ private:
 	//
 	QAction *actAdd, *actAddHtml, *actRemove, *actRename, *actPrev, *actNext;
 	QAction *actCopy, *actSetup, *actRun, *actExit, *actInfo, *actSearch;
-	QAction *actFormatBold, *actFormatItalic, *actFormatStrikeout, *actFormatUnderline;
+	QAction *actFormatBold, *actFormatItalic, *actFormatStrikeout, *actFormatUnderline, *actFormatColor;
 	//
 	QAction *actShow, *actHide;
 	//
@@ -76,6 +76,7 @@ private:
 			case itemFormatItalic:	return actFormatItalic;
 			case itemFormatStrikeout: return actFormatStrikeout;
 			case itemFormatUnderline: return actFormatUnderline;
+			case itemFormatColor:	return actFormatColor;
 			default: return new QAction(this);
 		}
 	}
@@ -106,6 +107,7 @@ public slots:
 	void formatItalic();
 	void formatStrikeout();
 	void formatUnderline();
+	void formatTextColor();
 	//
 	void actions_changed();
 	//

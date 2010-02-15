@@ -12,6 +12,7 @@
 #include <QProcess>
 #include <QCloseEvent>
 #include <QTextCharFormat>
+#include <QColorDialog>
 
 /*
 	Tray icon on windows is very small
@@ -349,6 +350,22 @@ void MainWindow::formatUnderline()
 	Notes->current()->setSelFormat(format);
 }
 
+void MainWindow::formatTextColor()
+{
+	if(Notes->empty()) return;
+	Note* note = Notes->current();
+	if(note->type()!=Note::type_html) return;
+	QTextCharFormat format = note->getSelFormat();
+	QColor color = format.foreground().color();
+	QColorDialog dlg(color);
+	if(dlg.exec()==QDialog::Accepted)
+	{
+		color = dlg.currentColor();
+		format.setForeground(color);
+		note->setSelFormat(format);
+	}
+}
+
 //------------------------------------------------------------------------------
 
 //Function for fast generating actions
@@ -390,6 +407,7 @@ MainWindow::MainWindow(QWidget *parent)
 	actFormatItalic = GenerateAction(itemFormatItalic, true);
 	actFormatStrikeout = GenerateAction(itemFormatStrikeout, true);
 	actFormatUnderline = GenerateAction(itemFormatUnderline, true);
+	actFormatColor = GenerateAction(itemFormatColor);
 	actShow =	new QAction(tr("Show"),	parent);
 	actHide =	new QAction(tr("Hide"),	parent);
 	//Connecting actions with slots
@@ -409,6 +427,7 @@ MainWindow::MainWindow(QWidget *parent)
 	connect(actFormatItalic,	SIGNAL(triggered()), this, SLOT(formatItalic()));
 	connect(actFormatStrikeout,	SIGNAL(triggered()), this, SLOT(formatStrikeout()));
 	connect(actFormatUnderline,	SIGNAL(triggered()), this, SLOT(formatUnderline()));
+	connect(actFormatColor,	SIGNAL(triggered()), this, SLOT(formatTextColor()));
 	//
 	connect(actShow,	SIGNAL(triggered()), this, SLOT(show()));
 	connect(actHide,	SIGNAL(triggered()), this, SLOT(hide()));
@@ -534,6 +553,7 @@ void MainWindow::currentNoteChanged(int old_index, int new_index)
 			actFormatItalic->setEnabled(true);
 			actFormatStrikeout->setEnabled(true);
 			actFormatUnderline->setEnabled(true);
+			actFormatColor->setEnabled(true);
 		}
 		break;
  default:
@@ -542,6 +562,7 @@ void MainWindow::currentNoteChanged(int old_index, int new_index)
 			actFormatItalic->setEnabled(false);
 			actFormatStrikeout->setEnabled(false);
 			actFormatUnderline->setEnabled(false);
+			actFormatColor->setEnabled(false);
 		}
 		break;
 	}

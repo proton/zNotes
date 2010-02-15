@@ -23,5 +23,6 @@
         <file>res/format_underline.png</file>
         <file>res/format_italic.png</file>
         <file>res/znotes64.png</file>
+        <file>res/format_color.png</file>
     </qresource>
 </RCC>

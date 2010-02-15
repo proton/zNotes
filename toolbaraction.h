@@ -24,6 +24,7 @@ enum item_enum
 	itemFormatItalic,
 	itemFormatStrikeout,
 	itemFormatUnderline,
+	itemFormatColor,
 	itemMax
 };
 
@@ -53,6 +54,7 @@ public:
 			case itemFormatItalic:		return QObject::tr("Italic");
 			case itemFormatStrikeout:	return QObject::tr("Strikeout");
 			case itemFormatUnderline:	return QObject::tr("Underline");
+			case itemFormatColor:		return QObject::tr("Text color");
 			default: return 0;
 		}
 	}
@@ -77,6 +79,7 @@ public:
 			case itemFormatItalic:		return QIcon(":/res/format_italic.png");
 			case itemFormatStrikeout:	return QIcon(":/res/format_strikeout.png");
 			case itemFormatUnderline:	return QIcon(":/res/format_underline.png");
+			case itemFormatColor:		return QIcon(":/res/format_color.png");
 			default: return QIcon();
 		}
 	}
@@ -101,6 +104,7 @@ public:
 			case itemFormatItalic:		return "Toolbar/itemFormatItalic";
 			case itemFormatStrikeout:	return "Toolbar/itemFormatStrikeout";
 			case itemFormatUnderline:	return "Toolbar/itemFormatUnderline";
+			case itemFormatColor:		return "Toolbar/itemFormatColor";
 			default:			return "";
 		}
 	}
