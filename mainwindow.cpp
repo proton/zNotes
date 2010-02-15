@@ -384,7 +384,7 @@ MainWindow::MainWindow(QWidget *parent)
 	actSetup = GenerateAction(itemSetup);
 	actInfo = GenerateAction(itemInfo);
 	actRun = GenerateAction(itemRun);
-	actSearch = GenerateAction(itemSearch);
+	actSearch = GenerateAction(itemSearch, true);
 	actExit = GenerateAction(itemExit);
 	actFormatBold = GenerateAction(itemFormatBold, true);
 	actFormatItalic = GenerateAction(itemFormatItalic, true);
@@ -403,7 +403,7 @@ MainWindow::MainWindow(QWidget *parent)
 	connect(actSetup,	SIGNAL(triggered()), this, SLOT(showPrefDialog()));
 	connect(actInfo,	SIGNAL(triggered()), this, SLOT(showAboutDialog()));
 	connect(actRun,		SIGNAL(triggered()), this, SLOT(commandMenu()));
-	connect(actSearch,	SIGNAL(triggered()), this, SLOT(showSearchBar()));
+	connect(actSearch,	SIGNAL(triggered(bool)), this, SLOT(showSearchBar(bool)));
 	connect(actExit,	SIGNAL(triggered()), qApp, SLOT(quit()));
 	connect(actFormatBold,	SIGNAL(triggered()), this, SLOT(formatBold()));
 	connect(actFormatItalic,	SIGNAL(triggered()), this, SLOT(formatItalic()));
@@ -547,10 +547,14 @@ void MainWindow::currentNoteChanged(int old_index, int new_index)
 	}
 }
 
-void MainWindow::showSearchBar()
+void MainWindow::showSearchBar(bool show)
 {
-	ui->wSearch->show();
-	ui->edSearch->setFocus();
+	ui->wSearch->setVisible(show);
+	if(show)
+	{
+		ui->edSearch->setFocus();
+		if(!actSearch->isChecked()) actSearch->setChecked(true);
+	}
 }
 
 /*

@@ -99,7 +99,7 @@ public slots:
 	void commandMenu();
 	void showAboutDialog();
 	void showPrefDialog();
-	void showSearchBar();
+	void showSearchBar(bool show = true);
 	//
 	void formatChanged(const QFont& font);
 	void formatBold();
