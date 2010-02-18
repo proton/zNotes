@@ -2,7 +2,7 @@
 # Project created by QtCreator 2009-09-20T17:20:55
 # -------------------------------------------------
 TARGET = znotes
-VERSION = "0.4.1"
+VERSION = "0.4.2"
 QT += core \
     gui
 TEMPLATE = app
@@ -23,7 +23,8 @@ SOURCES += main.cpp \
     notelist.cpp \
     note_text.cpp \
     note_html.cpp \
-    note_picture.cpp
+    note_picture.cpp \
+    application.cpp
 HEADERS += mainwindow.h \
     configdialog.h \
     settings.h \
@@ -37,7 +38,8 @@ HEADERS += mainwindow.h \
     notelist.h \
     note_text.h \
     note_html.h \
-    note_picture.h
+    note_picture.h \
+    application.h
 FORMS += mainwindow.ui \
     configdialog.ui \
     aboutDialog.ui
