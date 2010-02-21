@@ -35,6 +35,8 @@ public:
 	inline bool getShowExtensions()					{ return ShowExtensions; }
 	inline bool getHideFrame()						{ return HideFrame; }
 	inline bool getStayTop()						{ return StayTop; }
+	inline bool getSingleInstance()					{ return single_instance; }
+	inline bool getCopyStartRaise()					{ return copy_start_raise; }
 	inline bool getFileScanner()					{ return file_scanner; }
 	inline int getFileScannerTimeout()				{ return file_scanner_timeout; }
 	inline const QFont& getNoteFont()				{ return NoteFont; }
@@ -58,6 +60,8 @@ public:
 	void setShowExtensions(bool s);
 	void setHideFrame(bool s);
 	void setStayTop(bool s);
+	void setSingleInstance(bool s);
+	void setCopyStartRaise(bool s);
 	void setFileScanner(bool v);
 	void setFileScannerTimeout(int v);
 	void setNoteFont(const QFont& f);
@@ -95,6 +99,9 @@ private:
 	bool ShowExtensions;
 	bool HideFrame;
 	bool StayTop;
+	//
+	bool single_instance;
+	bool copy_start_raise;
 	//
 	bool file_scanner;
 	int file_scanner_timeout;

@@ -32,6 +32,9 @@ void Settings::load()
 		HideFrame = config.value("HideFrame").toBool();
 		StayTop = config.value("StayTop").toBool();
 		//
+		single_instance = config.value("SingleInstance").toBool();
+		copy_start_raise = config.value("CopyStartRaise").toBool();
+		//
 		file_scanner = config.value("FileScanner").toBool();
 		file_scanner_timeout = config.value("FileScannerTimeout").toInt();
 		//
@@ -74,6 +77,14 @@ void Settings::load()
 		config.setValue("NotesPath", NotesPath);
 	}
 #endif
+	//Settings single instance options
+	if(!config.contains("SingleInstance"))
+	{
+		single_instance = true;
+		config.setValue("SingleInstance", single_instance);
+		copy_start_raise = true;
+		config.setValue("CopyStartRaise", copy_start_raise);
+	}
 	//Setting default note options
 	if(!config.contains("NoteLinksHighlight"))
 	{
@@ -271,6 +282,24 @@ void Settings::setStayTop(bool top)
 		StayTop = top;
 		config.setValue("StayTop", StayTop);
 		emit WindowStateChanged();
+	}
+}
+
+void Settings::setSingleInstance(bool v)
+{
+	if(single_instance != v)
+	{
+		single_instance = v;
+		config.setValue("SingleInstance", single_instance);
+	}
+}
+
+void Settings::setCopyStartRaise(bool v)
+{
+	if(copy_start_raise != v)
+	{
+		copy_start_raise = v;
+		config.setValue("CopyStartRaise", copy_start_raise);
 	}
 }
 

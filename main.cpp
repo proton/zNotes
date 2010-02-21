@@ -7,7 +7,7 @@ int main(int argc, char *argv[])
 	zApplication a(argc, argv);
 	settings.load();
 	//if another copy is startes
-	if(a.sendMessage("proton is our god!") /*&& settings.*/)
+	if(a.sendMessage("proton is our god!") && settings.getSingleInstance())
 		return 0;
 	a.setQuitOnLastWindowClosed(false);
 	MainWindow w;

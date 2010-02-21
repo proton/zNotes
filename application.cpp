@@ -30,7 +30,8 @@ bool zApplication::sendMessage(const QString &message, int timeout)
 
 void zApplication::copyStarted(const QString&)
 {
-	if(main_window!=NULL)
+	//Raising main window on copy start
+	if(main_window!=NULL && settings.getCopyStartRaise())
 	{
 		main_window->show();
 	}

@@ -28,6 +28,9 @@ configDialog::configDialog(QWidget *parent) :
 	m_ui->cb_FrameHide->setChecked(settings.getHideFrame());
 	m_ui->cb_StayTop->setChecked(settings.getStayTop());
 	//
+	m_ui->cb_SingleInstance->setChecked(settings.getSingleInstance());
+	m_ui->cb_CopyStartRaise->setChecked(settings.getCopyStartRaise());
+	//
 	m_ui->tabScripts->setModel(&settings.getScriptModel());
 	m_ui->tabScripts->resizeColumnsToContents();
 	m_ui->cb_ScriptShowOutput->setChecked(settings.getScriptShowOutput());
@@ -73,6 +76,8 @@ void configDialog::SaveSettings()
 	settings.setShowExtensions(m_ui->cb_ShowExtensions->checkState());
 	settings.setHideFrame(m_ui->cb_FrameHide->checkState());
 	settings.setStayTop(m_ui->cb_StayTop->checkState());
+	settings.setSingleInstance(m_ui->cb_SingleInstance->checkState());
+	settings.setCopyStartRaise(m_ui->cb_CopyStartRaise->checkState());
 	settings.setNoteFont(m_ui->lb_FontExample->font());
 	settings.setNoteLinksHighlight(m_ui->cb_NoteLinksHighlight->checkState());
 	settings.setNoteLinksOpen(m_ui->cb_NoteLinksOpen->checkState());
