@@ -6,6 +6,10 @@
 #include <QApplication>
 #include <QDir>
 
+/*
+  Note is abstract class for notes
+*/
+
 Note::Note(const QFileInfo& fileinfo, Note::Type type_new)
 	: _type(type_new),
 	file_info(fileinfo),
@@ -63,6 +67,7 @@ bool Note::find(const QString& text, bool next)
 
 //------------------------------------------------------------------------------
 
+//On note content changing
 void Note::contentChanged()
 {
 	content_changed = true;
