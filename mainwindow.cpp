@@ -380,7 +380,6 @@ inline QAction* GenerateAction(item_enum item, bool checkable = false)
 MainWindow::MainWindow(QWidget *parent)
 	: QMainWindow(parent), ui(new Ui::MainWindow)
 {
-	settings.load();
 	ui->setupUi(this);
 	Notes = new NoteList(ui->centralWidget);
 	ui->layout->addWidget(Notes->getWidget());

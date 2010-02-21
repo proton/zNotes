@@ -1,6 +1,7 @@
 # -------------------------------------------------
 # Project created by QtCreator 2009-09-20T17:20:55
 # -------------------------------------------------
+#CONFIG += ololo
 TARGET = znotes
 VERSION = "0.4.2"
 QT += core \
@@ -24,7 +25,7 @@ SOURCES += main.cpp \
     note_text.cpp \
     note_html.cpp \
     note_picture.cpp \
-    application.cpp
+	application.cpp
 HEADERS += mainwindow.h \
     configdialog.h \
     settings.h \
@@ -39,13 +40,27 @@ HEADERS += mainwindow.h \
     note_text.h \
     note_html.h \
     note_picture.h \
-    application.h
+	application.h
 FORMS += mainwindow.ui \
     configdialog.ui \
     aboutDialog.ui
 TRANSLATIONS += translations/znotes_ru.ts \
     translations/znotes_cs.ts
 RESOURCES += znotes.qrc
+
+ololo {
+	QT += network
+
+	DEFINES += SINGLE_INSTANCE
+
+	SOURCES += single_inst/qtlockedfile_win.cpp \
+	single_inst/qtlockedfile_unix.cpp \
+	single_inst/qtlockedfile.cpp \
+	single_inst/qtlocalpeer.cpp
+
+	HEADERS += single_inst/qtlockedfile.h \
+	single_inst/qtlocalpeer.h
+}
 
 # This makes qmake generate translations
 isEmpty(QMAKE_LRELEASE):QMAKE_LRELEASE = $$[QT_INSTALL_BINS]/lrelease
@@ -59,7 +74,7 @@ TSQM.CONFIG = no_link
 QMAKE_EXTRA_COMPILERS += TSQM
 PRE_TARGETDEPS += compiler_TSQM_make_all
 !os2:DEFINES += VERSION=\\\"$$VERSION\\\"
-unix { 
+unix {
     PREFIX = $$(PREFIX)
     isEmpty( PREFIX ):PREFIX = /usr
     DEFINES += PROGRAM_DATA_DIR=\\\"$$PREFIX/share/znotes/\\\"
@@ -75,7 +90,7 @@ unix {
         pixmap \
         desktop
 }
-os2 { 
+os2 {
     DEFINES += VERSION=\"$$VERSION\"
     RC_FILE = znotes_os2.rc
 }
