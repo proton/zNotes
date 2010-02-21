@@ -25,30 +25,30 @@ public:
 	Settings();
 	void load();
 	//
-	inline const QString& getNotesPath()			{ return NotesPath; }
-	inline const QString& getLastNote()				{ return LastNote; }
-	inline bool getHideStart()						{ return HideStart; }
-	inline const QByteArray& getDialogGeometry()	{ return DialogGeometry; }
-	inline const QByteArray& getDialogState()		{ return DialogState; }
+	inline const QString& getNotesPath()			{ return notes_path; }
+	inline const QString& getLastNote()				{ return last_note; }
+	inline bool getHideStart()						{ return hide_start; }
+	inline const QByteArray& getDialogGeometry()	{ return dialog_geometry; }
+	inline const QByteArray& getDialogState()		{ return dialog_state; }
 	inline TabPosition getTabPosition()				{ return tab_position; }
-	inline bool getShowHidden()						{ return ShowHidden; }
-	inline bool getShowExtensions()					{ return ShowExtensions; }
-	inline bool getHideFrame()						{ return HideFrame; }
-	inline bool getStayTop()						{ return StayTop; }
+	inline bool getShowHidden()						{ return show_hidden; }
+	inline bool getShowExtensions()					{ return show_extensions; }
+	inline bool getHideFrame()						{ return hide_frame; }
+	inline bool getStayTop()						{ return stay_top; }
 	inline bool getSingleInstance()					{ return single_instance; }
 	inline bool getCopyStartRaise()					{ return copy_start_raise; }
 	inline bool getFileScanner()					{ return file_scanner; }
 	inline int getFileScannerTimeout()				{ return file_scanner_timeout; }
-	inline const QFont& getNoteFont()				{ return NoteFont; }
+	inline const QFont& getNoteFont()				{ return note_font; }
 	inline ScriptModel& getScriptModel()			{ return script_model; }
-	inline bool getScriptShowOutput()				{ return ScriptShowOutput; }
-	inline bool getScriptCopyOutput()				{ return ScriptCopyOutput; }
+	inline bool getScriptShowOutput()				{ return script_show_output; }
+	inline bool getScriptCopyOutput()				{ return script_copy_output; }
 	inline const QVector<int>& getToolbarItems()	{ return tb_items; }
 	inline const QMap<QLocale::Language, QString>& getTranslations()	{ return translations; }
-	inline QLocale::Language getLanguageCurrent()	{ return LanguageCurrent; }
-	inline bool getLanguageCustom()					{ return LanguageCustom; }
-	inline bool getNoteLinksHighlight()				{ return NoteLinksHighlight; }
-	inline bool getNoteLinksOpen()					{ return NoteLinksOpen; }
+	inline QLocale::Language getLanguageCurrent()	{ return language_current; }
+	inline bool getLanguageCustom()					{ return language_custom; }
+	inline bool getNoteLinksHighlight()				{ return note_links_highlight; }
+	inline bool getNoteLinksOpen()					{ return note_links_open; }
 	//
 	void setNotesPath(const QString& path);
 	void setLastNote(const QString& name);
@@ -84,21 +84,21 @@ private:
 	QTranslator qtranslator;
 	//
 	QMap<QLocale::Language, QString> translations;
-	QLocale::Language LanguageCurrent;
-	bool LanguageCustom;
+	QLocale::Language language_current;
+	bool language_custom;
 	//
-	QString NotesPath;
-	QString LastNote;
-	bool HideStart;
+	QString notes_path;
+	QString last_note;
+	bool hide_start;
 	//
-	QByteArray DialogGeometry;
-	QByteArray DialogState;
+	QByteArray dialog_geometry;
+	QByteArray dialog_state;
 	//
 	TabPosition tab_position;
-	bool ShowHidden;
-	bool ShowExtensions;
-	bool HideFrame;
-	bool StayTop;
+	bool show_hidden;
+	bool show_extensions;
+	bool hide_frame;
+	bool stay_top;
 	//
 	bool single_instance;
 	bool copy_start_raise;
@@ -106,13 +106,13 @@ private:
 	bool file_scanner;
 	int file_scanner_timeout;
 	//
-	QFont NoteFont;
-	bool NoteLinksHighlight;
-	bool NoteLinksOpen;
+	QFont note_font;
+	bool note_links_highlight;
+	bool note_links_open;
 	//
 	ScriptModel script_model;
-	bool ScriptShowOutput;
-	bool ScriptCopyOutput;
+	bool script_show_output;
+	bool script_copy_output;
 	//
 	QVector<int> tb_items;
 	//

@@ -18,19 +18,19 @@ void Settings::load()
 {
 	if(config.allKeys().size()>0) //if exist - reading settings
 	{
-		NotesPath = config.value("NotesPath").toString();
-		LastNote = config.value("LastNote").toString();
-		HideStart = config.value("HideStart").toBool();
+		notes_path = config.value("NotesPath").toString();
+		last_note = config.value("LastNote").toString();
+		hide_start = config.value("HideStart").toBool();
 		//
-		DialogGeometry = config.value("DialogGeometry").toByteArray();
-		DialogState = config.value("DialogState").toByteArray();
+		dialog_geometry = config.value("DialogGeometry").toByteArray();
+		dialog_state = config.value("DialogState").toByteArray();
 		//
 		tab_position = TabPosition(config.value("TabPosition").toInt());
-		ShowHidden = config.value("ShowHidden").toBool();
-		ShowExtensions = config.value("ShowExtensions").toBool();
+		show_hidden = config.value("ShowHidden").toBool();
+		show_extensions = config.value("ShowExtensions").toBool();
 		//
-		HideFrame = config.value("HideFrame").toBool();
-		StayTop = config.value("StayTop").toBool();
+		hide_frame = config.value("HideFrame").toBool();
+		stay_top = config.value("StayTop").toBool();
 		//
 		single_instance = config.value("SingleInstance").toBool();
 		copy_start_raise = config.value("CopyStartRaise").toBool();
@@ -38,9 +38,9 @@ void Settings::load()
 		file_scanner = config.value("FileScanner").toBool();
 		file_scanner_timeout = config.value("FileScannerTimeout").toInt();
 		//
-		NoteFont.fromString(config.value("NoteFont").toString());
-		NoteLinksHighlight = config.value("NoteLinksHighlight").toBool();
-		NoteLinksOpen = config.value("NoteLinksOpen").toBool();
+		note_font.fromString(config.value("NoteFont").toString());
+		note_links_highlight = config.value("NoteLinksHighlight").toBool();
+		note_links_open = config.value("NoteLinksOpen").toBool();
 		//
 		int ScriptCount = config.value("ComandCount").toInt();
 		for(int i=0; i<ScriptCount; ++i)
@@ -50,11 +50,11 @@ void Settings::load()
 				config.value(QString("ComandFile%1").arg(i)).toString(),
 				config.value(QString("ComandIcon%1").arg(i)).toString());
 		}
-		ScriptShowOutput = config.value("ScriptShowOutput").toBool();
-		ScriptCopyOutput = config.value("ScriptCopyOutput").toBool();
+		script_show_output = config.value("ScriptShowOutput").toBool();
+		script_copy_output = config.value("ScriptCopyOutput").toBool();
 		//
-		LanguageCustom = config.value("LanguageCustom").toBool();
-		LanguageCurrent = QLocale(config.value("LanguageCurrent").toString()).language();
+		language_custom = config.value("LanguageCustom").toBool();
+		language_current = QLocale(config.value("LanguageCurrent").toString()).language();
 		//
 		if(config.contains("Toolbar/itemCount"))
 		{
@@ -71,10 +71,10 @@ void Settings::load()
 	*/
 #ifdef Q_WS_X11
 	//Setting default path to notes
-	if(NotesPath.isEmpty())
+	if(notes_path.isEmpty())
 	{
-		NotesPath = QDir::homePath()+"/.local/share/notes";
-		config.setValue("NotesPath", NotesPath);
+		notes_path = QDir::homePath()+"/.local/share/notes";
+		config.setValue("NotesPath", notes_path);
 	}
 #endif
 	//Settings single instance options
@@ -88,13 +88,13 @@ void Settings::load()
 	//Setting default note options
 	if(!config.contains("NoteLinksHighlight"))
 	{
-		NoteLinksHighlight = true;
-		config.setValue("NoteLinksHighlight", NoteLinksHighlight);
+		note_links_highlight = true;
+		config.setValue("NoteLinksHighlight", note_links_highlight);
 	}
 	if(!config.contains("NoteLinksOpen"))
 	{
-		NoteLinksOpen = true;
-		config.setValue("NoteLinksOpen", NoteLinksOpen);
+		note_links_open = true;
+		config.setValue("NoteLinksOpen", note_links_open);
 	}
 	//Setting default scripts
 	if((script_model.rowCount()==0) && !config.contains("ComandCount"))
@@ -156,7 +156,7 @@ void Settings::load()
 #else
 	system_language = QLocale::system().language();
 #endif
-	QLocale::Language lang = (LanguageCustom)?LanguageCurrent:system_language;
+	QLocale::Language lang = (language_custom)?language_current:system_language;
 	if(!translations.contains(lang)) lang = QLocale::English;
 	qtranslator.load("qt_"+QLocale(lang).name(), QLibraryInfo::location(QLibraryInfo::TranslationsPath));
 	qApp->installTranslator(&qtranslator);
@@ -207,10 +207,10 @@ void Settings::loadLanguages()
 */
 void Settings::setNotesPath(const QString& path)
 {
-	if(NotesPath != path)
+	if(notes_path != path)
 	{
-		NotesPath = path;
-		config.setValue("NotesPath", NotesPath);
+		notes_path = path;
+		config.setValue("NotesPath", notes_path);
 		emit NotesPathChanged();
 	}
 }
@@ -220,10 +220,10 @@ void Settings::setNotesPath(const QString& path)
 */
 void Settings::setLastNote(const QString& note_name)
 {
-	if(LastNote != note_name)
+	if(last_note != note_name)
 	{
-		LastNote = note_name;
-		config.setValue("LastNote", LastNote);
+		last_note = note_name;
+		config.setValue("LastNote", last_note);
 	}
 }
 
@@ -232,42 +232,42 @@ void Settings::setLastNote(const QString& note_name)
 */
 void Settings::setHideStart(bool hide)
 {
-	if(HideStart != hide)
+	if(hide_start != hide)
 	{
-		HideStart = hide;
-		config.setValue("HideStart", HideStart);
+		hide_start = hide;
+		config.setValue("HideStart", hide_start);
 	}
 }
 
 void Settings::setShowHidden(bool v)
 {
-	if(ShowHidden != v)
+	if(show_hidden != v)
 	{
-		ShowHidden = v;
-		config.setValue("ShowHidden", ShowHidden);
+		show_hidden = v;
+		config.setValue("ShowHidden", show_hidden);
 		emit ShowHiddenChanged();
 	}
 }
 
 void Settings::setShowExtensions(bool v)
 {
-	if(ShowExtensions != v)
+	if(show_extensions != v)
 	{
-		ShowExtensions = v;
-		config.setValue("ShowExtensions", ShowExtensions);
-		emit ShowExtensionsChanged(ShowExtensions);
+		show_extensions = v;
+		config.setValue("ShowExtensions", show_extensions);
+		emit ShowExtensionsChanged(show_extensions);
 	}
 }
 
 /*
   Saving option (hiding window decoration)
 */
-void Settings::setHideFrame(bool Hide)
+void Settings::setHideFrame(bool v)
 {
-	if(HideFrame != Hide)
+	if(hide_frame != v)
 	{
-		HideFrame = Hide;
-		config.setValue("HideFrame", HideFrame);
+		hide_frame = v;
+		config.setValue("HideFrame", hide_frame);
 		emit WindowStateChanged();
 	}
 }
@@ -275,12 +275,12 @@ void Settings::setHideFrame(bool Hide)
 /*
   Saving option (staying on top)
 */
-void Settings::setStayTop(bool top)
+void Settings::setStayTop(bool v)
 {
-	if(StayTop != top)
+	if(stay_top != v)
 	{
-		StayTop = top;
-		config.setValue("StayTop", StayTop);
+		stay_top = v;
+		config.setValue("StayTop", stay_top);
 		emit WindowStateChanged();
 	}
 }
@@ -337,15 +337,15 @@ void Settings::setFileScannerTimeout(int v)
 /*
   Saving dialog's params
 */
-void Settings::setDialogGeometry(const QByteArray& g)
+void Settings::setDialogGeometry(const QByteArray& v)
 {
-	DialogGeometry = g;
-	config.setValue("DialogGeometry", DialogGeometry);
+	dialog_geometry = v;
+	config.setValue("DialogGeometry", dialog_geometry);
 }
-void Settings::setDialogState(const QByteArray& g)
+void Settings::setDialogState(const QByteArray& v)
 {
-	DialogState = g;
-	config.setValue("DialogState", DialogState);
+	dialog_state = v;
+	config.setValue("DialogState", dialog_state);
 }
 
 /*
@@ -361,12 +361,12 @@ void Settings::setTabPosition(TabPosition v)
 /*
   Saving notes's font
 */
-void Settings::setNoteFont(const QFont& f)
+void Settings::setNoteFont(const QFont& v)
 {
-	if(NoteFont != f)
+	if(note_font != v)
 	{
-		NoteFont = f;
-		config.setValue("NoteFont", NoteFont.toString());
+		note_font = v;
+		config.setValue("NoteFont", note_font.toString());
 		emit NoteFontChanged();
 	}
 }
@@ -374,12 +374,12 @@ void Settings::setNoteFont(const QFont& f)
 /*
   Saving notes's links highlight option
 */
-void Settings::setNoteLinksHighlight(bool b)
+void Settings::setNoteLinksHighlight(bool v)
 {
-	if(NoteLinksHighlight != b)
+	if(note_links_highlight != v)
 	{
-		NoteLinksHighlight = b;
-		config.setValue("NoteLinksHighlight", NoteLinksHighlight);
+		note_links_highlight = v;
+		config.setValue("NoteLinksHighlight", note_links_highlight);
 		emit NoteHighlightChanged();
 	}
 }
@@ -387,12 +387,12 @@ void Settings::setNoteLinksHighlight(bool b)
 /*
   Saving notes's links highlight option
 */
-void Settings::setNoteLinksOpen(bool b)
+void Settings::setNoteLinksOpen(bool v)
 {
-	if(NoteLinksOpen != b)
+	if(note_links_open != v)
 	{
-		NoteLinksOpen = b;
-		config.setValue("NoteLinksOpen", NoteLinksOpen);
+		note_links_open = v;
+		config.setValue("NoteLinksOpen", note_links_open);
 		emit NoteLinkOpenChanged();
 	}
 }
@@ -400,20 +400,20 @@ void Settings::setNoteLinksOpen(bool b)
 /*
   Saving script's options
 */
-void Settings::setScriptShowOutput(bool sso)
+void Settings::setScriptShowOutput(bool v)
 {
-	if(ScriptShowOutput != sso)
+	if(script_show_output != v)
 	{
-		ScriptShowOutput = sso;
-		config.setValue("ScriptShowOutput", ScriptShowOutput);
+		script_show_output = v;
+		config.setValue("ScriptShowOutput", script_show_output);
 	}
 }
-void Settings::setScriptCopyOutput(bool sco)
+void Settings::setScriptCopyOutput(bool v)
 {
-	if(ScriptCopyOutput != sco)
+	if(script_copy_output != v)
 	{
-		ScriptCopyOutput = sco;
-		config.setValue("ScriptCopyOutput", ScriptCopyOutput);
+		script_copy_output = v;
+		config.setValue("ScriptCopyOutput", script_copy_output);
 	}
 }
 
@@ -455,26 +455,26 @@ void Settings::setToolbarItems(const QVector<int>& v)
 /*
   Saving custom language
 */
-void Settings::setLanguageCurrent(QLocale::Language l)
+void Settings::setLanguageCurrent(QLocale::Language v)
 {
-	if(LanguageCurrent != l)
+	if(language_current != v)
 	{
-		LanguageCurrent = l;
-		config.setValue("LanguageCurrent", QLocale(LanguageCurrent).name());
+		language_current = v;
+		config.setValue("LanguageCurrent", QLocale(language_current).name());
 	}
-	if(LanguageCustom) setLanguage(LanguageCurrent);
+	if(language_custom) setLanguage(language_current);
 }
 
 /*
   Saving option of using cusrom language
 */
-void Settings::setLanguageCustom(bool b)
+void Settings::setLanguageCustom(bool v)
 {
-	if(LanguageCustom != b)
+	if(language_custom != v)
 	{
-		LanguageCustom = b;
-		config.setValue("LanguageCustom", LanguageCustom);
-		if(!LanguageCustom) setLanguage(QLocale(system_language).language());
+		language_custom = v;
+		config.setValue("LanguageCustom", language_custom);
+		if(!language_custom) setLanguage(QLocale(system_language).language());
 	}
 }
 
