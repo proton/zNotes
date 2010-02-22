@@ -24,6 +24,9 @@ aboutDialog::aboutDialog(QWidget *parent) :
 		.arg(tr("Application concept and main development")));
 	strAuthors.append(QString("<p><b>%1</b></p>").arg(tr("Translations:")));
 	strAuthors.append(QString("<p><b>%1</b> - <a href='mailto:%2'>%2</a><br/>%3</p>")
+		.arg("Marcio Moraes (marciopanto)").arg("marciopanto@gmail.com")
+		.arg(tr("Brazilian Portuguese translation")));
+	strAuthors.append(QString("<p><b>%1</b> - <a href='mailto:%2'>%2</a><br/>%3</p>")
 		.arg("Pavel Fric (fri)").arg("pavelfric@seznam.cz")
 		.arg(tr("Czech translation")));
 	strAuthors.append(QString("<p><b>%1</b> - <a href='mailto:%2'>%2</a><br/>%3</p>")

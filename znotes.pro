@@ -1,7 +1,6 @@
 # -------------------------------------------------
 # Project created by QtCreator 2009-09-20T17:20:55
 # -------------------------------------------------
-#CONFIG += ololo
 TARGET = znotes
 VERSION = "0.4.2"
 QT += core \
@@ -45,7 +44,8 @@ FORMS += mainwindow.ui \
     configdialog.ui \
     aboutDialog.ui
 TRANSLATIONS += translations/znotes_ru.ts \
-    translations/znotes_cs.ts
+    translations/znotes_cs.ts \
+    translations/znotes_pt_BR.ts
 RESOURCES += znotes.qrc
 
 ololo {
