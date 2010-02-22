@@ -59,7 +59,7 @@ Note* NoteList::add(const QFileInfo& fileinfo, bool set_current)
 bool NoteList::load(const QFileInfo& fileinfo, const QString& old_title)
 {
 	Note* note = add(fileinfo, false);
-	return (note->title()==old_title);
+	return (note->fileName()==old_title);
 }
 
 void NoteList::remove(int i)

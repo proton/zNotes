@@ -515,12 +515,14 @@ MainWindow::~MainWindow()
 	//saving notes
 	Notes->SaveAll();
 	//saving title of last note
-	settings.setLastNote(Notes->current()->title());
+	settings.setLastNote(Notes->current()->fileName());
 	//saving dialog's params
 	settings.setDialogGeometry(saveGeometry());
 	settings.setDialogState(saveState());
 	//saving scrits
 	settings.setScripts();
+	//syncing settings
+	settings.save();
 	//
 	delete Notes;
 }
