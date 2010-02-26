@@ -1,6 +1,21 @@
 #ifndef SETTINGS_H
 #define SETTINGS_H
 
+/*
+  translations:
+  QHash<QLocale::Language, QMap<QLocale::Country, QString file >>
+
+	search:
+	if lang in hash:
+		if country in map
+			locale = QLocale(lang, country);
+		else if QLocale::AnyCountry in map
+			locale = QLocale(lang, QLocale::AnyCountry);
+		else if map.size>0
+			locale = QLocale(lang, map.first);
+	else locale = C;
+  */
+
 #include <QString>
 #include <QObject>
 #include <QSettings>
