@@ -40,18 +40,25 @@ configDialog::configDialog(QWidget *parent) :
 	m_ui->cb_NoteLinksHighlight->setChecked(settings.getNoteLinksHighlight());
 	m_ui->cb_NoteLinksOpen->setChecked(settings.getNoteLinksOpen());
 	//
-	const QHash<QLocale, QString>& translations = settings.getTranslations();
-	QHashIterator<QLocale, QString> translation(translations);
+	const QMap<int, QMap<int, QString> >& translations = settings.getTranslations();
+	QMapIterator<int, QMap<int, QString> > translation(translations);
 	while(translation.hasNext())
 	{
-		const QLocale& locale = translation.next().key();
-		QString text = QString("%1 (%2)").
-			arg(QLocale::languageToString(locale.language())).
-			arg(QLocale::countryToString(locale.country()));
-		m_ui->cmb_Language->addItem(text, locale);
+		translation.next();
+		QLocale::Language language = QLocale::Language(translation.key());
+		QMapIterator<int, QString> country_it(translation.value());
+		while(country_it.hasNext())
+		{
+			QLocale::Country country = QLocale::Country(country_it.next().key());
+			QLocale locale(language, country);
+			QString text = QString("%1 (%2)").
+				arg(QLocale::languageToString(language)).
+				arg(QLocale::countryToString(country));
+			m_ui->cmb_Language->addItem(text, locale);
+		}
 	}
-	int current_locale_index = m_ui->cmb_Language->findData(settings.getLocaleCurrent());
-	m_ui->cmb_Language->setCurrentIndex(current_locale_index);
+//	int current_locale_index = m_ui->cmb_Language->findData(settings.getLocaleCurrent());
+//	m_ui->cmb_Language->setCurrentIndex(current_locale_index);
 	//
 	m_ui->cb_LanguageCustom->setChecked(settings.getLanguageCustom());
 	m_ui->cmb_Language->setEnabled(settings.getLanguageCustom());

@@ -180,9 +180,6 @@
            <property name="enabled">
             <bool>false</bool>
            </property>
-           <property name="insertPolicy">
-            <enum>QComboBox::InsertAlphabetically</enum>
-           </property>
           </widget>
          </item>
         </layout>

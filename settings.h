@@ -1,21 +1,6 @@
 #ifndef SETTINGS_H
 #define SETTINGS_H
 
-/*
-  translations:
-  QHash<QLocale::Language, QMap<QLocale::Country, QString file >>
-
-	search:
-	if lang in hash:
-		if country in map
-			locale = QLocale(lang, country);
-		else if QLocale::AnyCountry in map
-			locale = QLocale(lang, QLocale::AnyCountry);
-		else if map.size>0
-			locale = QLocale(lang, map.first);
-	else locale = C;
-  */
-
 #include <QString>
 #include <QObject>
 #include <QSettings>
@@ -26,6 +11,7 @@
 #include <QVector>
 #include <QTranslator>
 #include <QLocale>
+#include <QMap>
 
 #include <QtDebug>
 
@@ -59,7 +45,7 @@ public:
 	inline bool getScriptShowOutput()				{ return script_show_output; }
 	inline bool getScriptCopyOutput()				{ return script_copy_output; }
 	inline const QVector<int>& getToolbarItems()	{ return tb_items; }
-	inline const QHash<QLocale, QString>& getTranslations()	{ return translations; }
+	inline const QMap<int, QMap<int, QString> >& getTranslations()	{ return translations; }
 	inline const QLocale& getLocaleCurrent()		{ return locale_current; }
 	inline bool getLanguageCustom()					{ return language_custom; }
 	inline bool getNoteLinksHighlight()				{ return note_links_highlight; }
@@ -98,8 +84,9 @@ private:
 	QTranslator translator;
 	QTranslator qtranslator;
 	//
-	QHash<QLocale, QString> translations;
+	QMap<int, QMap<int, QString> > translations;
 	QLocale locale_current;
+	QLocale locale_system;
 	bool language_custom;
 	//
 	QString notes_path;
@@ -130,8 +117,6 @@ private:
 	bool script_copy_output;
 	//
 	QVector<int> tb_items;
-	//
-	QLocale system_locale;
 signals:
 	void NotesPathChanged();
 	void FileScannerEnChanged(bool);

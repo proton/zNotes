@@ -151,16 +151,38 @@ void Settings::load()
 	//Fixing Qt's problem on unix systems...
 	QString system_lang(qgetenv("LANG").constData());
 	system_lang.truncate(system_lang.indexOf('.'));
-	if(system_lang.size()>0) system_locale = QLocale(system_lang);
-	else system_locale = QLocale::system().language();
+	if(system_lang.size()>0) locale_system = QLocale(system_lang);
+	else locale_system = QLocale::system().language();
 #else
-	system_locale = QLocale::system().language();
+	locale_system = QLocale::system().language();
 #endif
-	QLocale locale = (language_custom)?locale_current:system_locale;
-	if(!translations.contains(locale)) locale = QLocale::c();
-	qtranslator.load("qt_"+locale.name(), QLibraryInfo::location(QLibraryInfo::TranslationsPath));
-	qApp->installTranslator(&qtranslator);
+	QLocale locale = (language_custom)?locale_current:locale_system;
+
+	QMap<int, QMap<int, QString> >::const_iterator it = translations.find(locale.language());
+	if(it!=translations.end()) //if translation list has locale language
+	{
+		const QMap<int, QString>& country_list = it.value();
+		if(!country_list.contains(locale.country()))
+		{
+			QList<QLocale::Country> language_countries = QLocale::countriesForLanguage(locale.language());
+			if(!language_countries.empty() && country_list.contains(language_countries[0]))
+			{
+				QLocale::Country country = language_countries[0];
+				locale = QLocale(locale.language(), country);
+			}
+			else if(!country_list.empty())
+			{
+				QLocale::Country country = QLocale::Country(country_list.begin().key());
+				locale = QLocale(locale.language(), country);
+			}
+			else locale = QLocale::c();
+		}
+	}
+	else locale = QLocale::c();
+
 	setLocale(locale);
+
+	qApp->installTranslator(&qtranslator);
 	qApp->installTranslator(&translator);
 }
 
@@ -180,6 +202,8 @@ void Settings::loadLanguages()
 #ifdef Q_WS_MAC
 	translation_dirs << QCoreApplication::applicationDirPath()+"/../Resources";
 #endif
+	//Setting default(English) translation path
+	translations[QLocale::English][QLocale::UnitedStates]="";
 	//looking for qm-files in translation directories
 	QStringListIterator dir_path(translation_dirs);
 	while(dir_path.hasNext())
@@ -193,13 +217,12 @@ void Settings::loadLanguages()
 			filename.remove(0, filename.indexOf('_') + 1);
 			filename.chop(3);
 			QLocale locale(filename);
-			if(!translations.contains(locale.language()))
+			if(!translations[locale.language()].contains(locale.country()))
 			{
-				translations[locale.language()]=fullpath;
+				translations[locale.language()][locale.country()]=fullpath;
 			}
 		}
 	}
-	translations[QLocale::English]="";
 }
 
 /*
@@ -474,7 +497,7 @@ void Settings::setLocaleCustom(bool v)
 	{
 		language_custom = v;
 		config.setValue("LanguageCustom", language_custom);
-		if(!language_custom) setLocale(system_locale);
+		if(!language_custom) setLocale(locale_system);
 	}
 }
 
@@ -484,5 +507,5 @@ void Settings::setLocaleCustom(bool v)
 void Settings::setLocale(const QLocale& locale)
 {
 	qtranslator.load("qt_"+locale.name(), QLibraryInfo::location(QLibraryInfo::TranslationsPath));
-	translator.load(translations[locale]);
+	translator.load(translations[locale.language()][locale.country()]);
 }
