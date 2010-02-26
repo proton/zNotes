@@ -40,15 +40,18 @@ configDialog::configDialog(QWidget *parent) :
 	m_ui->cb_NoteLinksHighlight->setChecked(settings.getNoteLinksHighlight());
 	m_ui->cb_NoteLinksOpen->setChecked(settings.getNoteLinksOpen());
 	//
-	const QMap<QLocale::Language, QString> translations = settings.getTranslations();
-	QMapIterator<QLocale::Language, QString> translation(translations);
+	const QHash<QLocale, QString>& translations = settings.getTranslations();
+	QHashIterator<QLocale, QString> translation(translations);
 	while(translation.hasNext())
 	{
-		const QLocale::Language language = translation.next().key();
-		m_ui->cmb_Language->addItem(QLocale::languageToString(language), language);
+		const QLocale& locale = translation.next().key();
+		QString text = QString("%1 (%2)").
+			arg(QLocale::languageToString(locale.language())).
+			arg(QLocale::countryToString(locale.country()));
+		m_ui->cmb_Language->addItem(text, locale);
 	}
-	int current_language_index = m_ui->cmb_Language->findData(settings.getLanguageCurrent());
-	m_ui->cmb_Language->setCurrentIndex(current_language_index);
+	int current_locale_index = m_ui->cmb_Language->findData(settings.getLocaleCurrent());
+	m_ui->cmb_Language->setCurrentIndex(current_locale_index);
 	//
 	m_ui->cb_LanguageCustom->setChecked(settings.getLanguageCustom());
 	m_ui->cmb_Language->setEnabled(settings.getLanguageCustom());
@@ -84,8 +87,8 @@ void configDialog::SaveSettings()
 	settings.setScriptShowOutput(m_ui->cb_ScriptShowOutput->checkState());
 	settings.setScriptCopyOutput(m_ui->cb_ScriptCopyOutput->checkState());
 	settings.setToolbarItems(mt_items.getVector());
-	settings.setLanguageCustom(m_ui->cb_LanguageCustom->isChecked());
-	settings.setLanguageCurrent(QLocale::Language(m_ui->cmb_Language->itemData(m_ui->cmb_Language->currentIndex(), Qt::UserRole).toInt()));
+	settings.setLocaleCustom(m_ui->cb_LanguageCustom->isChecked());
+	settings.setLocaleCurrent(m_ui->cmb_Language->itemData(m_ui->cmb_Language->currentIndex(), Qt::UserRole).toLocale());
 }
 
 void configDialog::on_buttonBox_clicked(QAbstractButton* button)

@@ -54,7 +54,7 @@ void Settings::load()
 		script_copy_output = config.value("ScriptCopyOutput").toBool();
 		//
 		language_custom = config.value("LanguageCustom").toBool();
-		language_current = QLocale(config.value("LanguageCurrent").toString()).language();
+		locale_current = QLocale(config.value("LanguageCurrent").toString());
 		//
 		if(config.contains("Toolbar/itemCount"))
 		{
@@ -151,16 +151,16 @@ void Settings::load()
 	//Fixing Qt's problem on unix systems...
 	QString system_lang(qgetenv("LANG").constData());
 	system_lang.truncate(system_lang.indexOf('.'));
-	if(system_lang.size()>0) system_language = QLocale(system_lang).language();
-	else system_language = QLocale::system().language();
+	if(system_lang.size()>0) system_locale = QLocale(system_lang);
+	else system_locale = QLocale::system().language();
 #else
-	system_language = QLocale::system().language();
+	system_locale = QLocale::system().language();
 #endif
-	QLocale::Language lang = (language_custom)?language_current:system_language;
-	if(!translations.contains(lang)) lang = QLocale::English;
-	qtranslator.load("qt_"+QLocale(lang).name(), QLibraryInfo::location(QLibraryInfo::TranslationsPath));
+	QLocale locale = (language_custom)?locale_current:system_locale;
+	if(!translations.contains(locale)) locale = QLocale::c();
+	qtranslator.load("qt_"+locale.name(), QLibraryInfo::location(QLibraryInfo::TranslationsPath));
 	qApp->installTranslator(&qtranslator);
-	setLanguage(lang);
+	setLocale(locale);
 	qApp->installTranslator(&translator);
 }
 
@@ -453,36 +453,36 @@ void Settings::setToolbarItems(const QVector<int>& v)
 }
 
 /*
-  Saving custom language
+  Saving current language
 */
-void Settings::setLanguageCurrent(QLocale::Language v)
+void Settings::setLocaleCurrent(const QLocale& locale)
 {
-	if(language_current != v)
+	if(locale_current != locale)
 	{
-		language_current = v;
-		config.setValue("LanguageCurrent", QLocale(language_current).name());
+		locale_current = locale;
+		config.setValue("LanguageCurrent", locale_current.name());
 	}
-	if(language_custom) setLanguage(language_current);
+	if(language_custom) setLocale(locale_current);
 }
 
 /*
-  Saving option of using cusrom language
+  Saving option of using custom language
 */
-void Settings::setLanguageCustom(bool v)
+void Settings::setLocaleCustom(bool v)
 {
 	if(language_custom != v)
 	{
 		language_custom = v;
 		config.setValue("LanguageCustom", language_custom);
-		if(!language_custom) setLanguage(QLocale(system_language).language());
+		if(!language_custom) setLocale(system_locale);
 	}
 }
 
 /*
   Setting language
 */
-void Settings::setLanguage(QLocale::Language language)
+void Settings::setLocale(const QLocale& locale)
 {
-	qtranslator.load("qt_"+QLocale(language).name(), QLibraryInfo::location(QLibraryInfo::TranslationsPath));
-	translator.load(translations[language]);
+	qtranslator.load("qt_"+locale.name(), QLibraryInfo::location(QLibraryInfo::TranslationsPath));
+	translator.load(translations[locale]);
 }

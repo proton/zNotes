@@ -44,8 +44,8 @@ public:
 	inline bool getScriptShowOutput()				{ return script_show_output; }
 	inline bool getScriptCopyOutput()				{ return script_copy_output; }
 	inline const QVector<int>& getToolbarItems()	{ return tb_items; }
-	inline const QMap<QLocale::Language, QString>& getTranslations()	{ return translations; }
-	inline QLocale::Language getLanguageCurrent()	{ return language_current; }
+	inline const QHash<QLocale, QString>& getTranslations()	{ return translations; }
+	inline const QLocale& getLocaleCurrent()		{ return locale_current; }
 	inline bool getLanguageCustom()					{ return language_custom; }
 	inline bool getNoteLinksHighlight()				{ return note_links_highlight; }
 	inline bool getNoteLinksOpen()					{ return note_links_open; }
@@ -69,9 +69,9 @@ public:
 	void setScriptCopyOutput(bool b);
 	void setScripts();
 	void setToolbarItems(const QVector<int>& v);
-	void setLanguage(QLocale::Language);
-	void setLanguageCurrent(QLocale::Language);
-	void setLanguageCustom(bool);
+	void setLocale(const QLocale&);
+	void setLocaleCurrent(const QLocale&);
+	void setLocaleCustom(bool);
 	void setNoteLinksHighlight(bool);
 	void setNoteLinksOpen(bool);
 	//
@@ -83,8 +83,8 @@ private:
 	QTranslator translator;
 	QTranslator qtranslator;
 	//
-	QMap<QLocale::Language, QString> translations;
-	QLocale::Language language_current;
+	QHash<QLocale, QString> translations;
+	QLocale locale_current;
 	bool language_custom;
 	//
 	QString notes_path;
@@ -116,7 +116,7 @@ private:
 	//
 	QVector<int> tb_items;
 	//
-	QLocale::Language system_language;
+	QLocale system_locale;
 signals:
 	void NotesPathChanged();
 	void FileScannerEnChanged(bool);
