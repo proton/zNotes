@@ -11,7 +11,14 @@ class Note : public QObject
 {
 	Q_OBJECT
 public:
-	enum Type { type_text, type_html, type_picture };
+	enum Type
+	{
+		type_text,
+		type_html,
+		type_picture,
+		//type_todo,
+		type_xml
+	};
 public:
 	Note(const QFileInfo& fileinfo, Note::Type type_new);
 	virtual ~Note();

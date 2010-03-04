@@ -23,6 +23,7 @@ SOURCES += main.cpp \
     notelist.cpp \
     note_text.cpp \
     note_html.cpp \
+    note_xml.cpp \
     note_picture.cpp \
 	application.cpp
 HEADERS += mainwindow.h \
@@ -39,6 +40,7 @@ HEADERS += mainwindow.h \
     note_text.h \
     note_html.h \
     note_picture.h \
+    note_xml.h \
 	application.h
 FORMS += mainwindow.ui \
     configdialog.ui \
@@ -61,6 +63,8 @@ ololo {
 	HEADERS += single_inst/qtlockedfile.h \
 	single_inst/qtlocalpeer.h
 }
+
+QT += xml
 
 # This makes qmake generate translations
 isEmpty(QMAKE_LRELEASE):QMAKE_LRELEASE = $$[QT_INSTALL_BINS]/lrelease
