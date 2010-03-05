@@ -16,7 +16,7 @@ public:
 		type_text,
 		type_html,
 		type_picture,
-		//type_todo,
+		type_todo,
 		type_xml
 	};
 public:
