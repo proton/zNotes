@@ -50,8 +50,9 @@ FORMS += mainwindow.ui \
     configdialog.ui \
     aboutDialog.ui
 TRANSLATIONS += translations/znotes_ru.ts \
-    translations/znotes_cs.ts \
-    translations/znotes_pt_BR.ts
+	translations/znotes_cs.ts \
+	translations/znotes_pt_BR.ts \
+	translations/znotes_uk.ts
 RESOURCES += znotes.qrc
 ololo { 
     QT += network

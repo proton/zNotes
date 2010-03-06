@@ -20,50 +20,41 @@ aboutDialog::aboutDialog(QWidget *parent) :
 	//Adding authors information
 	QString strAuthors;
 	strAuthors.append(QString("<p><b>%1</b> - <a href='mailto:%2'>%2</a><br/>%3<p>")
-		.arg("Peter Savichev (proton)").arg("psavichev@gmail.com")
-		.arg(tr("Application concept and main development")));
+		.arg("Peter Savichev (proton)", "psavichev@gmail.com", tr("Application concept and main development")));
 	strAuthors.append(QString("<p><b>%1</b></p>").arg(tr("Translations:")));
 	strAuthors.append(QString("<p><b>%1</b> - <a href='mailto:%2'>%2</a><br/>%3</p>")
-		.arg("Marcio Moraes (marciopanto)").arg("marciopanto@gmail.com")
-		.arg(tr("Brazilian Portuguese translation")));
+		.arg("Marcio Moraes (marciopanto)", "marciopanto@gmail.com", tr("Brazilian Portuguese translation")));
 	strAuthors.append(QString("<p><b>%1</b> - <a href='mailto:%2'>%2</a><br/>%3</p>")
-		.arg("Pavel Fric (fri)").arg("pavelfric@seznam.cz")
-		.arg(tr("Czech translation")));
+		.arg("Pavel Fric (fri)", "pavelfric@seznam.cz", tr("Czech translation")));
 	strAuthors.append(QString("<p><b>%1</b> - <a href='mailto:%2'>%2</a><br/>%3</p>")
-		.arg("Peter Savichev (proton)").arg("psavichev@gmail.com")
-		.arg(tr("Russian translation")));
+		.arg("Peter Savichev (proton)", "psavichev@gmail.com", tr("Russian translation")));
+	strAuthors.append(QString("<p><b>%1</b> - <a href='mailto:%2'>%2</a><br/>%3</p>")
+		.arg("Vadim Nekhai (onix)", "onix@onix.name", tr("Ukrainian translation")));
 	strAuthors.append(QString("<p><b>%1</b></p>").arg(tr("Icons:")));
-	strAuthors.append(QString("%1\n<a hreh='%2'>%2</a>")
-		.arg(tr("All icons are modified icons from Oxygen project")).arg("http://www.oxygen-icons.org"));
+	strAuthors.append(QString("%1\n<a href ='%2'>%2</a>")
+		.arg(tr("All icons are modified icons from Oxygen project"), "http://www.oxygen-icons.org"));
 	ui->lbAuthors->setHtml(strAuthors);
 	//Adding credits information
 	QString strCredits;
 	strCredits.append(QString("<p><b>%1</b><p>").arg(tr("Testing:")));
-	strCredits.append(QString("<b>%1</b> - <a href='mailto:%2'>%2</a><br/>").arg("Nikolay Edigaryev").arg("edigaryev@gmail.com"));
-	strCredits.append(QString("<b>%1</b> - <a href='mailto:%2'>%2</a><br/>").arg("Nikita Lyalin (tinman321)").arg("tinman321@gmail.com"));
-	strCredits.append(QString("<b>%1</b> - <a href='mailto:%2'>%2</a><br/>").arg("Elbert Pol").arg("e.pol@chello.nl"));
-	strCredits.append(QString("<b>%1</b> - <a href='mailto:%2'>%2</a><br/>").arg("Andrew Bodrow (Drino)").arg("drinob@gmail.com"));
-	strCredits.append(QString("<b>%1</b> - <a href='mailto:%2'>%2</a><br/>").arg("Max Porozkov (MaxPv)").arg("maxpv@rusnix.ru"));
+	strCredits.append(QString("<b>%1</b> - <a href='mailto:%2'>%2</a><br/>").arg("Nikolay Edigaryev", "edigaryev@gmail.com"));
+	strCredits.append(QString("<b>%1</b> - <a href='mailto:%2'>%2</a><br/>").arg("Nikita Lyalin (tinman321)", "tinman321@gmail.com"));
+	strCredits.append(QString("<b>%1</b> - <a href='mailto:%2'>%2</a><br/>").arg("Elbert Pol", "e.pol@chello.nl"));
+	strCredits.append(QString("<b>%1</b> - <a href='mailto:%2'>%2</a><br/>").arg("Andrew Bodrow (Drino)", "drinob@gmail.com"));
+	strCredits.append(QString("<b>%1</b> - <a href='mailto:%2'>%2</a><br/>").arg("Max Porozkov (MaxPv)", "maxpv@rusnix.ru"));
 	strCredits.append(QString("<p><b>%1</b></p>").arg(tr("Releasing:")));
 	strCredits.append(QString("<p><b>%1</b> - <a href='mailto:%2'>%2</a><br/><b>%3</b> - <a href='mailto:%4'>%4</a><br/>%5</p>")
-		.arg("Peter Savichev (proton)").arg("psavichev@gmail.com")
-		.arg("Ben de Groot (yngwin)").arg("yngwin@gentoo.org ")
-		.arg("Gentoo"));
+		.arg("Peter Savichev (proton)", "psavichev@gmail.com", "Ben de Groot (yngwin)", "yngwin@gentoo.org ", "Gentoo"));
 	strCredits.append(QString("<p><b>%1</b> - <a href='mailto:%2'>%2</a><br/>%3</p>")
-		.arg("Nikita Lyalin (tinman321)").arg("tinman321@gmail.com")
-		.arg("ArchLinux"));
+		.arg("Nikita Lyalin (tinman321)", "tinman321@gmail.com", "ArchLinux"));
 	strCredits.append(QString("<p><b>%1</b> - <a href='mailto:%2'>%2</a><br/>%3</p>")
-		.arg("Eugene Pivnev (ti.eugene)").arg("ti.eugene@gmail.com")
-		.arg("Fedora, Mandriva, OpenSuse, Ubuntu"));
+		.arg("Eugene Pivnev (ti.eugene)", "ti.eugene@gmail.com", "Fedora, Mandriva, OpenSuse, Ubuntu"));
 	strCredits.append(QString("<p><b>%1</b> - <a href='mailto:%2'>%2</a><br/>%3</p>")
-		.arg("Veniamin Gvozdikov (zloidemon)").arg("g.veniamin@googlemail.com")
-		.arg("FreeBSD"));
+		.arg("Veniamin Gvozdikov (zloidemon)", "g.veniamin@googlemail.com", "FreeBSD"));
 	strCredits.append(QString("<p><b>%1</b> - <a href='mailto:%2'>%2</a><br/>%3</p>")
-		.arg("Oktay Cetinkaya (xelat)").arg("xelat09@yahoo.de")
-		.arg("Windows"));
+		.arg("Oktay Cetinkaya (xelat)", "xelat09@yahoo.de", "Windows"));
 	strCredits.append(QString("<p><b>%1</b> - <a href='mailto:%2'>%2</a><br/>%3</p>")
-		.arg("Elbert Pol").arg("e.pol@chello.nl")
-		.arg("OS/2"));
+		.arg("Elbert Pol", "e.pol@chello.nl", "OS/2"));
 	ui->lbCredits->setHtml(strCredits);
 	//Adding help information
 	QString strHelp;
