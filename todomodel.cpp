@@ -1,5 +1,6 @@
 #include "todomodel.h"
 #include <QStringList>
+#include <QCheckBox>
 #include <QtDebug>
 
 Task::Task(QDomNode &node, int row, Task* parent)
@@ -96,6 +97,19 @@ int TodoModel::columnCount(const QModelIndex& parent) const
 	return 3;
 }
 
+QString getDateGap(const QDateTime& dt)
+{
+	QDateTime current(QDateTime::currentDateTime());
+
+	int days_gap = dt.daysTo(current);
+	if(days_gap) return QObject::tr("%n days(s)", "", days_gap);
+
+	int secs_gap = dt.secsTo(current);
+	if(secs_gap/3600) return QObject::tr("%n hour(s)", "", days_gap);
+	if(secs_gap/60) return QObject::tr("%n min(s)", "", days_gap);
+	else return QObject::tr("%n sec(s)", "", days_gap);
+}
+
 QVariant TodoModel::data(const QModelIndex& index, int role) const
 {
 	if(!index.isValid()) return QVariant();
@@ -105,8 +119,10 @@ QVariant TodoModel::data(const QModelIndex& index, int role) const
 
 	switch(index.column())
 	{
-		case 1: return task->title();
-		default: return QVariant();
+	case 0: return task->done();
+	case 1: return task->title();
+	case 2: if(!task->done()) return getDateGap(task->dateLimit());
+	default: return QVariant();
 	}
 	return QVariant();
 }
@@ -170,4 +186,43 @@ int TodoModel::rowCount(const QModelIndex& parent) const
 	if (!parent.isValid()) return _tasks.size();
 	Task* parent_item = static_cast<Task*>(parent.internalPointer());
 	return parent_item->subtasks().size();
+}
+
+//------------------------------------------------------------------------------
+
+CheckBoxDelegate::CheckBoxDelegate(QObject *parent)
+	: QItemDelegate(parent)
+{
+}
+
+QWidget* CheckBoxDelegate::createEditor(QWidget* parent, const QStyleOptionViewItem& option, const QModelIndex& index) const
+{
+	Q_UNUSED(option)
+	Q_UNUSED(index)
+	qDebug() << __LINE__;
+	QCheckBox* editor = new QCheckBox(parent);
+	return editor;
+}
+
+void CheckBoxDelegate::setEditorData(QWidget* editor, const QModelIndex &index) const
+{
+	qDebug() << __LINE__;
+	bool value = index.model()->data(index, Qt::EditRole).toBool();
+	QCheckBox* checkBox = static_cast<QCheckBox*>(editor);
+	checkBox->setChecked(value);
+}
+
+void CheckBoxDelegate::setModelData(QWidget *editor, QAbstractItemModel *model, const QModelIndex &index) const
+{
+	qDebug() << __LINE__;
+	QCheckBox* checkBox = static_cast<QCheckBox*>(editor);
+	bool value = checkBox->isChecked();
+
+	model->setData(index, value, Qt::EditRole);
+}
+
+void CheckBoxDelegate::updateEditorGeometry(QWidget *editor,
+	const QStyleOptionViewItem &option, const QModelIndex &/* index */) const
+{
+	editor->setGeometry(option.rect);
 }
