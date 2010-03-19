@@ -23,8 +23,6 @@ public:
 		normal, low, high
 	};
 
-	//Task* child(int i);
-	//inline int childCount() const { return _node.childNodes().count(); }
 	inline const QList<Task*>& subtasks() const { return _subtasks; }
 	inline Task* parent() const { return _parent; }
 	inline int row() const { return _row; };
@@ -70,7 +68,7 @@ public:
 
 private:
 	QDomDocument _document;
-	QList<Task*> _tasks;
+	Task* _root_task;
 };
 
 class CheckBoxDelegate : public QItemDelegate

@@ -50,17 +50,13 @@ Task::~Task()
 //------------------------------------------------------------------------------
 
 TodoModel::TodoModel(QObject *parent)
-	: QAbstractItemModel(parent)
+	: QAbstractItemModel(parent), _root_task(0)
 {
 }
 
 TodoModel::~TodoModel()
 {
-	for(int i=0; i<_tasks.size(); ++i)
-	{
-		delete _tasks[i];
-		_tasks[i] = 0;
-	}
+	delete _root_task;
 }
 
 void TodoModel::load(const QDomDocument& document)
@@ -69,26 +65,12 @@ void TodoModel::load(const QDomDocument& document)
 	_document = document;
 
 	//Removing old tasks
-	for(int i=0; i<_tasks.size(); ++i)
-	{
-		delete _tasks[i];
-		_tasks[i] = 0;
-	}
-	_tasks.clear();
+	delete _root_task;
 
 	//Inserting new tasks
 	QDomElement root_element = _document.documentElement();
 	QDomNode node = root_element.firstChild();
-	while(!node.isNull())
-	{
-		QDomElement element = node.toElement();
-		if(!element.isNull() && element.tagName()=="task")
-		{
-			_tasks.append(new Task(node, _tasks.size(), NULL));
-		}
-		node = node.nextSibling();
-	}
-
+	_root_task = new Task(root_element, 0, NULL);
 }
 
 int TodoModel::columnCount(const QModelIndex& parent) const
@@ -153,20 +135,16 @@ QVariant TodoModel::headerData(int section, Qt::Orientation orientation, int rol
 
 QModelIndex TodoModel::index(int row, int column, const QModelIndex& parent) const
 {
-	if(!hasIndex(row, column, parent)) return QModelIndex();
+	//if(!hasIndex(row, column, parent)) return QModelIndex();
 
 	Task* parent_item;
-	Task* child_item;
 
-	if(!parent.isValid()) child_item = _tasks.at(row);
-	else
-	{
-		parent_item = static_cast<Task*>(parent.internalPointer());
-		child_item = parent_item->subtasks().at(row);
-	}
+	 if (!parent.isValid()) parent_item = _root_task;
+	 else parent_item = static_cast<Task*>(parent.internalPointer());
 
-	if(child_item) return createIndex(row, column, child_item);
-	else return QModelIndex();
+	 Task* child_item = parent_item->subtasks().at(row);
+	 if(child_item) return createIndex(row, column, child_item);
+	 else return QModelIndex();
 }
 
 QModelIndex TodoModel::parent(const QModelIndex& child) const
@@ -176,15 +154,17 @@ QModelIndex TodoModel::parent(const QModelIndex& child) const
 	Task* child_item = static_cast<Task*>(child.internalPointer());
 	Task* parent_item = child_item->parent();
 
-	if (parent_item) createIndex(parent_item->row(), 0, parent_item);
-	return QModelIndex();
+	if(parent_item==_root_task) return QModelIndex();
+
+	return createIndex(parent_item->row(), 0, parent_item);
 }
 
 int TodoModel::rowCount(const QModelIndex& parent) const
 {
+	Task* parent_item;
 	if(parent.column() > 0) return 0;
-	if (!parent.isValid()) return _tasks.size();
-	Task* parent_item = static_cast<Task*>(parent.internalPointer());
+	if(!parent.isValid()) parent_item = _root_task;
+	else parent_item = static_cast<Task*>(parent.internalPointer());
 	return parent_item->subtasks().size();
 }
 
