@@ -69,7 +69,6 @@ void TodoModel::load(const QDomDocument& document)
 
 	//Inserting new tasks
 	QDomElement root_element = _document.documentElement();
-	QDomNode node = root_element.firstChild();
 	_root_task = new Task(root_element, 0, NULL);
 }
 
@@ -95,24 +94,48 @@ QString getDateGap(const QDateTime& dt)
 QVariant TodoModel::data(const QModelIndex& index, int role) const
 {
 	if(!index.isValid()) return QVariant();
-	if(role != Qt::DisplayRole) return QVariant();
 
 	Task* task = static_cast<Task*>(index.internalPointer());
 
-	switch(index.column())
+	if(role == Qt::DisplayRole)
 	{
-	case 0: return task->done();
-	case 1: return task->title();
-	case 2: if(!task->done()) return getDateGap(task->dateLimit());
-	default: return QVariant();
+		switch(index.column())
+		{
+			case 1: return task->title();
+			case 2: if(!task->done()) return getDateGap(task->dateLimit());
+			default: return QVariant();
+		}
+	}
+	else if(role == Qt::EditRole)
+	{
+		switch(index.column())
+		{
+			case 0: return (task->done())? Qt::Checked : Qt::Unchecked;
+			case 1: return task->title();
+			case 2: if(!task->done()) task->dateLimit();
+			default: return QVariant();
+		}
+	}
+	else if(role == Qt::CheckStateRole)
+	{
+		switch(index.column())
+		{
+			case 0: return (task->done())?Qt::Checked:Qt::Unchecked;
+			default: return QVariant();
+		}
 	}
 	return QVariant();
 }
 
 Qt::ItemFlags TodoModel::flags(const QModelIndex& index) const
 {
-	if (!index.isValid()) return 0;
-	return Qt::ItemIsEnabled | Qt::ItemIsSelectable;
+	switch(index.column())
+	{
+		case 0: return Qt::ItemIsSelectable|Qt::ItemIsEnabled|Qt::ItemIsEditable|Qt::ItemIsUserCheckable;
+		case 1: return Qt::ItemIsSelectable|Qt::ItemIsEnabled|Qt::ItemIsEditable;
+		case 2: return Qt::ItemIsSelectable|Qt::ItemIsEnabled|Qt::ItemIsEditable;
+		default: return 0;
+	}
 }
 
 QVariant TodoModel::headerData(int section, Qt::Orientation orientation, int role) const
@@ -166,43 +189,4 @@ int TodoModel::rowCount(const QModelIndex& parent) const
 	if(!parent.isValid()) parent_item = _root_task;
 	else parent_item = static_cast<Task*>(parent.internalPointer());
 	return parent_item->subtasks().size();
-}
-
-//------------------------------------------------------------------------------
-
-CheckBoxDelegate::CheckBoxDelegate(QObject *parent)
-	: QItemDelegate(parent)
-{
-}
-
-QWidget* CheckBoxDelegate::createEditor(QWidget* parent, const QStyleOptionViewItem& option, const QModelIndex& index) const
-{
-	Q_UNUSED(option)
-	Q_UNUSED(index)
-	qDebug() << __LINE__;
-	QCheckBox* editor = new QCheckBox(parent);
-	return editor;
-}
-
-void CheckBoxDelegate::setEditorData(QWidget* editor, const QModelIndex &index) const
-{
-	qDebug() << __LINE__;
-	bool value = index.model()->data(index, Qt::EditRole).toBool();
-	QCheckBox* checkBox = static_cast<QCheckBox*>(editor);
-	checkBox->setChecked(value);
-}
-
-void CheckBoxDelegate::setModelData(QWidget *editor, QAbstractItemModel *model, const QModelIndex &index) const
-{
-	qDebug() << __LINE__;
-	QCheckBox* checkBox = static_cast<QCheckBox*>(editor);
-	bool value = checkBox->isChecked();
-
-	model->setData(index, value, Qt::EditRole);
-}
-
-void CheckBoxDelegate::updateEditorGeometry(QWidget *editor,
-	const QStyleOptionViewItem &option, const QModelIndex &/* index */) const
-{
-	editor->setGeometry(option.rect);
 }
