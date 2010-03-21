@@ -127,11 +127,33 @@ QVariant TodoModel::data(const QModelIndex& index, int role) const
 	return QVariant();
 }
 
+bool TodoModel::setData(const QModelIndex& index, const QVariant& data, int role)
+{
+	if(index.column() == 0 && role == Qt::CheckStateRole)
+	{
+		Task* task = static_cast<Task*>(index.internalPointer());
+		task->setDone(data.toBool());
+		return true;
+	}
+//	qDebug() << idx << role <<data;
+//	if( role == Qt::CheckStateRole && idx.column() == 0 ) {
+//	  items[idx.row()].first = data.toInt() == Qt::Checked ? true : false;
+//	return true;
+//	}
+//
+//	if( role == Qt::EditRole && idx.column() == 1 ) {
+//	  items[idx.row()].second = data.toString();
+//	return true;
+//	}
+	return false;
+	return QAbstractItemModel::setData(index, data, role);
+}
+
 Qt::ItemFlags TodoModel::flags(const QModelIndex& index) const
 {
 	switch(index.column())
 	{
-		case 0: return Qt::ItemIsSelectable|Qt::ItemIsEnabled|Qt::ItemIsEditable|Qt::ItemIsUserCheckable;
+		case 0: return Qt::ItemIsSelectable|Qt::ItemIsEnabled|Qt::ItemIsUserCheckable;
 		case 1: return Qt::ItemIsSelectable|Qt::ItemIsEnabled|Qt::ItemIsEditable;
 		case 2: return Qt::ItemIsSelectable|Qt::ItemIsEnabled|Qt::ItemIsEditable;
 		default: return 0;

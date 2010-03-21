@@ -32,7 +32,9 @@ public:
 	inline const QDateTime& dateStart() const { return _date_start; }
 	inline const QDateTime& dateStop() const { return _date_stop; }
 	inline const QDateTime& dateLimit() const { return _date_limit; }
-	inline bool done() const { return _done; };
+	inline bool done() const { return _done; }
+
+	inline void setDone(bool v) { _done = v; }
 
 private:
 	QDomNode _node;
@@ -56,7 +58,8 @@ public:
 	TodoModel(QObject *parent = 0);
 	~TodoModel();
 
-	QVariant data(const QModelIndex &index, int role) const;
+	QVariant data(const QModelIndex& index, int role) const;
+	bool setData(const QModelIndex& index, const QVariant& data, int role);
 	Qt::ItemFlags flags(const QModelIndex &index) const;
 	QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const;
 	QModelIndex index(int row, int column, const QModelIndex &parent = QModelIndex()) const;
