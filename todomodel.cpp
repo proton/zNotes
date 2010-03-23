@@ -75,7 +75,7 @@ void TodoModel::load(const QDomDocument& document)
 int TodoModel::columnCount(const QModelIndex& parent) const
 {
 	Q_UNUSED(parent)
-	return 3;
+	return 7;
 }
 
 QString getDateGap(const QDateTime& dt)
@@ -101,8 +101,13 @@ QVariant TodoModel::data(const QModelIndex& index, int role) const
 	{
 		switch(index.column())
 		{
-			case 1: return task->title();
-			case 2: if(!task->done()) return getDateGap(task->dateLimit());
+			case 0: return task->title();
+			case 1: if(!task->done()) return getDateGap(task->dateLimit());
+			case 2: return task->dateStart();
+			case 3: return task->dateStop();
+			case 4: return task->dateLimit();
+			case 5: return task->priority();
+			case 6: return task->comment();
 			default: return QVariant();
 		}
 	}
@@ -110,9 +115,8 @@ QVariant TodoModel::data(const QModelIndex& index, int role) const
 	{
 		switch(index.column())
 		{
-			case 0: return (task->done())? Qt::Checked : Qt::Unchecked;
-			case 1: return task->title();
-			case 2: if(!task->done()) task->dateLimit();
+			case 0: return task->title();
+			case 1: if(!task->done()) task->dateLimit();
 			default: return QVariant();
 		}
 	}
@@ -153,7 +157,7 @@ Qt::ItemFlags TodoModel::flags(const QModelIndex& index) const
 {
 	switch(index.column())
 	{
-		case 0: return Qt::ItemIsSelectable|Qt::ItemIsEnabled|Qt::ItemIsUserCheckable;
+		case 0: return Qt::ItemIsSelectable|Qt::ItemIsEnabled|Qt::ItemIsUserCheckable|Qt::ItemIsEditable;
 		case 1: return Qt::ItemIsSelectable|Qt::ItemIsEnabled|Qt::ItemIsEditable;
 		case 2: return Qt::ItemIsSelectable|Qt::ItemIsEnabled|Qt::ItemIsEditable;
 		default: return 0;
