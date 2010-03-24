@@ -3,8 +3,8 @@
 #include <QCheckBox>
 #include <QtDebug>
 
-Task::Task(QDomNode &node, int row, Task* parent)
-	: _node(node), _row(row), _parent(parent), _done(false)
+Task::Task(QDomDocument* document, QDomNode &node, int row, Task* parent)
+	: _document(document), _node(node), _row(row), _parent(parent), _done(false)
 {
 	QDomElement element = _node.toElement();
 	if(!element.isNull())
@@ -20,10 +20,10 @@ Task::Task(QDomNode &node, int row, Task* parent)
 		{
 			const QString priority_text = element.attribute("priority");
 			if(priority_text=="low") _priority = low;
-			else if(priority_text=="normal") _priority = normal;
+			else if(priority_text=="medium") _priority = medium;
 			else _priority = high;
 		}
-		else _priority = normal;
+		else _priority = medium;
 
 		for(int i=0; i<node.childNodes().count(); ++i)
 		{
@@ -33,7 +33,7 @@ Task::Task(QDomNode &node, int row, Task* parent)
 			if(child_element.tagName()=="title") _title = child_element.text();
 			else if(child_element.tagName()=="comment") _comment = child_element.text();
 
-			else if(child_element.tagName()=="task") _subtasks.append(new Task(child_node, _subtasks.size(), this));
+			else if(child_element.tagName()=="task") _subtasks.append(new Task(_document, child_node, _subtasks.size(), this));
 		}
 	}
 }
@@ -44,6 +44,64 @@ Task::~Task()
 	{
 		delete _subtasks[i];
 		_subtasks[i] = 0;
+	}
+}
+
+static void updateChildNode(QDomDocument& document, QDomNode& node, const QString& tag_name, const QString& value)
+{
+	QDomElement old_element = node.firstChildElement(tag_name);
+	QDomElement new_element = document.createElement(tag_name);
+	QDomText new_element_text = document.createTextNode(value);
+	new_element.appendChild(new_element_text);
+
+	if(!old_element.isNull()) node.replaceChild(new_element, old_element);
+	else node.appendChild(new_element);
+}
+
+void Task::setTitle(const QString& v)
+{
+	_title = v;
+	updateChildNode(*_document, _node, "title", _title);
+}
+
+void Task::setComment(const QString& v)
+{
+	_comment = v;
+	updateChildNode(*_document, _node, "comment", _comment);
+}
+
+void Task::setDateStart(const QDateTime& v)
+{
+	_date_start = v;
+	_node.toElement().setAttribute("time_a", _date_start.toTime_t());
+}
+
+void Task::setDateStop(const QDateTime& v)
+{
+	_date_stop = v;
+	_node.toElement().setAttribute("time_d", _date_start.toTime_t());
+}
+
+void Task::setDateLimit(const QDateTime& v)
+{
+	_date_limit = v;
+	_node.toElement().setAttribute("time_l", _date_start.toTime_t());
+}
+
+void Task::setDone(bool v)
+{
+	_done = v;
+	if(_done) setDateStop(QDateTime::currentDateTime());
+}
+
+void Task::setPriority(Priority v)
+{
+	_priority = v;
+	switch(_priority)
+	{
+	case low: _node.toElement().setAttribute("priority", "low"); break;
+	case medium: _node.toElement().setAttribute("priority", "medium"); break;
+	case high: _node.toElement().setAttribute("priority", "high"); break;
 	}
 }
 
@@ -59,7 +117,7 @@ TodoModel::~TodoModel()
 	delete _root_task;
 }
 
-void TodoModel::load(const QDomDocument& document)
+void TodoModel::load(QDomDocument* document)
 {
 	//Setting document
 	_document = document;
@@ -68,15 +126,9 @@ void TodoModel::load(const QDomDocument& document)
 	delete _root_task;
 
 	//Inserting new tasks
-	QDomElement root_element = _document.documentElement();
-	_root_task = new Task(root_element, 0, NULL);
+	QDomElement root_element = _document->documentElement();
+	_root_task = new Task(_document, root_element, 0, NULL);
 }
-
-//void TodoModel::save()
-//{
-//	//QDomElement root_element = _document.documentElement();
-//	//_document.save();
-//}
 
 int TodoModel::columnCount(const QModelIndex& parent) const
 {
@@ -154,9 +206,7 @@ bool TodoModel::setData(const QModelIndex& index, const QVariant& data, int role
 		case 0:
 			if(role == Qt::CheckStateRole)
 			{
-				bool task_done = data.toBool();
-				task->setDone(task_done);
-				if(task_done) task->setDateStop(QDateTime::currentDateTime());
+				task->setDone(data.toBool());
 				return true;
 			}
 			else if(role == Qt::EditRole)

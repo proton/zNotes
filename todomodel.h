@@ -15,12 +15,12 @@
 class Task
 {
 public:
-	Task(QDomNode &node, int row, Task *parent = 0);
+	Task(QDomDocument* document, QDomNode &node, int row, Task *parent = 0);
 	~Task();
 
 	enum Priority
 	{
-		normal, low, high
+		medium, low, high
 	};
 
 	inline const QList<Task*>& subtasks() const { return _subtasks; }
@@ -35,15 +35,17 @@ public:
 	inline bool done() const { return _done; }
 	inline Priority priority() const { return _priority; }
 
-	inline void setTitle(const QString& v) { _title = v; }
-	inline void setComment(const QString& v) { _comment = v; }
-	inline void setDateStart(const QDateTime& v) { _date_start = v; }
-	inline void setDateStop(const QDateTime& v) { _date_stop = v; }
-	inline void setDateLimit(const QDateTime& v) { _date_limit = v; }
-	inline void setDone(bool v) { _done = v; }
-	inline void setPriority(Priority v) { _priority = v; }
+	void setTitle(const QString& v);
+	void setComment(const QString& v);
+	void setDateStart(const QDateTime& v);
+	void setDateStop(const QDateTime& v);
+	void setDateLimit(const QDateTime& v);
+	void setDone(bool v);
+	void setPriority(Priority v);
 
 private:
+	QDomDocument* _document;
+
 	QDomNode _node;
 	int _row;
 	Task* _parent;
@@ -74,10 +76,10 @@ public:
 	int rowCount(const QModelIndex &parent = QModelIndex()) const;
 	int columnCount(const QModelIndex &parent = QModelIndex()) const;
 
-	void load(const QDomDocument& document);
+	void load(QDomDocument* document);
 
 private:
-	QDomDocument _document;
+	QDomDocument* _document;
 	Task* _root_task;
 };
 
