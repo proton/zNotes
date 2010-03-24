@@ -35,7 +35,13 @@ public:
 	inline bool done() const { return _done; }
 	inline Priority priority() const { return _priority; }
 
+	inline void setTitle(const QString& v) { _title = v; }
+	inline void setComment(const QString& v) { _comment = v; }
+	inline void setDateStart(const QDateTime& v) { _date_start = v; }
+	inline void setDateStop(const QDateTime& v) { _date_stop = v; }
+	inline void setDateLimit(const QDateTime& v) { _date_limit = v; }
 	inline void setDone(bool v) { _done = v; }
+	inline void setPriority(Priority v) { _priority = v; }
 
 private:
 	QDomNode _node;

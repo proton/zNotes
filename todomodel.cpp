@@ -72,6 +72,12 @@ void TodoModel::load(const QDomDocument& document)
 	_root_task = new Task(root_element, 0, NULL);
 }
 
+//void TodoModel::save()
+//{
+//	//QDomElement root_element = _document.documentElement();
+//	//_document.save();
+//}
+
 int TodoModel::columnCount(const QModelIndex& parent) const
 {
 	Q_UNUSED(parent)
@@ -86,9 +92,9 @@ QString getDateGap(const QDateTime& dt)
 	if(days_gap) return QObject::tr("%n days(s)", "", days_gap);
 
 	int secs_gap = dt.secsTo(current);
-	if(secs_gap/3600) return QObject::tr("%n hour(s)", "", days_gap);
-	if(secs_gap/60) return QObject::tr("%n min(s)", "", days_gap);
-	else return QObject::tr("%n sec(s)", "", days_gap);
+	if(secs_gap/3600) return QObject::tr("%n hour(s)", "", secs_gap/3600);
+	if(secs_gap/60) return QObject::tr("%n min(s)", "", secs_gap/60);
+	else return QObject::tr("%n sec(s)", "", secs_gap);
 }
 
 QVariant TodoModel::data(const QModelIndex& index, int role) const
@@ -97,12 +103,17 @@ QVariant TodoModel::data(const QModelIndex& index, int role) const
 
 	Task* task = static_cast<Task*>(index.internalPointer());
 
+//	if(index.column()==4)
+//	{
+//		qDebug() << role << task->dateLimit();
+//	}
+
 	if(role == Qt::DisplayRole)
 	{
 		switch(index.column())
 		{
 			case 0: return task->title();
-			case 1: if(!task->done()) return getDateGap(task->dateLimit());
+			case 1: return (!task->done())?getDateGap(task->dateLimit()):"";
 			case 2: return task->dateStart();
 			case 3: return task->dateStop();
 			case 4: return task->dateLimit();
@@ -117,6 +128,10 @@ QVariant TodoModel::data(const QModelIndex& index, int role) const
 		{
 			case 0: return task->title();
 			case 1: if(!task->done()) task->dateLimit();
+			case 2: return task->dateStart().toString();
+			case 3: return task->dateStop().toString();
+			case 4: return task->dateLimit();
+			case 6: return task->comment();
 			default: return QVariant();
 		}
 	}
@@ -133,23 +148,49 @@ QVariant TodoModel::data(const QModelIndex& index, int role) const
 
 bool TodoModel::setData(const QModelIndex& index, const QVariant& data, int role)
 {
-	if(index.column() == 0 && role == Qt::CheckStateRole)
+	Task* task = static_cast<Task*>(index.internalPointer());
+	switch(index.column())
 	{
-		Task* task = static_cast<Task*>(index.internalPointer());
-		task->setDone(data.toBool());
-		return true;
+		case 0:
+			if(role == Qt::CheckStateRole)
+			{
+				bool task_done = data.toBool();
+				task->setDone(task_done);
+				if(task_done) task->setDateStop(QDateTime::currentDateTime());
+				return true;
+			}
+			else if(role == Qt::EditRole)
+			{
+				task->setTitle(data.toString());
+				return true;
+			}
+//		case 2:
+//			if(role == Qt::EditRole)
+//			{
+//				task->setDateStart(data.toDateTime());
+//				return true;
+//			}
+//		case 3:
+//			if(role == Qt::EditRole)
+//			{
+//				task->setDateStop(data.toDateTime());
+//				return true;
+//			}
+		case 4:
+			if(role == Qt::EditRole)
+			{
+				task->setDateLimit(data.toDateTime());
+				return true;
+			}
+		case 6:
+			if(role == Qt::EditRole)
+			{
+				task->setComment(data.toString());
+				return true;
+			}
+		default:
+		return QAbstractItemModel::setData(index, data, role);
 	}
-//	qDebug() << idx << role <<data;
-//	if( role == Qt::CheckStateRole && idx.column() == 0 ) {
-//	  items[idx.row()].first = data.toInt() == Qt::Checked ? true : false;
-//	return true;
-//	}
-//
-//	if( role == Qt::EditRole && idx.column() == 1 ) {
-//	  items[idx.row()].second = data.toString();
-//	return true;
-//	}
-	return false;
 	return QAbstractItemModel::setData(index, data, role);
 }
 
@@ -158,8 +199,8 @@ Qt::ItemFlags TodoModel::flags(const QModelIndex& index) const
 	switch(index.column())
 	{
 		case 0: return Qt::ItemIsSelectable|Qt::ItemIsEnabled|Qt::ItemIsUserCheckable|Qt::ItemIsEditable;
-		case 1: return Qt::ItemIsSelectable|Qt::ItemIsEnabled|Qt::ItemIsEditable;
-		case 2: return Qt::ItemIsSelectable|Qt::ItemIsEnabled|Qt::ItemIsEditable;
+		case 1: return Qt::ItemIsSelectable|Qt::ItemIsEnabled;
+		//case 2: return Qt::ItemIsSelectable|Qt::ItemIsEnabled|Qt::ItemIsEditable;
 		default: return 0;
 	}
 }
