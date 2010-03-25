@@ -164,7 +164,16 @@ QVariant TodoModel::data(const QModelIndex& index, int role) const
 	{
 		switch(index.column())
 		{
-			case 0: return task->title();
+			case 0:
+			{
+				int child_count = task->subtasks().count();
+				if(child_count==0) return task->title();
+				int child_done = 0;
+				for(int i=0; i<child_count; ++i)
+					if(task->subtasks().at(i)->done())
+						++child_done;
+				return task->title()+QString(" (%1/%2)").arg(child_done).arg(child_count);
+			}
 			case 1: return (!task->done())?getDateGap(task->dateLimit()):"";
 			case 2: return task->dateStart();
 			case 3: return task->dateStop();
@@ -194,6 +203,21 @@ QVariant TodoModel::data(const QModelIndex& index, int role) const
 			case 0: return (task->done())?Qt::Checked:Qt::Unchecked;
 			default: return QVariant();
 		}
+	}
+	else if(role == Qt::FontRole)
+	{
+		if(task->done())
+		{
+			QFont font;
+			font.setStrikeOut(true);
+			return font;
+		}
+		return QFont();
+	}
+	else if(role == Qt::ForegroundRole)
+	{
+		QPalette::ColorGroup colorgroup = (task->done())?QPalette::Disabled:QPalette::Normal;
+		return QPalette().color(colorgroup, QPalette::Text);
 	}
 	return QVariant();
 }
