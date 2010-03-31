@@ -47,6 +47,69 @@ Task::~Task()
 	}
 }
 
+void Task::insertSubTask()
+{
+	//
+	//TODO:
+//	QDomElement element = _node.toElement();
+//	for(int i=0; i<node.childNodes().count(); ++i)
+//	{
+//		QDomNode child_node = _node.childNodes().item(i);
+//		QDomElement child_element = child_node.toElement();
+//
+//		if(child_element.tagName()=="title") _title = child_element.text();
+//		else if(child_element.tagName()=="comment") _comment = child_element.text();
+//
+//		else if(child_element.tagName()=="task") _subtasks.append(new Task(_document, child_node, _subtasks.size(), this));
+//	}
+
+	///
+
+//	QDomElement new_element = document.createElement(tag_name);
+//	QDomText new_element_text = document.createTextNode(value);
+//	new_element.appendChild(new_element_text);
+//
+//	if(!old_element.isNull()) node.replaceChild(new_element, old_element);
+//	else node.appendChild(new_element);
+
+	QDomElement new_task_elem = _document->createElement("task");
+	_node.appendChild(new_task_elem);
+	Task* task = new Task(_document, new_task_elem, _subtasks.size(), this);
+	_subtasks.append(task);
+}
+
+void Task::removeSubTask(int pos)
+{
+	Task* subtask = _subtasks.takeAt(pos);
+
+	const QDomNode& subtask_elem = subtask->node();
+	_node.removeChild(subtask_elem);
+
+	//TODO: memory leak =(
+
+//	Task* subtask_new = subtask;
+//	subtask = 0;
+//	delete subtask_new;
+
+//	Task* subtask = _subtasks.at(pos);
+//	const QDomNode& subtask_elem = subtask->node();
+//	_node.removeChild(subtask_elem);
+//	Task* subtask_new = subtask;
+//	subtask = 0;
+//	_subtasks.removeAt(pos);
+
+	//delete subtask_new;
+
+
+//	Task* subtask = _subtasks.takeAt(pos);
+//
+//	const QDomNode& subtask_elem = subtask->node();
+//	_node.removeChild(subtask_elem);
+//
+//	delete subtask;
+}
+
+
 static void updateChildNode(QDomDocument& document, QDomNode& node, const QString& tag_name, const QString& value)
 {
 	QDomElement old_element = node.firstChildElement(tag_name);
@@ -130,6 +193,27 @@ void TodoModel::load(QDomDocument* document)
 	_root_task = new Task(_document, root_element, 0, NULL);
 }
 
+bool TodoModel::insertRows(int row, int count, const QModelIndex& parent)
+{
+	Q_UNUSED(row)
+	Task* task_parent = static_cast<Task*>(parent.internalPointer());
+	for(int i=0; i<count; ++i)
+	{
+		task_parent->insertSubTask();
+	}
+	return true;
+}
+
+bool TodoModel::removeRows(int row, int count, const QModelIndex& parent)
+{
+	Task* task_parent = static_cast<Task*>(parent.internalPointer());
+	for(int i=0; i<count; ++i)
+	{
+		task_parent->removeSubTask(row+i);
+	}
+	return true;
+}
+
 int TodoModel::columnCount(const QModelIndex& parent) const
 {
 	Q_UNUSED(parent)
@@ -151,14 +235,12 @@ QString getDateGap(const QDateTime& dt)
 
 QVariant TodoModel::data(const QModelIndex& index, int role) const
 {
+	//qDebug() << "111";
 	if(!index.isValid()) return QVariant();
 
+	//qDebug() <<index.internalPointer();
 	Task* task = static_cast<Task*>(index.internalPointer());
-
-//	if(index.column()==4)
-//	{
-//		qDebug() << role << task->dateLimit();
-//	}
+	//qDebug() << task;
 
 	if(role == Qt::DisplayRole)
 	{
@@ -270,6 +352,7 @@ bool TodoModel::setData(const QModelIndex& index, const QVariant& data, int role
 
 Qt::ItemFlags TodoModel::flags(const QModelIndex& index) const
 {
+	if(!index.isValid()) return 0;
 	switch(index.column())
 	{
 		case 0: return Qt::ItemIsSelectable|Qt::ItemIsEnabled|Qt::ItemIsUserCheckable|Qt::ItemIsEditable;
@@ -303,12 +386,14 @@ QModelIndex TodoModel::index(int row, int column, const QModelIndex& parent) con
 
 	Task* parent_item;
 
-	 if (!parent.isValid()) parent_item = _root_task;
-	 else parent_item = static_cast<Task*>(parent.internalPointer());
+	if(!parent.isValid()) parent_item = _root_task;
+	else parent_item = static_cast<Task*>(parent.internalPointer());
 
-	 Task* child_item = parent_item->subtasks().at(row);
-	 if(child_item) return createIndex(row, column, child_item);
-	 else return QModelIndex();
+	Task* child_item = (parent_item->subtasks().size()>row)?
+		parent_item->subtasks().at(row):0;
+
+	if(child_item) return createIndex(row, column, child_item);
+	else return QModelIndex();
 }
 
 QModelIndex TodoModel::parent(const QModelIndex& child) const

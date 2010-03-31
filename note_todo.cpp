@@ -13,6 +13,8 @@
 #include <QDataWidgetMapper>
 #include <QDateTimeEdit>
 #include <QLabel>
+#include <QMenu>
+//#include <QAction>
 
 TodoNote::TodoNote(const QFileInfo& fileinfo, Note::Type type_new)
 	: Note(fileinfo, type_new)
@@ -37,6 +39,15 @@ TodoNote::TodoNote(const QFileInfo& fileinfo, Note::Type type_new)
 
 	connect(model, SIGNAL(dataChanged(QModelIndex,QModelIndex)), this, SLOT(taskChanged(QModelIndex)));
 	connect(tree_view->selectionModel(), SIGNAL(currentChanged(QModelIndex,QModelIndex)), this, SLOT(taskChanged(QModelIndex)));
+
+	tree_view->setContextMenuPolicy(Qt::CustomContextMenu);
+
+	connect(tree_view, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(contextMenuRequested(QPoint)));
+
+	menu_context = new QMenu();
+	menu_context->addAction(tr("Insert new task"), this, SLOT(insertTask()));
+	menu_context->addAction(tr("Remove this task"), this, SLOT(removeTask()));
+	menu_context->addAction(tr("Hide completed tasks"), this, SLOT(hideColmpletedTasks())); //TODO: make checkable
 
 	//TODO: м.б. спросить...
 	//а можно и вручную сигнал посылать при изменении
@@ -126,6 +137,32 @@ void TodoNote::copy() const
 {
 //	QClipboard* clipboard = QApplication::clipboard();
 //	clipboard->setPixmap(*label->pixmap());
+}
+
+void TodoNote::contextMenuRequested(const QPoint& pos)
+{
+	QModelIndex index = tree_view->indexAt(pos);
+	menu_context->actions()[1]->setEnabled(index.isValid()); //action "Remove this task"
+	QPoint pos_global = tree_view->mapToGlobal(pos);
+	menu_context->exec(pos_global);
+}
+
+void TodoNote::insertTask()
+{
+	QModelIndex index = tree_view->currentIndex();
+	model->insertRow(index.model()->rowCount(index), index);
+}
+
+void TodoNote::removeTask()
+{
+	QModelIndex index = tree_view->currentIndex();
+	model->removeRow(index.row(), index.parent());
+}
+
+void TodoNote::hideComlpletedTasks()
+{
+//	QModelIndex index = tree_view->currentIndex();
+//	model->insertTask(index);
 }
 
 void TodoNote::taskChanged(QModelIndex index)

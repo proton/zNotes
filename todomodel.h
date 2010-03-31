@@ -27,6 +27,8 @@ public:
 	inline Task* parent() const { return _parent; }
 	inline int row() const { return _row; };
 
+	inline const QDomNode& node() const { return _node; }
+
 	inline const QString& title() const { return _title; }
 	inline const QString& comment() const { return _comment; }
 	inline const QDateTime& dateStart() const { return _date_start; }
@@ -42,6 +44,9 @@ public:
 	void setDateLimit(const QDateTime& v);
 	void setDone(bool v);
 	void setPriority(Priority v);
+
+	void insertSubTask();
+	void removeSubTask(int pos);
 
 private:
 	QDomDocument* _document;
@@ -77,6 +82,12 @@ public:
 	int columnCount(const QModelIndex &parent = QModelIndex()) const;
 
 	void load(QDomDocument* document);
+
+	bool insertRows(int row, int count, const QModelIndex& parent = QModelIndex());
+	bool removeRows(int row, int count, const QModelIndex& parent = QModelIndex());
+
+//	void insertTask(const QModelIndex& index);
+//	void removeTask(const QModelIndex& index);
 
 private:
 	QDomDocument* _document;

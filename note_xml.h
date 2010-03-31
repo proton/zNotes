@@ -7,6 +7,8 @@ class QTreeWidget;
 class QDomDocument;
 class QDomElement;
 class QTreeWidgetItem;
+class QMenu;
+class QAction;
 
 class XmlNote : public Note
 {
@@ -21,6 +23,7 @@ public:
 private:
 	QTreeWidget* tree_widget;
 	QDomDocument* document;
+	//QMenu* context_menu;
 	//
 	void apendTask(QDomElement* element, QTreeWidgetItem* parent = 0);
 };
