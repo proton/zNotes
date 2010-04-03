@@ -80,14 +80,12 @@ public:
 	QModelIndex parent(const QModelIndex &child) const;
 	int rowCount(const QModelIndex &parent = QModelIndex()) const;
 	int columnCount(const QModelIndex &parent = QModelIndex()) const;
+	bool hasChildren(const QModelIndex & parent = QModelIndex()) const;
 
 	void load(QDomDocument* document);
 
 	bool insertRows(int row, int count, const QModelIndex& parent = QModelIndex());
 	bool removeRows(int row, int count, const QModelIndex& parent = QModelIndex());
-
-//	void insertTask(const QModelIndex& index);
-//	void removeTask(const QModelIndex& index);
 
 private:
 	QDomDocument* _document;

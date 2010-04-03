@@ -214,10 +214,27 @@ bool TodoModel::removeRows(int row, int count, const QModelIndex& parent)
 	return true;
 }
 
+int TodoModel::rowCount(const QModelIndex& parent) const
+{
+	Task* parent_item;
+	if(parent.column() > 0) return 0;
+	if(!parent.isValid()) parent_item = _root_task;
+	else parent_item = static_cast<Task*>(parent.internalPointer());
+	return parent_item->subtasks().size();
+}
+
 int TodoModel::columnCount(const QModelIndex& parent) const
 {
 	Q_UNUSED(parent)
 	return 7;
+}
+
+bool TodoModel::hasChildren(const QModelIndex& parent) const
+{
+	Task* parent_item;
+	if(!parent.isValid()) parent_item = _root_task;
+	else parent_item = static_cast<Task*>(parent.internalPointer());
+	return parent_item->subtasks().size();
 }
 
 QString getDateGap(const QDateTime& dt)
@@ -406,13 +423,4 @@ QModelIndex TodoModel::parent(const QModelIndex& child) const
 	if(parent_item==_root_task) return QModelIndex();
 
 	return createIndex(parent_item->row(), 0, parent_item);
-}
-
-int TodoModel::rowCount(const QModelIndex& parent) const
-{
-	Task* parent_item;
-	if(parent.column() > 0) return 0;
-	if(!parent.isValid()) parent_item = _root_task;
-	else parent_item = static_cast<Task*>(parent.internalPointer());
-	return parent_item->subtasks().size();
 }

@@ -16,6 +16,27 @@
 #include <QMenu>
 //#include <QAction>
 
+class TodoView : public QTreeView
+{
+	//Q_OBJECT
+public:
+	bool isRowHidden(int row, const QModelIndex& parent) const
+	{
+		//qDebug() << (hide_completed && parent.child(row, 0).data(Qt::CheckStateRole).toBool());
+		//return hide_completed && parent.child(row, 0).data(Qt::CheckStateRole).toBool();
+		return true;
+	}
+	bool isIndexHidden (const QModelIndex& index) const
+	{
+		//qDebug() << (hide_completed && (index.sibling(index.row(), 0).data(Qt::CheckStateRole).toBool()));
+		//return hide_completed && (index.sibling(index.row(), 0).data(Qt::CheckStateRole).toBool());
+		return true;
+	}
+	inline void hideCompletedTasks(bool hide) { hide_completed = hide; }
+private:
+	bool hide_completed;
+};
+
 TodoNote::TodoNote(const QFileInfo& fileinfo, Note::Type type_new)
 	: Note(fileinfo, type_new)
 {
@@ -30,7 +51,7 @@ TodoNote::TodoNote(const QFileInfo& fileinfo, Note::Type type_new)
 
 	model = new TodoModel();
 
-	tree_view = new QTreeView();
+	tree_view = new TodoView();
 	tree_view->setModel(model);
 	tree_view->setEditTriggers(QAbstractItemView::DoubleClicked | QAbstractItemView::SelectedClicked);
 	tree_view->setSelectionBehavior(QAbstractItemView::SelectRows);
@@ -41,16 +62,16 @@ TodoNote::TodoNote(const QFileInfo& fileinfo, Note::Type type_new)
 	connect(tree_view->selectionModel(), SIGNAL(currentChanged(QModelIndex,QModelIndex)), this, SLOT(taskChanged(QModelIndex)));
 
 	tree_view->setContextMenuPolicy(Qt::CustomContextMenu);
+	tree_view->setAnimated(true);
 
 	connect(tree_view, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(contextMenuRequested(QPoint)));
 
 	menu_context = new QMenu();
 	menu_context->addAction(tr("Insert new task"), this, SLOT(insertTask()));
 	menu_context->addAction(tr("Remove this task"), this, SLOT(removeTask()));
-	menu_context->addAction(tr("Hide completed tasks"), this, SLOT(hideColmpletedTasks())); //TODO: make checkable
+	menu_context->addAction(tr("Hide completed tasks"), this, SLOT(hideCompletedTasks()));
+	menu_context->actions()[2]->setCheckable(true);
 
-	//TODO: м.б. спросить...
-	//а можно и вручную сигнал посылать при изменении
 	for(int i=2; i<model->columnCount(); ++i)
 		tree_view->setColumnHidden(i, true);
 
@@ -150,7 +171,7 @@ void TodoNote::contextMenuRequested(const QPoint& pos)
 void TodoNote::insertTask()
 {
 	QModelIndex index = tree_view->currentIndex();
-	model->insertRow(index.model()->rowCount(index), index);
+	model->insertRow(index.model()->rowCount(index)+1, index);
 }
 
 void TodoNote::removeTask()
@@ -159,10 +180,10 @@ void TodoNote::removeTask()
 	model->removeRow(index.row(), index.parent());
 }
 
-void TodoNote::hideComlpletedTasks()
+void TodoNote::hideCompletedTasks()
 {
-//	QModelIndex index = tree_view->currentIndex();
-//	model->insertTask(index);
+	bool hide_completed = menu_context->actions()[2]->isChecked();
+	tree_view->hideCompletedTasks(hide_completed);
 }
 
 void TodoNote::taskChanged(QModelIndex index)

@@ -3,7 +3,7 @@
 
 #include "note.h"
 
-class QTreeView;
+class TodoView;
 class TodoModel;
 class QScrollArea;
 class TextEdit;
@@ -30,10 +30,11 @@ private slots:
 	void contextMenuRequested(const QPoint& pos);
 	void insertTask();
 	void removeTask();
-	void hideComlpletedTasks();
+	void hideCompletedTasks();
+	//bool QAbstractItemView::isIndexHidden ( const QModelIndex & index ) const;
 private:
 	QDomDocument* document;
-	QTreeView* tree_view;
+	TodoView* tree_view;
 	TodoModel* model;
 	QScrollArea* area;
 	TextEdit* text_edit;
@@ -47,9 +48,6 @@ private:
 	QLabel* lb_date_1;
 	QLabel* lb_date_2;
 	QMenu* menu_context;
-//	QAction* act_create;
-//	QAction* act_remove;
-//	QAction* act_hide_done;
 };
 
 #endif // NOTE_TODO_H
