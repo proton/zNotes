@@ -4,8 +4,12 @@
 #include "note_text.h"
 #include "note_html.h"
 #include "note_picture.h"
-#include "note_xml.h"
-#include "note_todo.h"
+#ifdef NOTE_TODO_FORMAT
+	#include "note_todo.h"
+#endif
+#ifdef NOTE_XML_FORMAT
+	#include "note_xml.h"
+#endif
 
 NoteList::NoteList(QWidget* parent)
 	: QObject(), vec(), current_index(-1)
@@ -20,8 +24,12 @@ NoteList::NoteList(QWidget* parent)
 	NOTE_TYPE_MAP["bmp"] = Note::type_picture;
 	NOTE_TYPE_MAP["gif"] = Note::type_picture;
 	NOTE_TYPE_MAP["png"] = Note::type_picture;
-	NOTE_TYPE_MAP["xml"] = Note::type_xml;
+#ifdef NOTE_TODO_FORMAT
 	NOTE_TYPE_MAP["ztodo"] = Note::type_todo;
+#endif
+#ifdef NOTE_XML_FORMAT
+	NOTE_TYPE_MAP["xml"] = Note::type_xml;
+#endif
 
 	tabs = new QTabWidget(parent);
 	tabs->setDocumentMode(true);
@@ -50,8 +58,12 @@ Note* NoteList::add(const QFileInfo& fileinfo, bool set_current)
 		case Note::type_text: note = new TextNote(fileinfo, type); break;
 		case Note::type_html: note = new HtmlNote(fileinfo, type); break;
 		case Note::type_picture: note = new PictureNote(fileinfo, type); break;
-		case Note::type_xml: note = new XmlNote(fileinfo, type); break;
+#ifdef NOTE_TODO_FORMAT
 		case Note::type_todo: note = new TodoNote(fileinfo, type); break;
+#endif
+#ifdef NOTE_XML_FORMAT
+		case Note::type_xml: note = new XmlNote(fileinfo, type); break;
+#endif
 		default: note = new TextNote(fileinfo, type); break;
 	}
 

@@ -25,7 +25,13 @@ zApplication::zApplication(int &argc, char **argv)
 
 bool zApplication::sendMessage(const QString &message, int timeout)
 {
+#ifdef SINGLE_INSTANCE
 	return peer->sendMessage(message, timeout);
+#else
+	Q_UNUSED(message)
+	Q_UNUSED(timeout)
+	return true;
+#endif
 }
 
 void zApplication::copyStarted(const QString&)

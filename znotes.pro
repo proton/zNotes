@@ -23,11 +23,8 @@ SOURCES += main.cpp \
     notelist.cpp \
     note_text.cpp \
     note_html.cpp \
-    note_xml.cpp \
     note_picture.cpp \
-    application.cpp \
-    note_todo.cpp \
-    todomodel.cpp
+    application.cpp
 HEADERS += mainwindow.h \
     configdialog.h \
     settings.h \
@@ -42,10 +39,7 @@ HEADERS += mainwindow.h \
     note_text.h \
     note_html.h \
     note_picture.h \
-    note_xml.h \
-    application.h \
-    note_todo.h \
-    todomodel.h
+    application.h
 FORMS += mainwindow.ui \
     configdialog.ui \
     aboutDialog.ui
@@ -54,7 +48,7 @@ TRANSLATIONS += translations/znotes_ru.ts \
 	translations/znotes_pt_BR.ts \
 	translations/znotes_uk.ts
 RESOURCES += znotes.qrc
-ololo { 
+!without_single_inst { 
     QT += network
     DEFINES += SINGLE_INSTANCE
     SOURCES += single_inst/qtlockedfile_win.cpp \
@@ -64,7 +58,20 @@ ololo {
     HEADERS += single_inst/qtlockedfile.h \
         single_inst/qtlocalpeer.h
 }
-QT += xml
+!without_xml_format { 
+    QT += xml
+    DEFINES += NOTE_XML_FORMAT
+    SOURCES += note_xml.cpp
+    HEADERS += note_xml.h
+}
+!without_todo_format { 
+    QT += xml
+    DEFINES += NOTE_TODO_FORMAT
+    SOURCES += note_todo.cpp \
+		todomodel.cpp
+    HEADERS += note_todo.h \
+		todomodel.h
+}
 
 # This makes qmake generate translations
 isEmpty(QMAKE_LRELEASE):QMAKE_LRELEASE = $$[QT_INSTALL_BINS]/lrelease

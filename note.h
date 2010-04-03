@@ -16,8 +16,12 @@ public:
 		type_text,
 		type_html,
 		type_picture,
+#ifdef NOTE_TODO_FORMAT
 		type_todo,
-		type_xml
+#endif
+#ifdef NOTE_XML_FORMAT
+		type_xml,
+#endif
 	};
 public:
 	Note(const QFileInfo& fileinfo, Note::Type type_new);
