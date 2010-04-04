@@ -15,6 +15,9 @@ configDialog::configDialog(QWidget *parent) :
 	QDialog(parent), m_ui(new Ui::configDialog)
 {
 	m_ui->setupUi(this);
+#ifndef SINGLE_INSTANCE
+	m_ui->cb_SingleInstance->setDisabled(true);
+#endif
 	m_ui->listActions->setModel(&m_items);
 	m_ui->listToolbarActions->setModel(&mt_items);
 	//
@@ -28,8 +31,10 @@ configDialog::configDialog(QWidget *parent) :
 	m_ui->cb_FrameHide->setChecked(settings.getHideFrame());
 	m_ui->cb_StayTop->setChecked(settings.getStayTop());
 	//
+#ifdef SINGLE_INSTANCE
 	m_ui->cb_SingleInstance->setChecked(settings.getSingleInstance());
 	m_ui->cb_CopyStartRaise->setChecked(settings.getCopyStartRaise());
+#endif
 	//
 	m_ui->tabScripts->setModel(&settings.getScriptModel());
 	m_ui->tabScripts->resizeColumnsToContents();
@@ -86,8 +91,10 @@ void configDialog::SaveSettings()
 	settings.setShowExtensions(m_ui->cb_ShowExtensions->checkState());
 	settings.setHideFrame(m_ui->cb_FrameHide->checkState());
 	settings.setStayTop(m_ui->cb_StayTop->checkState());
+#ifdef SINGLE_INSTANCE
 	settings.setSingleInstance(m_ui->cb_SingleInstance->checkState());
 	settings.setCopyStartRaise(m_ui->cb_CopyStartRaise->checkState());
+#endif
 	settings.setNoteFont(m_ui->lb_FontExample->font());
 	settings.setNoteLinksHighlight(m_ui->cb_NoteLinksHighlight->checkState());
 	settings.setNoteLinksOpen(m_ui->cb_NoteLinksOpen->checkState());

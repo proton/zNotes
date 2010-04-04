@@ -30,7 +30,7 @@ bool zApplication::sendMessage(const QString &message, int timeout)
 #else
 	Q_UNUSED(message)
 	Q_UNUSED(timeout)
-	return true;
+	return false;
 #endif
 }
 
