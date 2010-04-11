@@ -111,7 +111,7 @@ TodoNote::TodoNote(const QFileInfo& fileinfo, Note::Type type_new)
 	mapper->addMapping(lb_date_stop, 3, "text");
 	mapper->addMapping(dt_date_limit, 4);
 
-	tree_view->setCurrentIndex(model->index(0,0));
+	tree_view->setCurrentIndex(QModelIndex());
 }
 
 TodoNote::~TodoNote()
@@ -176,6 +176,8 @@ void TodoNote::contextMenuRequested(const QPoint& pos)
 void TodoNote::insertTask()
 {
 	QModelIndex index = tree_view->currentIndex();
+	//TODO:
+	//QModelIndex index = tree_view->indexAt()
 	int row = model->rowCount(index)+1;
 	model->insertRow(row, index);
 }

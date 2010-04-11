@@ -244,12 +244,9 @@ QString getDateGap(const QDateTime& dt)
 
 QVariant TodoModel::data(const QModelIndex& index, int role) const
 {
-	//qDebug() << "111";
 	if(!index.isValid()) return QVariant();
 
-	//qDebug() <<index.internalPointer();
 	Task* task = static_cast<Task*>(index.internalPointer());
-	//qDebug() << task;
 
 	if(role == Qt::DisplayRole)
 	{
