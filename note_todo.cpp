@@ -24,13 +24,15 @@ public:
 	{
 		//qDebug() << (hide_completed && parent.child(row, 0).data(Qt::CheckStateRole).toBool());
 		//return hide_completed && parent.child(row, 0).data(Qt::CheckStateRole).toBool();
-		return true;
+		//return true;
+		return false;
 	}
 	bool isIndexHidden (const QModelIndex& index) const
 	{
 		//qDebug() << (hide_completed && (index.sibling(index.row(), 0).data(Qt::CheckStateRole).toBool()));
 		//return hide_completed && (index.sibling(index.row(), 0).data(Qt::CheckStateRole).toBool());
-		return true;
+		//return true;
+		return false;
 	}
 	inline void hideCompletedTasks(bool hide) { hide_completed = hide; }
 private:

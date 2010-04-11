@@ -219,13 +219,13 @@ int TodoModel::columnCount(const QModelIndex& parent) const
 	return 7;
 }
 
-bool TodoModel::hasChildren(const QModelIndex& parent) const
-{
-	Task* parent_item;
-	if(!parent.isValid()) parent_item = _root_task;
-	else parent_item = static_cast<Task*>(parent.internalPointer());
-	return parent_item->subtasks().size();
-}
+//bool TodoModel::hasChildren(const QModelIndex& parent) const
+//{
+//	Task* parent_item;
+//	if(!parent.isValid()) parent_item = _root_task;
+//	else parent_item = static_cast<Task*>(parent.internalPointer());
+//	return parent_item->subtasks().size();
+//}
 
 QString getDateGap(const QDateTime& dt)
 {
