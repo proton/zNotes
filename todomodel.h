@@ -9,6 +9,7 @@
 #include <QModelIndex>
 #include <QDateTime>
 #include <QVariant>
+#include <QFile>
 
 #include <QItemDelegate>
 
@@ -54,7 +55,6 @@ private:
 	QDomNode _node;
 	int _row;
 	Task* _parent;
-	//QHash<int, Task*> _childs;
 	QList<Task*> _subtasks;
 
 	QString _title;
@@ -82,7 +82,7 @@ public:
 	int columnCount(const QModelIndex &parent = QModelIndex()) const;
 	bool hasChildren(const QModelIndex & parent = QModelIndex()) const;
 
-	void load(QDomDocument* document);
+	QDomDocument* load(QFile& file);
 
 	bool insertRows(int row, int count, const QModelIndex& parent = QModelIndex());
 	bool removeRows(int row, int count, const QModelIndex& parent = QModelIndex());

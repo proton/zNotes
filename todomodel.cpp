@@ -49,32 +49,10 @@ Task::~Task()
 
 void Task::insertSubTask()
 {
-	//
-	//TODO:
-//	QDomElement element = _node.toElement();
-//	for(int i=0; i<node.childNodes().count(); ++i)
-//	{
-//		QDomNode child_node = _node.childNodes().item(i);
-//		QDomElement child_element = child_node.toElement();
-//
-//		if(child_element.tagName()=="title") _title = child_element.text();
-//		else if(child_element.tagName()=="comment") _comment = child_element.text();
-//
-//		else if(child_element.tagName()=="task") _subtasks.append(new Task(_document, child_node, _subtasks.size(), this));
-//	}
-
-	///
-
-//	QDomElement new_element = document.createElement(tag_name);
-//	QDomText new_element_text = document.createTextNode(value);
-//	new_element.appendChild(new_element_text);
-//
-//	if(!old_element.isNull()) node.replaceChild(new_element, old_element);
-//	else node.appendChild(new_element);
-
 	QDomElement new_task_elem = _document->createElement("task");
 	_node.appendChild(new_task_elem);
 	Task* task = new Task(_document, new_task_elem, _subtasks.size(), this);
+	task->setDateStart(QDateTime::currentDateTime());
 	_subtasks.append(task);
 }
 
@@ -171,7 +149,7 @@ void Task::setPriority(Priority v)
 //------------------------------------------------------------------------------
 
 TodoModel::TodoModel(QObject *parent)
-	: QAbstractItemModel(parent), _root_task(0)
+	: QAbstractItemModel(parent), _document(0), _root_task(0)
 {
 }
 
@@ -180,10 +158,20 @@ TodoModel::~TodoModel()
 	delete _root_task;
 }
 
-void TodoModel::load(QDomDocument* document)
+QDomDocument*  TodoModel::load(QFile& file)
 {
-	//Setting document
-	_document = document;
+	delete _document;
+	_document = new QDomDocument("ztodo");
+
+	//Creating new TODO note
+	if(!_document->setContent(&file) || !_document->childNodes().count())
+	{
+		 _document->appendChild(_document->createProcessingInstruction("xml", "version='1.0' encoding='UTF-8'"));
+
+		QDomElement elem = _document->createElement("ztodo");
+		elem.setAttribute("version", VERSION);
+		_document->appendChild(elem);
+	}
 
 	//Removing old tasks
 	delete _root_task;
@@ -191,12 +179,14 @@ void TodoModel::load(QDomDocument* document)
 	//Inserting new tasks
 	QDomElement root_element = _document->documentElement();
 	_root_task = new Task(_document, root_element, 0, NULL);
+
+	return _document;
 }
 
 bool TodoModel::insertRows(int row, int count, const QModelIndex& parent)
 {
 	Q_UNUSED(row)
-	Task* task_parent = static_cast<Task*>(parent.internalPointer());
+	Task* task_parent = (parent.isValid())? static_cast<Task*>(parent.internalPointer()) : _root_task;
 	for(int i=0; i<count; ++i)
 	{
 		task_parent->insertSubTask();
@@ -239,6 +229,8 @@ bool TodoModel::hasChildren(const QModelIndex& parent) const
 
 QString getDateGap(const QDateTime& dt)
 {
+	if(dt.isNull()) return "";
+
 	QDateTime current(QDateTime::currentDateTime());
 
 	int days_gap = dt.daysTo(current);

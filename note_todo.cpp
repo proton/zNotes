@@ -40,7 +40,7 @@ private:
 TodoNote::TodoNote(const QFileInfo& fileinfo, Note::Type type_new)
 	: Note(fileinfo, type_new)
 {
-	document = new QDomDocument();
+	//document = new QDomDocument();
 
 	text_edit = new TextEdit();
 //	text_edit->setMouseTracking(settings.getNoteLinksOpen());
@@ -128,10 +128,15 @@ TodoNote::~TodoNote()
 void TodoNote::load()
 {
 	file.close();
-	if(!file.open(QIODevice::ReadOnly)) return;
-	document->setContent(&file);
-	model->load(document);
-	file.close();
+	if(!file.exists() || !file.open(QIODevice::ReadOnly))
+	{
+		//file.open(QIODevice::WriteOnly)
+	}
+	else
+	{
+		document = model->load(file);
+		file.close();
+	}
 }
 
 //Saving note
@@ -171,13 +176,15 @@ void TodoNote::contextMenuRequested(const QPoint& pos)
 void TodoNote::insertTask()
 {
 	QModelIndex index = tree_view->currentIndex();
-	model->insertRow(index.model()->rowCount(index)+1, index);
+	int row = model->rowCount(index)+1;
+	model->insertRow(row, index);
 }
 
 void TodoNote::removeTask()
 {
 	QModelIndex index = tree_view->currentIndex();
-	model->removeRow(index.row(), index.parent());
+	if(index.isValid())
+		model->removeRow(index.row(), index.parent());
 }
 
 void TodoNote::hideCompletedTasks()
