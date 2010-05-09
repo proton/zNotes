@@ -180,8 +180,11 @@ void TodoNote::insertTask()
 	QModelIndex index = tree_view->currentIndex();
 	//TODO:
 	//QModelIndex index = tree_view->indexAt()
-	int row = model->rowCount(index)+1;
+	int row = model->rowCount(index);
 	model->insertRow(row, index);
+	//Setting current index to created task
+	QModelIndex child_index = index.child(row, 0);
+	tree_view->setCurrentIndex(child_index);
 }
 
 void TodoNote::removeTask()

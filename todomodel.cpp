@@ -185,31 +185,32 @@ QDomDocument*  TodoModel::load(QFile& file)
 
 bool TodoModel::insertRows(int row, int count, const QModelIndex& parent)
 {
-	Q_UNUSED(row)
-	Task* task_parent = (parent.isValid())? static_cast<Task*>(parent.internalPointer()) : _root_task;
+	Task* task_parent = getTask(parent);
+	beginInsertRows(parent, row, row+count-1);
 	for(int i=0; i<count; ++i)
 	{
 		task_parent->insertSubTask();
 	}
+	endInsertRows();
 	return true;
 }
 
 bool TodoModel::removeRows(int row, int count, const QModelIndex& parent)
 {
-	Task* task_parent = static_cast<Task*>(parent.internalPointer());
+	Task* task_parent = getTask(parent);
+	beginRemoveRows(parent, row, row+count-1);
 	for(int i=0; i<count; ++i)
 	{
 		task_parent->removeSubTask(row+i);
 	}
+	endRemoveRows();
 	return true;
 }
 
 int TodoModel::rowCount(const QModelIndex& parent) const
 {
-	Task* parent_item;
 	if(parent.column() > 0) return 0;
-	if(!parent.isValid()) parent_item = _root_task;
-	else parent_item = static_cast<Task*>(parent.internalPointer());
+	Task* parent_item = getTask(parent);
 	return parent_item->subtasks().size();
 }
 
@@ -217,6 +218,16 @@ int TodoModel::columnCount(const QModelIndex& parent) const
 {
 	Q_UNUSED(parent)
 	return 7;
+}
+
+Task* TodoModel::getTask(const QModelIndex &index) const
+{
+	if(index.isValid())
+	{
+		Task *task = static_cast<Task*>(index.internalPointer());
+		if(task) return task;
+	}
+	return _root_task;
 }
 
 //bool TodoModel::hasChildren(const QModelIndex& parent) const
@@ -390,10 +401,7 @@ QModelIndex TodoModel::index(int row, int column, const QModelIndex& parent) con
 {
 	//if(!hasIndex(row, column, parent)) return QModelIndex();
 
-	Task* parent_item;
-
-	if(!parent.isValid()) parent_item = _root_task;
-	else parent_item = static_cast<Task*>(parent.internalPointer());
+	Task* parent_item = getTask(parent);
 
 	Task* child_item = (parent_item->subtasks().size()>row)?
 		parent_item->subtasks().at(row):0;
@@ -406,7 +414,7 @@ QModelIndex TodoModel::parent(const QModelIndex& child) const
 {
 	if (!child.isValid()) return QModelIndex();
 
-	Task* child_item = static_cast<Task*>(child.internalPointer());
+	Task* child_item = getTask(child);
 	Task* parent_item = child_item->parent();
 
 	if(parent_item==_root_task) return QModelIndex();

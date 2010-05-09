@@ -87,6 +87,8 @@ public:
 	bool insertRows(int row, int count, const QModelIndex& parent = QModelIndex());
 	bool removeRows(int row, int count, const QModelIndex& parent = QModelIndex());
 
+	Task* getTask(const QModelIndex &index) const;
+
 private:
 	QDomDocument* _document;
 	Task* _root_task;
