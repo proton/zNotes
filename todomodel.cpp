@@ -53,6 +53,7 @@ void Task::insertSubTask()
 	_node.appendChild(new_task_elem);
 	Task* task = new Task(_document, new_task_elem, _subtasks.size(), this);
 	task->setDateStart(QDateTime::currentDateTime());
+	task->setTitle(QObject::tr("New task"));
 	_subtasks.append(task);
 }
 
