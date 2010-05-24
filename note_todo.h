@@ -3,8 +3,9 @@
 
 #include "note.h"
 
-class TodoView;
+class QTreeView;
 class TodoModel;
+class TodoProxyModel;
 class QScrollArea;
 class TextEdit;
 class QDomDocument;
@@ -34,8 +35,9 @@ private slots:
 	//bool QAbstractItemView::isIndexHidden ( const QModelIndex & index ) const;
 private:
 	QDomDocument* document;
-	TodoView* tree_view;
+	QTreeView* tree_view;
 	TodoModel* model;
+	TodoProxyModel* proxy_model;
 	QScrollArea* area;
 	TextEdit* text_edit;
 	QLayout* layout;

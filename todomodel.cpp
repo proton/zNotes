@@ -181,6 +181,8 @@ QDomDocument*  TodoModel::load(QFile& file)
 	QDomElement root_element = _document->documentElement();
 	_root_task = new Task(_document, root_element, 0, NULL);
 
+	reset();
+
 	return _document;
 }
 
@@ -210,8 +212,10 @@ bool TodoModel::removeRows(int row, int count, const QModelIndex& parent)
 
 int TodoModel::rowCount(const QModelIndex& parent) const
 {
+	//if(!parent.isValid()) return 0;
 	if(parent.column() > 0) return 0;
 	Task* parent_item = getTask(parent);
+	if(!parent_item) return 0;
 	return parent_item->subtasks().size();
 }
 
@@ -230,14 +234,6 @@ Task* TodoModel::getTask(const QModelIndex &index) const
 	}
 	return _root_task;
 }
-
-//bool TodoModel::hasChildren(const QModelIndex& parent) const
-//{
-//	Task* parent_item;
-//	if(!parent.isValid()) parent_item = _root_task;
-//	else parent_item = static_cast<Task*>(parent.internalPointer());
-//	return parent_item->subtasks().size();
-//}
 
 QString getDateGap(const QDateTime& dt)
 {
@@ -421,4 +417,30 @@ QModelIndex TodoModel::parent(const QModelIndex& child) const
 	if(parent_item==_root_task) return QModelIndex();
 
 	return createIndex(parent_item->row(), 0, parent_item);
+}
+
+TodoProxyModel::TodoProxyModel()
+	: QSortFilterProxyModel(), hide_done_tasks(false)
+{
+}
+
+
+void TodoProxyModel::hideDoneTasks(bool hide)
+{
+	hide_done_tasks = hide;
+	emit filterChanged();
+}
+
+bool TodoProxyModel::filterAcceptsRow (int source_row, const QModelIndex& source_parent) const
+{
+	if(hide_done_tasks)
+	{
+		QModelIndex source_index = source_parent.child(source_row, 0);
+		if(source_index.isValid())
+		{
+			bool done = source_index.data(Qt::CheckStateRole).toBool();
+			return !done;
+		}
+	}
+	return true;
 }

@@ -5,6 +5,7 @@
 #include <QHash>
 
 #include <QAbstractItemModel>
+#include <QSortFilterProxyModel>
 #include <QDomDocument>
 #include <QModelIndex>
 #include <QDateTime>
@@ -80,7 +81,6 @@ public:
 	QModelIndex parent(const QModelIndex &child) const;
 	int rowCount(const QModelIndex &parent = QModelIndex()) const;
 	int columnCount(const QModelIndex &parent = QModelIndex()) const;
-	//bool hasChildren(const QModelIndex & parent = QModelIndex()) const;
 
 	QDomDocument* load(QFile& file);
 
@@ -92,6 +92,17 @@ public:
 private:
 	QDomDocument* _document;
 	Task* _root_task;
+};
+
+class TodoProxyModel : public QSortFilterProxyModel
+{
+	Q_OBJECT
+public:
+	TodoProxyModel();
+	bool filterAcceptsRow ( int source_row, const QModelIndex & source_parent ) const;
+	void hideDoneTasks(bool hide = true);
+private:
+	bool hide_done_tasks;
 };
 
 #endif // TODOMODEL_H

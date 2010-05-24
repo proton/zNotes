@@ -14,30 +14,6 @@
 #include <QDateTimeEdit>
 #include <QLabel>
 #include <QMenu>
-//#include <QAction>
-
-class TodoView : public QTreeView
-{
-	//Q_OBJECT
-public:
-	bool isRowHidden(int row, const QModelIndex& parent) const
-	{
-		//qDebug() << (hide_completed && parent.child(row, 0).data(Qt::CheckStateRole).toBool());
-		//return hide_completed && parent.child(row, 0).data(Qt::CheckStateRole).toBool();
-		//return true;
-		return false;
-	}
-	bool isIndexHidden (const QModelIndex& index) const
-	{
-		//qDebug() << (hide_completed && (index.sibling(index.row(), 0).data(Qt::CheckStateRole).toBool()));
-		//return hide_completed && (index.sibling(index.row(), 0).data(Qt::CheckStateRole).toBool());
-		//return true;
-		return false;
-	}
-	inline void hideCompletedTasks(bool hide) { hide_completed = hide; }
-private:
-	bool hide_completed;
-};
 
 TodoNote::TodoNote(const QFileInfo& fileinfo, Note::Type type_new)
 	: Note(fileinfo, type_new)
@@ -52,15 +28,17 @@ TodoNote::TodoNote(const QFileInfo& fileinfo, Note::Type type_new)
 	text_edit->setAcceptRichText(false);
 
 	model = new TodoModel();
+	proxy_model = new TodoProxyModel();
+	proxy_model->setSourceModel(model);
 
-	tree_view = new TodoView();
-	tree_view->setModel(model);
+	tree_view = new QTreeView();
+	tree_view->setModel(proxy_model);
 	tree_view->setEditTriggers(QAbstractItemView::DoubleClicked | QAbstractItemView::SelectedClicked);
 	tree_view->setSelectionBehavior(QAbstractItemView::SelectRows);
 	tree_view->header()->setResizeMode(QHeaderView::ResizeToContents);
 	tree_view->header()->hide();
 
-	connect(model, SIGNAL(dataChanged(QModelIndex,QModelIndex)), this, SLOT(taskChanged(QModelIndex)));
+	connect(proxy_model, SIGNAL(dataChanged(QModelIndex,QModelIndex)), this, SLOT(taskChanged(QModelIndex)));
 	connect(tree_view->selectionModel(), SIGNAL(currentChanged(QModelIndex,QModelIndex)), this, SLOT(taskChanged(QModelIndex)));
 
 	tree_view->setContextMenuPolicy(Qt::CustomContextMenu);
@@ -107,7 +85,7 @@ TodoNote::TodoNote(const QFileInfo& fileinfo, Note::Type type_new)
 	load(); //loading note's content
 
 	mapper = new QDataWidgetMapper();
-	mapper->setModel(model);
+	mapper->setModel(proxy_model);
 	mapper->addMapping(text_edit, 6);
 	mapper->addMapping(lb_date_start, 2, "text");
 	mapper->addMapping(lb_date_stop, 3, "text");
@@ -121,6 +99,7 @@ TodoNote::~TodoNote()
 	delete text_edit;
 	delete area;
 	delete tree_view;
+	delete proxy_model;
 	delete model;
 	delete layout;
 	delete hlayout;
@@ -197,7 +176,7 @@ void TodoNote::removeTask()
 void TodoNote::hideCompletedTasks()
 {
 	bool hide_completed = menu_context->actions()[2]->isChecked();
-	tree_view->hideCompletedTasks(hide_completed);
+	proxy_model->hideDoneTasks(hide_completed);
 }
 
 void TodoNote::taskChanged(QModelIndex index)
