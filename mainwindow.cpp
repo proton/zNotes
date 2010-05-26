@@ -93,6 +93,24 @@ void MainWindow::NewNoteHTML()
 	}
 }
 
+void MainWindow::NewNoteTODO()
+{
+	int n = 0;
+	QString filename = QString("%1.ztodo").arg(n);
+	QFile file(dir.absoluteFilePath(filename));
+	while(file.exists()) //Searching for free filename
+	{
+		filename = QString("%1.ztodo").arg(++n);
+		file.setFileName(dir.absoluteFilePath(filename));
+	}
+	Notes->add(file);
+	if(!Notes->empty())
+	{
+		actRemove->setEnabled(true);
+		actRename->setEnabled(true);
+	}
+}
+
 void MainWindow::PreviousNote()
 {
 	Notes->getWidget()->setCurrentIndex(Notes->currentIndex()-1);
@@ -392,6 +410,7 @@ MainWindow::MainWindow(QWidget *parent)
 	//Creating toolbar/menu actions
 	actAdd = GenerateAction(itemAdd);
 	actAddHtml = GenerateAction(itemAddHtml);
+	actAddTodo = GenerateAction(itemAddTodo);
 	actRemove = GenerateAction(itemRemove);
 	actRename = GenerateAction(itemRename);
 	actPrev = GenerateAction(itemPrev);
@@ -412,6 +431,7 @@ MainWindow::MainWindow(QWidget *parent)
 	//Connecting actions with slots
 	connect(actAdd,		SIGNAL(triggered()), this, SLOT(NewNote()));
 	connect(actAddHtml,	SIGNAL(triggered()), this, SLOT(NewNoteHTML()));
+	connect(actAddHtml,	SIGNAL(triggered()), this, SLOT(NewNoteTODO()));
 	connect(actRemove,	SIGNAL(triggered()), this, SLOT(RemoveCurrentNote()));
 	connect(actRename,	SIGNAL(triggered()), this, SLOT(RenameCurrentNote()));
 	connect(actPrev,	SIGNAL(triggered()), this, SLOT(PreviousNote()));

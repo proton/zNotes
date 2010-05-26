@@ -436,6 +436,7 @@ bool TodoProxyModel::filterAcceptsRow (int source_row, const QModelIndex& source
 	if(hide_done_tasks)
 	{
 		QModelIndex source_index = source_parent.child(source_row, 0);
+		qDebug() << source_parent.row() << source_parent.column() << source_row << source_parent.parent() << sourceModel()->index(0,0);
 		if(source_index.isValid())
 		{
 			bool done = source_index.data(Qt::CheckStateRole).toBool();

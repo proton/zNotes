@@ -44,7 +44,8 @@ private:
 	QTimer SaveTimer;
 	QTimer ScanTimer;
 	//
-	QAction *actAdd, *actAddHtml, *actRemove, *actRename, *actPrev, *actNext;
+	QAction *actAdd, *actAddHtml, *actAddTodo;
+	QAction *actRemove, *actRename, *actPrev, *actNext;
 	QAction *actCopy, *actSetup, *actRun, *actExit, *actInfo, *actSearch;
 	QAction *actFormatBold, *actFormatItalic, *actFormatStrikeout, *actFormatUnderline, *actFormatColor;
 	//
@@ -86,6 +87,7 @@ public slots:
 	void RenameCurrentNote();
 	void NewNote();
 	void NewNoteHTML();
+	void NewNoteTODO();
 	//
 	void PreviousNote();
 	void NextNote();
