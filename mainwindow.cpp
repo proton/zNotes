@@ -431,7 +431,7 @@ MainWindow::MainWindow(QWidget *parent)
 	//Connecting actions with slots
 	connect(actAdd,		SIGNAL(triggered()), this, SLOT(NewNote()));
 	connect(actAddHtml,	SIGNAL(triggered()), this, SLOT(NewNoteHTML()));
-	connect(actAddHtml,	SIGNAL(triggered()), this, SLOT(NewNoteTODO()));
+	connect(actAddTodo,	SIGNAL(triggered()), this, SLOT(NewNoteTODO()));
 	connect(actRemove,	SIGNAL(triggered()), this, SLOT(RemoveCurrentNote()));
 	connect(actRename,	SIGNAL(triggered()), this, SLOT(RenameCurrentNote()));
 	connect(actPrev,	SIGNAL(triggered()), this, SLOT(PreviousNote()));

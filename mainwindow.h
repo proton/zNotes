@@ -63,6 +63,7 @@ private:
 		{
 			case itemAdd:			return actAdd;
 			case itemAddHtml:		return actAddHtml;
+			case itemAddTodo:		return actAddTodo;
 			case itemRemove:		return actRemove;
 			case itemRename:		return actRename;
 			case itemPrev:			return actPrev;
