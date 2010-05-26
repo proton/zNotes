@@ -156,19 +156,22 @@ void TodoNote::contextMenuRequested(const QPoint& pos)
 
 void TodoNote::insertTask()
 {
-	QModelIndex index = tree_view->currentIndex();
+	QModelIndex proxy_index = tree_view->currentIndex();
 	//TODO:
-	//QModelIndex index = tree_view->indexAt()
+	//QModelIndex proxy_index = tree_view->indexAt()
+	QModelIndex index = proxy_model->mapToSource(proxy_index);
 	int row = model->rowCount(index);
 	model->insertRow(row, index);
 	//Setting current index to created task
 	QModelIndex child_index = index.child(row, 0);
-	tree_view->setCurrentIndex(child_index);
+	proxy_index = proxy_model->mapFromSource(child_index);
+	tree_view->setCurrentIndex(proxy_index);
 }
 
 void TodoNote::removeTask()
 {
-	QModelIndex index = tree_view->currentIndex();
+	QModelIndex proxy_index = tree_view->currentIndex();
+	QModelIndex index = proxy_model->mapToSource(proxy_index);
 	if(index.isValid())
 		model->removeRow(index.row(), index.parent());
 }

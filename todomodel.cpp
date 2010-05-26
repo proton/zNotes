@@ -229,7 +229,7 @@ Task* TodoModel::getTask(const QModelIndex &index) const
 {
 	if(index.isValid())
 	{
-		Task *task = static_cast<Task*>(index.internalPointer());
+		Task* task = static_cast<Task*>(index.internalPointer());
 		if(task) return task;
 	}
 	return _root_task;
@@ -414,6 +414,7 @@ QModelIndex TodoModel::parent(const QModelIndex& child) const
 	Task* child_item = getTask(child);
 	Task* parent_item = child_item->parent();
 
+	//if(parent_item==_root_task) return index(0,0);
 	if(parent_item==_root_task) return QModelIndex();
 
 	return createIndex(parent_item->row(), 0, parent_item);
@@ -435,8 +436,9 @@ bool TodoProxyModel::filterAcceptsRow (int source_row, const QModelIndex& source
 {
 	if(hide_done_tasks)
 	{
-		QModelIndex source_index = source_parent.child(source_row, 0);
-		qDebug() << source_parent.row() << source_parent.column() << source_row << source_parent.parent() << sourceModel()->index(0,0);
+		QModelIndex source_index = source_parent.isValid() ?
+			source_parent.child(source_row, 0) :
+			sourceModel()->index(0,0).child(source_row, 0);
 		if(source_index.isValid())
 		{
 			bool done = source_index.data(Qt::CheckStateRole).toBool();
