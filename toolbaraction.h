@@ -113,6 +113,20 @@ public:
 		}
 	}
 	inline bool isSeparator() { return item_id==itemSeparator; }
+	inline bool isCheckable()
+	{
+		switch(item_id)
+		{
+		case itemSearch:
+		case itemFormatBold:
+		case itemFormatItalic:
+		case itemFormatStrikeout:
+		case itemFormatUnderline:
+			return true;
+		default:
+			return false;
+		}
+	}
 private:
 	item_enum item_id;
 };
