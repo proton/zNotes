@@ -65,7 +65,11 @@
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout_4">
        <item>
-        <widget class="QTextBrowser" name="lbAuthors"/>
+        <widget class="QTextBrowser" name="lbAuthors">
+         <property name="openExternalLinks">
+          <bool>true</bool>
+         </property>
+        </widget>
        </item>
       </layout>
      </widget>
@@ -75,7 +79,11 @@
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout_5">
        <item>
-        <widget class="QTextBrowser" name="lbCredits"/>
+        <widget class="QTextBrowser" name="lbCredits">
+         <property name="openExternalLinks">
+          <bool>true</bool>
+         </property>
+        </widget>
        </item>
       </layout>
      </widget>
@@ -106,7 +114,11 @@ The text of the license can can be found in the file LICENSE.</string>
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout_6">
        <item>
-        <widget class="QTextBrowser" name="lbHelp"/>
+        <widget class="QTextBrowser" name="lbHelp">
+         <property name="openExternalLinks">
+          <bool>true</bool>
+         </property>
+        </widget>
        </item>
       </layout>
      </widget>
