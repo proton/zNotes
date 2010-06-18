@@ -49,8 +49,8 @@ TodoNote::TodoNote(const QFileInfo& fileinfo, Note::Type type_new)
 	menu_context = new QMenu();
 	menu_context->addAction(tr("Insert new task"), this, SLOT(insertTask()));
 	menu_context->addAction(tr("Remove this task"), this, SLOT(removeTask()));
-	menu_context->addAction(tr("Hide completed tasks"), this, SLOT(hideCompletedTasks()));
-	menu_context->actions()[2]->setCheckable(true);
+	//menu_context->addAction(tr("Hide completed tasks"), this, SLOT(hideCompletedTasks()));
+	//menu_context->actions()[2]->setCheckable(true);
 
 	for(int i=2; i<model->columnCount(); ++i)
 		tree_view->setColumnHidden(i, true);
@@ -62,6 +62,7 @@ TodoNote::TodoNote(const QFileInfo& fileinfo, Note::Type type_new)
 	lb_date_1 = new QLabel(lb_date_stop);
 	lb_date_1->setText(tr("Stopped: "));
 	dt_date_limit = new QDateTimeEdit();
+	dt_date_limit->setCalendarPopup(true);
 	lb_date_2 = new QLabel(dt_date_limit);
 	lb_date_2->setText(tr("Limited: "));
 

@@ -133,7 +133,15 @@ void Task::setDateLimit(const QDateTime& v)
 void Task::setDone(bool v)
 {
 	_done = v;
-	if(_done) setDateStop(QDateTime::currentDateTime());
+	if(_done)
+	{
+		setDateStop(QDateTime::currentDateTime());
+//		for(int i=0; i<_subtasks.size(); ++i)
+//		{
+//			Task* subtask = _subtasks[i];
+//			if(!subtask->done()) subtask->setDone(true);
+//		}
+	}
 }
 
 void Task::setPriority(Priority v)
@@ -436,13 +444,21 @@ bool TodoProxyModel::filterAcceptsRow (int source_row, const QModelIndex& source
 {
 	if(hide_done_tasks)
 	{
+//		qDebug() << __LINE__;
+		//тут херятся первые строки =(
 		QModelIndex source_index = source_parent.isValid() ?
 			source_parent.child(source_row, 0) :
 			sourceModel()->index(0,0).child(source_row, 0);
+//		qDebug() << __LINE__;
+		//
+		qDebug() << source_index.isValid() << source_index.data(Qt::CheckStateRole).toBool() << source_index.data().toString();
+		//
 		if(source_index.isValid())
 		{
+//			qDebug() << __LINE__;
 			bool done = source_index.data(Qt::CheckStateRole).toBool();
-			return !done;
+//			qDebug() << __LINE__;
+			if(done) return false;
 		}
 	}
 	return true;
