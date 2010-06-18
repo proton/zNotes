@@ -30,6 +30,7 @@ private slots:
 	void taskChanged(QModelIndex);
 	void contextMenuRequested(const QPoint& pos);
 	void insertTask();
+	void insertSubTask();
 	void removeTask();
 	void hideCompletedTasks();
 	//bool QAbstractItemView::isIndexHidden ( const QModelIndex & index ) const;

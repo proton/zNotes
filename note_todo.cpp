@@ -15,6 +15,15 @@
 #include <QLabel>
 #include <QMenu>
 
+enum
+{
+	TODO_ACTION_INSERT,
+	TODO_ACTION_INSERT_SUB,
+	TODO_ACTION_REMOVE,
+	TODO_ACTION_HIDE_COMPLETED,
+	TODO_ACTION_COUNT,
+};
+
 TodoNote::TodoNote(const QFileInfo& fileinfo, Note::Type type_new)
 	: Note(fileinfo, type_new)
 {
@@ -48,9 +57,10 @@ TodoNote::TodoNote(const QFileInfo& fileinfo, Note::Type type_new)
 
 	menu_context = new QMenu();
 	menu_context->addAction(tr("Insert new task"), this, SLOT(insertTask()));
+	menu_context->addAction(tr("Insert new task"), this, SLOT(insertSubTask()));
 	menu_context->addAction(tr("Remove this task"), this, SLOT(removeTask()));
 	//menu_context->addAction(tr("Hide completed tasks"), this, SLOT(hideCompletedTasks()));
-	//menu_context->actions()[2]->setCheckable(true);
+	//menu_context->actions()[TODO_ACTION_HIDE_COMPLETED]->setCheckable(true);
 
 	for(int i=2; i<model->columnCount(); ++i)
 		tree_view->setColumnHidden(i, true);
@@ -150,16 +160,27 @@ void TodoNote::copy() const
 void TodoNote::contextMenuRequested(const QPoint& pos)
 {
 	QModelIndex index = tree_view->indexAt(pos);
-	menu_context->actions()[1]->setEnabled(index.isValid()); //action "Remove this task"
+	menu_context->actions()[TODO_ACTION_INSERT]->setVisible(!index.isValid());
+	menu_context->actions()[TODO_ACTION_INSERT_SUB]->setVisible(index.isValid());
+	menu_context->actions()[TODO_ACTION_REMOVE]->setEnabled(index.isValid());
 	QPoint pos_global = tree_view->mapToGlobal(pos);
 	menu_context->exec(pos_global);
 }
 
 void TodoNote::insertTask()
 {
+	QModelIndex index;
+	int row = model->rowCount(index);
+	model->insertRow(row, index);
+	//Setting current index to created task
+	QModelIndex child_index = model->index(row, 0);
+	QModelIndex proxy_index = proxy_model->mapFromSource(child_index);
+	tree_view->setCurrentIndex(proxy_index);
+}
+
+void TodoNote::insertSubTask()
+{
 	QModelIndex proxy_index = tree_view->currentIndex();
-	//TODO:
-	//QModelIndex proxy_index = tree_view->indexAt()
 	QModelIndex index = proxy_model->mapToSource(proxy_index);
 	int row = model->rowCount(index);
 	model->insertRow(row, index);
@@ -179,7 +200,7 @@ void TodoNote::removeTask()
 
 void TodoNote::hideCompletedTasks()
 {
-	bool hide_completed = menu_context->actions()[2]->isChecked();
+	bool hide_completed = menu_context->actions()[TODO_ACTION_HIDE_COMPLETED]->isChecked();
 	proxy_model->hideDoneTasks(hide_completed);
 }
 
