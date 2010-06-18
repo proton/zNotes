@@ -7,6 +7,7 @@
 
 class TextEdit : public QTextEdit
 {
+	Q_OBJECT
 public:
 	TextEdit();
 private:
@@ -15,6 +16,9 @@ private:
 	void mousePressEvent(QMouseEvent* e);
 	void mouseMoveEvent(QMouseEvent* e);
 	void focusOutEvent(QFocusEvent* e);
+private slots:
+	void fontChanged();
+	void linkOpenChanged();
 };
 
 #endif // TEXTEDIT_H

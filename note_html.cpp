@@ -12,12 +12,6 @@ HtmlNote::HtmlNote(const QFileInfo& fileinfo, Note::Type type_new)
 
 	load(); //loading note's content
 
-	text_edit->setMouseTracking(settings.getNoteLinksOpen());
-	connect(&settings, SIGNAL(NoteLinkOpenChanged()), this, SLOT(noteLinkOpenChanged()));
-
-	text_edit->setFont(settings.getNoteFont());
-	connect(&settings, SIGNAL(NoteFontChanged()), this, SLOT(noteFontChanged()));
-
 	connect(text_edit, SIGNAL(textChanged()), this, SLOT(contentChanged()));
 
 	connect(text_edit, SIGNAL(currentCharFormatChanged(const QTextCharFormat &)),
@@ -76,23 +70,6 @@ bool HtmlNote::find(const QString& text, bool next)
 	if(next) text_edit->setTextCursor(QTextCursor()); //search next
 	else text_edit->unsetCursor(); //new search
 	return text_edit->find(text);
-}
-
-void HtmlNote::noteLinkOpenChanged()
-{
-	bool is_link_open = settings.getNoteLinksOpen();
-	text_edit->setMouseTracking(is_link_open);
-	if(!is_link_open)
-	{
-		text_edit->setExtraSelections(QList<QTextEdit::ExtraSelection>());
-		text_edit->viewport()->setCursor(Qt::IBeamCursor);
-	}
-}
-
-//If notes' font changed in the preferences, applying font to note
-void HtmlNote::noteFontChanged()
-{
-	text_edit->setFont(settings.getNoteFont());
 }
 
 //Sending signal about changing format of a text under cursor

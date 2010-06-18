@@ -46,6 +46,10 @@ TextEdit::TextEdit()
 {
 	highlighter = new Highlighter(document());
 	connect(&settings, SIGNAL(NoteHighlightChanged()), highlighter, SLOT(rehighlight()));
+	setFont(settings.getNoteFont());
+	connect(&settings, SIGNAL(NoteFontChanged()), this, SLOT(fontChanged()));
+	setMouseTracking(settings.getNoteLinksOpen());
+	connect(&settings, SIGNAL(NoteLinkOpenChanged()), this, SLOT(linkOpenChanged()));
 }
 
 //Mouse pressing
@@ -100,4 +104,21 @@ void TextEdit::mouseMoveEvent(QMouseEvent *e)
 void TextEdit::focusOutEvent(QFocusEvent*)
 {
 	setExtraSelections(QList<QTextEdit::ExtraSelection>()); //Clearing
+}
+
+//If notes' font changed in the preferences, applying font to note
+void TextEdit::fontChanged()
+{
+	setFont(settings.getNoteFont());
+}
+
+void TextEdit::linkOpenChanged()
+{
+	bool is_link_open = settings.getNoteLinksOpen();
+	setMouseTracking(is_link_open);
+	if(!is_link_open)
+	{
+		setExtraSelections(QList<QTextEdit::ExtraSelection>());
+		viewport()->setCursor(Qt::IBeamCursor);
+	}
 }

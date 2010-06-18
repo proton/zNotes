@@ -20,8 +20,6 @@ public:
 	QTextCharFormat getSelFormat() const;
 
 private slots:
-	void noteFontChanged();
-	void noteLinkOpenChanged();
 	void currentCharFormatChanged(const QTextCharFormat&);
 
 private:

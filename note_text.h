@@ -16,9 +16,6 @@ public:
 	void copy() const; //Coping note's content to clipboard
 	bool find(const QString& text, bool next=false); //Searching text in a note's content
 	QWidget* widget();
-private slots:
-	void noteFontChanged();
-	void noteLinkOpenChanged();
 private:
 	TextEdit* text_edit;
 };

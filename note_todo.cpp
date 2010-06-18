@@ -30,10 +30,6 @@ TodoNote::TodoNote(const QFileInfo& fileinfo, Note::Type type_new)
 	//document = new QDomDocument();
 
 	text_edit = new TextEdit();
-//	text_edit->setMouseTracking(settings.getNoteLinksOpen());
-//	connect(&settings, SIGNAL(NoteLinkOpenChanged()), this, SLOT(noteLinkOpenChanged()));
-//	text_edit->setFont(settings.getNoteFont());
-//	connect(&settings, SIGNAL(NoteFontChanged()), this, SLOT(noteFontChanged()));
 	text_edit->setAcceptRichText(false);
 
 	model = new TodoModel();
