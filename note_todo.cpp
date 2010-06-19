@@ -27,8 +27,6 @@ enum
 TodoNote::TodoNote(const QFileInfo& fileinfo, Note::Type type_new)
 	: Note(fileinfo, type_new)
 {
-	//document = new QDomDocument();
-
 	text_edit = new TextEdit();
 	text_edit->setAcceptRichText(false);
 
@@ -63,10 +61,10 @@ TodoNote::TodoNote(const QFileInfo& fileinfo, Note::Type type_new)
 
 	lb_date_start = new QLabel();
 	lb_date_0 = new QLabel(lb_date_start);
-	lb_date_0->setText(tr("Started: "));
+	lb_date_0->setText(tr("Created: "));
 	lb_date_stop = new QLabel();
 	lb_date_1 = new QLabel(lb_date_stop);
-	lb_date_1->setText(tr("Stopped: "));
+	lb_date_1->setText(tr("Completed: "));
 	dt_date_limit = new QDateTimeEdit();
 	dt_date_limit->setCalendarPopup(true);
 	lb_date_2 = new QLabel(dt_date_limit);
@@ -169,10 +167,10 @@ void TodoNote::insertTask()
 	QModelIndex index;
 	int row = model->rowCount(index);
 	model->insertRow(row, index);
-//	//Setting current index to created task
-//	QModelIndex child_index = model->index(row, 0);
-//	QModelIndex proxy_index = proxy_model->mapFromSource(child_index);
-//	tree_view->setCurrentIndex(proxy_index);
+	//Setting current index to created task
+	QModelIndex child_index = model->index(row, 0);
+	QModelIndex proxy_index = proxy_model->mapFromSource(child_index);
+	tree_view->setCurrentIndex(proxy_index);
 }
 
 void TodoNote::insertSubTask()
@@ -201,14 +199,15 @@ void TodoNote::hideCompletedTasks()
 	proxy_model->hideDoneTasks(hide_completed);
 }
 
-void TodoNote::taskChanged(QModelIndex index)
+void TodoNote::taskChanged(QModelIndex proxy_index)
 {
-	if(!index.isValid()) return;
+	if(!proxy_index.isValid()) return;
+	mapper->setCurrentModelIndex(proxy_index);
+	QModelIndex index = proxy_model->mapToSource(proxy_index);
 	Task* task = static_cast<Task*>(index.internalPointer());
 	bool task_done = task->done();
 	lb_date_1->setVisible(task_done);
 	lb_date_stop->setVisible(task_done);
 	lb_date_2->setHidden(task_done);
 	dt_date_limit->setHidden(task_done);
-	mapper->setCurrentModelIndex(index);
 }
