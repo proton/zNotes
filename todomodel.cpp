@@ -64,30 +64,10 @@ void Task::removeSubTask(int pos)
 	const QDomNode& subtask_elem = subtask->node();
 	_node.removeChild(subtask_elem);
 
-	//TODO: memory leak =(
-
-//	Task* subtask_new = subtask;
-//	subtask = 0;
-//	delete subtask_new;
-
-//	Task* subtask = _subtasks.at(pos);
-//	const QDomNode& subtask_elem = subtask->node();
-//	_node.removeChild(subtask_elem);
-//	Task* subtask_new = subtask;
-//	subtask = 0;
-//	_subtasks.removeAt(pos);
-
-	//delete subtask_new;
-
-
-//	Task* subtask = _subtasks.takeAt(pos);
-//
-//	const QDomNode& subtask_elem = subtask->node();
-//	_node.removeChild(subtask_elem);
-//
-//	delete subtask;
+	Task* subtask_new = subtask;
+	subtask = 0;
+	delete subtask_new;
 }
-
 
 static void updateChildNode(QDomDocument& document, QDomNode& node, const QString& tag_name, const QString& value)
 {
