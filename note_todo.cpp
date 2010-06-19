@@ -103,24 +103,25 @@ TodoNote::TodoNote(const QFileInfo& fileinfo, Note::Type type_new)
 
 TodoNote::~TodoNote()
 {
-	delete text_edit;
-	delete area;
-	delete tree_view;
-	delete proxy_model;
-	delete model;
-	delete layout;
-	delete hlayout;
+//	delete text_edit;
+//	delete area;
+//	delete tree_view;
+//	delete proxy_model;
+//	delete model;
+//	delete layout;
+//	delete hlayout;
 }
 
 //Reading file
 void TodoNote::load()
 {
 	file.close();
-	if(!file.exists() || !file.open(QIODevice::ReadOnly))
+	if(!file.exists())
 	{
-		//file.open(QIODevice::WriteOnly)
+		file.open(QIODevice::WriteOnly);
+		file.close();
 	}
-	else
+	if(file.open(QIODevice::ReadOnly))
 	{
 		document = model->load(file);
 		file.close();
@@ -168,10 +169,10 @@ void TodoNote::insertTask()
 	QModelIndex index;
 	int row = model->rowCount(index);
 	model->insertRow(row, index);
-	//Setting current index to created task
-	QModelIndex child_index = model->index(row, 0);
-	QModelIndex proxy_index = proxy_model->mapFromSource(child_index);
-	tree_view->setCurrentIndex(proxy_index);
+//	//Setting current index to created task
+//	QModelIndex child_index = model->index(row, 0);
+//	QModelIndex proxy_index = proxy_model->mapFromSource(child_index);
+//	tree_view->setCurrentIndex(proxy_index);
 }
 
 void TodoNote::insertSubTask()
@@ -202,6 +203,7 @@ void TodoNote::hideCompletedTasks()
 
 void TodoNote::taskChanged(QModelIndex index)
 {
+	if(!index.isValid()) return;
 	Task* task = static_cast<Task*>(index.internalPointer());
 	bool task_done = task->done();
 	lb_date_1->setVisible(task_done);

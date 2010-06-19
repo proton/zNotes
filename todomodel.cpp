@@ -196,11 +196,11 @@ QDomDocument*  TodoModel::load(QFile& file)
 
 bool TodoModel::insertRows(int row, int count, const QModelIndex& parent)
 {
-	Task* task_parent = getTask(parent);
+	Task* task = getTask(parent);
 	beginInsertRows(parent, row, row+count-1);
 	for(int i=0; i<count; ++i)
 	{
-		task_parent->insertSubTask();
+		task->insertSubTask();
 	}
 	endInsertRows();
 	return true;
@@ -253,9 +253,9 @@ QString getDateGap(const QDateTime& dt)
 	if(days_gap) return QObject::tr("%n days(s)", "", days_gap);
 
 	int secs_gap = dt.secsTo(current);
-	if(secs_gap/3600) return QObject::tr("%n hour(s)", "", secs_gap/3600);
-	if(secs_gap/60) return QObject::tr("%n min(s)", "", secs_gap/60);
-	else return QObject::tr("%n sec(s)", "", secs_gap);
+	if(secs_gap>=3600) return QObject::tr("%n hour(s)", "", secs_gap/3600);
+	if(secs_gap>=60) return QObject::tr("%n min(s)", "", secs_gap/60);
+	return QObject::tr("%n sec(s)", "", secs_gap);
 }
 
 QVariant TodoModel::data(const QModelIndex& index, int role) const
