@@ -37,6 +37,7 @@ public:
 	inline const QDateTime& dateStop() const { return _date_stop; }
 	inline const QDateTime& dateLimit() const { return _date_limit; }
 	inline bool done() const { return _done; }
+	inline bool limited() const { return !_date_limit.isNull(); }
 	inline Priority priority() const { return _priority; }
 
 	void setTitle(const QString& v);

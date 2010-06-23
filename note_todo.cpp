@@ -13,6 +13,7 @@
 #include <QDataWidgetMapper>
 #include <QDateTimeEdit>
 #include <QLabel>
+#include <QCheckBox>
 #include <QMenu>
 
 enum
@@ -56,45 +57,51 @@ TodoNote::TodoNote(const QFileInfo& fileinfo, Note::Type type_new)
 	//menu_context->addAction(tr("Hide completed tasks"), this, SLOT(hideCompletedTasks()));
 	//menu_context->actions()[TODO_ACTION_HIDE_COMPLETED]->setCheckable(true);
 
-	for(int i=2; i<model->columnCount(); ++i)
-		tree_view->setColumnHidden(i, true);
+//	for(int i=2; i<model->columnCount(); ++i)
+//		tree_view->setColumnHidden(i, true);
 
-	lb_date_start = new QLabel();
-	lb_date_0 = new QLabel(lb_date_start);
-	lb_date_0->setText(tr("Created: "));
-	lb_date_stop = new QLabel();
-	lb_date_1 = new QLabel(lb_date_stop);
-	lb_date_1->setText(tr("Completed: "));
-	dt_date_limit = new QDateTimeEdit();
+	lb_date_start = new QLabel;
+	lb_date_0 = new QLabel(tr("Created: "), lb_date_start);
+	lb_date_stop = new QLabel;
+	lb_date_1 = new QLabel(tr("Completed: "), lb_date_stop);
+	dt_date_limit = new QDateTimeEdit;
 	dt_date_limit->setCalendarPopup(true);
-	lb_date_2 = new QLabel(dt_date_limit);
-	lb_date_2->setText(tr("Limited: "));
+	cb_date_limit = new QCheckBox(tr("Limited: "), dt_date_limit);
+	cb_date_limit->setCheckable(true);
 
-	hlayout =  new QGridLayout();
-	QGridLayout* l = dynamic_cast<QGridLayout*>(hlayout);
+	grid_layout = new QGridLayout();
+	QGridLayout* l = dynamic_cast<QGridLayout*>(grid_layout);
 	l->addWidget(lb_date_0, 0, 0);
 	l->addWidget(lb_date_start, 0, 1);
 	l->addWidget(lb_date_1, 1, 0);
 	l->addWidget(lb_date_stop, 1, 1);
-	l->addWidget(lb_date_2, 2, 0);
+	l->addWidget(cb_date_limit, 2, 0);
 	l->addWidget(dt_date_limit, 2, 1);
 
-	layout = new QVBoxLayout();
-	layout->addWidget(tree_view);
-	layout->addItem(hlayout);
-	layout->addWidget(text_edit);
+	extra_layout = new QVBoxLayout;
+	extra_layout->addItem(grid_layout);
+	extra_layout->addWidget(text_edit);
+
+	extra_widget = new QWidget;
+	extra_widget->setLayout(extra_layout);
+	extra_widget->hide();
+
+	main_layout = new QVBoxLayout();
+	main_layout->addWidget(tree_view);
+	main_layout->addWidget(extra_widget);
 
 	area = new QScrollArea();
-	area->setLayout(layout);
+	area->setLayout(main_layout);
 
 	load(); //loading note's content
 
 	mapper = new QDataWidgetMapper();
 	mapper->setModel(proxy_model);
-	mapper->addMapping(text_edit, 6);
+	mapper->addMapping(text_edit, 6, "plainText");
 	mapper->addMapping(lb_date_start, 2, "text");
 	mapper->addMapping(lb_date_stop, 3, "text");
 	mapper->addMapping(dt_date_limit, 4);
+	mapper->addMapping(cb_date_limit, 7, "checked");
 
 	tree_view->setCurrentIndex(QModelIndex());
 }
@@ -201,6 +208,7 @@ void TodoNote::hideCompletedTasks()
 
 void TodoNote::taskChanged(QModelIndex proxy_index)
 {
+	extra_widget->setVisible(proxy_index.isValid());
 	if(!proxy_index.isValid()) return;
 	mapper->setCurrentModelIndex(proxy_index);
 	QModelIndex index = proxy_model->mapToSource(proxy_index);
@@ -208,6 +216,12 @@ void TodoNote::taskChanged(QModelIndex proxy_index)
 	bool task_done = task->done();
 	lb_date_1->setVisible(task_done);
 	lb_date_stop->setVisible(task_done);
-	lb_date_2->setHidden(task_done);
+	cb_date_limit->setHidden(task_done);
 	dt_date_limit->setHidden(task_done);
+	qDebug() << task->limited() << proxy_model->index(proxy_index.row(), 7, proxy_index.parent()).data(Qt::CheckStateRole).toBool();
+//	cb_date_limit->setChecked(date);
+//	if(task->limited())
+//	{
+//
+//	}
 }

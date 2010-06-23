@@ -13,8 +13,8 @@ class QLayout;
 class QDataWidgetMapper;
 class QDateTimeEdit;
 class QLabel;
+class QCheckBox;
 class QMenu;
-//class QAction;
 
 class TodoNote : public Note
 {
@@ -41,15 +41,17 @@ private:
 	TodoProxyModel* proxy_model;
 	QScrollArea* area;
 	TextEdit* text_edit;
-	QLayout* layout;
-	QLayout* hlayout;
+	QWidget* extra_widget;
+	QLayout* main_layout;
+	QLayout* grid_layout;
+	QLayout* extra_layout;
 	QDataWidgetMapper* mapper;
 	QLabel* lb_date_start;
 	QLabel* lb_date_stop;
 	QDateTimeEdit* dt_date_limit;
 	QLabel* lb_date_0;
 	QLabel* lb_date_1;
-	QLabel* lb_date_2;
+	QCheckBox* cb_date_limit;
 	QMenu* menu_context;
 };
 

@@ -210,7 +210,7 @@ int TodoModel::rowCount(const QModelIndex& parent) const
 int TodoModel::columnCount(const QModelIndex& parent) const
 {
 	Q_UNUSED(parent)
-	return 7;
+	return 8;
 }
 
 Task* TodoModel::getTask(const QModelIndex &index) const
@@ -264,6 +264,7 @@ QVariant TodoModel::data(const QModelIndex& index, int role) const
 			case 4: return task->dateLimit();
 			case 5: return task->priority();
 			case 6: return task->comment();
+			case 7: return task->limited();
 			default: return QVariant();
 		}
 	}
@@ -285,6 +286,7 @@ QVariant TodoModel::data(const QModelIndex& index, int role) const
 		switch(index.column())
 		{
 			case 0: return (task->done())?Qt::Checked:Qt::Unchecked;
+			case 7: return task->limited();
 			default: return QVariant();
 		}
 	}
@@ -346,6 +348,18 @@ bool TodoModel::setData(const QModelIndex& index, const QVariant& data, int role
 				task->setComment(data.toString());
 				return true;
 			}
+		case 7:
+//			if(role == Qt::EditRole)
+//			{
+//				task->setComment(data.toString());
+//				return true;
+//			}
+//			{
+//				qDebug() << role << Qt::CheckStateRole << (role == Qt::CheckStateRole);
+//				qDebug() << __LINE__;
+//				qDebug() << data.toBool();
+//				break;
+//			}
 		default:
 		return QAbstractItemModel::setData(index, data, role);
 	}
@@ -353,13 +367,14 @@ bool TodoModel::setData(const QModelIndex& index, const QVariant& data, int role
 }
 
 Qt::ItemFlags TodoModel::flags(const QModelIndex& index) const
-{
+{;
 	if(!index.isValid()) return 0;
 	switch(index.column())
 	{
 		case 0: return Qt::ItemIsSelectable|Qt::ItemIsEnabled|Qt::ItemIsUserCheckable|Qt::ItemIsEditable;
 		case 1: return Qt::ItemIsSelectable|Qt::ItemIsEnabled;
 		//case 2: return Qt::ItemIsSelectable|Qt::ItemIsEnabled|Qt::ItemIsEditable;
+		case 7: return Qt::ItemIsSelectable|Qt::ItemIsEnabled|Qt::ItemIsUserCheckable; //TODO:remove
 		default: return 0;
 	}
 }
