@@ -108,13 +108,14 @@ TodoNote::TodoNote(const QFileInfo& fileinfo, Note::Type type_new)
 
 TodoNote::~TodoNote()
 {
-//	delete text_edit;
-//	delete area;
-//	delete tree_view;
-//	delete proxy_model;
-//	delete model;
-//	delete layout;
-//	delete hlayout;
+	delete tree_view;
+	delete proxy_model;
+	delete model;
+	delete text_edit;
+	delete extra_layout;
+	delete extra_widget;
+	delete main_layout;
+	delete area;
 }
 
 //Reading file
