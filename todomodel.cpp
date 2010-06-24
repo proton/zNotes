@@ -277,6 +277,7 @@ QVariant TodoModel::data(const QModelIndex& index, int role) const
 			case 3: return task->dateStop().toString();
 			case 4: return task->dateLimit();
 			case 6: return task->comment();
+			case 7: return task->limited();
 			default: return QVariant();
 		}
 	}
@@ -285,7 +286,6 @@ QVariant TodoModel::data(const QModelIndex& index, int role) const
 		switch(index.column())
 		{
 			case 0: return (task->done())?Qt::Checked:Qt::Unchecked;
-			case 7: return (task->limited())?Qt::Checked:Qt::Unchecked;
 			default: return QVariant();
 		}
 	}
@@ -323,18 +323,6 @@ bool TodoModel::setData(const QModelIndex& index, const QVariant& data, int role
 				task->setTitle(data.toString());
 				return true;
 			}
-//		case 2:
-//			if(role == Qt::EditRole)
-//			{
-//				task->setDateStart(data.toDateTime());
-//				return true;
-//			}
-//		case 3:
-//			if(role == Qt::EditRole)
-//			{
-//				task->setDateStop(data.toDateTime());
-//				return true;
-//			}
 		case 4:
 			if(role == Qt::EditRole)
 			{
@@ -348,17 +336,14 @@ bool TodoModel::setData(const QModelIndex& index, const QVariant& data, int role
 				return true;
 			}
 		case 7:
-//			if(role == Qt::EditRole)
-//			{
-//				task->setComment(data.toString());
-//				return true;
-//			}
-//			{
-//				qDebug() << role << Qt::CheckStateRole << (role == Qt::CheckStateRole);
-//				qDebug() << __LINE__;
-//				qDebug() << data.toBool();
-//				break;
-//			}
+			if(role == Qt::EditRole)
+			{
+				bool limited = data.toBool();
+				QDateTime date_limit;
+				if(limited) date_limit = QDateTime::currentDateTime().addDays(7);
+				task->setDateLimit(date_limit);
+				return true;
+			}
 		default:
 		return QAbstractItemModel::setData(index, data, role);
 	}
@@ -372,8 +357,6 @@ Qt::ItemFlags TodoModel::flags(const QModelIndex& index) const
 	{
 		case 0: return Qt::ItemIsSelectable|Qt::ItemIsEnabled|Qt::ItemIsUserCheckable|Qt::ItemIsEditable;
 		case 1: return Qt::ItemIsSelectable|Qt::ItemIsEnabled;
-		//case 2: return Qt::ItemIsSelectable|Qt::ItemIsEnabled|Qt::ItemIsEditable;
-		case 7: return Qt::ItemIsSelectable|Qt::ItemIsEnabled|Qt::ItemIsUserCheckable; //TODO:remove
 		default: return 0;
 	}
 }
