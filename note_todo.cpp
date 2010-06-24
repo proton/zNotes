@@ -101,7 +101,8 @@ TodoNote::TodoNote(const QFileInfo& fileinfo, Note::Type type_new)
 	mapper->addMapping(lb_date_start, 2, "text");
 	mapper->addMapping(lb_date_stop, 3, "text");
 	mapper->addMapping(dt_date_limit, 4);
-	mapper->addMapping(cb_date_limit, 7, "checked");
+	//mapper->addMapping(cb_date_limit, 7, "checkState");
+	mapper->addMapping(cb_date_limit, 7);
 
 	tree_view->setCurrentIndex(QModelIndex());
 }
@@ -211,15 +212,18 @@ void TodoNote::taskChanged(QModelIndex proxy_index)
 {
 	extra_widget->setVisible(proxy_index.isValid());
 	if(!proxy_index.isValid()) return;
+	mapper->setRootIndex(proxy_index.parent());
 	mapper->setCurrentModelIndex(proxy_index);
 	QModelIndex index = proxy_model->mapToSource(proxy_index);
 	Task* task = static_cast<Task*>(index.internalPointer());
-	bool task_done = task->done();
-	lb_date_1->setVisible(task_done);
-	lb_date_stop->setVisible(task_done);
-	cb_date_limit->setHidden(task_done);
-	dt_date_limit->setHidden(task_done);
-	qDebug() << task->limited() << proxy_model->index(proxy_index.row(), 7, proxy_index.parent()).data(Qt::CheckStateRole).toBool();
+	qDebug() << task->limited() << proxy_model->index(proxy_index.row(), 7, proxy_index.parent()).data(Qt::CheckStateRole).toInt() << cb_date_limit->checkState();
+//	bool task_done = task->done();
+//	lb_date_1->setVisible(task_done);
+//	lb_date_stop->setVisible(task_done);
+//	cb_date_limit->setHidden(task_done);
+//	dt_date_limit->setHidden(task_done);
+
+	//qDebug() << task->limited() << proxy_model->index(proxy_index.row(), 7, proxy_index.parent()).data(Qt::CheckStateRole).toInt();
 //	cb_date_limit->setChecked(date);
 //	if(task->limited())
 //	{

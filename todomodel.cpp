@@ -264,7 +264,6 @@ QVariant TodoModel::data(const QModelIndex& index, int role) const
 			case 4: return task->dateLimit();
 			case 5: return task->priority();
 			case 6: return task->comment();
-			case 7: return task->limited();
 			default: return QVariant();
 		}
 	}
@@ -286,7 +285,7 @@ QVariant TodoModel::data(const QModelIndex& index, int role) const
 		switch(index.column())
 		{
 			case 0: return (task->done())?Qt::Checked:Qt::Unchecked;
-			case 7: return task->limited();
+			case 7: return (task->limited())?Qt::Checked:Qt::Unchecked;
 			default: return QVariant();
 		}
 	}
