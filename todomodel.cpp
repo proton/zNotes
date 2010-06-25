@@ -223,16 +223,16 @@ Task* TodoModel::getTask(const QModelIndex &index) const
 	return _root_task;
 }
 
-QString getDateGap(const QDateTime& dt)
+QString getDateGap(const QDateTime& dest_date)
 {
-	if(dt.isNull()) return "";
+	if(dest_date.isNull()) return QString();
 
-	QDateTime current(QDateTime::currentDateTime());
+	QDateTime current = QDateTime::currentDateTime();
 
-	int days_gap = dt.daysTo(current);
+	int days_gap = current.daysTo(dest_date);
 	if(days_gap) return QObject::tr("%n days(s)", "", days_gap);
 
-	int secs_gap = dt.secsTo(current);
+	int secs_gap = current.secsTo(dest_date);
 	if(secs_gap>=3600) return QObject::tr("%n hour(s)", "", secs_gap/3600);
 	if(secs_gap>=60) return QObject::tr("%n min(s)", "", secs_gap/60);
 	return QObject::tr("%n sec(s)", "", secs_gap);
@@ -316,23 +316,29 @@ bool TodoModel::setData(const QModelIndex& index, const QVariant& data, int role
 			if(role == Qt::CheckStateRole)
 			{
 				task->setDone(data.toBool());
+				emit dataChanged(index, index);
 				return true;
 			}
 			else if(role == Qt::EditRole)
 			{
 				task->setTitle(data.toString());
+				emit dataChanged(index, index);
 				return true;
 			}
 		case 4:
 			if(role == Qt::EditRole)
 			{
 				task->setDateLimit(data.toDateTime());
+				emit dataChanged(index, index);
+				QModelIndex date_display_index = index.sibling(index.row(), 1);
+				emit dataChanged(date_display_index, date_display_index);
 				return true;
 			}
 		case 6:
 			if(role == Qt::EditRole)
 			{
 				task->setComment(data.toString());
+				emit dataChanged(index, index);
 				return true;
 			}
 		case 7:
@@ -342,6 +348,9 @@ bool TodoModel::setData(const QModelIndex& index, const QVariant& data, int role
 				QDateTime date_limit;
 				if(limited) date_limit = QDateTime::currentDateTime().addDays(7);
 				task->setDateLimit(date_limit);
+				emit dataChanged(index, index);
+				QModelIndex date_display_index = index.sibling(index.row(), 1);
+				emit dataChanged(date_display_index, date_display_index);
 				return true;
 			}
 		default:

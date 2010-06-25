@@ -102,9 +102,8 @@ TodoNote::TodoNote(const QFileInfo& fileinfo, Note::Type type_new)
 	mapper->addMapping(lb_date_stop, 3, "text");
 	mapper->addMapping(dt_date_limit, 4);
 	mapper->addMapping(cb_date_limit, 7);
-	//mapper->addMapping(lb_date_1, 0, "visible");
-	connect(cb_date_limit, SIGNAL(toggled(bool)), dt_date_limit, SLOT(setEnabled(bool)));
-	dt_date_limit->setDisabled(true);
+	//connect(cb_date_limit, SIGNAL(clicked()), mapper, SLOT(submit()));
+	//connect(dt_date_limit, SIGNAL(dateTimeChanged(QDateTime)), mapper, SLOT(submit()));
 
 	tree_view->setCurrentIndex(QModelIndex());
 }
@@ -223,4 +222,5 @@ void TodoNote::taskChanged(QModelIndex proxy_index)
 	lb_date_stop->setVisible(task_done);
 	cb_date_limit->setHidden(task_done);
 	dt_date_limit->setHidden(task_done);
+	dt_date_limit->setEnabled(task->limited());
 }
