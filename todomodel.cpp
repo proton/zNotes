@@ -122,6 +122,7 @@ void Task::setDone(bool v)
 //			if(!subtask->done()) subtask->setDone(true);
 //		}
 	}
+	else _node.toElement().removeAttribute("time_d");
 }
 
 void Task::setPriority(Priority v)
@@ -230,9 +231,11 @@ QString getDateGap(const QDateTime& dest_date)
 	QDateTime current = QDateTime::currentDateTime();
 
 	int days_gap = current.daysTo(dest_date);
-	if(days_gap) return QObject::tr("%n days(s)", "", days_gap);
-
 	int secs_gap = current.secsTo(dest_date);
+
+	if(secs_gap<0) return QObject::tr("expired");
+
+	if(days_gap) return QObject::tr("%n days(s)", "", days_gap);
 	if(secs_gap>=3600) return QObject::tr("%n hour(s)", "", secs_gap/3600);
 	if(secs_gap>=60) return QObject::tr("%n min(s)", "", secs_gap/60);
 	return QObject::tr("%n sec(s)", "", secs_gap);
