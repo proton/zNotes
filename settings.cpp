@@ -69,14 +69,16 @@ void Settings::load()
 	/*
 	* If settings don't exist - setup default settings
 	*/
-#ifdef Q_WS_X11
 	//Setting default path to notes
 	if(notes_path.isEmpty())
 	{
+#ifdef Q_WS_X11
 		notes_path = QDir::homePath()+"/.local/share/notes";
+#else
+		if(!QDir::homePath().isEmpty()) notes_path = QDir::homePath()+"/"+tr("Notes");
+#endif
 		config.setValue("NotesPath", notes_path);
 	}
-#endif
 	//Settings single instance options
 	if(!config.contains("SingleInstance"))
 	{

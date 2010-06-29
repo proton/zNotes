@@ -17,7 +17,7 @@ HtmlNote::HtmlNote(const QFileInfo& fileinfo, Note::Type type_new)
 	connect(text_edit, SIGNAL(currentCharFormatChanged(const QTextCharFormat &)),
 		this, SLOT(currentCharFormatChanged(const QTextCharFormat &)));
 
-	text_edit->setAcceptRichText(true);
+	text_edit->setAcceptRichText(true); //TODO: option
 }
 
 HtmlNote::~HtmlNote()

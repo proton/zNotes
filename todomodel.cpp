@@ -331,7 +331,9 @@ bool TodoModel::setData(const QModelIndex& index, const QVariant& data, int role
 		case 4:
 			if(role == Qt::EditRole)
 			{
-				task->setDateLimit(data.toDateTime());
+				QDateTime date = data.toDateTime();
+				//if(task->dateLimit()==date) return false;
+				task->setDateLimit(date);
 				emit dataChanged(index, index);
 				QModelIndex date_display_index = index.sibling(index.row(), 1);
 				emit dataChanged(date_display_index, date_display_index);
@@ -348,6 +350,7 @@ bool TodoModel::setData(const QModelIndex& index, const QVariant& data, int role
 			if(role == Qt::EditRole)
 			{
 				bool limited = data.toBool();
+				//if(task->limited()==limited) return false;
 				QDateTime date_limit;
 				if(limited) date_limit = QDateTime::currentDateTime().addDays(7);
 				task->setDateLimit(date_limit);
