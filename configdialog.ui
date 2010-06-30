@@ -440,7 +440,7 @@
        <item>
         <widget class="QCheckBox" name="cb_NotePastePlaintext">
          <property name="text">
-          <string>Convert rich text to plain text in insertions to HTML notes</string>
+          <string>Convert rich text insertions to plain text in HTML notes</string>
          </property>
         </widget>
        </item>
