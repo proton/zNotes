@@ -44,6 +44,7 @@ configDialog::configDialog(QWidget *parent) :
 	m_ui->lb_FontExample->setFont(settings.getNoteFont());
 	m_ui->cb_NoteLinksHighlight->setChecked(settings.getNoteLinksHighlight());
 	m_ui->cb_NoteLinksOpen->setChecked(settings.getNoteLinksOpen());
+	m_ui->cb_NotePastePlaintext->setChecked(settings.getNotePastePlaintext());
 	//
 	const QMap<int, QMap<int, QString> >& translations = settings.getTranslations();
 	QMapIterator<int, QMap<int, QString> > translation(translations);
@@ -98,6 +99,7 @@ void configDialog::SaveSettings()
 	settings.setNoteFont(m_ui->lb_FontExample->font());
 	settings.setNoteLinksHighlight(m_ui->cb_NoteLinksHighlight->checkState());
 	settings.setNoteLinksOpen(m_ui->cb_NoteLinksOpen->checkState());
+	settings.setNotePastePlaintext(m_ui->cb_NotePastePlaintext->checkState());
 	settings.setScriptShowOutput(m_ui->cb_ScriptShowOutput->checkState());
 	settings.setScriptCopyOutput(m_ui->cb_ScriptCopyOutput->checkState());
 	settings.setToolbarItems(mt_items.getVector());

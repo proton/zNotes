@@ -21,7 +21,7 @@
    <item>
     <widget class="QTabWidget" name="tabWidget">
      <property name="currentIndex">
-      <number>0</number>
+      <number>3</number>
      </property>
      <widget class="QWidget" name="tab">
       <attribute name="title">
@@ -434,6 +434,13 @@
         <widget class="QCheckBox" name="cb_NoteLinksOpen">
          <property name="text">
           <string>Open links (with pressed CTRL)</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QCheckBox" name="cb_NotePastePlaintext">
+         <property name="text">
+          <string>Convert rich text to plain text in insertions to HTML notes</string>
          </property>
         </widget>
        </item>

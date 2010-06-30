@@ -41,6 +41,7 @@ void Settings::load()
 		note_font.fromString(config.value("NoteFont").toString());
 		note_links_highlight = config.value("NoteLinksHighlight").toBool();
 		note_links_open = config.value("NoteLinksOpen").toBool();
+		note_paste_plaintext = config.value("NotePastePlaintext").toBool();
 		//
 		int ScriptCount = config.value("ComandCount").toInt();
 		for(int i=0; i<ScriptCount; ++i)
@@ -97,6 +98,11 @@ void Settings::load()
 	{
 		note_links_open = true;
 		config.setValue("NoteLinksOpen", note_links_open);
+	}
+	if(!config.contains("NotePastePlaintext"))
+	{
+		note_paste_plaintext = false;
+		config.setValue("NotePastePlaintext", note_paste_plaintext);
 	}
 	//Setting default scripts
 	if((script_model.rowCount()==0) && !config.contains("ComandCount"))
@@ -419,6 +425,19 @@ void Settings::setNoteLinksOpen(bool v)
 		note_links_open = v;
 		config.setValue("NoteLinksOpen", note_links_open);
 		emit NoteLinkOpenChanged();
+	}
+}
+
+/*
+  Saving notes's option for pasting to HTML notes only plaintext
+*/
+void Settings::setNotePastePlaintext(bool v)
+{
+	if(note_paste_plaintext != v)
+	{
+		note_paste_plaintext = v;
+		config.setValue("NotePastePlaintext", note_paste_plaintext);
+		emit NotePastePlaintextChanged();
 	}
 }
 

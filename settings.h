@@ -50,6 +50,7 @@ public:
 	inline bool getLanguageCustom()					{ return language_custom; }
 	inline bool getNoteLinksHighlight()				{ return note_links_highlight; }
 	inline bool getNoteLinksOpen()					{ return note_links_open; }
+	inline bool getNotePastePlaintext()				{ return note_paste_plaintext; }
 	//
 	void setNotesPath(const QString& path);
 	void setLastNote(const QString& name);
@@ -59,22 +60,23 @@ public:
 	void setTabPosition(TabPosition v);
 	void setShowHidden(bool s);
 	void setShowExtensions(bool s);
-	void setHideFrame(bool s);
-	void setStayTop(bool s);
-	void setSingleInstance(bool s);
-	void setCopyStartRaise(bool s);
-	void setFileScanner(bool v);
-	void setFileScannerTimeout(int v);
-	void setNoteFont(const QFont& f);
-	void setScriptShowOutput(bool b);
-	void setScriptCopyOutput(bool b);
+	void setHideFrame(bool);
+	void setStayTop(bool);
+	void setSingleInstance(bool);
+	void setCopyStartRaise(bool);
+	void setFileScanner(bool);
+	void setFileScannerTimeout(int);
+	void setNoteFont(const QFont&);
+	void setScriptShowOutput(bool);
+	void setScriptCopyOutput(bool);
 	void setScripts();
-	void setToolbarItems(const QVector<int>& v);
+	void setToolbarItems(const QVector<int>&);
 	void setLocale(const QLocale&);
 	void setLocaleCurrent(const QLocale&);
 	void setLocaleCustom(bool);
 	void setNoteLinksHighlight(bool);
 	void setNoteLinksOpen(bool);
+	void setNotePastePlaintext(bool);
 	//
 	void loadLanguages();
 	//
@@ -111,6 +113,7 @@ private:
 	QFont note_font;
 	bool note_links_highlight;
 	bool note_links_open;
+	bool note_paste_plaintext;
 	//
 	ScriptModel script_model;
 	bool script_show_output;
@@ -128,6 +131,7 @@ signals:
 	void NoteFontChanged();
 	void NoteHighlightChanged();
 	void NoteLinkOpenChanged();
+	void NotePastePlaintextChanged();
 	void tbHidingChanged();
 	void ToolbarItemsChanged();
 };

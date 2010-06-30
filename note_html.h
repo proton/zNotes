@@ -21,6 +21,7 @@ public:
 
 private slots:
 	void currentCharFormatChanged(const QTextCharFormat&);
+	void noteNotePastePlaintextChanged();
 
 private:
 	TextEdit* text_edit;

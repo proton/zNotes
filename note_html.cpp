@@ -17,7 +17,8 @@ HtmlNote::HtmlNote(const QFileInfo& fileinfo, Note::Type type_new)
 	connect(text_edit, SIGNAL(currentCharFormatChanged(const QTextCharFormat &)),
 		this, SLOT(currentCharFormatChanged(const QTextCharFormat &)));
 
-	text_edit->setAcceptRichText(true); //TODO: option
+	text_edit->setAcceptRichText(!settings.getNotePastePlaintext());
+	connect(&settings, SIGNAL(NotePastePlaintextChanged()), this, SLOT(noteNotePastePlaintextChanged()));
 }
 
 HtmlNote::~HtmlNote()
@@ -91,5 +92,10 @@ QTextCharFormat HtmlNote::getSelFormat() const
 {
 	QTextCursor cursor = text_edit->textCursor();
 	return cursor.charFormat();
+}
+
+void HtmlNote::noteNotePastePlaintextChanged()
+{
+	text_edit->setAcceptRichText(!settings.getNotePastePlaintext());
 }
 
