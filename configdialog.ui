@@ -147,7 +147,7 @@
             <bool>false</bool>
            </property>
            <property name="text">
-            <string>Raise main window on stating application copy</string>
+            <string>Raise main window on starting application copy</string>
            </property>
           </widget>
          </item>

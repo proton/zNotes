@@ -235,10 +235,10 @@ QString getDateGap(const QDateTime& dest_date)
 
 	if(secs_gap<0) return QObject::tr("expired");
 
-	if(days_gap) return QObject::tr("%n days(s)", "", days_gap);
+	if(days_gap) return QObject::tr("%n day(s)", "", days_gap);
 	if(secs_gap>=3600) return QObject::tr("%n hour(s)", "", secs_gap/3600);
-	if(secs_gap>=60) return QObject::tr("%n min(s)", "", secs_gap/60);
-	return QObject::tr("%n sec(s)", "", secs_gap);
+	if(secs_gap>=60) return QObject::tr("%n minute(s)", "", secs_gap/60);
+	return QObject::tr("%n second(s)", "", secs_gap);
 }
 
 QVariant TodoModel::data(const QModelIndex& index, int role) const
