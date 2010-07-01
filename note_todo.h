@@ -34,6 +34,8 @@ private slots:
 	void removeTask();
 	void hideCompletedTasks();
 	//bool QAbstractItemView::isIndexHidden ( const QModelIndex & index ) const;
+	void noteDateLimitChanged(const QDateTime&);
+	void noteLimitChanged(bool);
 private:
 	QDomDocument* document;
 	QTreeView* tree_view;

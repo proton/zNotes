@@ -176,17 +176,17 @@ void MainWindow::trayActivated(QSystemTrayIcon::ActivationReason reason)
 
 void MainWindow::hideEvent(QHideEvent */*event*/)
 {
+	settings.setDialogGeometry(saveGeometry());
 	actShow->setEnabled(true);
 	actHide->setDisabled(true);
-	settings.setDialogGeometry(saveGeometry());
-	if(Notes->current()!=0) Notes->SaveAll();
+	if(Notes->current()) Notes->SaveAll();
 }
 
 void MainWindow::showEvent(QShowEvent */*event*/)
 {
+	restoreGeometry(settings.getDialogGeometry());
 	actShow->setEnabled(false);
 	actHide->setDisabled(false);
-	restoreGeometry(settings.getDialogGeometry());
 }
 
 void MainWindow::closeEvent(QCloseEvent *event)

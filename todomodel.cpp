@@ -211,7 +211,7 @@ int TodoModel::rowCount(const QModelIndex& parent) const
 int TodoModel::columnCount(const QModelIndex& parent) const
 {
 	Q_UNUSED(parent)
-	return 8;
+	return 7;
 }
 
 Task* TodoModel::getTask(const QModelIndex &index) const
@@ -280,7 +280,6 @@ QVariant TodoModel::data(const QModelIndex& index, int role) const
 			case 3: return task->dateStop().toString();
 			case 4: return task->dateLimit();
 			case 6: return task->comment();
-			case 7: return task->limited();
 			default: return QVariant();
 		}
 	}
@@ -332,7 +331,6 @@ bool TodoModel::setData(const QModelIndex& index, const QVariant& data, int role
 			if(role == Qt::EditRole)
 			{
 				QDateTime date = data.toDateTime();
-				//if(task->dateLimit()==date) return false;
 				task->setDateLimit(date);
 				emit dataChanged(index, index);
 				QModelIndex date_display_index = index.sibling(index.row(), 1);
@@ -344,19 +342,6 @@ bool TodoModel::setData(const QModelIndex& index, const QVariant& data, int role
 			{
 				task->setComment(data.toString());
 				emit dataChanged(index, index);
-				return true;
-			}
-		case 7:
-			if(role == Qt::EditRole)
-			{
-				bool limited = data.toBool();
-				//if(task->limited()==limited) return false;
-				QDateTime date_limit;
-				if(limited) date_limit = QDateTime::currentDateTime().addDays(7);
-				task->setDateLimit(date_limit);
-				emit dataChanged(index, index);
-				QModelIndex date_display_index = index.sibling(index.row(), 1);
-				emit dataChanged(date_display_index, date_display_index);
 				return true;
 			}
 		default:

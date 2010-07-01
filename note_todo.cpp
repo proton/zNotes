@@ -100,10 +100,6 @@ TodoNote::TodoNote(const QFileInfo& fileinfo, Note::Type type_new)
 	mapper->addMapping(text_edit, 6, "plainText");
 	mapper->addMapping(lb_date_start, 2, "text");
 	mapper->addMapping(lb_date_stop, 3, "text");
-	mapper->addMapping(dt_date_limit, 4);
-	mapper->addMapping(cb_date_limit, 7);
-	//connect(cb_date_limit, SIGNAL(clicked()), mapper, SLOT(submit()));
-	//connect(dt_date_limit, SIGNAL(dateTimeChanged(QDateTime)), mapper, SLOT(submit()));
 
 	tree_view->setCurrentIndex(QModelIndex());
 }
@@ -217,10 +213,33 @@ void TodoNote::taskChanged(QModelIndex proxy_index)
 	mapper->setCurrentModelIndex(proxy_index);
 	QModelIndex index = proxy_model->mapToSource(proxy_index);
 	Task* task = static_cast<Task*>(index.internalPointer());
+	//
+	disconnect(dt_date_limit, SIGNAL(dateTimeChanged(QDateTime)), this, SLOT(noteDateLimitChanged(QDateTime)));
+	disconnect(cb_date_limit, SIGNAL(toggled(bool)), this, SLOT(noteLimitChanged(bool)));
+	dt_date_limit->setDateTime(task->dateLimit());
+	cb_date_limit->setChecked(task->limited());
+	connect(dt_date_limit, SIGNAL(dateTimeChanged(QDateTime)), this, SLOT(noteDateLimitChanged(QDateTime)));
+	connect(cb_date_limit, SIGNAL(toggled(bool)), this, SLOT(noteLimitChanged(bool)));
+	//
 	bool task_done = task->done();
 	lb_date_1->setVisible(task_done);
 	lb_date_stop->setVisible(task_done);
 	cb_date_limit->setHidden(task_done);
 	dt_date_limit->setHidden(task_done);
 	dt_date_limit->setEnabled(task->limited());
+}
+
+void TodoNote::noteDateLimitChanged(const QDateTime& date)
+{
+	QModelIndex proxy_index = tree_view->currentIndex();
+	QModelIndex index = proxy_model->mapToSource(proxy_index);
+	if(!index.isValid()) return;
+	QModelIndex date_limit_index = index.sibling(index.row(), 4);
+	model->setData(date_limit_index, date, Qt::EditRole);
+}
+
+void TodoNote::noteLimitChanged(bool limited)
+{
+	QDateTime date = limited?QDateTime::currentDateTime().addDays(7):QDateTime();
+	noteDateLimitChanged(date);
 }
