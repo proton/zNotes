@@ -48,7 +48,7 @@ TRANSLATIONS += translations/znotes_ru.ts \
 	translations/znotes_pt_BR.ts \
 	translations/znotes_uk.ts
 RESOURCES += znotes.qrc
-!without_single_inst { 
+!without_single_inst {
     QT += network
     DEFINES += SINGLE_INSTANCE
     SOURCES += single_inst/qtlockedfile_win.cpp \
@@ -58,13 +58,7 @@ RESOURCES += znotes.qrc
     HEADERS += single_inst/qtlockedfile.h \
         single_inst/qtlocalpeer.h
 }
-!without_xml_format { 
-    QT += xml
-    DEFINES += NOTE_XML_FORMAT
-    SOURCES += note_xml.cpp
-    HEADERS += note_xml.h
-}
-!without_todo_format { 
+!without_todo_format {
     QT += xml
     DEFINES += NOTE_TODO_FORMAT
     SOURCES += note_todo.cpp \
@@ -85,7 +79,7 @@ TSQM.CONFIG = no_link
 QMAKE_EXTRA_COMPILERS += TSQM
 PRE_TARGETDEPS += compiler_TSQM_make_all
 !os2:DEFINES += VERSION=\\\"$$VERSION\\\"
-unix { 
+unix {
     PREFIX = $$(PREFIX)
     isEmpty( PREFIX ):PREFIX = /usr
     DEFINES += PROGRAM_DATA_DIR=\\\"$$PREFIX/share/znotes/\\\"
@@ -101,7 +95,7 @@ unix {
         pixmap \
         desktop
 }
-os2 { 
+os2 {
     DEFINES += VERSION=\"$$VERSION\"
     RC_FILE = znotes_os2.rc
 }

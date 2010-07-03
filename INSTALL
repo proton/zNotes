@@ -1,4 +1,4 @@
-lrelease znotes.pro #for Fedora - lrelease-qt4 znotes.pro
-qmake
+lrelease znotes.pro #for Fedora lrelease-qt4 znotes.pro
+qmake #use CONFIG+=without_todo_format and CONFIG+=without_single_inst to disable this options
 make
 make install

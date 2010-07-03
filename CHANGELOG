@@ -1,3 +1,17 @@
+zNotes 0.4.2:
+* Changed arhitecure of the note class
+* Added picture format support
+* Some ui improvements
+* Added ability to change text color in html notes
+* Added ability to use only one running instance of application.
+* Added default notes directory for all platforms
+* Added option for converting rich text insertions to plain text in HTML notes
+* Fixed problem with saving last note's name
+* Fixed bug with opening links in about dialog
+* Added Brazilian Portuguese translation
+* Added Ukranian translation
+* Improved translations support
+
 zNotes 0.4.1:
 * Added automatic scaning for new files
 * Some arhitecture changes
