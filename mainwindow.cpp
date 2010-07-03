@@ -515,7 +515,6 @@ MainWindow::MainWindow(QWidget *parent)
 
 MainWindow::~MainWindow()
 {
-	delete ui;
 	//saving notes
 	Notes->SaveAll();
 	//saving title of last note
@@ -527,8 +526,6 @@ MainWindow::~MainWindow()
 	settings.setScripts();
 	//syncing settings
 	settings.save();
-	//
-	delete Notes;
 }
 
 void MainWindow::currentNoteChanged(int old_index, int new_index)
