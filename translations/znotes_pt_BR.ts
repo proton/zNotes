@@ -16,12 +16,12 @@
     <message>
         <location filename="../mainwindow.ui" line="62"/>
         <source>Show Toolbar</source>
-        <translation>Mostrar barra de ferramentas</translation>
+        <translation>Mostrar Barra de Ferramentas</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="32"/>
         <source>Delete Note</source>
-        <translation>Excluir nota</translation>
+        <translation>Excluir Nota</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="33"/>
@@ -46,13 +46,13 @@
     <message>
         <location filename="../mainwindow.cpp" line="215"/>
         <source>Move Notes</source>
-        <translation>Mover notas</translation>
+        <translation>Mover Notas</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="216"/>
         <source>Notes path changed!
 Do you want to move your notes to new place ?</source>
-        <translation>Caminho das notas aletado!
+        <translation>Caminho das notas alterado!
 Você realmente deseja mover suas notas para o novo lugar?</translation>
     </message>
     <message>
@@ -85,13 +85,13 @@ Você pode adicionar novos comandos em preferências.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="413"/>
-        <location filename="../mainwindow.cpp" line="629"/>
+        <location filename="../mainwindow.cpp" line="626"/>
         <source>Show</source>
         <translation>Mostrar</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="414"/>
-        <location filename="../mainwindow.cpp" line="630"/>
+        <location filename="../mainwindow.cpp" line="627"/>
         <source>Hide</source>
         <translation>Ocultar</translation>
     </message>
@@ -131,7 +131,7 @@ Você pode adicionar novos comandos em preferências.</translation>
     <message>
         <location filename="../toolbaraction.h" line="44"/>
         <source>Create new TODO note</source>
-        <translation type="unfinished"></translation>
+        <translation>Criar nova nota PARA FAZER</translation>
     </message>
     <message>
         <location filename="../toolbaraction.h" line="45"/>
@@ -206,48 +206,48 @@ Você pode adicionar novos comandos em preferências.</translation>
     <message>
         <location filename="../toolbaraction.h" line="59"/>
         <source>Text color</source>
-        <translation type="unfinished"></translation>
+        <translation>Cor do texto</translation>
     </message>
     <message>
         <location filename="../todomodel.cpp" line="56"/>
         <source>New task</source>
-        <translation type="unfinished"></translation>
+        <translation>Nova tarefa</translation>
     </message>
     <message>
         <location filename="../todomodel.cpp" line="236"/>
         <source>expired</source>
-        <translation type="unfinished"></translation>
+        <translation>expirada</translation>
     </message>
     <message numerus="yes">
         <location filename="../todomodel.cpp" line="238"/>
         <source>%n day(s)</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>%n dia</numerusform>
+            <numerusform>%n dias</numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <location filename="../todomodel.cpp" line="240"/>
         <source>%n minute(s)</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>%n minuto</numerusform>
+            <numerusform>%n minutos</numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <location filename="../todomodel.cpp" line="241"/>
         <source>%n second(s)</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>%n segundo</numerusform>
+            <numerusform>%n segundos</numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <location filename="../todomodel.cpp" line="239"/>
         <source>%n hour(s)</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>%n hora</numerusform>
+            <numerusform>%n horas</numerusform>
         </translation>
     </message>
 </context>
@@ -257,27 +257,27 @@ Você pode adicionar novos comandos em preferências.</translation>
         <location filename="../note_todo.cpp" line="54"/>
         <location filename="../note_todo.cpp" line="55"/>
         <source>Insert new task</source>
-        <translation type="unfinished"></translation>
+        <translation>Inserir uma nova tarefa</translation>
     </message>
     <message>
         <location filename="../note_todo.cpp" line="56"/>
         <source>Remove this task</source>
-        <translation type="unfinished"></translation>
+        <translation>Remover esta tarefa</translation>
     </message>
     <message>
         <location filename="../note_todo.cpp" line="64"/>
         <source>Created: </source>
-        <translation type="unfinished"></translation>
+        <translation>Criado: </translation>
     </message>
     <message>
         <location filename="../note_todo.cpp" line="66"/>
         <source>Completed: </source>
-        <translation type="unfinished"></translation>
+        <translation>Completo: </translation>
     </message>
     <message>
         <location filename="../note_todo.cpp" line="69"/>
         <source>Limited: </source>
-        <translation type="unfinished"></translation>
+        <translation>Limitado: </translation>
     </message>
 </context>
 <context>
@@ -323,7 +323,7 @@ The text of the license can can be found in the file LICENSE.</source>
 Este programa é distribuído na esperança que será útil, mas SEM QUALQUER GARANTIA, sem mesmo a garantia implícita de COMERCIABILIDADE ou ADEQUAÇÃO A UM DETERMINADO PROPÓSITO.
 Veja a Licença Pública Geral GNU para mais detalhes.
 
-O texto da licença pode ser encontrada no arquivo LICENSE.</translation>
+O texto da licença pode ser encontrado no arquivo LICENSE.</translation>
     </message>
     <message>
         <location filename="../aboutDialog.ui" line="113"/>
@@ -373,7 +373,7 @@ O texto da licença pode ser encontrada no arquivo LICENSE.</translation>
     <message>
         <location filename="../aboutDialog.cpp" line="26"/>
         <source>Brazilian Portuguese translation</source>
-        <translation type="unfinished"></translation>
+        <translation>Tradução para o Português do Brasil</translation>
     </message>
     <message>
         <location filename="../aboutDialog.cpp" line="28"/>
@@ -388,7 +388,7 @@ O texto da licença pode ser encontrada no arquivo LICENSE.</translation>
     <message>
         <location filename="../aboutDialog.cpp" line="32"/>
         <source>Ukrainian translation</source>
-        <translation type="unfinished"></translation>
+        <translation>Tradução para o Ucraniano</translation>
     </message>
     <message>
         <location filename="../aboutDialog.cpp" line="33"/>
@@ -491,7 +491,7 @@ O texto da licença pode ser encontrada no arquivo LICENSE.</translation>
     <message>
         <location filename="../configdialog.ui" line="150"/>
         <source>Raise main window on starting application copy</source>
-        <translation type="unfinished"></translation>
+        <translation>Elevar a janela principal ao iniciar o programa</translation>
     </message>
     <message>
         <location filename="../configdialog.ui" line="333"/>
@@ -566,7 +566,7 @@ O texto da licença pode ser encontrada no arquivo LICENSE.</translation>
     <message>
         <location filename="../configdialog.ui" line="140"/>
         <source>Use only one running instance of zNotes</source>
-        <translation type="unfinished"></translation>
+        <translation>Utilizar apenas uma instância do zNotes</translation>
     </message>
     <message>
         <location filename="../configdialog.ui" line="174"/>
@@ -636,7 +636,7 @@ O texto da licença pode ser encontrada no arquivo LICENSE.</translation>
     <message>
         <location filename="../configdialog.ui" line="443"/>
         <source>Convert rich text insertions to plain text in HTML notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Converter ricas inserções de texto para texto simples em notas HTML</translation>
     </message>
     <message>
         <location filename="../configdialog.cpp" line="135"/>

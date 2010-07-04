@@ -138,13 +138,13 @@ Chcete své poznámky přesunout na nové místo?</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="413"/>
-        <location filename="../mainwindow.cpp" line="629"/>
+        <location filename="../mainwindow.cpp" line="626"/>
         <source>Show</source>
         <translation>Ukázat </translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="414"/>
-        <location filename="../mainwindow.cpp" line="630"/>
+        <location filename="../mainwindow.cpp" line="627"/>
         <source>Hide</source>
         <translation>Skrýt</translation>
     </message>
