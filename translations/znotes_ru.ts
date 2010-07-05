@@ -364,7 +364,7 @@ Do you want to move your notes to new place ?</source>
         <location filename="../note_todo.cpp" line="54"/>
         <location filename="../note_todo.cpp" line="55"/>
         <source>Insert new task</source>
-        <translation>Добавить задвчу</translation>
+        <translation>Добавить задачу</translation>
     </message>
     <message>
         <location filename="../note_todo.cpp" line="56"/>
