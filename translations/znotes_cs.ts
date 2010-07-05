@@ -138,13 +138,13 @@ Chcete své poznámky přesunout na nové místo?</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="413"/>
-        <location filename="../mainwindow.cpp" line="626"/>
+        <location filename="../mainwindow.cpp" line="629"/>
         <source>Show</source>
         <translation>Ukázat </translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="414"/>
-        <location filename="../mainwindow.cpp" line="627"/>
+        <location filename="../mainwindow.cpp" line="630"/>
         <source>Hide</source>
         <translation>Skrýt</translation>
     </message>
@@ -200,7 +200,7 @@ Chcete své poznámky přesunout na nové místo?</translation>
     <message>
         <location filename="../toolbaraction.h" line="44"/>
         <source>Create new TODO note</source>
-        <translation type="unfinished"></translation>
+        <translation>Vytvořit novou poznámku CO DĚLAT</translation>
     </message>
     <message>
         <location filename="../toolbaraction.h" line="45"/>
@@ -275,7 +275,7 @@ Chcete své poznámky přesunout na nové místo?</translation>
     <message>
         <location filename="../toolbaraction.h" line="59"/>
         <source>Text color</source>
-        <translation type="unfinished"></translation>
+        <translation>Barva textu</translation>
     </message>
     <message>
         <location filename="../scriptmodel.cpp" line="30"/>
@@ -295,47 +295,47 @@ Chcete své poznámky přesunout na nové místo?</translation>
     <message>
         <location filename="../todomodel.cpp" line="56"/>
         <source>New task</source>
-        <translation type="unfinished"></translation>
+        <translation>Nový úkol</translation>
     </message>
     <message>
         <location filename="../todomodel.cpp" line="236"/>
         <source>expired</source>
-        <translation type="unfinished"></translation>
+        <translation>vyprší</translation>
     </message>
     <message numerus="yes">
         <location filename="../todomodel.cpp" line="238"/>
         <source>%n day(s)</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>jeden den</numerusform>
+            <numerusform>%n dny</numerusform>
+            <numerusform>%n dnů</numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <location filename="../todomodel.cpp" line="240"/>
         <source>%n minute(s)</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>jedna minuta</numerusform>
+            <numerusform>%n minuty</numerusform>
+            <numerusform>%n minut</numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <location filename="../todomodel.cpp" line="241"/>
         <source>%n second(s)</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>jedna sekunda</numerusform>
+            <numerusform>%n sekundy</numerusform>
+            <numerusform>%n sekund</numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <location filename="../todomodel.cpp" line="239"/>
         <source>%n hour(s)</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>jedna hodina</numerusform>
+            <numerusform>%n hodiny</numerusform>
+            <numerusform>%n hodin</numerusform>
         </translation>
     </message>
 </context>
@@ -360,27 +360,27 @@ Chcete své poznámky přesunout na nové místo?</translation>
         <location filename="../note_todo.cpp" line="54"/>
         <location filename="../note_todo.cpp" line="55"/>
         <source>Insert new task</source>
-        <translation type="unfinished"></translation>
+        <translation>Vložit nový úkol</translation>
     </message>
     <message>
         <location filename="../note_todo.cpp" line="56"/>
         <source>Remove this task</source>
-        <translation type="unfinished"></translation>
+        <translation>Odstranit tento úkol</translation>
     </message>
     <message>
         <location filename="../note_todo.cpp" line="64"/>
         <source>Created: </source>
-        <translation type="unfinished"></translation>
+        <translation>Vytvořeno:</translation>
     </message>
     <message>
         <location filename="../note_todo.cpp" line="66"/>
         <source>Completed: </source>
-        <translation type="unfinished"></translation>
+        <translation>Dokončeno:</translation>
     </message>
     <message>
         <location filename="../note_todo.cpp" line="69"/>
         <source>Limited: </source>
-        <translation type="unfinished"></translation>
+        <translation>Omezeno:</translation>
     </message>
 </context>
 <context>
@@ -427,7 +427,7 @@ Chcete své poznámky přesunout na nové místo?</translation>
     <message>
         <location filename="../aboutDialog.cpp" line="26"/>
         <source>Brazilian Portuguese translation</source>
-        <translation type="unfinished"></translation>
+        <translation>Překlad do brazilské portugalštiny</translation>
     </message>
     <message>
         <location filename="../aboutDialog.cpp" line="28"/>
@@ -442,7 +442,7 @@ Chcete své poznámky přesunout na nové místo?</translation>
     <message>
         <location filename="../aboutDialog.cpp" line="32"/>
         <source>Ukrainian translation</source>
-        <translation type="unfinished"></translation>
+        <translation>Překlad do ukrajinštiny</translation>
     </message>
     <message>
         <location filename="../aboutDialog.cpp" line="33"/>
@@ -561,7 +561,7 @@ Chcete své poznámky přesunout na nové místo?</translation>
     <message>
         <location filename="../aboutDialog.ui" line="92"/>
         <source>License</source>
-        <translation>Licence</translation>
+        <translation>Povolení</translation>
     </message>
     <message>
         <location filename="../aboutDialog.ui" line="101"/>
@@ -603,7 +603,7 @@ Text licence lze nalézt v souboru LICENSE.</translation>
     <message>
         <location filename="../configdialog.ui" line="150"/>
         <source>Raise main window on starting application copy</source>
-        <translation type="unfinished"></translation>
+        <translation>Zvednout hlavní okno při spuštění kopie programu</translation>
     </message>
     <message>
         <location filename="../configdialog.ui" line="333"/>
@@ -720,7 +720,7 @@ Text licence lze nalézt v souboru LICENSE.</translation>
     <message>
         <location filename="../configdialog.ui" line="140"/>
         <source>Use only one running instance of zNotes</source>
-        <translation type="unfinished"></translation>
+        <translation>Používat pouze jednu běžící instanci zNotes</translation>
     </message>
     <message>
         <location filename="../configdialog.ui" line="209"/>
@@ -760,7 +760,7 @@ Text licence lze nalézt v souboru LICENSE.</translation>
     <message>
         <location filename="../configdialog.ui" line="443"/>
         <source>Convert rich text insertions to plain text in HTML notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Převést v poznámkách HTML vložený formátovaný text na prostý text</translation>
     </message>
     <message>
         <source>Hide edit section</source>
