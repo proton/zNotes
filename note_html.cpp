@@ -66,9 +66,9 @@ void HtmlNote::copy() const
 }
 
 //Searching in a note's content
-bool HtmlNote::find(const QString& text, bool new_search)
+bool HtmlNote::find(const QString& text, bool next)
 {
-	return text_edit->search(text, new_search);
+	return text_edit->search(text, next);
 }
 
 //Sending signal about changing format of a text under cursor

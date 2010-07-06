@@ -17,7 +17,7 @@ private:
 	void mouseMoveEvent(QMouseEvent* e);
 	void focusOutEvent(QFocusEvent* e);
 public:
-	bool search(const QString& text, bool new_search=false); //Searching text in a note's content
+	bool search(const QString& text, bool next=false); //Searching text in a note's content
 private slots:
 	void fontChanged();
 	void linkOpenChanged();

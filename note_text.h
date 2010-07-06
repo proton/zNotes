@@ -14,7 +14,7 @@ public:
 	void load(); //Reading note's content
 	void save(bool forced = false); //Saving note's content
 	void copy() const; //Coping note's content to clipboard
-	bool find(const QString& text, bool new_search=false); //Searching text in a note's content
+	bool find(const QString& text, bool next=false); //Searching text in a note's content
 	QWidget* widget();
 private:
 	TextEdit* text_edit;
