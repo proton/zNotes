@@ -122,3 +122,16 @@ void TextEdit::linkOpenChanged()
 		viewport()->setCursor(Qt::IBeamCursor);
 	}
 }
+
+//Searching
+bool TextEdit::search(const QString& text, bool new_search)
+{
+	if(new_search) //new search
+	{
+		QTextCursor cursor(textCursor().block().next());
+		setTextCursor(cursor);
+	}
+	else unsetCursor(); //search next
+	return find(text);
+}
+

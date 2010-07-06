@@ -62,10 +62,8 @@ void TextNote::copy() const
 }
 
 //Searching in a note's content
-bool TextNote::find(const QString& text, bool next)
+bool TextNote::find(const QString& text, bool new_search)
 {
-	if(next) text_edit->setTextCursor(QTextCursor()); //search next
-	else text_edit->unsetCursor(); //new search
-	return text_edit->find(text);
+	return text_edit->search(text, new_search);
 }
 

@@ -66,11 +66,9 @@ void HtmlNote::copy() const
 }
 
 //Searching in a note's content
-bool HtmlNote::find(const QString& text, bool next)
+bool HtmlNote::find(const QString& text, bool new_search)
 {
-	if(next) text_edit->setTextCursor(QTextCursor()); //search next
-	else text_edit->unsetCursor(); //new search
-	return text_edit->find(text);
+	return text_edit->search(text, new_search);
 }
 
 //Sending signal about changing format of a text under cursor

@@ -113,6 +113,8 @@ void NoteList::search(const QString& text)
 			return;
 		}
 	}
+	//If find nothing
+	//current()->widget()->setFocus();
 }
 
 void NoteList::rename(int index, const QString& title)
