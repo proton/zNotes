@@ -76,7 +76,7 @@ void Settings::load()
 #ifdef Q_WS_X11
 		notes_path = QDir::homePath()+"/.local/share/notes";
 #else
-		if(!QDir::homePath().isEmpty()) notes_path = QDir::homePath()+"/Notes");
+		if(!QDir::homePath().isEmpty()) notes_path = QDir::homePath()+"/Notes";
 #endif
 		config.setValue("NotesPath", notes_path);
 	}
