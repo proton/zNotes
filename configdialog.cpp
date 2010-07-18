@@ -63,8 +63,8 @@ configDialog::configDialog(QWidget *parent) :
 			m_ui->cmb_Language->addItem(text, locale);
 		}
 	}
-//	int current_locale_index = m_ui->cmb_Language->findData(settings.getLocaleCurrent());
-//	m_ui->cmb_Language->setCurrentIndex(current_locale_index);
+	int current_locale_index = m_ui->cmb_Language->findData(settings.getLocaleCurrent());
+	m_ui->cmb_Language->setCurrentIndex(current_locale_index);
 	//
 	m_ui->cb_LanguageCustom->setChecked(settings.getLanguageCustom());
 	m_ui->cmb_Language->setEnabled(settings.getLanguageCustom());
