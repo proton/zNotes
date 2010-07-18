@@ -98,6 +98,7 @@ public slots:
 	//
 	void warningSettingsChanged();
 private slots:
+	void on_btSearchClose_clicked();
 	void on_edSearch_returnPressed();
 	void on_edSearch_textChanged(QString text);
 };

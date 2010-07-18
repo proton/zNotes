@@ -630,3 +630,8 @@ void MainWindow::changeEvent(QEvent *e)
 	default: break;
 	}
 }
+
+void MainWindow::on_btSearchClose_clicked()
+{
+	actions[itemSearch]->setChecked(false);
+}

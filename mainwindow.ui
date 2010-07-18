@@ -39,7 +39,7 @@
         <widget class="QLineEdit" name="edSearch"/>
        </item>
        <item>
-        <widget class="QPushButton" name="pushButton">
+        <widget class="QPushButton" name="btSearchClose">
          <property name="text">
           <string/>
          </property>
@@ -81,7 +81,7 @@
  </resources>
  <connections>
   <connection>
-   <sender>pushButton</sender>
+   <sender>btSearchClose</sender>
    <signal>clicked()</signal>
    <receiver>wSearch</receiver>
    <slot>hide()</slot>
@@ -97,7 +97,7 @@
    </hints>
   </connection>
   <connection>
-   <sender>pushButton</sender>
+   <sender>btSearchClose</sender>
    <signal>clicked()</signal>
    <receiver>edSearch</receiver>
    <slot>clear()</slot>
