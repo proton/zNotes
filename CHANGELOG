@@ -1,3 +1,9 @@
+zNotes 0.4.3:
+* Fixed problem with compilation on not UNIX systems
+* Fixed problem with saving user language
+* Fixed problem with unchecking search action on closing search bar
+* Improved search usability
+
 zNotes 0.4.2:
 * Changed arhitecure of the note class
 * Added picture format support
