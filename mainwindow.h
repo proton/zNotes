@@ -50,6 +50,7 @@ private:
 //	//
 	QShortcut *scAdd, *scRemove, *scRename, *scBack, *scForward, *scPrev, *scNext, *scExit, *scSearch;
 	QShortcut *scFormatBold, *scFormatItalic, *scFormatStrikeout, *scFormatUnderline;
+	QShortcut *scSearchEsc;
 	//
 	void LoadNotes();
 	//

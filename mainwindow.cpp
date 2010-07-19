@@ -424,7 +424,7 @@ MainWindow::MainWindow(QWidget *parent)
 	connect(actions[itemSetup],	SIGNAL(triggered()), this, SLOT(showPrefDialog()));
 	connect(actions[itemInfo],	SIGNAL(triggered()), this, SLOT(showAboutDialog()));
 	connect(actions[itemRun],		SIGNAL(triggered()), this, SLOT(commandMenu()));
-	connect(actions[itemSearch],	SIGNAL(triggered(bool)), this, SLOT(showSearchBar(bool)));
+	connect(actions[itemSearch],	SIGNAL(toggled(bool)), this, SLOT(showSearchBar(bool)));
 	connect(actions[itemExit],	SIGNAL(triggered()), qApp, SLOT(quit()));
 	connect(actions[itemFormatBold],	SIGNAL(triggered()), this, SLOT(formatBold()));
 	connect(actions[itemFormatItalic],	SIGNAL(triggered()), this, SLOT(formatItalic()));
@@ -463,6 +463,7 @@ MainWindow::MainWindow(QWidget *parent)
 	scPrev =	new QShortcut(QKeySequence::PreviousChild,	this);
 	scNext =	new QShortcut(QKeySequence::NextChild,this);
 	scSearch =	new QShortcut(QKeySequence::Find,	this);
+	scSearchEsc = new QShortcut(Qt::Key_Escape, ui->edSearch, 0, 0, Qt::WidgetShortcut);
 	scExit =	new QShortcut(QKeySequence::Close,	this);
 	scFormatBold =		new QShortcut(Qt::CTRL + Qt::Key_B,	this);
 	scFormatItalic =	new QShortcut(Qt::CTRL + Qt::Key_I,	this);
@@ -476,7 +477,8 @@ MainWindow::MainWindow(QWidget *parent)
 	connect(scForward,	SIGNAL(activated()), this, SLOT(NextNote()));
 	connect(scPrev,		SIGNAL(activated()), this, SLOT(PreviousNote()));
 	connect(scNext,		SIGNAL(activated()), this, SLOT(NextNote()));
-	connect(scSearch,	SIGNAL(activated()), this, SLOT(showSearchBar()));
+	connect(scSearch,	SIGNAL(activated()), actions[itemSearch], SLOT(toggle()));
+	connect(scSearchEsc,	SIGNAL(activated()), actions[itemSearch], SLOT(toggle()));
 	connect(scExit,		SIGNAL(activated()), qApp, SLOT(quit()));
 	connect(scFormatBold,	SIGNAL(activated()), this, SLOT(formatBold()));
 	connect(scFormatItalic,	SIGNAL(activated()), this, SLOT(formatItalic()));
@@ -578,6 +580,7 @@ void MainWindow::showSearchBar(bool show)
 		ui->edSearch->setFocus();
 		if(!actions[itemSearch]->isChecked()) actions[itemSearch]->setChecked(true);
 	}
+	else ui->edSearch->clear();
 }
 
 /*
