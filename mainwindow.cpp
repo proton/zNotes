@@ -59,64 +59,39 @@ void MainWindow::RenameCurrentNote()
 	}
 }
 
-void MainWindow::NewNotePlain()
+void MainWindow::NewNote(const QString& mask)
 {
 	int n = 0;
-	QString filename = QString::number(n);
+	QString filename = QString(mask).arg(n);
 	QFile file(dir.absoluteFilePath(filename));
 	while(file.exists()) //Searching for free filename
 	{
-		filename = QString::number(++n);
+		filename = QString(mask).arg(++n);
 		file.setFileName(dir.absoluteFilePath(filename));
 	}
 	if(Notes->empty())
 	{
-		for(int i=0; i<itemMax; ++i)
+		for(int i=0; i<itemMax ; ++i)
 		{
 			actions[i]->setEnabled(true);
 		}
 	}
 	Notes->add(file);
+}
+
+void MainWindow::NewNotePlain()
+{
+	NewNote("%1");
 }
 
 void MainWindow::NewNoteHTML()
 {
-	int n = 0;
-	QString filename = QString("%1.htm").arg(n);
-	QFile file(dir.absoluteFilePath(filename));
-	while(file.exists()) //Searching for free filename
-	{
-		filename = QString("%1.htm").arg(++n);
-		file.setFileName(dir.absoluteFilePath(filename));
-	}
-	if(Notes->empty())
-	{
-		for(int i=0; i<itemMax ; ++i)
-		{
-			actions[i]->setEnabled(true);
-		}
-	}
-	Notes->add(file);
+	NewNote("%1.htm");
 }
 
 void MainWindow::NewNoteTODO()
 {
-	int n = 0;
-	QString filename = QString("%1.ztodo").arg(n);
-	QFile file(dir.absoluteFilePath(filename));
-	while(file.exists()) //Searching for free filename
-	{
-		filename = QString("%1.ztodo").arg(++n);
-		file.setFileName(dir.absoluteFilePath(filename));
-	}
-	if(Notes->empty())
-	{
-		for(int i=0; i<itemMax ; ++i)
-		{
-			actions[i]->setEnabled(true);
-		}
-	}
-	Notes->add(file);
+	NewNote("%1.ztodo");
 }
 
 void MainWindow::PreviousNote()

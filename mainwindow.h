@@ -56,6 +56,8 @@ private:
 	//
 	void Search(bool next);
 	void changeEvent(QEvent *e);
+	//
+	void NewNote(const QString& mask);
 public slots:
 	void RemoveCurrentNote();
 	void RenameCurrentNote();
