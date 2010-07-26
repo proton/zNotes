@@ -59,7 +59,7 @@ private:
 public slots:
 	void RemoveCurrentNote();
 	void RenameCurrentNote();
-	void NewNote();
+	void NewNotePlain();
 	void NewNoteHTML();
 	void NewNoteTODO();
 	//

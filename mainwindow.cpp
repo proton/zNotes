@@ -57,7 +57,7 @@ void MainWindow::RenameCurrentNote()
 	}
 }
 
-void MainWindow::NewNote()
+void MainWindow::NewNotePlain()
 {
 	int n = 0;
 	QString filename = QString::number(n);
@@ -113,11 +113,13 @@ void MainWindow::NewNoteTODO()
 
 void MainWindow::PreviousNote()
 {
+	if(Notes->empty()) return;
 	Notes->getWidget()->setCurrentIndex(Notes->currentIndex()-1);
 }
 
 void MainWindow::NextNote()
 {
+	if(Notes->empty()) return;
 	Notes->getWidget()->setCurrentIndex(Notes->currentIndex()+1);
 }
 
@@ -129,6 +131,7 @@ void MainWindow::ToNote(int n)
 
 void MainWindow::CopyNote()
 {
+	if(Notes->empty()) return;
 	Notes->current()->copy();
 }
 
@@ -413,7 +416,7 @@ MainWindow::MainWindow(QWidget *parent)
 	actShow =	new QAction(tr("Show"),	parent);
 	actHide =	new QAction(tr("Hide"),	parent);
 	//Connecting actions with slots
-	connect(actions[itemAdd],		SIGNAL(triggered()), this, SLOT(NewNote()));
+	connect(actions[itemAdd],		SIGNAL(triggered()), this, SLOT(NewNotePlain()));
 	connect(actions[itemAddHtml],	SIGNAL(triggered()), this, SLOT(NewNoteHTML()));
 	connect(actions[itemAddTodo],	SIGNAL(triggered()), this, SLOT(NewNoteTODO()));
 	connect(actions[itemRemove],	SIGNAL(triggered()), this, SLOT(RemoveCurrentNote()));
@@ -470,7 +473,7 @@ MainWindow::MainWindow(QWidget *parent)
 	scFormatStrikeout = new QShortcut(Qt::CTRL + Qt::Key_S,	this);
 	scFormatUnderline = new QShortcut(Qt::CTRL + Qt::Key_U,	this);
 	//Connecting shortcuts with slots
-	connect(scAdd,		SIGNAL(activated()), this, SLOT(NewNote()));
+	connect(scAdd,		SIGNAL(activated()), this, SLOT(NewNotePlain()));
 	connect(scRemove,	SIGNAL(activated()), this, SLOT(RemoveCurrentNote()));
 	connect(scRename,	SIGNAL(activated()), this, SLOT(RenameCurrentNote()));
 	connect(scBack,		SIGNAL(activated()), this, SLOT(PreviousNote()));
@@ -494,7 +497,7 @@ MainWindow::MainWindow(QWidget *parent)
 	connect(&alt_mapper, SIGNAL(mapped(int)), this, SLOT(ToNote(int)));
 	//
 	LoadNotes();
-	if(Notes->empty()) NewNote();
+	if(Notes->empty()) NewNotePlain();
 	//
 	connect(&SaveTimer, SIGNAL(timeout()), Notes, SLOT(SaveAll()));
 	SaveTimer.start(15000);
