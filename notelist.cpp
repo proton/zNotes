@@ -82,19 +82,12 @@ bool NoteList::load(const QFileInfo& fileinfo, const QString& old_title)
 
 void NoteList::remove(int i)
 {
-	qDebug() << __FILE__ << __LINE__;
 	Note* note = vec[i];
-	qDebug() << __FILE__ << __LINE__;
 	tabs->removeTab(i);
-	qDebug() << __FILE__ << __LINE__;
 	vec.remove(i);
-	qDebug() << __FILE__ << __LINE__;
 	QString filename = note->fileName();
-	qDebug() << __FILE__ << __LINE__;
 	delete note;
-	qDebug() << __FILE__ << __LINE__;
 	notes_filenames.remove(filename);
-	qDebug() << __FILE__ << __LINE__;
 }
 
 void NoteList::move(const QString& path)

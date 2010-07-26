@@ -127,6 +127,19 @@ public:
 			return false;
 		}
 	}
+	//Is item enabled when notelist is empty
+	inline bool isEnabledWhenEmpty()
+	{
+		switch(item_id)
+		{
+		case itemAdd:
+		case itemAddHtml:
+		case itemAddTodo:
+			return true;
+		default:
+			return false;
+		}
+	}
 private:
 	item_enum item_id;
 };

@@ -38,8 +38,10 @@ void MainWindow::RemoveCurrentNote()
 		Notes->remove(Notes->currentIndex());
 		if(Notes->empty())
 		{
-			actions[itemRemove]->setDisabled(true);
-			actions[itemRename]->setDisabled(true);
+			for(int i=0; i<itemMax; ++i)
+			{
+				actions[i]->setDisabled(!ToolbarAction(item_enum(i)).isEnabledWhenEmpty());
+			}
 		}
 	}
 }
@@ -67,12 +69,14 @@ void MainWindow::NewNotePlain()
 		filename = QString::number(++n);
 		file.setFileName(dir.absoluteFilePath(filename));
 	}
-	Notes->add(file);
-	if(!Notes->empty())
+	if(Notes->empty())
 	{
-		actions[itemRemove]->setEnabled(true);
-		actions[itemRename]->setEnabled(true);
+		for(int i=0; i<itemMax; ++i)
+		{
+			actions[i]->setEnabled(true);
+		}
 	}
+	Notes->add(file);
 }
 
 void MainWindow::NewNoteHTML()
@@ -85,12 +89,14 @@ void MainWindow::NewNoteHTML()
 		filename = QString("%1.htm").arg(++n);
 		file.setFileName(dir.absoluteFilePath(filename));
 	}
-	Notes->add(file);
-	if(!Notes->empty())
+	if(Notes->empty())
 	{
-		actions[itemRemove]->setEnabled(true);
-		actions[itemRename]->setEnabled(true);
+		for(int i=0; i<itemMax ; ++i)
+		{
+			actions[i]->setEnabled(true);
+		}
 	}
+	Notes->add(file);
 }
 
 void MainWindow::NewNoteTODO()
@@ -103,12 +109,14 @@ void MainWindow::NewNoteTODO()
 		filename = QString("%1.ztodo").arg(++n);
 		file.setFileName(dir.absoluteFilePath(filename));
 	}
-	Notes->add(file);
-	if(!Notes->empty())
+	if(Notes->empty())
 	{
-		actions[itemRemove]->setEnabled(true);
-		actions[itemRename]->setEnabled(true);
+		for(int i=0; i<itemMax ; ++i)
+		{
+			actions[i]->setEnabled(true);
+		}
 	}
+	Notes->add(file);
 }
 
 void MainWindow::PreviousNote()
