@@ -8,7 +8,7 @@ Highlighter::Highlighter(QTextDocument *parent)
 
 	linkFormat.setForeground(Qt::blue);
 	rule.format = linkFormat;
-	rule.pattern = QRegExp("http://\\S+");
+	rule.pattern = QRegExp("(http|https|ftp)://\\S+");
 	highlightingRules.append(rule);
 }
 

@@ -18,22 +18,27 @@ inline bool isOnLink(const QTextDocument& document, const QTextCursor& cursor, i
 		pos_end = position;
 		while(pos_end<characterCount && !document.characterAt(pos_end).isSpace()) ++pos_end; //Detecting end on the word
 		//
-		const QString priznak("http://");
+		QStringList signlist;
+		signlist << "http://" << "https://" << "ftp://";
 		const int link_lenght = pos_end-pos_start;
-		if(link_lenght>priznak.size())
+		QStringList::const_iterator sign_it;
+		for(sign_it=signlist.constBegin(); sign_it!=signlist.constEnd(); ++sign_it)
 		{
-			bool isLink = true;
-			int i = 0;
-			while(i<priznak.size())
+			if(link_lenght>sign_it->size())
 			{
-				if(document.characterAt(pos_start+i)!=priznak.at(i))
+				bool isLink = true;
+				int i = 0;
+				while(i<sign_it->size())
 				{
-					isLink = false;
-					break;
+					if(document.characterAt(pos_start+i)!=sign_it->at(i))
+					{
+						isLink = false;
+						break;
+					}
+					++i;
 				}
-				++i;
+				if(isLink) return true;
 			}
-			if(isLink) return true;
 		}
 	}
 	return false;
