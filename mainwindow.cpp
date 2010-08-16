@@ -55,7 +55,7 @@ void MainWindow::RenameCurrentNote()
 	QString new_name = QInputDialog::getText(this, tr("Rename note"), tr("New name:"), QLineEdit::Normal, filename, &ok);
 	if(ok && !new_name.isEmpty())
 	{
-		QFile file(dir.absoluteFilePath(filename));
+		QFile file(dir.absoluteFilePath(new_name));
 		if(!file.exists())
 			Notes->rename(Notes->currentIndex(), new_name);
 		else
