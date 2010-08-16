@@ -13,6 +13,8 @@ enum item_enum
 	itemAddTodo,
 	itemRemove,
 	itemRename,
+	itemBack,
+	itemForward,
 	itemPrev,
 	itemNext,
 	itemCopy,
@@ -44,6 +46,8 @@ public:
 			case itemAddTodo:	return QObject::tr("Create new TODO note");
 			case itemRemove:	return QObject::tr("Remove this note");
 			case itemRename:	return QObject::tr("Rename this note");
+			case itemBack:		return QObject::tr("Back");
+			case itemForward:	return QObject::tr("Forward");
 			case itemPrev:		return QObject::tr("Prev note");
 			case itemNext:		return QObject::tr("Next note");
 			case itemCopy:		return QObject::tr("Copy this note to clipboard");
@@ -70,6 +74,8 @@ public:
 			case itemAddTodo:	return QIcon(":/res/add.png");
 			case itemRemove:	return QIcon(":/res/remove.png");
 			case itemRename:	return QIcon(":/res/rename.png");
+			case itemBack:		return QIcon(":/res/back.png");
+			case itemForward:	return QIcon(":/res/forward.png");
 			case itemPrev:		return QIcon(":/res/prev.png");
 			case itemNext:		return QIcon(":/res/next.png");
 			case itemCopy:		return QIcon(":/res/copy.png");
@@ -96,6 +102,8 @@ public:
 			case itemAddTodo:	return "Toolbar/itemAddTodo";
 			case itemRemove:	return "Toolbar/itemRemove";
 			case itemRename:	return "Toolbar/itemRename";
+			case itemBack:		return "Toolbar/itemBack";
+			case itemForward:	return "Toolbar/itemForward";
 			case itemPrev:		return "Toolbar/itemPrev";
 			case itemNext:		return "Toolbar/itemNext";
 			case itemCopy:		return "Toolbar/itemCopy";

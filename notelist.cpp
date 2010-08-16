@@ -12,7 +12,7 @@
 #endif
 
 NoteList::NoteList(QWidget* parent)
-	: QObject(), vec(), current_index(-1)
+	: QObject(), vec(), history_index(0), current_index(-1), history_forward_pressed(false), history_back_pressed(false)
 {
 	//NOTE_TYPE_MAP init
 	NOTE_TYPE_MAP[""] = Note::type_text;
@@ -127,13 +127,97 @@ void NoteList::rename(int index, const QString& title)
 	notes_filenames.insert(note->fileName());
 }
 
+#include <QtDebug>
+
 void NoteList::CurrentTabChanged(int index)
 {
 	if(index==-1) return;
 	if(current_index!=-1) current()->save();
 	int old_index = current_index;
 	current_index = index;
+	const QString path = vec[current_index]->absolutePath();
+	//
+	if(history_forward_pressed)
+	{
+		history_forward_pressed = false;
+		if(history_index>0)
+		{
+			for(int i=history_index+1; i<history.size(); ++i)
+			{
+				if(path==history.at(i))
+				{
+					history_index = i;
+					break;
+				}
+			}
+		}
+	}
+	else if(history_back_pressed)
+	{
+		history_back_pressed = false;
+		if(history_index>0)
+		{
+			for(int i=history_index-1; i>=0; --i)
+			{
+				if(path==history.at(i))
+				{
+					history_index = i;
+					break;
+				}
+			}
+		}
+	}
+	else
+	{
+		if((history.size()==0) && (old_index==-1))
+		{
+			history.append(path);
+		}
+		else
+		{
+			while(history.size()>(history_index+1)) history.removeLast();
+			history.append(path);
+			++history_index;
+		}
+	}
+	//
 	emit currentNoteChanged(old_index, current_index);
+}
+
+void NoteList::historyBack()
+{
+	if(!historyHasBack()) return;
+	for(int j=history_index-1; j>=0; --j)
+	{
+		const QString& note_fname = history.at(j);
+		for(int i=0; i<vec.size(); ++i)
+		{
+			if(vec[i]->absolutePath()==note_fname)
+			{
+				history_back_pressed = true;
+				tabs->setCurrentIndex(i);
+				return;
+			}
+		}
+	}
+}
+
+void NoteList::historyForward()
+{
+	if(!historyHasForward()) return;
+	for(int j=history_index+1; j<history.size(); ++j)
+	{
+		const QString& note_fname = history.at(j);
+		for(int i=0; i<vec.size(); ++i)
+		{
+			if(vec[i]->absolutePath()==note_fname)
+			{
+				history_forward_pressed = true;
+				tabs->setCurrentIndex(i);
+				return;
+			}
+		}
+	}
 }
 
 void NoteList::ShowExtensionsChanged(bool show_extensions)

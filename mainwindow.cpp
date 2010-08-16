@@ -411,6 +411,8 @@ MainWindow::MainWindow(QWidget *parent)
 	connect(actions[itemRename],	SIGNAL(triggered()), this, SLOT(RenameCurrentNote()));
 	connect(actions[itemPrev],	SIGNAL(triggered()), this, SLOT(PreviousNote()));
 	connect(actions[itemNext],	SIGNAL(triggered()), this, SLOT(NextNote()));
+	connect(actions[itemBack],	SIGNAL(triggered()), Notes, SLOT(historyBack()));
+	connect(actions[itemForward],	SIGNAL(triggered()), Notes, SLOT(historyForward()));
 	connect(actions[itemCopy],	SIGNAL(triggered()), this, SLOT(CopyNote()));
 	connect(actions[itemSetup],	SIGNAL(triggered()), this, SLOT(showPrefDialog()));
 	connect(actions[itemInfo],	SIGNAL(triggered()), this, SLOT(showAboutDialog()));
@@ -464,10 +466,10 @@ MainWindow::MainWindow(QWidget *parent)
 	connect(scAdd,		SIGNAL(activated()), this, SLOT(NewNotePlain()));
 	connect(scRemove,	SIGNAL(activated()), this, SLOT(RemoveCurrentNote()));
 	connect(scRename,	SIGNAL(activated()), this, SLOT(RenameCurrentNote()));
-	connect(scBack,		SIGNAL(activated()), this, SLOT(PreviousNote()));
-	connect(scForward,	SIGNAL(activated()), this, SLOT(NextNote()));
 	connect(scPrev,		SIGNAL(activated()), this, SLOT(PreviousNote()));
 	connect(scNext,		SIGNAL(activated()), this, SLOT(NextNote()));
+	connect(scBack,		SIGNAL(activated()), Notes, SLOT(historyBack()));
+	connect(scForward,	SIGNAL(activated()), Notes, SLOT(historyForward()));
 	connect(scSearch,	SIGNAL(activated()), actions[itemSearch], SLOT(toggle()));
 	connect(scSearchEsc,	SIGNAL(activated()), actions[itemSearch], SLOT(toggle()));
 	connect(scExit,		SIGNAL(activated()), qApp, SLOT(quit()));
@@ -531,6 +533,8 @@ void MainWindow::currentNoteChanged(int old_index, int new_index)
 	//
 	actions[itemPrev]->setDisabled(new_index==0); //if first note
 	actions[itemNext]->setDisabled(new_index==Notes->last()); //if last note
+	actions[itemBack]->setEnabled(Notes->historyHasBack());
+	actions[itemForward]->setEnabled(Notes->historyHasForward());
 	//
 	Note* note = Notes->current();
 	switch(note->type())

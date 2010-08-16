@@ -24,5 +24,7 @@
         <file>res/format_italic.png</file>
         <file>res/znotes64.png</file>
         <file>res/format_color.png</file>
+        <file>res/forward.png</file>
+        <file>res/back.png</file>
     </qresource>
 </RCC>

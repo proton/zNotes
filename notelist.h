@@ -4,6 +4,7 @@
 #include "note.h"
 
 #include <QVector>
+#include <QList>
 #include <QObject>
 #include <QTabWidget>
 #include <QSet>
@@ -19,10 +20,12 @@ public:
 	inline bool empty() const {return vec.isEmpty(); }
 	inline int count() const { return vec.size(); }
 	inline int last() const { return vec.size()-1; }
+	inline void setCurrent(int n) { tabs->setCurrentIndex(n); }
 	inline Note* current() const { return (current_index!=-1)?vec[current_index]:0; }
 	inline Note* get(int i) const { return (vec.size()>i)?vec[i]:0; }
-	inline void setCurrent(int n) { tabs->setCurrentIndex(n); }
 	inline int currentIndex() const { return current_index; }
+	inline bool historyHasBack() const { return history_index>0; }
+	inline bool historyHasForward() const { return (history_index+1)<history.size(); }
 	//
 	Note* add(const QFileInfo& fileinfo, bool set_current = true);
 	bool load(const QFileInfo& fileinfo, const QString& old_title);
@@ -43,12 +46,21 @@ public slots:
 	void ShowExtensionsChanged(bool show_extensions);
 	void TabPositionChanged();
 	void SaveAll();
+	//
+	void historyBack();
+	void historyForward();
 signals:
 	void currentNoteChanged(int old_index, int new_index);
 private:
 	QSet<QString> notes_filenames;
 	QMap<QString, Note::Type> NOTE_TYPE_MAP;
 	QVector<Note*> vec;
+	//
+	QList<QString> history;
+	int history_index;
+	bool history_forward_pressed;
+	bool history_back_pressed;
+	//
 	int current_index;
 	QTabWidget* tabs;
 };
