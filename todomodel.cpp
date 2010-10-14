@@ -1,7 +1,10 @@
 #include "todomodel.h"
 #include <QStringList>
 #include <QCheckBox>
+#include <QMimeData>
 #include <QtDebug>
+
+#define NOTE_TODO_TASK_MIME "application/znotes.content.list"
 
 Task::Task(QDomDocument* document, QDomNode &node, int row, Task* parent)
 	: _document(document), _node(node), _row(row), _parent(parent), _done(false)
@@ -47,14 +50,16 @@ Task::~Task()
 	}
 }
 
-void Task::insertSubTask()
+void Task::insertSubTask(int pos)
 {
 	QDomElement new_task_elem = _document->createElement("task");
-	_node.appendChild(new_task_elem);
-	Task* task = new Task(_document, new_task_elem, _subtasks.size(), this);
+	if(pos<0 || pos>_subtasks.size()) pos = _subtasks.size();
+	if(pos == _subtasks.size()) _node.appendChild(new_task_elem);
+	else _node.insertAfter(new_task_elem, _node.childNodes().at(pos-1));
+	Task* task = new Task(_document, new_task_elem, pos, this);
 	task->setDateStart(QDateTime::currentDateTime());
 	task->setTitle(QObject::tr("New task"));
-	_subtasks.append(task);
+	_subtasks.insert(pos, task);
 }
 
 void Task::removeSubTask(int pos)
@@ -178,10 +183,11 @@ QDomDocument*  TodoModel::load(QFile& file)
 bool TodoModel::insertRows(int row, int count, const QModelIndex& parent)
 {
 	Task* task = getTask(parent);
+	qDebug() << row << count;
 	beginInsertRows(parent, row, row+count-1);
 	for(int i=0; i<count; ++i)
 	{
-		task->insertSubTask();
+		task->insertSubTask(row+i);
 	}
 	endInsertRows();
 	return true;
@@ -199,13 +205,85 @@ bool TodoModel::removeRows(int row, int count, const QModelIndex& parent)
 	return true;
 }
 
-int TodoModel::rowCount(const QModelIndex& parent) const
+Qt::DropActions TodoModel::supportedDropActions() const
+{
+	return Qt::MoveAction;
+}
+
+QStringList TodoModel::mimeTypes() const
+{
+	QStringList types;
+	types << NOTE_TODO_TASK_MIME;
+	return types;
+}
+
+QMimeData* TodoModel::mimeData(const QModelIndexList& indexes) const
+{
+	QMimeData* mimeData = new QMimeData();
+	QByteArray encodedData;
+	QDataStream stream(&encodedData, QIODevice::WriteOnly);
+	foreach(QModelIndex index, indexes)
+	{
+		Task* task = getTask(index);
+		stream << task->title();
+		stream << task->comment();
+		stream << task->dateStart().toTime_t();
+		stream << task->dateStop().toTime_t();
+		stream << task->dateLimit().toTime_t();
+		stream << task->done();
+		stream << int(task->priority());
+//		if (index.isValid())
+//		{
+//			QString text = data(index, Qt::DisplayRole).toString();
+//			stream << text;
+//		}
+	}
+	mimeData->setData(NOTE_TODO_TASK_MIME, encodedData);
+	return mimeData;
+}
+
+bool TodoModel::dropMimeData(const QMimeData* data, Qt::DropAction action, int row, int column, const QModelIndex& parent)
+{
+	Q_UNUSED(column);
+	if(action==Qt::IgnoreAction) return true;
+	if(!parent.isValid()) return false;
+	if(!data->hasFormat(NOTE_TODO_TASK_MIME)) return false;
+	if(action!=Qt::MoveAction) return true;
+	Task* task_parent = getTask(parent);
+	const QList<Task*>& task_list = task_parent->subtasks();
+	if(row==-1) row = task_list.size();
+	if(insertRow(row, parent))
+	{
+		Task* task = task_list.at(row);
+		//
+		QByteArray encodedData = data->data(NOTE_TODO_TASK_MIME);
+		QDataStream stream(&encodedData, QIODevice::ReadOnly);
+		QString title, comment;
+		uint date_start_ts, date_stop_ts, date_limit_ts;
+		bool done;
+		int priority;
+		//
+		stream >> title >> comment
+				>> date_start_ts >> date_stop_ts >> date_limit_ts
+				>> done >> priority;
+		task->setTitle(title);
+		task->setComment(comment);
+		task->setDateStart(QDateTime::fromTime_t(date_start_ts));
+		if(done) task->setDateStop(QDateTime::fromTime_t(date_stop_ts));
+		if(date_limit_ts) task->setDateLimit(QDateTime::fromTime_t(date_limit_ts));
+		task->setPriority(Task::Priority(priority));
+		return true;
+	}
+	return false;
+}
+
+int TodoModel::rowCount(const QModelIndex& index) const
 {
 	//if(!parent.isValid()) return 0;
-	if(parent.column() > 0) return 0;
-	Task* parent_item = getTask(parent);
-	if(!parent_item) return 0;
-	return parent_item->subtasks().size();
+	if(index.column() > 0) return 0;
+	Task* task = getTask(index);
+	if(!task) return 0;
+	return task->subtasks().size();
 }
 
 int TodoModel::columnCount(const QModelIndex& parent) const
@@ -351,13 +429,13 @@ bool TodoModel::setData(const QModelIndex& index, const QVariant& data, int role
 }
 
 Qt::ItemFlags TodoModel::flags(const QModelIndex& index) const
-{;
-	if(!index.isValid()) return 0;
+{
+	if(!index.isValid()) return Qt::ItemIsDropEnabled;
 	switch(index.column())
 	{
-		case 0: return Qt::ItemIsSelectable|Qt::ItemIsEnabled|Qt::ItemIsUserCheckable|Qt::ItemIsEditable;
-		case 1: return Qt::ItemIsSelectable|Qt::ItemIsEnabled;
-		default: return 0;
+		case 0: return  Qt::ItemIsDragEnabled|Qt::ItemIsDropEnabled|Qt::ItemIsSelectable|Qt::ItemIsEnabled|Qt::ItemIsUserCheckable|Qt::ItemIsEditable;
+		case 1: return  Qt::ItemIsDragEnabled|Qt::ItemIsDropEnabled|Qt::ItemIsSelectable|Qt::ItemIsEnabled;
+		default: return Qt::ItemIsDropEnabled|Qt::ItemIsDropEnabled|Qt::ItemIsSelectable|Qt::ItemIsEnabled;
 	}
 }
 

@@ -48,7 +48,7 @@ public:
 	void setDone(bool v);
 	void setPriority(Priority v);
 
-	void insertSubTask();
+	void insertSubTask(int pos=-1);
 	void removeSubTask(int pos);
 
 private:
@@ -87,6 +87,11 @@ public:
 
 	bool insertRows(int row, int count, const QModelIndex& parent = QModelIndex());
 	bool removeRows(int row, int count, const QModelIndex& parent = QModelIndex());
+
+	Qt::DropActions supportedDropActions() const;
+	QStringList mimeTypes() const;
+	QMimeData* mimeData(const QModelIndexList& indexes) const;
+	bool dropMimeData(const QMimeData* data, Qt::DropAction action, int row, int column, const QModelIndex& parent);
 
 	Task* getTask(const QModelIndex &index) const;
 
