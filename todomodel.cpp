@@ -2,7 +2,6 @@
 #include <QStringList>
 #include <QCheckBox>
 #include <QMimeData>
-#include <QtDebug>
 
 #define NOTE_TODO_TASK_MIME "application/znotes.content.list"
 
@@ -183,7 +182,6 @@ QDomDocument*  TodoModel::load(QFile& file)
 bool TodoModel::insertRows(int row, int count, const QModelIndex& parent)
 {
 	Task* task = getTask(parent);
-	qDebug() << row << count;
 	beginInsertRows(parent, row, row+count-1);
 	for(int i=0; i<count; ++i)
 	{
@@ -506,7 +504,7 @@ bool TodoProxyModel::filterAcceptsRow (int source_row, const QModelIndex& source
 			sourceModel()->index(0,0).child(source_row, 0);
 //		qDebug() << __LINE__;
 		//
-		qDebug() << source_index.isValid() << source_index.data(Qt::CheckStateRole).toBool() << source_index.data().toString();
+//		qDebug() << source_index.isValid() << source_index.data(Qt::CheckStateRole).toBool() << source_index.data().toString();
 		//
 		if(source_index.isValid())
 		{

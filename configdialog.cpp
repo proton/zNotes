@@ -8,8 +8,9 @@
 #include <QFontDialog>
 #include <QColorDialog>
 
-ItemModel m_items;
-ItemToolbarModel mt_items;
+ToolbarItems* t_items;
+ItemModel* m_items;
+ItemToolbarModel* mt_items;
 
 configDialog::configDialog(QWidget *parent) :
 	QDialog(parent), m_ui(new Ui::configDialog)
@@ -18,8 +19,21 @@ configDialog::configDialog(QWidget *parent) :
 #ifndef SINGLE_INSTANCE
 	m_ui->cb_SingleInstance->setDisabled(true);
 #endif
-	m_ui->listActions->setModel(&m_items);
-	m_ui->listToolbarActions->setModel(&mt_items);
+	t_items = new ToolbarItems();
+	m_items = new ItemModel(*t_items);
+	mt_items = new ItemToolbarModel(*t_items);
+	//
+	m_ui->listActions->setModel(m_items);
+	m_ui->listActions->setDragEnabled(true);
+	m_ui->listActions->setAcceptDrops(true);
+	m_ui->listActions->setDropIndicatorShown(true);
+	m_ui->listActions->setDragDropMode(QAbstractItemView::DragDrop);
+	//
+	m_ui->listToolbarActions->setModel(mt_items);
+	m_ui->listToolbarActions->setDragEnabled(true);
+	m_ui->listToolbarActions->setAcceptDrops(true);
+	m_ui->listToolbarActions->setDropIndicatorShown(true);
+	m_ui->listToolbarActions->setDragDropMode(QAbstractItemView::DragDrop);
 	//
 	m_ui->ed_NotesPath->setText(settings.getNotesPath());
 	m_ui->cb_FileScan->setChecked(settings.getFileScanner());
@@ -69,8 +83,7 @@ configDialog::configDialog(QWidget *parent) :
 	m_ui->cb_LanguageCustom->setChecked(settings.getLanguageCustom());
 	m_ui->cmb_Language->setEnabled(settings.getLanguageCustom());
 	//
-	mt_items.setVector(settings.getToolbarItems());
-	m_items.setVector(settings.getToolbarItems());
+	t_items->setVector(settings.getToolbarItems());
 	//
 	connect(m_ui->listActions->selectionModel(), SIGNAL(currentRowChanged(QModelIndex,QModelIndex)), this, SLOT(currentListActionChanged(QModelIndex,QModelIndex))); //TODO: selection changed
 	connect(m_ui->listToolbarActions->selectionModel(), SIGNAL(currentRowChanged(QModelIndex,QModelIndex)), this, SLOT(currentToolbarActionChanged(QModelIndex,QModelIndex)));
@@ -102,7 +115,7 @@ void configDialog::SaveSettings()
 	settings.setNotePastePlaintext(m_ui->cb_NotePastePlaintext->checkState());
 	settings.setScriptShowOutput(m_ui->cb_ScriptShowOutput->checkState());
 	settings.setScriptCopyOutput(m_ui->cb_ScriptCopyOutput->checkState());
-	settings.setToolbarItems(mt_items.getVector());
+	settings.setToolbarItems(t_items->getToolbarElems());
 	settings.setLocaleCustom(m_ui->cb_LanguageCustom->isChecked());
 	settings.setLocaleCurrent(m_ui->cmb_Language->itemData(m_ui->cmb_Language->currentIndex(), Qt::UserRole).toLocale());
 }
@@ -161,30 +174,27 @@ void configDialog::on_butActionAdd_clicked()
 	int id = m_ui->listActions->currentIndex().row();
 	int row = (m_ui->listToolbarActions->selectionModel()->hasSelection())?
 		m_ui->listToolbarActions->currentIndex().row():-1;
-	mt_items.insert(id, row);
-	m_items.remove(id);
+	t_items->insert(id, row);
 }
 
 void configDialog::on_butActionRemove_clicked()
 {
 	m_ui->butActionRemove->setDisabled(true);
 	QModelIndex index = m_ui->listToolbarActions->currentIndex();
-	int id = mt_items.getId(index);
-	mt_items.remove(index);
-	m_items.insert(id);
+	t_items->remove(index.row());
 }
 
 void configDialog::on_butActionTop_clicked()
 {
 	QModelIndex index(m_ui->listToolbarActions->currentIndex());
-	QModelIndex new_index = mt_items.up(index);
+	QModelIndex new_index = mt_items->up(index);
 	m_ui->listToolbarActions->setCurrentIndex(new_index);
 }
 
 void configDialog::on_butActionBottom_clicked()
 {
 	QModelIndex index(m_ui->listToolbarActions->currentIndex());
-	QModelIndex new_index = mt_items.down(index);
+	QModelIndex new_index = mt_items->down(index);
 	m_ui->listToolbarActions->setCurrentIndex(new_index);
 }
 
@@ -194,7 +204,7 @@ void configDialog::currentToolbarActionChanged(QModelIndex index, QModelIndex)
 	m_ui->butActionRemove->setEnabled(index.isValid());
 	int row = index.row();
 	m_ui->butActionTop->setEnabled(row>0);
-	m_ui->butActionBottom->setEnabled(row<(mt_items.rowCount()-1));
+	m_ui->butActionBottom->setEnabled(row<(mt_items->rowCount()-1));
 }
 
 //On changing selection in current toolar actions list
@@ -209,7 +219,7 @@ void configDialog::currentListActionChanged(QModelIndex index, QModelIndex)
 //		return;
 //	} qDebug() << i; }
 //	m_ui->butActionAdd->setEnabled(true);
-	m_ui->butActionAdd->setEnabled(index.isValid() && !m_items.isUsed(index.row()));
+	m_ui->butActionAdd->setEnabled(index.isValid() && !t_items->isUsed(index.row()));
 }
 
 //Retranslating ui on language change

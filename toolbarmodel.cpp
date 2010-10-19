@@ -2,16 +2,68 @@
 #include "toolbaraction.h"
 
 #include <QPalette>
+#include <QMimeData>
+
+#define NOTE_TOOLBAR_ITEM_MIME "application/znotes.toolbar_item"
+#define NOTE_TOOLBAR_ITEM_USED_MIME "application/znotes.toolbar_item_used"
 
 //------------------------------------------------------------------------------
+
+ToolbarItems::ToolbarItems()
+{
+	elems.resize(itemMax);
+}
+
+void ToolbarItems::setVector(const QVector<int>& nv)
+{
+	for(int i=0; i<elems.size(); ++i) elems[i]=false;
+	toolbar_elems=nv;
+	for(int i=0; i<toolbar_elems.size(); ++i)
+	{
+		int id = toolbar_elems[i];
+		if(id!=itemSeparator) elems[id] = true;
+	}
+}
+
+void ToolbarItems::swap(int pos0, int pos1)
+{
+	qSwap(toolbar_elems[pos0], toolbar_elems[pos1]);
+}
+
+void ToolbarItems::move(int pos0, int pos1)
+{
+	if(pos0<0 || pos0>=toolbar_elems.size()) return;
+	if(pos1<0 || pos1>toolbar_elems.size()) return;
+	int id = toolbar_elems.at(pos0);
+	toolbar_elems.remove(pos0);
+	if(pos1<pos0) toolbar_elems.insert(pos1, id);
+	else toolbar_elems.insert(pos1-1, id);
+}
+
+void ToolbarItems::insert(int id, int pos)
+{
+	if(pos!=-1) toolbar_elems.insert(pos, id);
+	else toolbar_elems.append(id);
+	if(id!=itemSeparator) elems[id] = true;
+	emit reset();
+}
+
+void ToolbarItems::remove(int pos)
+{
+	int id = toolbar_elems.at(pos);
+	toolbar_elems.remove(pos);
+	elems[id] = false;
+	emit reset();
+}
 
 /*
   This model contains all existing items
 */
 
-ItemModel::ItemModel()
+ItemModel::ItemModel(ToolbarItems& t_items)
+	: items(t_items), v(t_items.getAllElems())
 {
-	v.resize(itemMax);
+	connect(&t_items, SIGNAL(reset()), this, SIGNAL(modelReset()));
 }
 
 int ItemModel::rowCount(const QModelIndex &) const
@@ -22,43 +74,61 @@ int ItemModel::rowCount(const QModelIndex &) const
 QVariant ItemModel::data(const QModelIndex &index, int role) const
 {
 	const int id = index.row();
-	QPalette::ColorGroup colorgroup = (isUsed(id))?QPalette::Disabled:QPalette::Normal;
 	switch(role)
 	{
 		case Qt::DisplayRole: return ToolbarAction(item_enum(id)).text();
 		case Qt::DecorationRole: return ToolbarAction(item_enum(id)).icon();
-		case Qt::ForegroundRole: return QPalette().color(colorgroup, QPalette::Text);
 		default: return QVariant();
 	}
 }
 
-void ItemModel::setVector(const QVector<int>& nv)
+Qt::ItemFlags ItemModel::flags(const QModelIndex &index) const
 {
-	for(int i=0; i<v.size(); ++i) v[i]=false;
-	for(int i=0; i<nv.size(); ++i)
+	if(!index.isValid()) return Qt::ItemIsDropEnabled;
+	if(items.isUsed(index.row())) return Qt::ItemIsDropEnabled;
+	return Qt::ItemIsDragEnabled|Qt::ItemIsDropEnabled|Qt::ItemIsSelectable|Qt::ItemIsEnabled;
+}
+
+Qt::DropActions ItemModel::supportedDropActions() const
+{
+	return Qt::MoveAction;
+}
+
+QStringList ItemModel::mimeTypes() const
+{
+	QStringList types;
+	types << NOTE_TOOLBAR_ITEM_USED_MIME;
+	return types;
+}
+
+QMimeData* ItemModel::mimeData(const QModelIndexList& indexes) const
+{
+	QMimeData* mimeData = new QMimeData();
+	QByteArray encodedData;
+	QDataStream stream(&encodedData, QIODevice::WriteOnly);
+	foreach(QModelIndex index, indexes)
 	{
-		int id = nv[i];
-		if(id!=itemSeparator) v[id] = true;
+		stream << index.row();
 	}
+	mimeData->setData(NOTE_TOOLBAR_ITEM_MIME, encodedData);
+	return mimeData;
 }
 
-void ItemModel::insert(int id)
+bool ItemModel::dropMimeData(const QMimeData* data, Qt::DropAction action, int row, int column, const QModelIndex& parent)
 {
-	if(id==itemSeparator) return;
-	v[id] = false;
-	emit reset();
-}
-
-void ItemModel::remove(int id)
-{
-	if(id==itemSeparator) return;
-	v[id] = true;
-	emit reset();
-}
-
-bool ItemModel::isUsed(int row) const
-{
-	return v[row];
+	Q_UNUSED(row);
+	Q_UNUSED(column);
+	Q_UNUSED(parent);
+	if(action==Qt::IgnoreAction) return true;
+	if(!data->hasFormat(NOTE_TOOLBAR_ITEM_USED_MIME)) return false;
+	if(action!=Qt::MoveAction) return true;
+	//
+	QByteArray encodedData = data->data(NOTE_TOOLBAR_ITEM_USED_MIME);
+	QDataStream stream(&encodedData, QIODevice::ReadOnly);
+	int pos;
+	stream >> pos;
+	items.remove(pos);
+	return true;
 }
 
 //------------------------------------------------------------------------------
@@ -67,11 +137,13 @@ bool ItemModel::isUsed(int row) const
   This model contains items, added on toolbar
 */
 
-ItemToolbarModel::ItemToolbarModel()
+ItemToolbarModel::ItemToolbarModel(ToolbarItems& t_items)
+	: items(t_items), v(t_items.getToolbarElems())
 {
+	connect(&t_items, SIGNAL(reset()), this, SIGNAL(modelReset()));
 }
 
-int ItemToolbarModel::rowCount(const QModelIndex &) const
+int ItemToolbarModel::rowCount(const QModelIndex&) const
 {
 	return v.size();
 }
@@ -87,11 +159,69 @@ QVariant ItemToolbarModel::data(const QModelIndex &index, int role) const
 	}
 }
 
+Qt::DropActions ItemToolbarModel::supportedDropActions() const
+{
+	return Qt::MoveAction;
+}
+
+Qt::ItemFlags ItemToolbarModel::flags(const QModelIndex &index) const
+{
+	if(!index.isValid()) return Qt::ItemIsDropEnabled;
+	return Qt::ItemIsDragEnabled|Qt::ItemIsSelectable|Qt::ItemIsEnabled;
+}
+
+QStringList ItemToolbarModel::mimeTypes() const
+{
+	QStringList types;
+	types << NOTE_TOOLBAR_ITEM_MIME << NOTE_TOOLBAR_ITEM_USED_MIME;
+	return types;
+}
+
+QMimeData* ItemToolbarModel::mimeData(const QModelIndexList& indexes) const
+{
+	QMimeData* mimeData = new QMimeData();
+	QByteArray encodedData;
+	QDataStream stream(&encodedData, QIODevice::WriteOnly);
+	foreach(QModelIndex index, indexes)
+	{
+		stream << index.row();
+	}
+	mimeData->setData(NOTE_TOOLBAR_ITEM_USED_MIME, encodedData);
+	return mimeData;
+}
+
+bool ItemToolbarModel::dropMimeData(const QMimeData* data, Qt::DropAction action, int row, int column, const QModelIndex& parent)
+{
+	Q_UNUSED(column);
+	Q_UNUSED(parent);
+	if(row==-1) return false;
+	if(action!=Qt::MoveAction) return false;
+	if(data->hasFormat(NOTE_TOOLBAR_ITEM_USED_MIME))
+	{
+		QByteArray encodedData = data->data(NOTE_TOOLBAR_ITEM_USED_MIME);
+		QDataStream stream(&encodedData, QIODevice::ReadOnly);
+		int pos;
+		stream >> pos;
+		items.move(pos, row);
+		return true;
+	}
+	if(data->hasFormat(NOTE_TOOLBAR_ITEM_MIME))
+	{
+		QByteArray encodedData = data->data(NOTE_TOOLBAR_ITEM_USED_MIME);
+		QDataStream stream(&encodedData, QIODevice::ReadOnly);
+		int id;
+		stream >> id;
+		items.insert(id, row);
+		return true;
+	}
+	return false;
+}
+
 QModelIndex ItemToolbarModel::up(const QModelIndex &index)
 {
 	int row = index.row();
 	if(row==0) return index; //if this item first
-	qSwap(v[row], v[row-1]);
+	items.swap(row, row-1);
 	emit reset();
 	QModelIndex new_index(this->index(row-1, index.column()));
 	return new_index;
@@ -101,32 +231,8 @@ QModelIndex ItemToolbarModel::down(const QModelIndex &index)
 {
 	int row = index.row();
 	if(row==v.size()-1) return index; //if this item last
-	qSwap(v[row], v[row+1]);
+	items.swap(row, row+1);
 	emit reset();
 	QModelIndex new_index(this->index(row+1, index.column()));
 	return new_index;
-}
-
-void ItemToolbarModel::setVector(const QVector<int>& nv)
-{
-	v=nv;
-}
-
-const QVector<int>& ItemToolbarModel::getVector() const
-{
-	return v;
-}
-
-void ItemToolbarModel::insert(int id, int row)
-{
-	if(row!=-1) v.insert(row, id);
-	else v.append(id);
-	emit reset();
-}
-
-void ItemToolbarModel::remove(const QModelIndex & index)
-{
-	if(!index.isValid()) return;
-	v.remove(index.row());
-	emit reset();
 }
