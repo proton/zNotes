@@ -688,7 +688,7 @@ The text of the license can can be found in the file LICENSE.</source>
     <message>
         <location filename="../configdialog.ui" line="36"/>
         <source>Tabs position:</source>
-        <translation>Расроложение вкладок:</translation>
+        <translation>Расположение вкладок:</translation>
     </message>
     <message>
         <location filename="../configdialog.ui" line="44"/>
@@ -738,7 +738,7 @@ The text of the license can can be found in the file LICENSE.</source>
     <message>
         <location filename="../configdialog.ui" line="235"/>
         <source>Show script&apos;s output</source>
-        <translation>Показать вывод скрипта</translation>
+        <translation>Показывать вывод скрипта</translation>
     </message>
     <message>
         <location filename="../configdialog.ui" line="242"/>
