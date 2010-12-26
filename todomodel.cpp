@@ -3,6 +3,8 @@
 #include <QCheckBox>
 #include <QMimeData>
 
+#include <QtDebug>
+
 #define NOTE_TODO_TASK_MIME "application/znotes.content.list"
 
 Task::Task(QDomDocument* document, QDomNode &node, int row, Task* parent)
@@ -105,13 +107,13 @@ void Task::setDateStart(const QDateTime& v)
 void Task::setDateStop(const QDateTime& v)
 {
 	_date_stop = v;
-	_node.toElement().setAttribute("time_d", _date_start.toTime_t());
+	_node.toElement().setAttribute("time_d", _date_stop.toTime_t());
 }
 
 void Task::setDateLimit(const QDateTime& v)
 {
 	_date_limit = v;
-	_node.toElement().setAttribute("time_l", _date_start.toTime_t());
+	_node.toElement().setAttribute("time_l", _date_limit.toTime_t());
 }
 
 void Task::setDone(bool v)
