@@ -26,6 +26,7 @@ public:
 	void save(bool forced = false); //Saving note's content
 	void copy() const; //Coping note's content to clipboard
 	QWidget* widget();
+	void retranslate(const QLocale& locale);
 private slots:
 	void taskChanged(QModelIndex);
 	void contextMenuRequested(const QPoint& pos);

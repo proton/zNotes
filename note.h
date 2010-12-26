@@ -54,6 +54,10 @@ public:
 	{
 		return QTextCharFormat();
 	}
+	virtual void retranslate(const QLocale& locale)
+	{
+		Q_UNUSED(locale)
+	}
 private:
 	Type _type;
 	QString _title;

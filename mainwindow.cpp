@@ -27,16 +27,16 @@ Settings settings;
 
 void MainWindow::RemoveCurrentNote()
 {
-	if(Notes->empty()) return;
-	Note* note = Notes->current();
+	if(notes->empty()) return;
+	Note* note = notes->current();
 	QMessageBox msgBox(QMessageBox::Question, tr("Delete Note"),
 		tr("Do you realy want to delete note %1 ?").arg(note->title()),
 		QMessageBox::Yes | QMessageBox::No);
 	int ret = msgBox.exec();
 	if(ret == QMessageBox::Yes && note->remove())
 	{
-		Notes->remove(Notes->currentIndex());
-		if(Notes->empty())
+		notes->remove(notes->currentIndex());
+		if(notes->empty())
 		{
 			for(int i=0; i<itemMax; ++i)
 			{
@@ -48,16 +48,16 @@ void MainWindow::RemoveCurrentNote()
 
 void MainWindow::RenameCurrentNote()
 {
-	if(Notes->empty()) return;
+	if(notes->empty()) return;
 	//
-	QString filename = Notes->current()->fileName();
+	QString filename = notes->current()->fileName();
 	bool ok;
 	QString new_name = QInputDialog::getText(this, tr("Rename note"), tr("New name:"), QLineEdit::Normal, filename, &ok);
 	if(ok && !new_name.isEmpty())
 	{
 		QFile file(dir.absoluteFilePath(new_name));
 		if(!file.exists())
-			Notes->rename(Notes->currentIndex(), new_name);
+			notes->rename(notes->currentIndex(), new_name);
 		else
 			QMessageBox::information(this, tr("Note renaming"),
 				tr("Note %1 already exists!").arg(new_name));
@@ -74,14 +74,14 @@ void MainWindow::NewNote(const QString& mask)
 		filename = QString(mask).arg(++n);
 		file.setFileName(dir.absoluteFilePath(filename));
 	}
-	if(Notes->empty())
+	if(notes->empty())
 	{
 		for(int i=0; i<itemMax ; ++i)
 		{
 			actions[i]->setEnabled(true);
 		}
 	}
-	Notes->add(file);
+	notes->add(file);
 }
 
 void MainWindow::NewNotePlain()
@@ -101,26 +101,26 @@ void MainWindow::NewNoteTODO()
 
 void MainWindow::PreviousNote()
 {
-	if(Notes->empty()) return;
-	Notes->getWidget()->setCurrentIndex(Notes->currentIndex()-1);
+	if(notes->empty()) return;
+	notes->getWidget()->setCurrentIndex(notes->currentIndex()-1);
 }
 
 void MainWindow::NextNote()
 {
-	if(Notes->empty()) return;
-	Notes->getWidget()->setCurrentIndex(Notes->currentIndex()+1);
+	if(notes->empty()) return;
+	notes->getWidget()->setCurrentIndex(notes->currentIndex()+1);
 }
 
 void MainWindow::ToNote(int n)
 {
-	if(n>=Notes->count()) return;
-	Notes->getWidget()->setCurrentIndex(n);
+	if(n>=notes->count()) return;
+	notes->getWidget()->setCurrentIndex(n);
 }
 
 void MainWindow::CopyNote()
 {
-	if(Notes->empty()) return;
-	Notes->current()->copy();
+	if(notes->empty()) return;
+	notes->current()->copy();
 }
 
 void MainWindow::LoadNotes()
@@ -145,10 +145,10 @@ void MainWindow::LoadNotes()
 	for(int i=0; i<flist.size(); ++i)
 	{
 		//Loading note
-		bool is_old = Notes->load(flist.at(i), old_note);
+		bool is_old = notes->load(flist.at(i), old_note);
 		if(is_old) old_index = i;
 	}
-	if(old_index!=-1) Notes->setCurrent(old_index);
+	if(old_index!=-1) notes->setCurrent(old_index);
 }
 
 void MainWindow::trayActivated(QSystemTrayIcon::ActivationReason reason)
@@ -170,7 +170,7 @@ void MainWindow::hideEvent(QHideEvent */*event*/)
 	settings.setDialogGeometry(saveGeometry());
 	actShow->setEnabled(true);
 	actHide->setDisabled(true);
-	if(Notes->current()) Notes->SaveAll();
+	if(notes->current()) notes->SaveAll();
 }
 
 void MainWindow::showEvent(QShowEvent */*event*/)
@@ -203,17 +203,17 @@ void MainWindow::showPrefDialog()
 
 void MainWindow::notesPathChanged()
 {
-	QMessageBox msgBox(QMessageBox::Question, tr("Move Notes"),
-		tr("Notes path changed!\nDo you want to move your notes to new place ?"),
+	QMessageBox msgBox(QMessageBox::Question, tr("Move notes"),
+		tr("notes path changed!\nDo you want to move your notes to new place ?"),
 		QMessageBox::Yes | QMessageBox::No);
 	int ret = msgBox.exec();
 	if(ret == QMessageBox::Yes)
 	{
 		dir.setPath(settings.getNotesPath());
 		QString dir_path = dir.absolutePath();
-		Notes->move(dir_path);
+		notes->move(dir_path);
 	}
-	else QMessageBox::information(this, tr("Notes path change"),
+	else QMessageBox::information(this, tr("notes path change"),
 		tr("You need restart application to get effect."));
 }
 
@@ -247,8 +247,8 @@ void MainWindow::scanForNewFiles()
 	for(int i=0; i<flist.size(); ++i)
 	{
 		//Loading note
-		bool exists = Notes->has(flist.at(i).fileName());
-		if(!exists) Notes->add(flist.at(i));
+		bool exists = notes->has(flist.at(i).fileName());
+		if(!exists) notes->add(flist.at(i));
 	}
 }
 
@@ -275,7 +275,7 @@ void MainWindow::cmdExec(const QString & command)
 {
 	QProcess p;
 	QStringList args;
-	args << Notes->current()->absolutePath();
+	args << notes->current()->absolutePath();
 	p.start(command, args);
 	if(p.waitForStarted())
 	{
@@ -321,48 +321,48 @@ void MainWindow::formatChanged(const QFont& font)
 
 void MainWindow::formatBold()
 {
-	if(Notes->empty()) return;
-	if(Notes->current()->type()!=Note::type_html) return;
+	if(notes->empty()) return;
+	if(notes->current()->type()!=Note::type_html) return;
 	QTextCharFormat format;
 	bool is_bold = actions[itemFormatBold]->isChecked();
 	format.setFontWeight(is_bold?QFont::Bold : QFont::Normal);
-	Notes->current()->setSelFormat(format);
+	notes->current()->setSelFormat(format);
 }
 
 void MainWindow::formatItalic()
 {
-	if(Notes->empty()) return;
-	if(Notes->current()->type()!=Note::type_html) return;
+	if(notes->empty()) return;
+	if(notes->current()->type()!=Note::type_html) return;
 	QTextCharFormat format;
 	bool is_italic = actions[itemFormatItalic]->isChecked();
 	format.setFontItalic(is_italic);
-	Notes->current()->setSelFormat(format);
+	notes->current()->setSelFormat(format);
 }
 
 void MainWindow::formatStrikeout()
 {
-	if(Notes->empty()) return;
-	if(Notes->current()->type()!=Note::type_html) return;
+	if(notes->empty()) return;
+	if(notes->current()->type()!=Note::type_html) return;
 	QTextCharFormat format;
 	bool is_strikeout = actions[itemFormatStrikeout]->isChecked();
 	format.setFontStrikeOut(is_strikeout);
-	Notes->current()->setSelFormat(format);
+	notes->current()->setSelFormat(format);
 }
 
 void MainWindow::formatUnderline()
 {
-	if(Notes->empty()) return;
-	if(Notes->current()->type()!=Note::type_html) return;
+	if(notes->empty()) return;
+	if(notes->current()->type()!=Note::type_html) return;
 	QTextCharFormat format;
 	bool is_underline = actions[itemFormatUnderline]->isChecked();
 	format.setFontUnderline(is_underline);
-	Notes->current()->setSelFormat(format);
+	notes->current()->setSelFormat(format);
 }
 
 void MainWindow::formatTextColor()
 {
-	if(Notes->empty()) return;
-	Note* note = Notes->current();
+	if(notes->empty()) return;
+	Note* note = notes->current();
 	if(note->type()!=Note::type_html) return;
 	QTextCharFormat format = note->getSelFormat();
 	QColor color = format.foreground().color();
@@ -391,9 +391,9 @@ MainWindow::MainWindow(QWidget *parent)
 	: QMainWindow(parent), ui(new Ui::MainWindow)
 {
 	ui->setupUi(this);
-	Notes = new NoteList(ui->centralWidget);
-	ui->layout->addWidget(Notes->getWidget());
-	connect(Notes, SIGNAL(currentNoteChanged(int,int)), this, SLOT(currentNoteChanged(int,int)));
+	notes = new NoteList(ui->centralWidget);
+	ui->layout->addWidget(notes->getWidget());
+	connect(notes, SIGNAL(currentNoteChanged(int,int)), this, SLOT(currentNoteChanged(int,int)));
 	ui->wSearch->hide();
 	//restoring window state
 	restoreGeometry(settings.getDialogGeometry());
@@ -411,8 +411,8 @@ MainWindow::MainWindow(QWidget *parent)
 	connect(actions[itemRename],	SIGNAL(triggered()), this, SLOT(RenameCurrentNote()));
 	connect(actions[itemPrev],	SIGNAL(triggered()), this, SLOT(PreviousNote()));
 	connect(actions[itemNext],	SIGNAL(triggered()), this, SLOT(NextNote()));
-	connect(actions[itemBack],	SIGNAL(triggered()), Notes, SLOT(historyBack()));
-	connect(actions[itemForward],	SIGNAL(triggered()), Notes, SLOT(historyForward()));
+	connect(actions[itemBack],	SIGNAL(triggered()), notes, SLOT(historyBack()));
+	connect(actions[itemForward],	SIGNAL(triggered()), notes, SLOT(historyForward()));
 	connect(actions[itemCopy],	SIGNAL(triggered()), this, SLOT(CopyNote()));
 	connect(actions[itemSetup],	SIGNAL(triggered()), this, SLOT(showPrefDialog()));
 	connect(actions[itemInfo],	SIGNAL(triggered()), this, SLOT(showAboutDialog()));
@@ -468,8 +468,8 @@ MainWindow::MainWindow(QWidget *parent)
 	connect(scRename,	SIGNAL(activated()), this, SLOT(RenameCurrentNote()));
 	connect(scPrev,		SIGNAL(activated()), this, SLOT(PreviousNote()));
 	connect(scNext,		SIGNAL(activated()), this, SLOT(NextNote()));
-	connect(scBack,		SIGNAL(activated()), Notes, SLOT(historyBack()));
-	connect(scForward,	SIGNAL(activated()), Notes, SLOT(historyForward()));
+	connect(scBack,		SIGNAL(activated()), notes, SLOT(historyBack()));
+	connect(scForward,	SIGNAL(activated()), notes, SLOT(historyForward()));
 	connect(scSearch,	SIGNAL(activated()), actions[itemSearch], SLOT(toggle()));
 	connect(scSearchEsc,	SIGNAL(activated()), actions[itemSearch], SLOT(toggle()));
 	connect(scExit,		SIGNAL(activated()), qApp, SLOT(quit()));
@@ -487,9 +487,9 @@ MainWindow::MainWindow(QWidget *parent)
 	connect(&alt_mapper, SIGNAL(mapped(int)), this, SLOT(ToNote(int)));
 	//
 	LoadNotes();
-	if(Notes->empty()) NewNotePlain();
+	if(notes->empty()) NewNotePlain();
 	//
-	connect(&SaveTimer, SIGNAL(timeout()), Notes, SLOT(SaveAll()));
+	connect(&SaveTimer, SIGNAL(timeout()), notes, SLOT(SaveAll()));
 	SaveTimer.start(15000);
 	if(settings.getFileScanner())
 	{
@@ -511,9 +511,9 @@ MainWindow::MainWindow(QWidget *parent)
 MainWindow::~MainWindow()
 {
 	//saving notes
-	Notes->SaveAll();
+	notes->SaveAll();
 	//saving title of last note
-	settings.setLastNote(Notes->current()->fileName());
+	settings.setLastNote(notes->current()->fileName());
 	//saving dialog's params
 	settings.setDialogGeometry(saveGeometry());
 	settings.setDialogState(saveState());
@@ -527,16 +527,16 @@ void MainWindow::currentNoteChanged(int old_index, int new_index)
 {
 	if(old_index!=-1)
 	{
-		Note* note = Notes->get(old_index);
+		Note* note = notes->get(old_index);
 		if(note->type()==Note::type_html) disconnect(note, SIGNAL(formatChanged(QFont)), 0, 0); //disconnecting old note
 	}
 	//
 	actions[itemPrev]->setDisabled(new_index==0); //if first note
-	actions[itemNext]->setDisabled(new_index==Notes->last()); //if last note
-	actions[itemBack]->setEnabled(Notes->historyHasBack());
-	actions[itemForward]->setEnabled(Notes->historyHasForward());
+	actions[itemNext]->setDisabled(new_index==notes->last()); //if last note
+	actions[itemBack]->setEnabled(notes->historyHasBack());
+	actions[itemForward]->setEnabled(notes->historyHasForward());
 	//
-	Note* note = Notes->current();
+	Note* note = notes->current();
 	switch(note->type())
 	{
  case Note::type_html:
@@ -584,10 +584,10 @@ void MainWindow::showSearchBar(bool show)
 void MainWindow::Search(bool next)
 {
 	Q_UNUSED(next);
-	if(Notes->empty()) return;
+	if(notes->empty()) return;
 	QString text(ui->edSearch->text());
 	if(text.isEmpty()) return;
-	Notes->search(text);
+	notes->search(text);
 }
 
 void MainWindow::on_edSearch_textChanged(QString text)
@@ -624,6 +624,7 @@ void MainWindow::changeEvent(QEvent *e)
 		actShow->setText(tr("Show"));
 		actHide->setText(tr("Hide"));
 		//
+		notes->retranslate(settings.getLocaleCurrent());
 		break;
 	default: break;
 	}

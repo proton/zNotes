@@ -22,7 +22,7 @@ enum
 	TODO_ACTION_INSERT,
 	TODO_ACTION_INSERT_SUB,
 	TODO_ACTION_REMOVE,
-	TODO_ACTION_HIDE_COMPLETED,
+	//TODO_ACTION_HIDE_COMPLETED,
 	TODO_ACTION_COUNT,
 };
 
@@ -110,6 +110,20 @@ TodoNote::TodoNote(const QFileInfo& fileinfo, Note::Type type_new)
 	dt_date_limit->calendarWidget()->setLocale(settings.getLocale());
 
 	tree_view->setCurrentIndex(QModelIndex());
+}
+
+void TodoNote::retranslate(const QLocale& locale)
+{
+	menu_context->actions()[TODO_ACTION_INSERT]->setText(tr("Insert new task"));
+	menu_context->actions()[TODO_ACTION_INSERT_SUB]->setText(tr("Insert new task"));
+	menu_context->actions()[TODO_ACTION_REMOVE]->setText(tr("Remove this task"));
+	//menu_context->actions()[TODO_ACTION_HIDE_COMPLETED]->setText(tr("Hide completed tasks"));
+	lb_date_0->setText(tr("Created: "));
+	lb_date_1->setText(tr("Completed: "));
+	cb_date_limit->setText(tr("Limited: "));
+	lb_date_start->setLocale(locale);
+	dt_date_limit->setLocale(locale);
+	dt_date_limit->calendarWidget()->setLocale(locale);
 }
 
 TodoNote::~TodoNote()
@@ -209,8 +223,8 @@ void TodoNote::removeTask()
 
 void TodoNote::hideCompletedTasks()
 {
-	bool hide_completed = menu_context->actions()[TODO_ACTION_HIDE_COMPLETED]->isChecked();
-	proxy_model->hideDoneTasks(hide_completed);
+	//bool hide_completed = menu_context->actions()[TODO_ACTION_HIDE_COMPLETED]->isChecked();
+	//proxy_model->hideDoneTasks(hide_completed);
 }
 
 void TodoNote::taskChanged(QModelIndex proxy_index)

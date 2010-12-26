@@ -39,6 +39,8 @@ public:
 	void search(const QString& text);
 	//
 	inline QTabWidget* getWidget() const { return tabs; }
+	//
+	void retranslate(const QLocale& locale);
 private:
 	Note::Type getType(const QFileInfo& fileinfo) const;
 public slots:

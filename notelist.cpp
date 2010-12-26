@@ -12,7 +12,7 @@
 #endif
 
 NoteList::NoteList(QWidget* parent)
-	: QObject(), vec(), history_index(0), current_index(-1), history_forward_pressed(false), history_back_pressed(false)
+	: QObject(), vec(), history_index(0), history_forward_pressed(false), history_back_pressed(false), current_index(-1)
 {
 	//NOTE_TYPE_MAP init
 	NOTE_TYPE_MAP[""] = Note::type_text;
@@ -127,8 +127,6 @@ void NoteList::rename(int index, const QString& title)
 	notes_filenames.insert(note->fileName());
 }
 
-#include <QtDebug>
-
 void NoteList::CurrentTabChanged(int index)
 {
 	if(index==-1) return;
@@ -240,5 +238,13 @@ void NoteList::SaveAll()
 	for(int i=0; i<vec.size(); ++i)
 	{
 		vec[i]->save(true); //Forced saving
+	}
+}
+
+void NoteList::retranslate(const QLocale& locale)
+{
+	for(int i=0; i<vec.size(); ++i)
+	{
+		vec[i]->retranslate(locale);
 	}
 }

@@ -34,7 +34,7 @@ private:
 	Ui::MainWindow *ui;
 	//
 	QDir dir;
-	NoteList* Notes;
+	NoteList* notes;
 	//
 	QSystemTrayIcon tray;
 	QMenu cmenu;
