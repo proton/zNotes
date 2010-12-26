@@ -47,6 +47,7 @@ public:
 	inline const QVector<int>& getToolbarItems()	{ return tb_items; }
 	inline const QMap<int, QMap<int, QString> >& getTranslations()	{ return translations; }
 	inline const QLocale& getLocaleCurrent()		{ return locale_current; }
+	inline const QLocale& getLocale()				{ return locale; }
 	inline bool getLanguageCustom()					{ return language_custom; }
 	inline bool getNoteLinksHighlight()				{ return note_links_highlight; }
 	inline bool getNoteLinksOpen()					{ return note_links_open; }
@@ -71,7 +72,6 @@ public:
 	void setScriptCopyOutput(bool);
 	void setScripts();
 	void setToolbarItems(const QVector<int>&);
-	void setLocale(const QLocale&);
 	void setLocaleCurrent(const QLocale&);
 	void setLocaleCustom(bool);
 	void setNoteLinksHighlight(bool);
@@ -79,6 +79,7 @@ public:
 	void setNotePastePlaintext(bool);
 	//
 	void loadLanguages();
+	void updateLocale();
 	//
 	inline void save() { config.sync(); }
 private:
@@ -89,6 +90,7 @@ private:
 	QMap<int, QMap<int, QString> > translations;
 	QLocale locale_current;
 	QLocale locale_system;
+	QLocale locale;
 	bool language_custom;
 	//
 	QString notes_path;

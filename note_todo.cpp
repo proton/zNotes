@@ -12,6 +12,7 @@
 #include <QGridLayout>
 #include <QDataWidgetMapper>
 #include <QDateTimeEdit>
+#include <QCalendarWidget>
 #include <QLabel>
 #include <QCheckBox>
 #include <QMenu>
@@ -104,6 +105,9 @@ TodoNote::TodoNote(const QFileInfo& fileinfo, Note::Type type_new)
 	mapper->addMapping(text_edit, 6, "plainText");
 	mapper->addMapping(lb_date_start, 2, "text");
 	mapper->addMapping(lb_date_stop, 3, "text");
+	lb_date_start->setLocale(settings.getLocale());
+	dt_date_limit->setLocale(settings.getLocale());
+	dt_date_limit->calendarWidget()->setLocale(settings.getLocale());
 
 	tree_view->setCurrentIndex(QModelIndex());
 }
@@ -231,6 +235,7 @@ void TodoNote::taskChanged(QModelIndex proxy_index)
 	cb_date_limit->setHidden(task_done);
 	dt_date_limit->setHidden(task_done);
 	dt_date_limit->setEnabled(task->limited());
+
 }
 
 void TodoNote::noteDateLimitChanged(const QDateTime& date)

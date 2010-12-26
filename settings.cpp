@@ -6,7 +6,8 @@
 #include <QLibraryInfo>
 #include <QDir>
 
-Settings::Settings() : config("pDev", "zNotes")
+Settings::Settings()
+	: config("pDev", "zNotes")
 {
 }
 
@@ -164,7 +165,7 @@ void Settings::load()
 #else
 	locale_system = QLocale::system().language();
 #endif
-	QLocale locale = (language_custom)?locale_current:locale_system;
+	locale = (language_custom)?locale_current:locale_system;
 
 	QMap<int, QMap<int, QString> >::const_iterator it = translations.find(locale.language());
 	if(it!=translations.end()) //if translation list has locale language
@@ -188,7 +189,7 @@ void Settings::load()
 	}
 	else locale = QLocale::c();
 
-	setLocale(locale);
+	updateLocale();
 
 	qApp->installTranslator(&qtranslator);
 	qApp->installTranslator(&translator);
@@ -499,14 +500,18 @@ void Settings::setToolbarItems(const QVector<int>& v)
 /*
   Saving current language
 */
-void Settings::setLocaleCurrent(const QLocale& locale)
+void Settings::setLocaleCurrent(const QLocale& new_locale)
 {
-	if(locale_current != locale)
+	if(locale_current != new_locale)
 	{
-		locale_current = locale;
+		locale_current = new_locale;
 		config.setValue("LanguageCurrent", locale_current.name());
 	}
-	if(language_custom) setLocale(locale_current);
+	if(language_custom)
+	{
+		locale = locale_current;
+		updateLocale();
+	}
 }
 
 /*
@@ -518,14 +523,18 @@ void Settings::setLocaleCustom(bool v)
 	{
 		language_custom = v;
 		config.setValue("LanguageCustom", language_custom);
-		if(!language_custom) setLocale(locale_system);
+		if(!language_custom)
+		{
+			locale = locale_system;
+			updateLocale();
+		}
 	}
 }
 
 /*
   Setting language
 */
-void Settings::setLocale(const QLocale& locale)
+void Settings::updateLocale()
 {
 	qtranslator.load("qt_"+locale.name(), QLibraryInfo::location(QLibraryInfo::TranslationsPath));
 	translator.load(translations[locale.language()][locale.country()]);
