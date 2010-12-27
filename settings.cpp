@@ -17,7 +17,7 @@ Settings::Settings()
 
 void Settings::load()
 {
-	if(config.allKeys().size()>0) //if exist - reading settings
+	if(config.allKeys().size()) //if exist - reading settings
 	{
 		notes_path = config.value("NotesPath").toString();
 		last_note = config.value("LastNote").toString();
@@ -76,6 +76,11 @@ void Settings::load()
 	{
 #ifdef Q_WS_X11
 		notes_path = QDir::homePath()+"/.local/share/notes";
+#elif Q_WS_WIN
+		QSettings win_settings("Microsoft", "Windows");
+		QString mydocuments_path = win_settings->value("CurrentVersion/Explorer/Shell Folders/Personal", "").toString();
+		if(!mydocuments_path.isEmpty()) notes_path = mydocuments_path+"/Notes";
+		else if(!QDir::homePath().isEmpty()) notes_path = QDir::homePath()+"/Notes";
 #else
 		if(!QDir::homePath().isEmpty()) notes_path = QDir::homePath()+"/Notes";
 #endif
@@ -160,7 +165,7 @@ void Settings::load()
 	//Fixing Qt's problem on unix systems...
 	QString system_lang(qgetenv("LANG").constData());
 	system_lang.truncate(system_lang.indexOf('.'));
-	if(system_lang.size()>0) locale_system = QLocale(system_lang);
+	if(system_lang.size()) locale_system = QLocale(system_lang);
 	else locale_system = QLocale::system().language();
 #else
 	locale_system = QLocale::system().language();

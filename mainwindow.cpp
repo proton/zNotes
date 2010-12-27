@@ -132,9 +132,14 @@ void MainWindow::LoadNotes()
 	while(dir.path().isEmpty())
 	{
 		dir.setPath(QFileDialog::getExistingDirectory(0,
-			tr("Select notes directory"), QDir::homePath(),
+			tr("Select place for notes directory"), QDir::homePath(),
 			QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks));
-		if(!dir.path().isEmpty()) settings.setNotesPath(dir.path());
+		if(!dir.path().isEmpty())
+		{
+			settings.setNotesPath(dir.path()+tr("Notes"));
+			if(!dir.exists()) if(!dir.mkpath(dir.path())) dir.setPath("");
+			if(!dir.isReadable()) dir.setPath("");
+		}
 	}
 	//Loading files' list
 	if(settings.getShowHidden()) dir.setFilter(QDir::Files | QDir::Hidden | QDir::Readable);
