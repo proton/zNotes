@@ -9,6 +9,9 @@
 #include <QTabWidget>
 #include <QSet>
 #include <QMap>
+#include <QDir>
+
+class QFileSystemWatcher;
 
 class NoteList : public QObject
 {
@@ -27,14 +30,8 @@ public:
 	inline bool historyHasBack() const { return history_index>0; }
 	inline bool historyHasForward() const { return (history_index+1)<history.size(); }
 	//
-	Note* add(const QFileInfo& fileinfo, bool set_current = true);
-	bool load(const QFileInfo& fileinfo, const QString& old_title);
+	void create(const QString& mask);
 	void remove(int i);
-	void rename(int index, const QString& title);
-	//
-	inline bool has(const QString& filename) const { return notes_filenames.contains(filename); }
-	//
-	void move(const QString& path);
 	//
 	void search(const QString& text);
 	//
@@ -42,15 +39,24 @@ public:
 	//
 	void retranslate(const QLocale& locale);
 private:
+	void initNoteTypes();
 	Note::Type getType(const QFileInfo& fileinfo) const;
+	Note* add(const QFileInfo& fileinfo, bool set_current = true);
+	void rename(int index, const QString& title);
+	void move(const QString& path);
 public slots:
-	void CurrentTabChanged(int index);
-	void ShowExtensionsChanged(bool show_extensions);
-	void TabPositionChanged();
-	void SaveAll();
+	void saveAll();
+	//
+	void renameCurrentNote();
 	//
 	void historyBack();
 	void historyForward();
+private slots:
+	void currentTabChanged(int index);
+	void showExtensionsChanged(bool show_extensions);
+	void tabPositionChanged();
+	void notesPathChanged();
+	void scanForNewFiles();
 signals:
 	void currentNoteChanged(int old_index, int new_index);
 private:
@@ -65,6 +71,9 @@ private:
 	//
 	int current_index;
 	QTabWidget* tabs;
+	//
+	QFileSystemWatcher* watcher;
+	QDir dir;
 };
 
 #endif // NOTELIST_H

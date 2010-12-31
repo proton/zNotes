@@ -5,9 +5,7 @@
 #include "aboutDialog.h"
 #include "note_html.h"
 
-#include <QInputDialog>
 #include <QMessageBox>
-#include <QFileDialog>
 #include <QClipboard>
 #include <QProcess>
 #include <QCloseEvent>
@@ -46,57 +44,19 @@ void MainWindow::RemoveCurrentNote()
 	}
 }
 
-void MainWindow::RenameCurrentNote()
-{
-	if(notes->empty()) return;
-	//
-	QString filename = notes->current()->fileName();
-	bool ok;
-	QString new_name = QInputDialog::getText(this, tr("Rename note"), tr("New name:"), QLineEdit::Normal, filename, &ok);
-	if(ok && !new_name.isEmpty())
-	{
-		QFile file(dir.absoluteFilePath(new_name));
-		if(!file.exists())
-			notes->rename(notes->currentIndex(), new_name);
-		else
-			QMessageBox::information(this, tr("Note renaming"),
-				tr("Note %1 already exists!").arg(new_name));
-	}
-}
-
-void MainWindow::NewNote(const QString& mask)
-{
-	int n = 0;
-	QString filename = QString(mask).arg(n);
-	QFile file(dir.absoluteFilePath(filename));
-	while(file.exists()) //Searching for free filename
-	{
-		filename = QString(mask).arg(++n);
-		file.setFileName(dir.absoluteFilePath(filename));
-	}
-	if(notes->empty())
-	{
-		for(int i=0; i<itemMax ; ++i)
-		{
-			actions[i]->setEnabled(true);
-		}
-	}
-	notes->add(file);
-}
-
 void MainWindow::NewNotePlain()
 {
-	NewNote("%1");
+	notes->create("%1");
 }
 
 void MainWindow::NewNoteHTML()
 {
-	NewNote("%1.htm");
+	notes->create("%1.htm");
 }
 
 void MainWindow::NewNoteTODO()
 {
-	NewNote("%1.ztodo");
+	notes->create("%1.ztodo");
 }
 
 void MainWindow::PreviousNote()
@@ -123,39 +83,6 @@ void MainWindow::CopyNote()
 	notes->current()->copy();
 }
 
-void MainWindow::LoadNotes()
-{
-	//Setting directory
-	dir.setPath(settings.getNotesPath());
-	if(!dir.exists()) if(!dir.mkpath(dir.path())) dir.setPath("");
-	if(!dir.isReadable()) dir.setPath("");
-	while(dir.path().isEmpty())
-	{
-		dir.setPath(QFileDialog::getExistingDirectory(0,
-			tr("Select place for notes directory"), QDir::homePath(),
-			QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks));
-		if(!dir.path().isEmpty())
-		{
-			settings.setNotesPath(dir.path()+tr("Notes"));
-			if(!dir.exists()) if(!dir.mkpath(dir.path())) dir.setPath("");
-			if(!dir.isReadable()) dir.setPath("");
-		}
-	}
-	//Loading files' list
-	if(settings.getShowHidden()) dir.setFilter(QDir::Files | QDir::Hidden | QDir::Readable);
-	else dir.setFilter(QDir::Files | QDir::Readable);
-	QFileInfoList flist = dir.entryInfoList();
-	const QString& old_note = settings.getLastNote();
-	int old_index=-1;
-	for(int i=0; i<flist.size(); ++i)
-	{
-		//Loading note
-		bool is_old = notes->load(flist.at(i), old_note);
-		if(is_old) old_index = i;
-	}
-	if(old_index!=-1) notes->setCurrent(old_index);
-}
-
 void MainWindow::trayActivated(QSystemTrayIcon::ActivationReason reason)
 {
 	switch(reason)
@@ -175,7 +102,7 @@ void MainWindow::hideEvent(QHideEvent */*event*/)
 	settings.setDialogGeometry(saveGeometry());
 	actShow->setEnabled(true);
 	actHide->setDisabled(true);
-	if(notes->current()) notes->SaveAll();
+	if(notes->current()) notes->saveAll();
 }
 
 void MainWindow::showEvent(QShowEvent */*event*/)
@@ -206,32 +133,16 @@ void MainWindow::showPrefDialog()
 	dlg.exec();
 }
 
-void MainWindow::notesPathChanged()
-{
-	QMessageBox msgBox(QMessageBox::Question, tr("Move notes"),
-		tr("notes path changed!\nDo you want to move your notes to new place ?"),
-		QMessageBox::Yes | QMessageBox::No);
-	int ret = msgBox.exec();
-	if(ret == QMessageBox::Yes)
-	{
-		dir.setPath(settings.getNotesPath());
-		QString dir_path = dir.absolutePath();
-		notes->move(dir_path);
-	}
-	else QMessageBox::information(this, tr("notes path change"),
-		tr("You need restart application to get effect."));
-}
+//void MainWindow::fileScannerEnChanged(bool enabled)
+//{
+//	if(enabled) ScanTimer.start();
+//	else ScanTimer.stop();
+//}
 
-void MainWindow::fileScannerEnChanged(bool enabled)
-{
-	if(enabled) ScanTimer.start();
-	else ScanTimer.stop();
-}
-
-void MainWindow::fileScannerTimeoutChanged(int period)
-{
-	ScanTimer.setInterval(period);
-}
+//void MainWindow::fileScannerTimeoutChanged(int period)
+//{
+//	ScanTimer.setInterval(period);
+//}
 
 void MainWindow::windowStateChanged()
 {
@@ -241,20 +152,6 @@ void MainWindow::windowStateChanged()
 	bool window_is_visible = isVisible();
 	setWindowFlags(flags);
 	if(window_is_visible) show();
-}
-
-void MainWindow::scanForNewFiles()
-{
-	if(settings.getShowHidden()) dir.setFilter(QDir::Files | QDir::Hidden | QDir::Readable);
-	else dir.setFilter(QDir::Files | QDir::Readable);
-	dir.refresh();
-	QFileInfoList flist = dir.entryInfoList();
-	for(int i=0; i<flist.size(); ++i)
-	{
-		//Loading note
-		bool exists = notes->has(flist.at(i).fileName());
-		if(!exists) notes->add(flist.at(i));
-	}
 }
 
 void MainWindow::warningSettingsChanged()
@@ -396,14 +293,16 @@ MainWindow::MainWindow(QWidget *parent)
 	: QMainWindow(parent), ui(new Ui::MainWindow)
 {
 	ui->setupUi(this);
-	notes = new NoteList(ui->centralWidget);
-	ui->layout->addWidget(notes->getWidget());
-	connect(notes, SIGNAL(currentNoteChanged(int,int)), this, SLOT(currentNoteChanged(int,int)));
 	ui->wSearch->hide();
 	//restoring window state
 	restoreGeometry(settings.getDialogGeometry());
 	restoreState(settings.getDialogState());
 	windowStateChanged();
+
+	notes = new NoteList(ui->centralWidget);
+	ui->layout->addWidget(notes->getWidget());
+	connect(notes, SIGNAL(currentNoteChanged(int,int)), this, SLOT(currentNoteChanged(int,int)));
+
 	//Creating toolbar/menu actions
 	for(int i=0; i<itemMax ; ++i) actions[i] = GenerateAction(i);
 	actShow =	new QAction(tr("Show"),	parent);
@@ -413,7 +312,7 @@ MainWindow::MainWindow(QWidget *parent)
 	connect(actions[itemAddHtml],	SIGNAL(triggered()), this, SLOT(NewNoteHTML()));
 	connect(actions[itemAddTodo],	SIGNAL(triggered()), this, SLOT(NewNoteTODO()));
 	connect(actions[itemRemove],	SIGNAL(triggered()), this, SLOT(RemoveCurrentNote()));
-	connect(actions[itemRename],	SIGNAL(triggered()), this, SLOT(RenameCurrentNote()));
+	connect(actions[itemRename],	SIGNAL(triggered()), notes, SLOT(renameCurrentNote()));
 	connect(actions[itemPrev],	SIGNAL(triggered()), this, SLOT(PreviousNote()));
 	connect(actions[itemNext],	SIGNAL(triggered()), this, SLOT(NextNote()));
 	connect(actions[itemBack],	SIGNAL(triggered()), notes, SLOT(historyBack()));
@@ -435,6 +334,7 @@ MainWindow::MainWindow(QWidget *parent)
 	//
 	actions_changed(); //Adding toolbar's actions
 	cmd_changed(); //Adding scripts
+
 	//Adding menu actions
 	cmenu.addAction(actShow);
 	cmenu.addAction(actHide);
@@ -452,6 +352,7 @@ MainWindow::MainWindow(QWidget *parent)
 	connect(&tray, SIGNAL(activated(QSystemTrayIcon::ActivationReason)),
 			this, SLOT(trayActivated(QSystemTrayIcon::ActivationReason)));
 	tray.show();
+
 	//Creating shortcuts
 	scAdd	=	new QShortcut(QKeySequence::New,	this);
 	scRemove =	new QShortcut(QKeySequence::Delete,	this);
@@ -470,7 +371,7 @@ MainWindow::MainWindow(QWidget *parent)
 	//Connecting shortcuts with slots
 	connect(scAdd,		SIGNAL(activated()), this, SLOT(NewNotePlain()));
 	connect(scRemove,	SIGNAL(activated()), this, SLOT(RemoveCurrentNote()));
-	connect(scRename,	SIGNAL(activated()), this, SLOT(RenameCurrentNote()));
+	connect(scRename,	SIGNAL(activated()), notes, SLOT(renameCurrentNote()));
 	connect(scPrev,		SIGNAL(activated()), this, SLOT(PreviousNote()));
 	connect(scNext,		SIGNAL(activated()), this, SLOT(NextNote()));
 	connect(scBack,		SIGNAL(activated()), notes, SLOT(historyBack()));
@@ -491,20 +392,6 @@ MainWindow::MainWindow(QWidget *parent)
 	}
 	connect(&alt_mapper, SIGNAL(mapped(int)), this, SLOT(ToNote(int)));
 	//
-	LoadNotes();
-	if(notes->empty()) NewNotePlain();
-	//
-	connect(&SaveTimer, SIGNAL(timeout()), notes, SLOT(SaveAll()));
-	SaveTimer.start(15000);
-	if(settings.getFileScanner())
-	{
-		connect(&ScanTimer, SIGNAL(timeout()), this, SLOT(scanForNewFiles()));
-		ScanTimer.start(settings.getFileScannerTimeout());
-	}
-	connect(&settings, SIGNAL(FileScannerEnChanged(bool)), this, SLOT(fileScannerEnChanged(bool)));
-	connect(&settings, SIGNAL(FileScannerTimeoutChanged(int)), this, SLOT(fileScannerTimeoutChanged(int)));
-	//
-	connect(&settings, SIGNAL(NotesPathChanged()), this, SLOT(notesPathChanged()));
 	connect(&settings, SIGNAL(ShowHiddenChanged()), this, SLOT(warningSettingsChanged()));
 	connect(&settings, SIGNAL(WindowStateChanged()), this, SLOT(windowStateChanged()));
 	connect(&settings, SIGNAL(ToolbarItemsChanged()), this, SLOT(actions_changed()));
@@ -516,7 +403,7 @@ MainWindow::MainWindow(QWidget *parent)
 MainWindow::~MainWindow()
 {
 	//saving notes
-	notes->SaveAll();
+	notes->saveAll();
 	//saving title of last note
 	settings.setLastNote(notes->current()->fileName());
 	//saving dialog's params

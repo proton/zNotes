@@ -2,7 +2,6 @@
 #define MAINWINDOW_H
 
 #include <QtGui/QMainWindow>
-#include <QDir>
 #include <QSystemTrayIcon>
 #include <QMenu>
 #include <QTimer>
@@ -33,7 +32,6 @@ protected:
 private:
 	Ui::MainWindow *ui;
 	//
-	QDir dir;
 	NoteList* notes;
 	//
 	QSystemTrayIcon tray;
@@ -56,11 +54,8 @@ private:
 	//
 	void Search(bool next);
 	void changeEvent(QEvent *e);
-	//
-	void NewNote(const QString& mask);
 public slots:
 	void RemoveCurrentNote();
-	void RenameCurrentNote();
 	void NewNotePlain();
 	void NewNoteHTML();
 	void NewNoteTODO();
@@ -92,12 +87,9 @@ public slots:
 	void cmd_changed();
 	void cmdExec(const QString &);
 	//
-	void notesPathChanged();
-	void fileScannerEnChanged(bool);
-	void fileScannerTimeoutChanged(int);
 	void windowStateChanged();
 	//
-	void scanForNewFiles();
+//	void scanForNewFiles();
 	//
 	void warningSettingsChanged();
 private slots:
