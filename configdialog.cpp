@@ -36,8 +36,6 @@ configDialog::configDialog(QWidget *parent) :
 	m_ui->listToolbarActions->setDragDropMode(QAbstractItemView::DragDrop);
 	//
 	m_ui->ed_NotesPath->setText(settings.getNotesPath());
-	m_ui->cb_FileScan->setChecked(settings.getFileScanner());
-	m_ui->sb_FileScanTimeout->setValue(settings.getFileScannerTimeout());
 	m_ui->cmb_TabPosition->setCurrentIndex(settings.getTabPosition());
 	m_ui->cb_ShowHidden->setChecked(settings.getShowHidden());
 	m_ui->cb_ShowExtensions->setChecked(settings.getShowExtensions());
@@ -98,8 +96,6 @@ void configDialog::SaveSettings()
 {
 	settings.setHideStart(m_ui->cb_HideStart->checkState());
 	settings.setNotesPath(m_ui->ed_NotesPath->text());
-	settings.setFileScannerTimeout(m_ui->sb_FileScanTimeout->value());
-	settings.setFileScanner(m_ui->cb_FileScan->isChecked());
 	settings.setTabPosition(TabPosition(m_ui->cmb_TabPosition->currentIndex()));
 	settings.setShowHidden(m_ui->cb_ShowHidden->checkState());
 	settings.setShowExtensions(m_ui->cb_ShowExtensions->checkState());

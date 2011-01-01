@@ -36,9 +36,6 @@ void Settings::load()
 		single_instance = config.value("SingleInstance").toBool();
 		copy_start_raise = config.value("CopyStartRaise").toBool();
 		//
-		file_scanner = config.value("FileScanner").toBool();
-		file_scanner_timeout = config.value("FileScannerTimeout").toInt();
-		//
 		note_font.fromString(config.value("NoteFont").toString());
 		note_links_highlight = config.value("NoteLinksHighlight").toBool();
 		note_links_open = config.value("NoteLinksOpen").toBool();
@@ -122,12 +119,6 @@ void Settings::load()
 			config.setValue(QString("ComandFile%1").arg(i), script_model.getFile(i));
 			config.setValue(QString("ComandIcon%1").arg(i), script_model.getIcon(i));
 		}
-	}
-	//Setting default filescanner timeout
-	if(!config.contains("FileScannerTimeout"))
-	{
-		file_scanner_timeout = 500;//500 msec
-		config.setValue("FileScannerTimeout", file_scanner_timeout);
 	}
 	//Setting default tab position
 	if(!config.contains("TabPosition"))
@@ -337,37 +328,6 @@ void Settings::setCopyStartRaise(bool v)
 	{
 		copy_start_raise = v;
 		config.setValue("CopyStartRaise", copy_start_raise);
-	}
-}
-
-/*
-  Saving option (scanning for new files)
-*/
-void setFileScanner(bool v);
-
-/*
-  Saving option (file scan timeout)
-*/
-void Settings::setFileScanner(bool v)
-{
-	if(file_scanner != v)
-	{
-		file_scanner = v;
-		config.setValue("FileScanner", file_scanner);
-		emit FileScannerEnChanged(file_scanner);
-	}
-}
-
-/*
-  Saving option (hiding window decoration)
-*/
-void Settings::setFileScannerTimeout(int v)
-{
-	if(file_scanner_timeout != v)
-	{
-		file_scanner_timeout = v;
-		config.setValue("FileScannerTimeout", file_scanner_timeout);
-		emit FileScannerTimeoutChanged(file_scanner_timeout);
 	}
 }
 

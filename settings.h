@@ -38,8 +38,6 @@ public:
 	inline bool getStayTop()						{ return stay_top; }
 	inline bool getSingleInstance()					{ return single_instance; }
 	inline bool getCopyStartRaise()					{ return copy_start_raise; }
-	inline bool getFileScanner()					{ return file_scanner; }
-	inline int getFileScannerTimeout()				{ return file_scanner_timeout; }
 	inline const QFont& getNoteFont()				{ return note_font; }
 	inline ScriptModel& getScriptModel()			{ return script_model; }
 	inline bool getScriptShowOutput()				{ return script_show_output; }
@@ -65,8 +63,6 @@ public:
 	void setStayTop(bool);
 	void setSingleInstance(bool);
 	void setCopyStartRaise(bool);
-	void setFileScanner(bool);
-	void setFileScannerTimeout(int);
 	void setNoteFont(const QFont&);
 	void setScriptShowOutput(bool);
 	void setScriptCopyOutput(bool);
@@ -109,9 +105,6 @@ private:
 	bool single_instance;
 	bool copy_start_raise;
 	//
-	bool file_scanner;
-	int file_scanner_timeout;
-	//
 	QFont note_font;
 	bool note_links_highlight;
 	bool note_links_open;
@@ -124,8 +117,6 @@ private:
 	QVector<int> tb_items;
 signals:
 	void NotesPathChanged();
-	void FileScannerEnChanged(bool);
-	void FileScannerTimeoutChanged(int);
 	void ShowExtensionsChanged(bool show_extensions);
 	void ShowHiddenChanged();
 	void TabPositionChanged();

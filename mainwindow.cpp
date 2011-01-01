@@ -112,17 +112,6 @@ void MainWindow::showPrefDialog()
 	dlg.exec();
 }
 
-//void MainWindow::fileScannerEnChanged(bool enabled)
-//{
-//	if(enabled) ScanTimer.start();
-//	else ScanTimer.stop();
-//}
-
-//void MainWindow::fileScannerTimeoutChanged(int period)
-//{
-//	ScanTimer.setInterval(period);
-//}
-
 void MainWindow::windowStateChanged()
 {
 	Qt::WindowFlags flags = Qt::Window;
