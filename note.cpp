@@ -53,6 +53,7 @@ void Note::move(const QString& new_dirname)
 //Removing note
 bool Note::remove()
 {
+	//TODO: move this to destructor
 	file.close();
 	return file.remove();
 }

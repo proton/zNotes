@@ -74,6 +74,7 @@ NoteList::NoteList(QWidget* parent)
 	}
 	if(old_index!=-1) tabs->setCurrentIndex(old_index);
 	if(empty()) create("%1");
+	current_index = tabs->currentIndex();
 
 	watcher = new QFileSystemWatcher(this);
 	watcher->addPath(dir.absolutePath());
@@ -121,14 +122,6 @@ void NoteList::create(const QString& mask)
 		filename = QString(mask).arg(++n);
 		file.setFileName(dir.absoluteFilePath(filename));
 	}
-//TODO:
-//	if(notes->empty())
-//	{
-//		for(int i=0; i<itemMax ; ++i)
-//		{
-//			actions[i]->setEnabled(true);
-//		}
-//	}
 	add(file);
 }
 
@@ -159,19 +152,25 @@ Note* NoteList::add(const QFileInfo& fileinfo, bool set_current)
 
 void NoteList::remove(int i)
 {
+	disconnect(tabs, SIGNAL(currentChanged(int)), this, SLOT(currentTabChanged(int)));
 	Note* note = vec[i];
-	tabs->removeTab(i);
+	note->remove();
 	vec.remove(i);
+	tabs->removeTab(i);
 	QString filename = note->fileName();
-	delete note;
+	note->deleteLater();
 	notes_filenames.remove(filename);
+	current_index = tabs->currentIndex();
+	connect(tabs, SIGNAL(currentChanged(int)), this, SLOT(currentTabChanged(int)));
+	emit currentNoteChanged(-1, current_index);
 }
 
 void NoteList::move(const QString& path)
 {
-	for(int i=0; i<vec.size(); ++i)
+	Note* note;
+	foreach (note, vec)
 	{
-		vec[i]->move(path);
+		note->move(path);
 	}
 }
 
@@ -192,6 +191,21 @@ void NoteList::search(const QString& text)
 	}
 	//If find nothing
 	//current()->widget()->setFocus();
+}
+
+void NoteList::removeCurrentNote()
+{
+	if(vec.size()<=1) return;
+	Note* note = current();
+	if(!note) return;
+	QMessageBox msgBox(QMessageBox::Question, tr("Delete Note"),
+		tr("Do you realy want to delete note %1 ?").arg(note->title()),
+		QMessageBox::Yes | QMessageBox::No);
+	int ret = msgBox.exec();
+	if(ret == QMessageBox::Yes)
+	{
+		remove(currentIndex());
+	}
 }
 
 void NoteList::renameCurrentNote()
@@ -226,7 +240,7 @@ void NoteList::rename(int index, const QString& title)
 void NoteList::currentTabChanged(int index)
 {
 	if(index==-1) return;
-	if(current_index!=-1) current()->save();
+	if(current_index!=-1) if(current()) current()->save();
 	int old_index = current_index;
 	current_index = index;
 	const QString path = vec[current_index]->absolutePath();

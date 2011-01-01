@@ -31,7 +31,6 @@ public:
 	inline bool historyHasForward() const { return (history_index+1)<history.size(); }
 	//
 	void create(const QString& mask);
-	void remove(int i);
 	//
 	void search(const QString& text);
 	//
@@ -42,11 +41,13 @@ private:
 	void initNoteTypes();
 	Note::Type getType(const QFileInfo& fileinfo) const;
 	Note* add(const QFileInfo& fileinfo, bool set_current = true);
+	void remove(int i);
 	void rename(int index, const QString& title);
 	void move(const QString& path);
 public slots:
 	void saveAll();
 	//
+	void removeCurrentNote();
 	void renameCurrentNote();
 	//
 	void historyBack();

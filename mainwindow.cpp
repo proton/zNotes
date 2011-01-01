@@ -23,27 +23,6 @@
 
 Settings settings;
 
-void MainWindow::RemoveCurrentNote()
-{
-	if(notes->empty()) return;
-	Note* note = notes->current();
-	QMessageBox msgBox(QMessageBox::Question, tr("Delete Note"),
-		tr("Do you realy want to delete note %1 ?").arg(note->title()),
-		QMessageBox::Yes | QMessageBox::No);
-	int ret = msgBox.exec();
-	if(ret == QMessageBox::Yes && note->remove())
-	{
-		notes->remove(notes->currentIndex());
-		if(notes->empty())
-		{
-			for(int i=0; i<itemMax; ++i)
-			{
-				actions[i]->setDisabled(!ToolbarAction(item_enum(i)).isEnabledWhenEmpty());
-			}
-		}
-	}
-}
-
 void MainWindow::NewNotePlain()
 {
 	notes->create("%1");
@@ -311,7 +290,7 @@ MainWindow::MainWindow(QWidget *parent)
 	connect(actions[itemAdd],		SIGNAL(triggered()), this, SLOT(NewNotePlain()));
 	connect(actions[itemAddHtml],	SIGNAL(triggered()), this, SLOT(NewNoteHTML()));
 	connect(actions[itemAddTodo],	SIGNAL(triggered()), this, SLOT(NewNoteTODO()));
-	connect(actions[itemRemove],	SIGNAL(triggered()), this, SLOT(RemoveCurrentNote()));
+	connect(actions[itemRemove],	SIGNAL(triggered()), notes, SLOT(removeCurrentNote()));
 	connect(actions[itemRename],	SIGNAL(triggered()), notes, SLOT(renameCurrentNote()));
 	connect(actions[itemPrev],	SIGNAL(triggered()), this, SLOT(PreviousNote()));
 	connect(actions[itemNext],	SIGNAL(triggered()), this, SLOT(NextNote()));
@@ -370,7 +349,7 @@ MainWindow::MainWindow(QWidget *parent)
 	scFormatUnderline = new QShortcut(Qt::CTRL + Qt::Key_U,	this);
 	//Connecting shortcuts with slots
 	connect(scAdd,		SIGNAL(activated()), this, SLOT(NewNotePlain()));
-	connect(scRemove,	SIGNAL(activated()), this, SLOT(RemoveCurrentNote()));
+	connect(scRemove,	SIGNAL(activated()), notes, SLOT(removeCurrentNote()));
 	connect(scRename,	SIGNAL(activated()), notes, SLOT(renameCurrentNote()));
 	connect(scPrev,		SIGNAL(activated()), this, SLOT(PreviousNote()));
 	connect(scNext,		SIGNAL(activated()), this, SLOT(NextNote()));
@@ -398,6 +377,8 @@ MainWindow::MainWindow(QWidget *parent)
 	connect(&settings.getScriptModel(), SIGNAL(dataChanged(const QModelIndex &, const QModelIndex &)),
 		this, SLOT(cmd_changed()));
 	if(!settings.getHideStart()) show();
+	//
+	currentNoteChanged(-1, notes->currentIndex());
 }
 
 MainWindow::~MainWindow()
@@ -427,6 +408,7 @@ void MainWindow::currentNoteChanged(int old_index, int new_index)
 	actions[itemNext]->setDisabled(new_index==notes->last()); //if last note
 	actions[itemBack]->setEnabled(notes->historyHasBack());
 	actions[itemForward]->setEnabled(notes->historyHasForward());
+	actions[itemRemove]->setEnabled(notes->count()>1);
 	//
 	Note* note = notes->current();
 	switch(note->type())

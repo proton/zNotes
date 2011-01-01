@@ -55,7 +55,6 @@ private:
 	void Search(bool next);
 	void changeEvent(QEvent *e);
 public slots:
-	void RemoveCurrentNote();
 	void NewNotePlain();
 	void NewNoteHTML();
 	void NewNoteTODO();
