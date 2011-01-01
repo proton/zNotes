@@ -39,6 +39,8 @@ void NoteList::initNoteTypes()
 NoteList::NoteList(QWidget* parent)
 	: QObject(), vec(), history_index(0), history_forward_pressed(false), history_back_pressed(false), current_index(-1)
 {
+	initNoteTypes();
+
 	tabs = new QTabWidget(parent);
 	tabs->setDocumentMode(true);
 	tabs->setTabPosition(QTabWidget::TabPosition(settings.getTabPosition()));
