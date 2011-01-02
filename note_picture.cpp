@@ -43,7 +43,7 @@ void PictureNote::save(bool forced)
 {
 	if(!(content_changed || forced)) return; //If file doesn't need in saving, exiting from function
 	file.close();
-	//label->picture()->save(file.fileName()); //TODO:
+	//label->picture()->save(file.fileName()); //TODO: this is readonly now
 	content_changed = false;
 }
 
