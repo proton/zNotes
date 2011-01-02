@@ -75,7 +75,7 @@ NoteList::NoteList(QWidget* parent)
 		if(old_index==-1 && note->fileName()==last_note_title) old_index = i;
 	}
 	if(old_index!=-1) tabs->setCurrentIndex(old_index);
-	if(empty()) create("%1");
+	else if(empty()) create("%1");
 	current_index = tabs->currentIndex();
 
 	watcher = new QFileSystemWatcher(this);
@@ -334,7 +334,7 @@ void NoteList::showExtensionsChanged(bool show_extensions)
 {
 	for(int i=0; i<vec.size(); ++i)
 	{
-		vec[i]->setTitle(show_extensions);
+		vec[i]->updateTitle(show_extensions);
 		tabs->setTabText(i, vec[i]->title());
 	}
 }

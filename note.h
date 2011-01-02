@@ -34,7 +34,7 @@ public:
 
 	virtual QWidget* widget() = 0;
 
-	void setTitle(bool show_extensions);
+	void updateTitle(bool show_extensions);
 
 	virtual void load() = 0; //Reading note's content
 	virtual void save(bool forced = false) = 0; //Saving note's content

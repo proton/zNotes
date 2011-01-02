@@ -15,7 +15,7 @@ Note::Note(const QFileInfo& fileinfo, Note::Type type_new)
 	file_info(fileinfo),
 	content_changed(false)
 {
-	setTitle(settings.getShowExtensions());
+	updateTitle(settings.getShowExtensions());
 }
 
 Note::~Note()
@@ -23,7 +23,7 @@ Note::~Note()
 }
 
 //Setting note title
-void Note::setTitle(bool show_extensions)
+void Note::updateTitle(bool show_extensions)
 {
 	file.setFileName(file_info.absoluteFilePath());
 	_title = (show_extensions || (file_info.fileName()[0]=='.'))?
@@ -37,7 +37,7 @@ void Note::rename(const QString& new_name)
 	QString absolute_file_path = file_info.dir().absoluteFilePath(new_name);
 	file.rename(absolute_file_path);
 	file_info.setFile(file);
-	setTitle(settings.getShowExtensions());
+	updateTitle(settings.getShowExtensions());
 }
 
 //Moving note to another folder
