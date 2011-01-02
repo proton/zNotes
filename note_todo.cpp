@@ -47,7 +47,7 @@ TodoNote::TodoNote(const QFileInfo& fileinfo, Note::Type type_new)
 	tree_view->setDropIndicatorShown(true);
 	tree_view->setDragDropMode(QAbstractItemView::InternalMove);
 
-	connect(proxy_model, SIGNAL(dataChanged(QModelIndex,QModelIndex)), this, SLOT(taskChanged(QModelIndex)));
+	connect(proxy_model, SIGNAL(dataChanged(const QModelIndex&, const QModelIndex&)), this, SLOT(taskChanged(QModelIndex)));
 	connect(tree_view->selectionModel(), SIGNAL(currentChanged(QModelIndex,QModelIndex)), this, SLOT(taskChanged(QModelIndex)));
 
 	tree_view->setContextMenuPolicy(Qt::CustomContextMenu);
@@ -75,7 +75,7 @@ TodoNote::TodoNote(const QFileInfo& fileinfo, Note::Type type_new)
 	cb_date_limit->setCheckable(true);
 
 	grid_layout = new QGridLayout();
-	QGridLayout* l = dynamic_cast<QGridLayout*>(grid_layout);
+	QGridLayout* l = qobject_cast<QGridLayout*>(grid_layout);
 	l->addWidget(lb_date_0, 0, 0);
 	l->addWidget(lb_date_start, 0, 1);
 	l->addWidget(lb_date_1, 1, 0);
@@ -112,6 +112,26 @@ TodoNote::TodoNote(const QFileInfo& fileinfo, Note::Type type_new)
 	tree_view->setCurrentIndex(QModelIndex());
 }
 
+TodoNote::~TodoNote()
+{
+	tree_view->deleteLater();
+	proxy_model->deleteLater();
+	model->deleteLater();
+	text_edit->deleteLater();
+	extra_layout->deleteLater();
+	main_layout->deleteLater();
+	extra_widget->deleteLater();
+	area->deleteLater();
+	lb_date_start->deleteLater();
+	lb_date_stop->deleteLater();
+	dt_date_limit->deleteLater();
+	cb_date_limit->deleteLater();
+	grid_layout->deleteLater();
+	mapper->deleteLater();
+
+	menu_context->deleteLater();
+}
+
 void TodoNote::retranslate(const QLocale& locale)
 {
 	menu_context->actions()[TODO_ACTION_INSERT]->setText(tr("Insert new task"));
@@ -124,18 +144,6 @@ void TodoNote::retranslate(const QLocale& locale)
 	lb_date_start->setLocale(locale);
 	dt_date_limit->setLocale(locale);
 	dt_date_limit->calendarWidget()->setLocale(locale);
-}
-
-TodoNote::~TodoNote()
-{
-	delete tree_view;
-	delete proxy_model;
-	delete model;
-	delete text_edit;
-	delete extra_layout;
-	delete extra_widget;
-	delete main_layout;
-	delete area;
 }
 
 //Reading file
@@ -227,7 +235,7 @@ void TodoNote::hideCompletedTasks()
 	//proxy_model->hideDoneTasks(hide_completed);
 }
 
-void TodoNote::taskChanged(QModelIndex proxy_index)
+void TodoNote::taskChanged(const QModelIndex& proxy_index)
 {
 	extra_widget->setVisible(proxy_index.isValid());
 	if(!proxy_index.isValid()) return;

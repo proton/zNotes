@@ -363,7 +363,7 @@ MainWindow::MainWindow(QWidget *parent)
 	connect(&settings, SIGNAL(ShowHiddenChanged()), this, SLOT(warningSettingsChanged()));
 	connect(&settings, SIGNAL(WindowStateChanged()), this, SLOT(windowStateChanged()));
 	connect(&settings, SIGNAL(ToolbarItemsChanged()), this, SLOT(actions_changed()));
-	connect(&settings.getScriptModel(), SIGNAL(dataChanged(const QModelIndex &, const QModelIndex &)),
+	connect(&settings.getScriptModel(), SIGNAL(dataChanged(const QModelIndex&, const QModelIndex&)),
 		this, SLOT(cmd_changed()));
 	if(!settings.getHideStart()) show();
 	//

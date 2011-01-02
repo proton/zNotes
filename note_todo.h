@@ -28,7 +28,7 @@ public:
 	QWidget* widget();
 	void retranslate(const QLocale& locale);
 private slots:
-	void taskChanged(QModelIndex);
+	void taskChanged(const QModelIndex& proxy_index);
 	void contextMenuRequested(const QPoint& pos);
 	void insertTask();
 	void insertSubTask();

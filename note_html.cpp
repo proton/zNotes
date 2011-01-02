@@ -23,7 +23,7 @@ HtmlNote::HtmlNote(const QFileInfo& fileinfo, Note::Type type_new)
 
 HtmlNote::~HtmlNote()
 {
-	delete text_edit;
+	text_edit->deleteLater();
 }
 
 //Reading file

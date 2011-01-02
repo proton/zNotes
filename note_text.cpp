@@ -19,7 +19,7 @@ TextNote::TextNote(const QFileInfo& fileinfo, Note::Type type_new)
 
 TextNote::~TextNote()
 {
-	delete text_edit;
+	text_edit->deleteLater();
 }
 
 //Reading file
