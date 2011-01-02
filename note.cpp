@@ -20,6 +20,8 @@ Note::Note(const QFileInfo& fileinfo, Note::Type type_new)
 
 Note::~Note()
 {
+	file.close();
+	file.remove();
 }
 
 //Setting note title
@@ -48,14 +50,6 @@ void Note::move(const QString& new_dirname)
 	QString absolute_file_path = QDir(new_dirname).absoluteFilePath(filename);
 	file.rename(absolute_file_path);
 	file_info.setFile(file);
-}
-
-//Removing note
-bool Note::remove()
-{
-	//TODO: move this to destructor
-	file.close();
-	return file.remove();
 }
 
 //Searching in a note's content

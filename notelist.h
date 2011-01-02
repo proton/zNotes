@@ -63,7 +63,7 @@ signals:
 private:
 	QSet<QString> notes_filenames;
 	QMap<QString, Note::Type> NOTE_TYPE_MAP;
-	QVector<Note*> vec;
+	QList<Note*> vec;
 	//
 	QList<QString> history;
 	int history_index;

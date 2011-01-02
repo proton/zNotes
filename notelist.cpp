@@ -155,16 +155,14 @@ Note* NoteList::add(const QFileInfo& fileinfo, bool set_current)
 void NoteList::remove(int i)
 {
 	disconnect(tabs, SIGNAL(currentChanged(int)), this, SLOT(currentTabChanged(int)));
-	Note* note = vec[i];
-	note->remove();
-	vec.remove(i);
+	Note* note = vec.takeAt(i);
 	tabs->removeTab(i);
 	QString filename = note->fileName();
 	note->deleteLater();
-	notes_filenames.remove(filename);
 	current_index = tabs->currentIndex();
 	connect(tabs, SIGNAL(currentChanged(int)), this, SLOT(currentTabChanged(int)));
 	emit currentNoteChanged(-1, current_index);
+	notes_filenames.remove(filename);
 }
 
 void NoteList::move(const QString& path)

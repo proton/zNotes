@@ -41,7 +41,6 @@ public:
 
 	void rename(const QString& new_name);
 	void move(const QString& new_dir);
-	bool remove(); //Removing note from harddisk
 
 	virtual void copy() const = 0; //Coping note's content to clipboard
 	virtual bool find(const QString& text, bool next=false); //Searching text in a note's content
