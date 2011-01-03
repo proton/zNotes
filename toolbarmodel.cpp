@@ -207,7 +207,7 @@ bool ItemToolbarModel::dropMimeData(const QMimeData* data, Qt::DropAction action
 	}
 	if(data->hasFormat(NOTE_TOOLBAR_ITEM_MIME))
 	{
-		QByteArray encodedData = data->data(NOTE_TOOLBAR_ITEM_USED_MIME);
+		QByteArray encodedData = data->data(NOTE_TOOLBAR_ITEM_MIME);
 		QDataStream stream(&encodedData, QIODevice::ReadOnly);
 		int id;
 		stream >> id;
