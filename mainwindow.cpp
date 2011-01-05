@@ -143,6 +143,7 @@ void MainWindow::commandMenu()
 
 void MainWindow::cmdExec(const QString & command)
 {
+	if(notes->empty()) return;
 	QProcess p;
 	QStringList args;
 	args << notes->current()->absolutePath();
@@ -375,7 +376,7 @@ MainWindow::~MainWindow()
 	//saving notes
 	notes->saveAll();
 	//saving title of last note
-	settings.setLastNote(notes->current()->fileName());
+	if(notes->current()) settings.setLastNote(notes->current()->fileName());
 	//saving dialog's params
 	settings.setDialogGeometry(saveGeometry());
 	settings.setDialogState(saveState());
@@ -393,40 +394,52 @@ void MainWindow::currentNoteChanged(int old_index, int new_index)
 		if(note->type()==Note::type_html) disconnect(note, SIGNAL(formatChanged(QFont)), 0, 0); //disconnecting old note
 	}
 	//
-	actions[itemPrev]->setDisabled(new_index==0); //if first note
-	actions[itemNext]->setDisabled(new_index==notes->last()); //if last note
-	actions[itemBack]->setEnabled(notes->historyHasBack());
-	actions[itemForward]->setEnabled(notes->historyHasForward());
-	actions[itemRemove]->setEnabled(notes->count()>1);
+	bool not_empty = !notes->empty();
+	actions[itemPrev]->setEnabled(not_empty && new_index!=0); //if first note
+	actions[itemNext]->setEnabled(not_empty && new_index!=notes->last()); //if last note
+	actions[itemBack]->setEnabled(not_empty && notes->historyHasBack());
+	actions[itemForward]->setEnabled(not_empty && notes->historyHasForward());
+	actions[itemRemove]->setEnabled(not_empty);
 	//
 	Note* note = notes->current();
-	switch(note->type())
+	if(note)
 	{
- case Note::type_html:
+		switch(note->type())
 		{
-			HtmlNote* htmlnote = dynamic_cast<HtmlNote*> (note);
-			QFont font(htmlnote->getSelFormat().font());
-			actions[itemFormatBold]->setChecked(font.bold());
-			actions[itemFormatItalic]->setChecked(font.italic());
-			actions[itemFormatStrikeout]->setChecked(font.strikeOut());
-			actions[itemFormatUnderline]->setChecked(font.underline());
-			connect(htmlnote, SIGNAL(formatChanged(QFont)), this, SLOT(formatChanged(QFont))); //connecting old note
-			actions[itemFormatBold]->setEnabled(true);
-			actions[itemFormatItalic]->setEnabled(true);
-			actions[itemFormatStrikeout]->setEnabled(true);
-			actions[itemFormatUnderline]->setEnabled(true);
-			actions[itemFormatColor]->setEnabled(true);
+	 case Note::type_html:
+			{
+				HtmlNote* htmlnote = dynamic_cast<HtmlNote*> (note);
+				QFont font(htmlnote->getSelFormat().font());
+				actions[itemFormatBold]->setChecked(font.bold());
+				actions[itemFormatItalic]->setChecked(font.italic());
+				actions[itemFormatStrikeout]->setChecked(font.strikeOut());
+				actions[itemFormatUnderline]->setChecked(font.underline());
+				connect(htmlnote, SIGNAL(formatChanged(QFont)), this, SLOT(formatChanged(QFont))); //connecting old note
+				actions[itemFormatBold]->setEnabled(true);
+				actions[itemFormatItalic]->setEnabled(true);
+				actions[itemFormatStrikeout]->setEnabled(true);
+				actions[itemFormatUnderline]->setEnabled(true);
+				actions[itemFormatColor]->setEnabled(true);
+			}
+			break;
+	 default:
+			{
+				actions[itemFormatBold]->setEnabled(false);
+				actions[itemFormatItalic]->setEnabled(false);
+				actions[itemFormatStrikeout]->setEnabled(false);
+				actions[itemFormatUnderline]->setEnabled(false);
+				actions[itemFormatColor]->setEnabled(false);
+			}
+			break;
 		}
-		break;
- default:
-		{
-			actions[itemFormatBold]->setEnabled(false);
-			actions[itemFormatItalic]->setEnabled(false);
-			actions[itemFormatStrikeout]->setEnabled(false);
-			actions[itemFormatUnderline]->setEnabled(false);
-			actions[itemFormatColor]->setEnabled(false);
-		}
-		break;
+	}
+	else
+	{
+		actions[itemFormatBold]->setEnabled(false);
+		actions[itemFormatItalic]->setEnabled(false);
+		actions[itemFormatStrikeout]->setEnabled(false);
+		actions[itemFormatUnderline]->setEnabled(false);
+		actions[itemFormatColor]->setEnabled(false);
 	}
 }
 

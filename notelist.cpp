@@ -195,7 +195,6 @@ void NoteList::search(const QString& text)
 
 void NoteList::removeCurrentNote()
 {
-	if(vec.size()<=1) return;
 	Note* note = current();
 	if(!note) return;
 	QMessageBox msgBox(QMessageBox::Question, tr("Delete Note"),
