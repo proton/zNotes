@@ -168,63 +168,64 @@ Do you want to move your notes to new place ?</source>
     <message>
         <location filename="../notelist.cpp" line="55"/>
         <source>Select place for notes directory</source>
-        <translation type="unfinished"></translation>
+        <translation>Выбор расположения каталога с заметками</translation>
     </message>
     <message>
         <location filename="../notelist.cpp" line="59"/>
         <source>Notes</source>
-        <translation type="unfinished">Заметки</translation>
+        <translation>Заметки</translation>
     </message>
     <message>
         <location filename="../notelist.cpp" line="200"/>
         <source>Delete Note</source>
-        <translation type="unfinished">Удаление заметки</translation>
+        <translation>Удаление заметки</translation>
     </message>
     <message>
         <location filename="../notelist.cpp" line="201"/>
         <source>Do you realy want to delete note %1 ?</source>
-        <translation type="unfinished">Вы действительно хотите удалить заметку %1 ?</translation>
+        <translation>Вы действительно хотите удалить заметку %1 ?</translation>
     </message>
     <message>
         <location filename="../notelist.cpp" line="217"/>
         <source>Rename note</source>
-        <translation type="unfinished">Переименование заметки</translation>
+        <translation>Переименование заметки</translation>
     </message>
     <message>
         <location filename="../notelist.cpp" line="217"/>
         <source>New name:</source>
-        <translation type="unfinished">Новое имя:</translation>
+        <translation>Новое имя:</translation>
     </message>
     <message>
         <location filename="../notelist.cpp" line="224"/>
         <source>Note renaming</source>
-        <translation type="unfinished"></translation>
+        <translation>Переименование заметки</translation>
     </message>
     <message>
         <location filename="../notelist.cpp" line="224"/>
         <source>Note %1 already exists!</source>
-        <translation type="unfinished"></translation>
+        <translation>Заметка %1 уже существует!</translation>
     </message>
     <message>
         <location filename="../notelist.cpp" line="356"/>
         <source>Move notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Перемещение заметок</translation>
     </message>
     <message>
         <location filename="../notelist.cpp" line="357"/>
         <source>notes path changed!
 Do you want to move your notes to new place ?</source>
-        <translation type="unfinished"></translation>
+        <translation>Каталог с заметками изменен!
+Перенести заметки в новое место?</translation>
     </message>
     <message>
         <location filename="../notelist.cpp" line="366"/>
         <source>notes path change</source>
-        <translation type="unfinished"></translation>
+        <translation>Изменение места хранения заметок</translation>
     </message>
     <message>
         <location filename="../notelist.cpp" line="367"/>
         <source>You need restart application to get effect.</source>
-        <translation type="unfinished">Необходимо перезапустить приложение, чтобы изменения вступили в силу.</translation>
+        <translation>Необходимо перезапустить zNotes, чтобы изменения вступили в силу.</translation>
     </message>
 </context>
 <context>
@@ -266,12 +267,12 @@ Do you want to move your notes to new place ?</source>
     <message>
         <location filename="../toolbaraction.h" line="49"/>
         <source>Back</source>
-        <translation type="unfinished"></translation>
+        <translation>Назад</translation>
     </message>
     <message>
         <location filename="../toolbaraction.h" line="50"/>
         <source>Forward</source>
-        <translation type="unfinished"></translation>
+        <translation>Вперёд</translation>
     </message>
     <message>
         <location filename="../toolbaraction.h" line="51"/>
