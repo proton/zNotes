@@ -92,63 +92,64 @@ Você pode adicionar novos comandos em preferências.</translation>
     <message>
         <location filename="../notelist.cpp" line="55"/>
         <source>Select place for notes directory</source>
-        <translation type="unfinished"></translation>
+        <translation>Selecionar um lugar para o diretório de notas</translation>
     </message>
     <message>
         <location filename="../notelist.cpp" line="59"/>
         <source>Notes</source>
-        <translation type="unfinished">Notas</translation>
+        <translation>Notas</translation>
     </message>
     <message>
         <location filename="../notelist.cpp" line="200"/>
         <source>Delete Note</source>
-        <translation type="unfinished">Excluir Nota</translation>
+        <translation>Excluir Nota</translation>
     </message>
     <message>
         <location filename="../notelist.cpp" line="201"/>
         <source>Do you realy want to delete note %1 ?</source>
-        <translation type="unfinished">Você realmente deseja excluir a nota %1?</translation>
+        <translation>Você realmente deseja excluir a nota %1?</translation>
     </message>
     <message>
         <location filename="../notelist.cpp" line="217"/>
         <source>Rename note</source>
-        <translation type="unfinished">Renomear nota</translation>
+        <translation>Renomear nota</translation>
     </message>
     <message>
         <location filename="../notelist.cpp" line="217"/>
         <source>New name:</source>
-        <translation type="unfinished">Novo nome:</translation>
+        <translation>Novo nome:</translation>
     </message>
     <message>
         <location filename="../notelist.cpp" line="224"/>
         <source>Note renaming</source>
-        <translation type="unfinished"></translation>
+        <translation>Renomeando nota</translation>
     </message>
     <message>
         <location filename="../notelist.cpp" line="224"/>
         <source>Note %1 already exists!</source>
-        <translation type="unfinished"></translation>
+        <translation>Nota %1 já existe!</translation>
     </message>
     <message>
         <location filename="../notelist.cpp" line="356"/>
         <source>Move notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Mover notas</translation>
     </message>
     <message>
         <location filename="../notelist.cpp" line="357"/>
         <source>notes path changed!
 Do you want to move your notes to new place ?</source>
-        <translation type="unfinished"></translation>
+        <translation>caminho das notas alterado!
+Você deseja mover suas notas para o novo lugar?</translation>
     </message>
     <message>
         <location filename="../notelist.cpp" line="366"/>
         <source>notes path change</source>
-        <translation type="unfinished"></translation>
+        <translation>o caminho das notas alterado</translation>
     </message>
     <message>
         <location filename="../notelist.cpp" line="367"/>
         <source>You need restart application to get effect.</source>
-        <translation type="unfinished">Você precisa reiniciar o programa para que se tenha efeito.</translation>
+        <translation>Você precisa reiniciar o programa para que se tenha efeito.</translation>
     </message>
 </context>
 <context>
@@ -201,12 +202,12 @@ Do you want to move your notes to new place ?</source>
     <message>
         <location filename="../toolbaraction.h" line="49"/>
         <source>Back</source>
-        <translation type="unfinished"></translation>
+        <translation>Voltar</translation>
     </message>
     <message>
         <location filename="../toolbaraction.h" line="50"/>
         <source>Forward</source>
-        <translation type="unfinished"></translation>
+        <translation>Avançar</translation>
     </message>
     <message>
         <location filename="../toolbaraction.h" line="51"/>
@@ -705,7 +706,7 @@ O texto da licença pode ser encontrado no arquivo LICENSE.</translation>
     <message>
         <location filename="../configdialog.ui" line="416"/>
         <source>Convert rich text insertions to plain text in HTML notes</source>
-        <translation>Converter ricas inserções de texto para texto simples em notas HTML</translation>
+        <translation>Converter inserções de texto para texto simples nas notas HTML</translation>
     </message>
     <message>
         <location filename="../configdialog.cpp" line="144"/>
