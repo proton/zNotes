@@ -81,7 +81,7 @@ Chcete své poznámky přesunout na nové místo?</translation>
     <message>
         <location filename="../mainwindow.cpp" line="128"/>
         <source>You need restart application to get effect.</source>
-        <translation>Aby se změna projevila, musíte aplikaci spustit znovu.</translation>
+        <translation>Aby se změna projevila, musíte program spustit znovu.</translation>
     </message>
     <message>
         <source>Commands</source>
@@ -131,7 +131,7 @@ Chcete své poznámky přesunout na nové místo?</translation>
         <location filename="../mainwindow.cpp" line="277"/>
         <location filename="../mainwindow.cpp" line="500"/>
         <source>Show</source>
-        <translation>Ukázat </translation>
+        <translation>Ukázat</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="278"/>
@@ -172,63 +172,64 @@ Chcete své poznámky přesunout na nové místo?</translation>
     <message>
         <location filename="../notelist.cpp" line="55"/>
         <source>Select place for notes directory</source>
-        <translation type="unfinished"></translation>
+        <translation>Vybrat místo pro adresář s poznámkami</translation>
     </message>
     <message>
         <location filename="../notelist.cpp" line="59"/>
         <source>Notes</source>
-        <translation type="unfinished">Poznámky</translation>
+        <translation>Poznámky</translation>
     </message>
     <message>
         <location filename="../notelist.cpp" line="200"/>
         <source>Delete Note</source>
-        <translation type="unfinished">Smazat poznámku</translation>
+        <translation>Smazat poznámku</translation>
     </message>
     <message>
         <location filename="../notelist.cpp" line="201"/>
         <source>Do you realy want to delete note %1 ?</source>
-        <translation type="unfinished">Opravdu chcete smazat poznámku %1?</translation>
+        <translation>Opravdu chcete smazat poznámku %1?</translation>
     </message>
     <message>
         <location filename="../notelist.cpp" line="217"/>
         <source>Rename note</source>
-        <translation type="unfinished"></translation>
+        <translation>Přejmenovat poznámku</translation>
     </message>
     <message>
         <location filename="../notelist.cpp" line="217"/>
         <source>New name:</source>
-        <translation type="unfinished">Nový název:</translation>
+        <translation>Nový název:</translation>
     </message>
     <message>
         <location filename="../notelist.cpp" line="224"/>
         <source>Note renaming</source>
-        <translation type="unfinished"></translation>
+        <translation>Přejmenování poznámky</translation>
     </message>
     <message>
         <location filename="../notelist.cpp" line="224"/>
         <source>Note %1 already exists!</source>
-        <translation type="unfinished"></translation>
+        <translation>Poznámka %1 již existuje!</translation>
     </message>
     <message>
         <location filename="../notelist.cpp" line="356"/>
         <source>Move notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Přesunout poznámky</translation>
     </message>
     <message>
         <location filename="../notelist.cpp" line="357"/>
         <source>notes path changed!
 Do you want to move your notes to new place ?</source>
-        <translation type="unfinished"></translation>
+        <translation>Cesta k poznámkám byla změněna!
+Chcete své poznámky přesunout na nové místo?</translation>
     </message>
     <message>
         <location filename="../notelist.cpp" line="366"/>
         <source>notes path change</source>
-        <translation type="unfinished"></translation>
+        <translation>Změna cesty k poznámkám</translation>
     </message>
     <message>
         <location filename="../notelist.cpp" line="367"/>
         <source>You need restart application to get effect.</source>
-        <translation type="unfinished">Aby se změna projevila, musíte aplikaci spustit znovu.</translation>
+        <translation>Aby se změna projevila, musíte program spustit znovu.</translation>
     </message>
 </context>
 <context>
@@ -270,12 +271,12 @@ Do you want to move your notes to new place ?</source>
     <message>
         <location filename="../toolbaraction.h" line="49"/>
         <source>Back</source>
-        <translation type="unfinished"></translation>
+        <translation>Zpět</translation>
     </message>
     <message>
         <location filename="../toolbaraction.h" line="50"/>
         <source>Forward</source>
-        <translation type="unfinished"></translation>
+        <translation>Vpřed</translation>
     </message>
     <message>
         <location filename="../toolbaraction.h" line="51"/>
@@ -459,7 +460,7 @@ Do you want to move your notes to new place ?</source>
     <message>
         <location filename="../aboutDialog.cpp" line="15"/>
         <source>Simple Qt-based notes aplication</source>
-        <translation>Jednoduchý program založený na Qt</translation>
+        <translation>Jednoduchý program na vedení poznámek založený na Qt</translation>
     </message>
     <message>
         <location filename="../aboutDialog.cpp" line="16"/>
@@ -488,7 +489,7 @@ Do you want to move your notes to new place ?</source>
     <message>
         <location filename="../aboutDialog.cpp" line="23"/>
         <source>Application concept and main development</source>
-        <translation>Návrh aplikace a hlavní vývoj</translation>
+        <translation>Pojetí programu a hlavní vývoj</translation>
     </message>
     <message>
         <location filename="../aboutDialog.cpp" line="24"/>
@@ -597,12 +598,12 @@ Do you want to move your notes to new place ?</source>
     <message>
         <location filename="../aboutDialog.cpp" line="39"/>
         <source>Testing:</source>
-        <translation>Zkoušení:</translation>
+        <translation>Zkouška:</translation>
     </message>
     <message>
         <location filename="../aboutDialog.cpp" line="45"/>
         <source>Releasing:</source>
-        <translation>Vydávání:</translation>
+        <translation>Vydání:</translation>
     </message>
     <message>
         <location filename="../aboutDialog.ui" line="14"/>
@@ -644,9 +645,9 @@ The text of the license can can be found in the file LICENSE.</source>
         <translation>Tento balík je svobodným softwarem; můžete jej rozdávat a/nebo upravovat za podmínek GNU General Public License (GPL), jak jsou zveřejněny Free Software 
 Foundation; buď ve verzi 2 licence, nebo (podle své volby) v kterékoli pozdější verzi.
 
-Tento balík je šířen v naději, že bude užitečný, ale BEZ JAKÉKOLI ZÁRUKY; také bez předpokládané záruky PRODEJNOSTI nebo POUŽITELNOSTI PRO NĚJAKÝ URČITÝ ÚČEL: Více podrobností naleznete v GNU Library General Public License.
+Tento program je šířen v naději, že bude užitečný, ale BEZ JAKÉKOLI ZÁRUKY; také bez předpokládané záruky PRODEJNOSTI nebo POUŽITELNOSTI PRO NĚJAKÝ URČITÝ ÚČEL: Více podrobností naleznete v GNU Library General Public License.
 
-Text licence lze nalézt v souboru LICENSE.</translation>
+Text povolení lze nalézt v souboru LICENSE.</translation>
     </message>
     <message>
         <location filename="../aboutDialog.ui" line="113"/>
@@ -669,7 +670,7 @@ Text licence lze nalézt v souboru LICENSE.</translation>
     <message>
         <location filename="../configdialog.ui" line="28"/>
         <source>Common</source>
-        <translation>Společné</translation>
+        <translation>Obecné</translation>
     </message>
     <message>
         <location filename="../configdialog.ui" line="150"/>
