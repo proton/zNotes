@@ -85,6 +85,10 @@ configDialog::configDialog(QWidget *parent) :
 	//
 	connect(m_ui->listActions->selectionModel(), SIGNAL(currentRowChanged(QModelIndex,QModelIndex)), this, SLOT(currentListActionChanged(QModelIndex,QModelIndex))); //TODO: selection changed
 	connect(m_ui->listToolbarActions->selectionModel(), SIGNAL(currentRowChanged(QModelIndex,QModelIndex)), this, SLOT(currentToolbarActionChanged(QModelIndex,QModelIndex)));
+
+#if defined(Q_OS_OS2)
+	m_ui->cb_HideStart->setDisabled(true);
+#endif
 }
 
 configDialog::~configDialog()
