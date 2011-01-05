@@ -1,3 +1,12 @@
+zNotes 0.4.4:
+* Fixed segfault on removing last note
+* HTTPS and FTP links may be highlighted now
+* Added toolbar actions for navigation by history
+* Fixed problem with note renaming
+* Fixed problem with NoteTodo translation
+* Added drag and drop support for toolbar items configuration dialog
+* Major architectural changes
+
 zNotes 0.4.3:
 * Fixed problem with compilation on not UNIX systems
 * Fixed problem with saving user language
