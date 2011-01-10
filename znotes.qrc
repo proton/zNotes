@@ -26,5 +26,6 @@
         <file>res/format_color.png</file>
         <file>res/forward.png</file>
         <file>res/back.png</file>
+        <file>res/znotes32_bw.png</file>
     </qresource>
 </RCC>

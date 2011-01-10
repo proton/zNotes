@@ -15,10 +15,12 @@
 /*
 	Tray icon on windows is very small
 */
-#ifdef unix
-#define TRAY_ICON_FILE_NAME ":/res/znotes32.png"
+#ifdef Q_WS_WIN
+	#define TRAY_ICON_FILE_NAME ":/res/znotes.png"
+#elif Q_WS_MAC
+	#define TRAY_ICON_FILE_NAME ":/res/znotes32_bw.png"
 #else
-#define TRAY_ICON_FILE_NAME ":/res/znotes.png"
+	#define TRAY_ICON_FILE_NAME ":/res/znotes32.png"
 #endif
 
 Settings settings;
