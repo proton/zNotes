@@ -2,8 +2,11 @@
 Name=zNotes
 GenericName=Simple Notes
 GenericName[ru]=Простые заметки
+GenericName[sk]=Jednoduché poznámky
 Type=Application
-Comment=Simple Notes
+Comment=Lightweigh crossplatform application for notes management
+Comment[ru]=Лёгкая кроссплатформенная утилита для управлению заметками
+Comment[sk]=Jednoduchý správca poznámok
 Exec=znotes
 TryExec=znotes
 Icon=znotes
