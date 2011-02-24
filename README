@@ -6,3 +6,6 @@ lrelease znotes.pro #for Fedora - lrelease-qt4 znotes.pro
 qmake
 make
 make install
+
+DEPENDENCIES:
+Qt 4.5 (or higher)
