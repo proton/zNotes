@@ -27,5 +27,19 @@
         <file>res/forward.png</file>
         <file>res/back.png</file>
         <file>res/znotes32_bw.png</file>
+        <file>res/note_types/16/binary.png</file>
+        <file>res/note_types/16/html.png</file>
+        <file>res/note_types/16/pic.png</file>
+        <file>res/note_types/16/todo.png</file>
+        <file>res/note_types/16/txt.png</file>
+        <file>res/note_types/16/unknown.png</file>
+        <file>res/note_types/16/xml.png</file>
+        <file>res/note_types/binary.png</file>
+        <file>res/note_types/html.png</file>
+        <file>res/note_types/pic.png</file>
+        <file>res/note_types/todo.png</file>
+        <file>res/note_types/txt.png</file>
+        <file>res/note_types/unknown.png</file>
+        <file>res/note_types/xml.png</file>
     </qresource>
 </RCC>
