@@ -4,7 +4,7 @@
 #include <QtGui/QMainWindow>
 #include <QSystemTrayIcon>
 #include <QMenu>
-#include <QTimer>
+//#include <QTimer>
 #include <QSignalMapper>
 #include <QAction>
 #include <QShortcut>
@@ -13,6 +13,8 @@
 #include "notelist.h"
 #include "settings.h"
 #include "toolbaraction.h"
+
+class NoteCreateWidget;
 
 namespace Ui
 {
@@ -33,14 +35,14 @@ private:
 	Ui::MainWindow *ui;
 	//
 	NoteList* notes;
+	NoteCreateWidget* note_create_widget;
 	//
 	QSystemTrayIcon tray;
 	QMenu cmenu;
 	QMenu cmd_menu;
 	QSignalMapper cmd_mapper;
 	QSignalMapper alt_mapper;
-	QTimer SaveTimer;
-	QTimer ScanTimer;
+	//QTimer SaveTimer;
 	//
 	QAction* actions[itemMax];
 //	//
@@ -55,6 +57,7 @@ private:
 	void Search(bool next);
 	void changeEvent(QEvent *e);
 public slots:
+	void NewNote();
 	void NewNotePlain();
 	void NewNoteHTML();
 	void NewNoteTODO();

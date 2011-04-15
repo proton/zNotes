@@ -18,22 +18,24 @@
 
 void NoteList::initNoteTypes()
 {
-	//NOTE_TYPE_MAP init
-	NOTE_TYPE_MAP[""] = Note::type_text;
-	NOTE_TYPE_MAP["txt"] = Note::type_text;
-	NOTE_TYPE_MAP["htm"] = Note::type_html;
-	NOTE_TYPE_MAP["html"] = Note::type_html;
-	NOTE_TYPE_MAP["jpg"] = Note::type_picture;
-	NOTE_TYPE_MAP["jpeg"] = Note::type_picture;
-	NOTE_TYPE_MAP["bmp"] = Note::type_picture;
-	NOTE_TYPE_MAP["gif"] = Note::type_picture;
-	NOTE_TYPE_MAP["png"] = Note::type_picture;
+	registerType(Note::type_text, QObject::tr("Text Note"), QObject::tr("Simple text Note"), ":/res/note_types/txt.png", ":/res/note_types/16/txt.png", "txt,");
+	registerType(Note::type_html, QObject::tr("HTML Note"), QObject::tr("Simple Note with text formating"), ":/res/note_types/html.png", ":/res/note_types/16/html.png", "html,htm");
+	registerType(Note::type_picture, QObject::tr("Picture Note"), QObject::tr("Simple text Note"), ":/res/note_types/pic.png", ":/res/note_types/16/pic.png", "png,jpeg,jpg,png,gif", false);
 #ifdef NOTE_TODO_FORMAT
-	NOTE_TYPE_MAP["ztodo"] = Note::type_todo;
+	registerType(Note::type_todo, QObject::tr("TODO Note"), QObject::tr("Simple TODO list"), ":/res/note_types/todo.png", ":/res/note_types/16/todo.png", "ztodo");
 #endif
 #ifdef NOTE_XML_FORMAT
-	NOTE_TYPE_MAP["xml"] = Note::type_xml;
+	registerType(Note::type_xml, QObject::tr("XML Note"), QObject::tr("XML file"), ":/res/note_types/xml.png", ":/res/note_types/16/xml.png", "xml");
 #endif
+}
+
+void NoteList::registerType(Note::Type id, const QString& title,
+					const QString& description, const QString& big_icon_path,
+					const QString& small_icon_path, const QString extensions,
+					bool visible)
+{
+	note_types[id] = NoteType(id, title, description, big_icon_path, small_icon_path, extensions, visible);
+	foreach(const QString& extension, note_types[id].extensions()) NOTE_TYPE_MAP[extension] = id;
 }
 
 NoteList::NoteList(QWidget* parent)
@@ -75,7 +77,7 @@ NoteList::NoteList(QWidget* parent)
 		if(old_index==-1 && note->fileName()==last_note_title) old_index = i;
 	}
 	if(old_index!=-1) tabs->setCurrentIndex(old_index);
-	else if(empty()) create("%1");
+	else if(empty()) create(Note::type_html);
 	current_index = tabs->currentIndex();
 
 	watcher = new QFileSystemWatcher(this);
@@ -114,14 +116,15 @@ Note::Type NoteList::getType(const QFileInfo& fileinfo) const
 	return NOTE_TYPE_MAP[fileinfo.suffix().toLower()];
 }
 
-void NoteList::create(const QString& mask)
+void NoteList::create(Note::Type type, const QString& name)
 {
-	int n = 0;
-	QString filename = QString(mask).arg(n);
+	QString extension = noteTypes()[type].defaultExtension();
+	QString filename = QString("%1.%2").arg(name.isEmpty()?"0":name).arg(extension);
 	QFile file(dir.absoluteFilePath(filename));
+	int n = 0;
 	while(file.exists()) //Searching for free filename
 	{
-		filename = QString(mask).arg(++n);
+		filename = QString("%1.%2").arg(++n).arg(extension);
 		file.setFileName(dir.absoluteFilePath(filename));
 	}
 	add(file);
@@ -228,7 +231,7 @@ void NoteList::renameCurrentNote()
 
 void NoteList::rename(int index, const QString& title)
 {
-	Note* note = vec[index];
+	Note* note = vec.at(index);
 	note->save();
 	notes_filenames.remove(note->fileName());
 	note->rename(title);

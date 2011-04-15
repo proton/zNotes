@@ -24,7 +24,10 @@ SOURCES += main.cpp \
     note_text.cpp \
     note_html.cpp \
     note_picture.cpp \
-    application.cpp
+    application.cpp \
+    notecreatewidget.cpp \
+    notetype.cpp \
+    notecreatebutton.cpp
 HEADERS += mainwindow.h \
     configdialog.h \
     settings.h \
@@ -39,10 +42,14 @@ HEADERS += mainwindow.h \
     note_text.h \
     note_html.h \
     note_picture.h \
-    application.h
+    application.h \
+    notecreatewidget.h \
+    notetype.h \
+    notecreatebutton.h
 FORMS += mainwindow.ui \
     configdialog.ui \
-    aboutDialog.ui
+    aboutDialog.ui \
+    notecreatewidget.ui
 TRANSLATIONS += translations/znotes_ru.ts \
 	translations/znotes_cs.ts \
 	translations/znotes_pt_BR.ts \

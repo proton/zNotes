@@ -22,6 +22,7 @@ public:
 #ifdef NOTE_XML_FORMAT
 		type_xml,
 #endif
+		//type_count
 	};
 public:
 	Note(const QFileInfo& fileinfo, Note::Type type_new);
@@ -57,6 +58,7 @@ public:
 	{
 		Q_UNUSED(locale)
 	}
+
 private:
 	Type _type;
 	QString _title;

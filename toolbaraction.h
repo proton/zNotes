@@ -9,6 +9,7 @@ enum item_enum
 {
 	itemSeparator,
 	itemAdd,
+	itemAddText,
 	itemAddHtml,
 	itemAddTodo,
 	itemRemove,
@@ -42,6 +43,7 @@ public:
 		{
 			case itemSeparator:	return QObject::tr("Separator");
 			case itemAdd:		return QObject::tr("Create new note");
+			case itemAddText:	return QObject::tr("Create new Text note");
 			case itemAddHtml:	return QObject::tr("Create new HTML note");
 			case itemAddTodo:	return QObject::tr("Create new TODO note");
 			case itemRemove:	return QObject::tr("Remove this note");
@@ -70,6 +72,7 @@ public:
 		switch(item_id)
 		{
 			case itemAdd:		return QIcon(":/res/add.png");
+			case itemAddText:	return QIcon(":/res/add.png");
 			case itemAddHtml:	return QIcon(":/res/add.png");
 			case itemAddTodo:	return QIcon(":/res/add.png");
 			case itemRemove:	return QIcon(":/res/remove.png");
@@ -98,6 +101,7 @@ public:
 		switch(item_id)
 		{
 			case itemAdd:		return "Toolbar/itemAdd";
+			case itemAddText:	return "Toolbar/itemAddText";
 			case itemAddHtml:	return "Toolbar/itemAddHtml";
 			case itemAddTodo:	return "Toolbar/itemAddTodo";
 			case itemRemove:	return "Toolbar/itemRemove";
@@ -141,6 +145,7 @@ public:
 		switch(item_id)
 		{
 		case itemAdd:
+		case itemAddText:
 		case itemAddHtml:
 		case itemAddTodo:
 			return true;

@@ -2,6 +2,7 @@
 #define NOTELIST_H
 
 #include "note.h"
+#include "notetype.h"
 
 #include <QVector>
 #include <QList>
@@ -30,13 +31,19 @@ public:
 	inline bool historyHasBack() const { return history_index>0; }
 	inline bool historyHasForward() const { return (history_index+1)<history.size(); }
 	//
-	void create(const QString& mask);
+	void create(Note::Type type, const QString& name = QString());
 	//
 	void search(const QString& text);
 	//
 	inline QTabWidget* getWidget() const { return tabs; }
 	//
 	void retranslate(const QLocale& locale);
+	//
+	inline const QMap<Note::Type,NoteType>& noteTypes() { return note_types; }
+	void registerType(Note::Type id, const QString& title,
+					  const QString& description, const QString& big_icon_path,
+					  const QString& small_icon_path, const QString extensions,
+					  bool visible = true);
 private:
 	void initNoteTypes();
 	Note::Type getType(const QFileInfo& fileinfo) const;
@@ -61,6 +68,7 @@ private slots:
 signals:
 	void currentNoteChanged(int old_index, int new_index);
 private:
+	QMap<Note::Type,NoteType> note_types;
 	QSet<QString> notes_filenames;
 	QMap<QString, Note::Type> NOTE_TYPE_MAP;
 	QList<Note*> vec;
