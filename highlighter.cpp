@@ -4,27 +4,26 @@
 Highlighter::Highlighter(QTextDocument *parent)
 	: QSyntaxHighlighter(parent)
 {
-	HighlightingRule rule;
-
-	linkFormat.setForeground(Qt::blue);
-	rule.format = linkFormat;
-	rule.pattern = QRegExp("(http|https|ftp)://\\S+");
-	highlightingRules.append(rule);
 }
 
 void Highlighter::highlightBlock(const QString &text)
 {
-	if(settings.getNoteLinksHighlight())
+	if(settings.getNoteHighlight())
 	{
-		foreach (const HighlightingRule &rule, highlightingRules)
+		foreach (const HighlightRule &rule, settings.getHighlightRules())
 		{
-			QRegExp expression(rule.pattern);
+			if(!rule.enabled) continue;
+			if(rule.regexp.isEmpty()) continue;
+			QRegExp expression(rule.regexp);
+			if(!expression.isValid()) continue;
+			QTextCharFormat format;
+			format.setForeground(rule.color);
 			int index = expression.indexIn(text);
 			while (index >= 0)
 			{
 				int length = expression.matchedLength();
-				setFormat(index, length, rule.format);
-				index = expression.indexIn(text, index + length);
+				setFormat(index, length, format);
+				index = expression.indexIn(text, index+length);
 			}
 		}
 	}

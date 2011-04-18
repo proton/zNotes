@@ -9,15 +9,6 @@ public:
 	Highlighter(QTextDocument *parent = 0);
 protected:
 	void highlightBlock(const QString &text);
-private:
-	struct HighlightingRule
-	{
-		QRegExp pattern;
-		QTextCharFormat format;
-	};
-	QVector<HighlightingRule> highlightingRules;
-public:
-	QTextCharFormat linkFormat;
 };
 
 #endif // HIGHLIGHTER_H

@@ -16,6 +16,7 @@
 #include <QLabel>
 #include <QCheckBox>
 #include <QMenu>
+#include <QTextStream>
 
 enum
 {

@@ -92,7 +92,7 @@ void TextEdit::mouseMoveEvent(QMouseEvent *e)
 		sel.cursor = textCursor();
 		sel.cursor.setPosition(position_start);
 		sel.cursor.setPosition(position_end, QTextCursor::KeepAnchor);
-		sel.format = highlighter->linkFormat;
+		//sel.format = highlighter->linkFormat;
 		sel.format.setFontUnderline(true);
 		setExtraSelections(QList<QTextEdit::ExtraSelection>() << sel); //Underlining link
 		viewport()->setCursor(Qt::PointingHandCursor);

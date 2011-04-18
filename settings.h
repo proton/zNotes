@@ -17,6 +17,23 @@
 
 #include "scriptmodel.h"
 
+struct HighlightRule
+{
+	HighlightRule(bool e, const QString& r, const QColor& c)
+		: enabled(e), regexp(r), color(c) {}
+	HighlightRule() {}
+	bool enabled;
+	QString regexp;
+	QColor color;
+	inline bool operator == (const HighlightRule& hr) const
+	{
+		if(enabled!=hr.enabled) return false;
+		if(regexp!=hr.regexp) return false;
+		if(color!=hr.color) return false;
+		return true;
+	}
+};
+
 enum TabPosition { North, South, West, East };
 
 class Settings : public QObject
@@ -43,11 +60,12 @@ public:
 	inline bool getScriptShowOutput()				{ return script_show_output; }
 	inline bool getScriptCopyOutput()				{ return script_copy_output; }
 	inline const QVector<int>& getToolbarItems()	{ return tb_items; }
+	inline bool getNoteHighlight()					{ return note_highlight; }
+	inline const QVector<HighlightRule>& getHighlightRules()	{ return highlight_rules; }
 	inline const QMap<int, QMap<int, QString> >& getTranslations()	{ return translations; }
 	inline const QLocale& getLocaleCurrent()		{ return locale_current; }
 	inline const QLocale& getLocale()				{ return locale; }
 	inline bool getLanguageCustom()					{ return language_custom; }
-	inline bool getNoteLinksHighlight()				{ return note_links_highlight; }
 	inline bool getNoteLinksOpen()					{ return note_links_open; }
 	inline bool getNotePastePlaintext()				{ return note_paste_plaintext; }
 	//
@@ -68,9 +86,10 @@ public:
 	void setScriptCopyOutput(bool);
 	void setScripts();
 	void setToolbarItems(const QVector<int>&);
+	void setNoteHighlight(bool);
+	void setHighlightRules(const QVector<HighlightRule>&);
 	void setLocaleCurrent(const QLocale&);
 	void setLocaleCustom(bool);
-	void setNoteLinksHighlight(bool);
 	void setNoteLinksOpen(bool);
 	void setNotePastePlaintext(bool);
 	//
@@ -106,9 +125,11 @@ private:
 	bool copy_start_raise;
 	//
 	QFont note_font;
-	bool note_links_highlight;
 	bool note_links_open;
 	bool note_paste_plaintext;
+	//
+	bool note_highlight;
+	QVector<HighlightRule> highlight_rules;
 	//
 	ScriptModel script_model;
 	bool script_show_output;

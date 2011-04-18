@@ -37,7 +37,6 @@ void Settings::load()
 		copy_start_raise = config.value("CopyStartRaise").toBool();
 		//
 		note_font.fromString(config.value("NoteFont").toString());
-		note_links_highlight = config.value("NoteLinksHighlight").toBool();
 		note_links_open = config.value("NoteLinksOpen").toBool();
 		note_paste_plaintext = config.value("NotePastePlaintext").toBool();
 		//
@@ -49,6 +48,19 @@ void Settings::load()
 				config.value(QString("ComandFile%1").arg(i)).toString(),
 				config.value(QString("ComandIcon%1").arg(i)).toString());
 		}
+		note_highlight = config.value("NoteHighlight").toBool();
+
+		int HighlightRuleCount = config.beginReadArray("HighlightRules");
+		highlight_rules.resize(HighlightRuleCount);
+		for(int i=0; i<highlight_rules.size(); ++i)
+		{
+			config.setArrayIndex(i);
+			highlight_rules[i].enabled = config.value("enabled").toBool();
+			highlight_rules[i].regexp = config.value("regexp").toString();
+			highlight_rules[i].color = QColor(config.value("color").toString());
+		}
+		config.endArray();
+
 		script_show_output = config.value("ScriptShowOutput").toBool();
 		script_copy_output = config.value("ScriptCopyOutput").toBool();
 		//
@@ -92,11 +104,6 @@ void Settings::load()
 		config.setValue("CopyStartRaise", copy_start_raise);
 	}
 	//Setting default note options
-	if(!config.contains("NoteLinksHighlight"))
-	{
-		note_links_highlight = true;
-		config.setValue("NoteLinksHighlight", note_links_highlight);
-	}
 	if(!config.contains("NoteLinksOpen"))
 	{
 		note_links_open = true;
@@ -106,6 +113,30 @@ void Settings::load()
 	{
 		note_paste_plaintext = false;
 		config.setValue("NotePastePlaintext", note_paste_plaintext);
+	}
+	//Setting default highlight rules
+	if(!config.contains("NoteHighlight"))
+	{
+		if(config.contains("NoteLinksHighlight"))
+			note_highlight = config.value("NoteLinksHighlight").toBool();
+		else
+			note_highlight = true;
+
+		config.setValue("NoteHighlight", note_highlight);
+		highlight_rules.append(HighlightRule(true, "(http|https|ftp)://\\S+", QColor(Qt::blue)));
+		highlight_rules.append(HighlightRule(false, "(\\d{1,3}\\.){3,3}\\d{1,3}(\\:\\d+)?", QColor("#500000")));
+		highlight_rules.append(HighlightRule(false, "(0x|)\\d+", QColor("#147E16")));
+		highlight_rules.append(HighlightRule(false, "#[0-9a-fA-F]{6,6}", QColor("#CEC51B")));
+
+		config.beginWriteArray("HighlightRules", highlight_rules.size());
+		for(int i=0; i<highlight_rules.size(); ++i)
+		{
+			config.setArrayIndex(i);
+			config.setValue("enabled", highlight_rules.at(i).enabled);
+			config.setValue("regexp", highlight_rules.at(i).regexp);
+			config.setValue("color", highlight_rules.at(i).color);
+		}
+		config.endArray();
 	}
 	//Setting default scripts
 	if((script_model.rowCount()==0) && !config.contains("ComandCount"))
@@ -371,12 +402,12 @@ void Settings::setNoteFont(const QFont& v)
 /*
   Saving notes's links highlight option
 */
-void Settings::setNoteLinksHighlight(bool v)
+void Settings::setNoteHighlight(bool v)
 {
-	if(note_links_highlight != v)
+	if(note_highlight != v)
 	{
-		note_links_highlight = v;
-		config.setValue("NoteLinksHighlight", note_links_highlight);
+		note_highlight = v;
+		config.setValue("NoteHighlight", note_highlight);
 		emit NoteHighlightChanged();
 	}
 }
@@ -460,6 +491,26 @@ void Settings::setToolbarItems(const QVector<int>& v)
 		config.setValue(ToolbarAction(item_enum(tb_items[i])).pref_name(), i);
 	}
 	emit ToolbarItemsChanged();
+}
+
+/*
+  Saving highlight rules
+*/
+
+void Settings::setHighlightRules(const QVector<HighlightRule>& v)
+{
+	if(highlight_rules==v) return;
+	highlight_rules = v;
+	config.beginWriteArray("HighlightRules", highlight_rules.size());
+	for(int i=0; i<highlight_rules.size(); ++i)
+	{
+		config.setArrayIndex(i);
+		config.setValue("enabled", highlight_rules.at(i).enabled);
+		config.setValue("regexp", highlight_rules.at(i).regexp);
+		config.setValue("color", highlight_rules.at(i).color.name());
+	}
+	config.endArray();
+	emit NoteHighlightChanged();
 }
 
 /*

@@ -27,7 +27,8 @@ SOURCES += main.cpp \
     application.cpp \
     notecreatewidget.cpp \
     notetype.cpp \
-    notecreatebutton.cpp
+    notecreatebutton.cpp \
+    highlightrulemodel.cpp
 HEADERS += mainwindow.h \
     configdialog.h \
     settings.h \
@@ -45,7 +46,8 @@ HEADERS += mainwindow.h \
     application.h \
     notecreatewidget.h \
     notetype.h \
-    notecreatebutton.h
+    notecreatebutton.h \
+    highlightrulemodel.h
 FORMS += mainwindow.ui \
     configdialog.ui \
     aboutDialog.ui \

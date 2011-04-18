@@ -3,14 +3,11 @@
 
 #include "settings.h"
 #include "toolbarmodel.h"
+#include "highlightrulemodel.h"
 
 #include <QFileDialog>
 #include <QFontDialog>
 #include <QColorDialog>
-
-ToolbarItems* t_items;
-ItemModel* m_items;
-ItemToolbarModel* mt_items;
 
 configDialog::configDialog(QWidget *parent) :
 	QDialog(parent), m_ui(new Ui::configDialog)
@@ -49,14 +46,22 @@ configDialog::configDialog(QWidget *parent) :
 #endif
 	//
 	m_ui->tabScripts->setModel(&settings.getScriptModel());
-	m_ui->tabScripts->resizeColumnsToContents();
+	m_ui->tabScripts->horizontalHeader()->setResizeMode(QHeaderView::Stretch);
 	m_ui->cb_ScriptShowOutput->setChecked(settings.getScriptShowOutput());
 	m_ui->cb_ScriptCopyOutput->setChecked(settings.getScriptCopyOutput());
 	//
 	m_ui->lb_FontExample->setFont(settings.getNoteFont());
-	m_ui->cb_NoteLinksHighlight->setChecked(settings.getNoteLinksHighlight());
 	m_ui->cb_NoteLinksOpen->setChecked(settings.getNoteLinksOpen());
 	m_ui->cb_NotePastePlaintext->setChecked(settings.getNotePastePlaintext());
+	//
+	m_ui->cb_NoteHighlight->setChecked(settings.getNoteHighlight());
+	m_ui->highlightRulesTableView->setEnabled(settings.getNoteHighlight());
+	connect(m_ui->cb_NoteHighlight, SIGNAL(toggled(bool)), m_ui->highlightRulesTableView, SLOT(setEnabled(bool)));
+	highlight_rule_model = new HighlightRuleModel(this, settings.getHighlightRules());
+	m_ui->highlightRulesTableView->setModel(highlight_rule_model);
+	m_ui->highlightRulesTableView->horizontalHeader()->setResizeMode(QHeaderView::Stretch);
+	connect(m_ui->highlightRulesTableView->selectionModel(), SIGNAL(currentRowChanged(QModelIndex,QModelIndex)),
+			this, SLOT(currentHighlightRuleModelRowChanged(QModelIndex,QModelIndex)));
 	//
 	const QMap<int, QMap<int, QString> >& translations = settings.getTranslations();
 	QMapIterator<int, QMap<int, QString> > translation(translations);
@@ -110,9 +115,10 @@ void configDialog::SaveSettings()
 	settings.setCopyStartRaise(m_ui->cb_CopyStartRaise->checkState());
 #endif
 	settings.setNoteFont(m_ui->lb_FontExample->font());
-	settings.setNoteLinksHighlight(m_ui->cb_NoteLinksHighlight->checkState());
 	settings.setNoteLinksOpen(m_ui->cb_NoteLinksOpen->checkState());
 	settings.setNotePastePlaintext(m_ui->cb_NotePastePlaintext->checkState());
+	settings.setNoteHighlight(m_ui->cb_NoteHighlight->checkState());
+	settings.setHighlightRules(highlight_rule_model->getRules());
 	settings.setScriptShowOutput(m_ui->cb_ScriptShowOutput->checkState());
 	settings.setScriptCopyOutput(m_ui->cb_ScriptCopyOutput->checkState());
 	settings.setToolbarItems(t_items->getToolbarElems());
@@ -237,3 +243,35 @@ void configDialog::changeEvent(QEvent *e)
 	}
 }
 
+void configDialog::on_highlightRuleAddButton_clicked()
+{
+	highlight_rule_model->appendRow();
+}
+
+void configDialog::on_highlightRuleRemoveButton_clicked()
+{
+	highlight_rule_model->removeRow(m_ui->highlightRulesTableView->currentIndex());
+}
+
+void configDialog::currentHighlightRuleModelRowChanged(QModelIndex index, QModelIndex)
+{
+	m_ui->highlightRuleRemoveButton->setEnabled(index.isValid());
+	m_ui->highlightRuleUpButton->setEnabled(index.row()>0);
+	m_ui->highlightRuleDownButton->setEnabled(index.row()<(highlight_rule_model->rowCount()-1));
+}
+
+void configDialog::on_highlightRuleUpButton_clicked()
+{
+	qDebug() << __LINE__;
+	highlight_rule_model->up(m_ui->highlightRulesTableView->currentIndex());
+	qDebug() << __LINE__;
+	currentHighlightRuleModelRowChanged(m_ui->highlightRulesTableView->currentIndex());
+}
+
+void configDialog::on_highlightRuleDownButton_clicked()
+{
+	qDebug() << __LINE__;
+	highlight_rule_model->down(m_ui->highlightRulesTableView->currentIndex());
+	qDebug() << __LINE__;
+	currentHighlightRuleModelRowChanged(m_ui->highlightRulesTableView->currentIndex());
+}
