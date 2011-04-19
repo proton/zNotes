@@ -1,3 +1,10 @@
+zNotes 0.4.5:
+* Added version for MeeGo
+* Fixed problems with creating and using notes directory on MeeGo 
+* Added Note Creation Dialog
+* Added highlighting rules setup to configuration dialog
+* Optimized source code
+
 zNotes 0.4.4:
 * Fixed segfault on removing last note
 * HTTPS and FTP links may be highlighted now
