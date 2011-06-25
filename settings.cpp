@@ -141,8 +141,11 @@ void Settings::load()
 	//Setting default scripts
 	if((script_model.rowCount()==0) && !config.contains("ComandCount"))
 	{
+	#ifdef unix
 		script_model.append("Print note's content", "cat", "");
-		script_model.append("Upload to pasterbin", "/usr/bin/pastebin", "");
+	#elif Q_WS_WIN
+		//
+	#endif
 		config.setValue("ComandCount", script_model.rowCount());
 		for(int i=0; i<script_model.rowCount(); ++i)
 		{
