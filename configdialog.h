@@ -19,6 +19,9 @@ class configDialog : public QDialog {
 public:
 	configDialog(QWidget *parent = 0);
 	~configDialog();
+	//
+	void changeTabToFirst();
+	void changeTabToCommands();
 
 private:
 	Ui::configDialog *m_ui;

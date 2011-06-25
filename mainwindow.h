@@ -88,6 +88,7 @@ public slots:
 	//
 	void cmd_changed();
 	void cmdExec(const QString &);
+	void edit_command_list();
 	//
 	void windowStateChanged();
 	//

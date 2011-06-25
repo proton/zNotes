@@ -187,6 +187,8 @@ void MainWindow::cmd_changed()
 		cmd_mapper.setMapping(cmd_menu.actions().last(), sm.getFile(i));
 		connect(&cmd_mapper, SIGNAL(mapped(const QString &)), this, SLOT(cmdExec(const QString &)));
 	}
+	cmd_menu.addSeparator();
+	cmd_menu.addAction(tr("Edit command list"), this, SLOT(edit_command_list()));
 }
 
 void MainWindow::actions_changed()
@@ -198,6 +200,13 @@ void MainWindow::actions_changed()
 		if(items[i]==itemSeparator) ui->mainToolBar->addSeparator();
 		else ui->mainToolBar->addAction(actions[items[i]]);
 	}
+}
+
+void MainWindow::edit_command_list()
+{
+	configDialog dlg;
+	dlg.changeTabToCommands();
+	dlg.exec();
 }
 
 void MainWindow::formatChanged(const QFont& font)
