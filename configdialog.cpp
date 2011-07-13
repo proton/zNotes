@@ -262,16 +262,22 @@ void configDialog::currentHighlightRuleModelRowChanged(QModelIndex index, QModel
 
 void configDialog::on_highlightRuleUpButton_clicked()
 {
-	qDebug() << __LINE__;
 	highlight_rule_model->up(m_ui->highlightRulesTableView->currentIndex());
-	qDebug() << __LINE__;
 	currentHighlightRuleModelRowChanged(m_ui->highlightRulesTableView->currentIndex());
 }
 
 void configDialog::on_highlightRuleDownButton_clicked()
 {
-	qDebug() << __LINE__;
 	highlight_rule_model->down(m_ui->highlightRulesTableView->currentIndex());
-	qDebug() << __LINE__;
 	currentHighlightRuleModelRowChanged(m_ui->highlightRulesTableView->currentIndex());
+}
+
+void configDialog::changeTabToFirst()
+{
+	m_ui->tabWidget->setCurrentIndex(0);
+}
+
+void configDialog::changeTabToCommands()
+{
+	m_ui->tabWidget->setCurrentIndex(1);
 }
