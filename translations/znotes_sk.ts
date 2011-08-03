@@ -54,14 +54,19 @@ You can add new commands in preferences.</source>
 Nové príkazy môžetez adať v nastaveniach.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="295"/>
-        <location filename="../mainwindow.cpp" line="519"/>
+        <location filename="../mainwindow.cpp" line="191"/>
+        <source>Edit command list</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="304"/>
+        <location filename="../mainwindow.cpp" line="528"/>
         <source>Show</source>
         <translation>Zobraziť</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="296"/>
-        <location filename="../mainwindow.cpp" line="520"/>
+        <location filename="../mainwindow.cpp" line="305"/>
+        <location filename="../mainwindow.cpp" line="529"/>
         <source>Hide</source>
         <translation>Skryť</translation>
     </message>
@@ -520,91 +525,96 @@ Text licencie môžet nájsť v súbore LICENSE.</translation>
     </message>
     <message>
         <location filename="../aboutDialog.cpp" line="34"/>
+        <source>Spanish translation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../aboutDialog.cpp" line="36"/>
         <source>Ukrainian translation</source>
         <translation>Ukrajinčina</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="35"/>
+        <location filename="../aboutDialog.cpp" line="37"/>
         <source>Icons:</source>
         <translation>Ikony:</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="37"/>
+        <location filename="../aboutDialog.cpp" line="39"/>
         <source>All icons are modified icons from Oxygen project</source>
         <translation>Všetky ikony sú upravenými ikonami projektu Oxygen</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="41"/>
+        <location filename="../aboutDialog.cpp" line="43"/>
         <source>Testing:</source>
         <translation>Testovanie:</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="47"/>
+        <location filename="../aboutDialog.cpp" line="49"/>
         <source>Releasing:</source>
         <translation>Vydávanie:</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="63"/>
+        <location filename="../aboutDialog.cpp" line="65"/>
         <source>Shortcuts:</source>
         <translation>Skratky:</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="64"/>
+        <location filename="../aboutDialog.cpp" line="66"/>
         <source>Go to note n</source>
         <translation>Prejsť na poznámku n</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="65"/>
+        <location filename="../aboutDialog.cpp" line="67"/>
         <source>Go to previous note</source>
         <translation>Prejsť na predošlú poznámku</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="66"/>
+        <location filename="../aboutDialog.cpp" line="68"/>
         <source>Go to next note</source>
         <translation>Prejsť na ďalšiu poznámku</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="67"/>
+        <location filename="../aboutDialog.cpp" line="69"/>
         <source>Create new note</source>
         <translation>Vytvoriť novú poznámku</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="68"/>
+        <location filename="../aboutDialog.cpp" line="70"/>
         <source>Remove current note</source>
         <translation>Odstrániť túto poznámku</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="69"/>
+        <location filename="../aboutDialog.cpp" line="71"/>
         <source>Rename current note</source>
         <translation>Premenovať túto poznámku</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="70"/>
+        <location filename="../aboutDialog.cpp" line="72"/>
         <source>Search in the notes&apos; text</source>
         <translation>Hľadať v texte poznámok</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="71"/>
+        <location filename="../aboutDialog.cpp" line="73"/>
         <source>Make selected text bold</source>
         <translation>Zmeniť označený text na tučný</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="72"/>
+        <location filename="../aboutDialog.cpp" line="74"/>
         <source>Make selected text italic</source>
         <translation>Zmeniť označený text na šikmý</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="73"/>
+        <location filename="../aboutDialog.cpp" line="75"/>
         <source>Make selected text strikeout</source>
         <translation>Zmeniť označený text na prečiarknutý</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="74"/>
+        <location filename="../aboutDialog.cpp" line="76"/>
         <source>Make selected text underline</source>
         <translation>Zmeniť označený text na podčiarknutý</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="75"/>
+        <location filename="../aboutDialog.cpp" line="77"/>
         <source>Exit program</source>
         <translation>Skončiť program</translation>
     </message>

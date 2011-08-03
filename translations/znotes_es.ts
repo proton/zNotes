@@ -54,14 +54,19 @@ You can add new commands in preferences.</source>
 Usted puede agregar nuevos comandos en las preferencias.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="295"/>
-        <location filename="../mainwindow.cpp" line="519"/>
+        <location filename="../mainwindow.cpp" line="191"/>
+        <source>Edit command list</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="304"/>
+        <location filename="../mainwindow.cpp" line="528"/>
         <source>Show</source>
         <translation>Mostrar</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="296"/>
-        <location filename="../mainwindow.cpp" line="520"/>
+        <location filename="../mainwindow.cpp" line="305"/>
+        <location filename="../mainwindow.cpp" line="529"/>
         <source>Hide</source>
         <translation>Ocultar</translation>
     </message>
@@ -512,91 +517,96 @@ El texto de la licencia se puede encontrar en el archivo de licencia.</translati
     </message>
     <message>
         <location filename="../aboutDialog.cpp" line="34"/>
+        <source>Spanish translation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../aboutDialog.cpp" line="36"/>
         <source>Ukrainian translation</source>
         <translation>Traducción de Ucrania</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="35"/>
+        <location filename="../aboutDialog.cpp" line="37"/>
         <source>Icons:</source>
         <translation>Iconos:</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="37"/>
+        <location filename="../aboutDialog.cpp" line="39"/>
         <source>All icons are modified icons from Oxygen project</source>
         <translation>Todos los iconos se han modificado los iconos del proyecto de Oxígeno</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="41"/>
+        <location filename="../aboutDialog.cpp" line="43"/>
         <source>Testing:</source>
         <translation>A prueba:</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="47"/>
+        <location filename="../aboutDialog.cpp" line="49"/>
         <source>Releasing:</source>
         <translation>Liberación:</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="63"/>
+        <location filename="../aboutDialog.cpp" line="65"/>
         <source>Shortcuts:</source>
         <translation>Atajos:</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="64"/>
+        <location filename="../aboutDialog.cpp" line="66"/>
         <source>Go to note n</source>
         <translation>Ir a la nota n</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="65"/>
+        <location filename="../aboutDialog.cpp" line="67"/>
         <source>Go to previous note</source>
         <translation>Ir a la nota previosa</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="66"/>
+        <location filename="../aboutDialog.cpp" line="68"/>
         <source>Go to next note</source>
         <translation>Ir a la nota siguiente</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="67"/>
+        <location filename="../aboutDialog.cpp" line="69"/>
         <source>Create new note</source>
         <translation>Crear nueva nota</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="68"/>
+        <location filename="../aboutDialog.cpp" line="70"/>
         <source>Remove current note</source>
         <translation>Eliminar la nota actual</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="69"/>
+        <location filename="../aboutDialog.cpp" line="71"/>
         <source>Rename current note</source>
         <translation>Cambiar el nombre de nota actual</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="70"/>
+        <location filename="../aboutDialog.cpp" line="72"/>
         <source>Search in the notes&apos; text</source>
         <translation>Buscar en las notas de texto</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="71"/>
+        <location filename="../aboutDialog.cpp" line="73"/>
         <source>Make selected text bold</source>
         <translation>Hacer que el texto seleccionado en negrita</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="72"/>
+        <location filename="../aboutDialog.cpp" line="74"/>
         <source>Make selected text italic</source>
         <translation>Hacer que el texto seleccionado en italico</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="73"/>
+        <location filename="../aboutDialog.cpp" line="75"/>
         <source>Make selected text strikeout</source>
         <translation>Hacer tachado el texto seleccionado</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="74"/>
+        <location filename="../aboutDialog.cpp" line="76"/>
         <source>Make selected text underline</source>
         <translation>Hacer subrayado el texto seleccionado</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="75"/>
+        <location filename="../aboutDialog.cpp" line="77"/>
         <source>Exit program</source>
         <translation>Salir del programa</translation>
     </message>
