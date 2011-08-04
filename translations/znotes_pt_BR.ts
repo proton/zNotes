@@ -6,12 +6,12 @@
     <message>
         <location filename="../highlightrulemodel.cpp" line="26"/>
         <source>Pattern</source>
-        <translation type="unfinished"></translation>
+        <translation>Padrão</translation>
     </message>
     <message>
         <location filename="../highlightrulemodel.cpp" line="27"/>
         <source>Color</source>
-        <translation type="unfinished"></translation>
+        <translation>Cores</translation>
     </message>
 </context>
 <context>
@@ -90,7 +90,7 @@ Você pode adicionar novos comandos em preferências.</translation>
     <message>
         <location filename="../mainwindow.cpp" line="191"/>
         <source>Edit command list</source>
-        <translation type="unfinished"></translation>
+        <translation>Editar lista de comandos</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="304"/>
@@ -110,17 +110,17 @@ Você pode adicionar novos comandos em preferências.</translation>
     <message>
         <location filename="../notecreatewidget.ui" line="14"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation>Form</translation>
     </message>
     <message>
         <location filename="../notecreatewidget.ui" line="22"/>
         <source>New note name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Nome da nova nota:</translation>
     </message>
     <message>
         <location filename="../notecreatewidget.ui" line="41"/>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Cancelar</translation>
     </message>
 </context>
 <context>
@@ -218,12 +218,12 @@ Você deseja mover suas notas para o novo lugar?</translation>
     <message>
         <location filename="../toolbaraction.h" line="46"/>
         <source>Create new Text note</source>
-        <translation type="unfinished"></translation>
+        <translation>Criar nova nota de Texto</translation>
     </message>
     <message>
         <location filename="../toolbaraction.h" line="47"/>
         <source>Create new HTML note</source>
-        <translation>Criar nova nota HTML</translation>
+        <translation>Criar nova nota em HTML</translation>
     </message>
     <message>
         <location filename="../toolbaraction.h" line="48"/>
@@ -360,48 +360,48 @@ Você deseja mover suas notas para o novo lugar?</translation>
     <message>
         <location filename="../notelist.cpp" line="21"/>
         <source>Text Note</source>
-        <translation type="unfinished"></translation>
+        <translation>Nota de Texto</translation>
     </message>
     <message>
         <location filename="../notelist.cpp" line="21"/>
         <location filename="../notelist.cpp" line="23"/>
         <source>Simple text Note</source>
-        <translation type="unfinished"></translation>
+        <translation>Simples Nota de texto</translation>
     </message>
     <message>
         <location filename="../notelist.cpp" line="22"/>
         <source>HTML Note</source>
-        <translation type="unfinished"></translation>
+        <translation>Nota em HTML</translation>
     </message>
     <message>
         <location filename="../notelist.cpp" line="22"/>
         <source>Simple Note with text formating</source>
-        <translation type="unfinished"></translation>
+        <translation>Simples Nota com formatação de texto</translation>
     </message>
     <message>
         <location filename="../notelist.cpp" line="23"/>
         <source>Picture Note</source>
-        <translation type="unfinished"></translation>
+        <translation>Nota em Imagem</translation>
     </message>
     <message>
         <location filename="../notelist.cpp" line="25"/>
         <source>TODO Note</source>
-        <translation type="unfinished"></translation>
+        <translation>Nota PARA FAZER</translation>
     </message>
     <message>
         <location filename="../notelist.cpp" line="25"/>
         <source>Simple TODO list</source>
-        <translation type="unfinished"></translation>
+        <translation>Simples lista PARA FAZER</translation>
     </message>
     <message>
         <location filename="../notelist.cpp" line="28"/>
         <source>XML Note</source>
-        <translation type="unfinished"></translation>
+        <translation>Nota em XML</translation>
     </message>
     <message>
         <location filename="../notelist.cpp" line="28"/>
         <source>XML file</source>
-        <translation type="unfinished"></translation>
+        <translation>Arquivo XML</translation>
     </message>
 </context>
 <context>
@@ -511,7 +511,7 @@ O texto da licença pode ser encontrado no arquivo LICENSE.</translation>
     <message>
         <location filename="../aboutDialog.cpp" line="17"/>
         <source>Copyright (c) 2011</source>
-        <translation type="unfinished">Copyright (c) 2011</translation>
+        <translation>Copyright (c) 2011</translation>
     </message>
     <message>
         <location filename="../aboutDialog.cpp" line="18"/>
@@ -551,12 +551,12 @@ O texto da licença pode ser encontrado no arquivo LICENSE.</translation>
     <message>
         <location filename="../aboutDialog.cpp" line="32"/>
         <source>Slovak translation</source>
-        <translation type="unfinished"></translation>
+        <translation>Tradução para o Eslovaco</translation>
     </message>
     <message>
         <location filename="../aboutDialog.cpp" line="34"/>
         <source>Spanish translation</source>
-        <translation type="unfinished"></translation>
+        <translation>Tradução para o Espanhol</translation>
     </message>
     <message>
         <location filename="../aboutDialog.cpp" line="36"/>
@@ -659,7 +659,7 @@ O texto da licença pode ser encontrado no arquivo LICENSE.</translation>
     <message>
         <location filename="../configdialog.ui" line="28"/>
         <source>Common</source>
-        <translation>Comun</translation>
+        <translation>Comum</translation>
     </message>
     <message>
         <location filename="../configdialog.ui" line="150"/>
@@ -797,12 +797,12 @@ O texto da licença pode ser encontrado no arquivo LICENSE.</translation>
     <message>
         <location filename="../configdialog.ui" line="417"/>
         <source>Highlighting</source>
-        <translation type="unfinished"></translation>
+        <translation>Destaque</translation>
     </message>
     <message>
         <location filename="../configdialog.ui" line="423"/>
         <source>Highlight text in notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Destacar texto nas notas</translation>
     </message>
     <message>
         <source>Highlight links in notes</source>
