@@ -6,12 +6,12 @@
     <message>
         <location filename="../highlightrulemodel.cpp" line="26"/>
         <source>Pattern</source>
-        <translation type="unfinished"></translation>
+        <translation>Vzor</translation>
     </message>
     <message>
         <location filename="../highlightrulemodel.cpp" line="27"/>
         <source>Color</source>
-        <translation type="unfinished"></translation>
+        <translation>Barva</translation>
     </message>
 </context>
 <context>
@@ -56,7 +56,7 @@ Nové příkazy lze přidat v nastaveních.</translation>
     <message>
         <location filename="../mainwindow.cpp" line="191"/>
         <source>Edit command list</source>
-        <translation type="unfinished"></translation>
+        <translation>Upravit seznam příkazů</translation>
     </message>
     <message>
         <source>zNotes - about</source>
@@ -182,7 +182,7 @@ Chcete své poznámky přesunout na nové místo?</translation>
     <message>
         <location filename="../mainwindow.ui" line="62"/>
         <source>Show Toolbar</source>
-        <translation>Ukázat pruh s nástroji</translation>
+        <translation>Ukázat panel s nástroji</translation>
     </message>
 </context>
 <context>
@@ -190,17 +190,17 @@ Chcete své poznámky přesunout na nové místo?</translation>
     <message>
         <location filename="../notecreatewidget.ui" line="14"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation>Formulář</translation>
     </message>
     <message>
         <location filename="../notecreatewidget.ui" line="22"/>
         <source>New note name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Nový název poznámky:</translation>
     </message>
     <message>
         <location filename="../notecreatewidget.ui" line="41"/>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Zrušit</translation>
     </message>
 </context>
 <context>
@@ -287,7 +287,7 @@ Chcete své poznámky přesunout na nové místo?</translation>
     <message>
         <location filename="../toolbaraction.h" line="46"/>
         <source>Create new Text note</source>
-        <translation type="unfinished"></translation>
+        <translation>Vytvořit novou textovou poznámku</translation>
     </message>
     <message>
         <location filename="../toolbaraction.h" line="47"/>
@@ -448,48 +448,48 @@ Chcete své poznámky přesunout na nové místo?</translation>
     <message>
         <location filename="../notelist.cpp" line="21"/>
         <source>Text Note</source>
-        <translation type="unfinished"></translation>
+        <translation>Textová poznámka</translation>
     </message>
     <message>
         <location filename="../notelist.cpp" line="21"/>
         <location filename="../notelist.cpp" line="23"/>
         <source>Simple text Note</source>
-        <translation type="unfinished"></translation>
+        <translation>Jednoduchá textová poznámka</translation>
     </message>
     <message>
         <location filename="../notelist.cpp" line="22"/>
         <source>HTML Note</source>
-        <translation type="unfinished"></translation>
+        <translation>Poznámka HTML</translation>
     </message>
     <message>
         <location filename="../notelist.cpp" line="22"/>
         <source>Simple Note with text formating</source>
-        <translation type="unfinished"></translation>
+        <translation>Jednoduchá poznámka s formátováním textu</translation>
     </message>
     <message>
         <location filename="../notelist.cpp" line="23"/>
         <source>Picture Note</source>
-        <translation type="unfinished"></translation>
+        <translation>Obrázková poznámka</translation>
     </message>
     <message>
         <location filename="../notelist.cpp" line="25"/>
         <source>TODO Note</source>
-        <translation type="unfinished"></translation>
+        <translation>Poznámka CO DĚLAT</translation>
     </message>
     <message>
         <location filename="../notelist.cpp" line="25"/>
         <source>Simple TODO list</source>
-        <translation type="unfinished"></translation>
+        <translation>Jednoduchý seznam CO DĚLAT</translation>
     </message>
     <message>
         <location filename="../notelist.cpp" line="28"/>
         <source>XML Note</source>
-        <translation type="unfinished"></translation>
+        <translation>Poznámka XML</translation>
     </message>
     <message>
         <location filename="../notelist.cpp" line="28"/>
         <source>XML file</source>
-        <translation type="unfinished"></translation>
+        <translation>Soubor XML</translation>
     </message>
 </context>
 <context>
@@ -565,7 +565,7 @@ Chcete své poznámky přesunout na nové místo?</translation>
     <message>
         <location filename="../aboutDialog.cpp" line="17"/>
         <source>Copyright (c) 2011</source>
-        <translation type="unfinished">Autorské právo (c) 2011</translation>
+        <translation>Autorské právo (c) 2011</translation>
     </message>
     <message>
         <location filename="../aboutDialog.cpp" line="18"/>
@@ -605,12 +605,12 @@ Chcete své poznámky přesunout na nové místo?</translation>
     <message>
         <location filename="../aboutDialog.cpp" line="32"/>
         <source>Slovak translation</source>
-        <translation type="unfinished"></translation>
+        <translation>Překlad do slovenštiny</translation>
     </message>
     <message>
         <location filename="../aboutDialog.cpp" line="34"/>
         <source>Spanish translation</source>
-        <translation type="unfinished"></translation>
+        <translation>Překlad do španělštiny</translation>
     </message>
     <message>
         <location filename="../aboutDialog.cpp" line="36"/>
@@ -743,7 +743,7 @@ This program is distributed in the hope that it will be useful, but WITHOUT ANY 
 See the GNU General Public License for more details.
 
 The text of the license can can be found in the file LICENSE.</source>
-        <translation>Tento balík je svobodným softwarem; můžete jej rozdávat a/nebo upravovat za podmínek GNU General Public License (GPL), jak jsou zveřejněny Free Software 
+        <translation>Tento program je svobodným softwarem; můžete jej rozdávat a/nebo upravovat za podmínek GNU General Public License (GPL), jak jsou zveřejněny Free Software 
 Foundation; buď ve verzi 2 licence, nebo (podle své volby) v kterékoli pozdější verzi.
 
 Tento program je šířen v naději, že bude užitečný, ale BEZ JAKÉKOLI ZÁRUKY; také bez předpokládané záruky PRODEJNOSTI nebo POUŽITELNOSTI PRO NĚJAKÝ URČITÝ ÚČEL: Více podrobností naleznete v GNU Library General Public License.
@@ -819,7 +819,7 @@ Text povolení lze nalézt v souboru LICENSE.</translation>
     <message>
         <location filename="../configdialog.ui" line="380"/>
         <source>The quick brown fox jumps over the lazy dog.</source>
-        <translation>Rychlá hnědá liška přeskakuje líného psa..</translation>
+        <translation>Rychlá hnědá liška přeskakuje líného psa.</translation>
     </message>
     <message>
         <source>Eat more of these soft French loaves and drink tea.</source>
@@ -916,17 +916,17 @@ Text povolení lze nalézt v souboru LICENSE.</translation>
     <message>
         <location filename="../configdialog.ui" line="252"/>
         <source>Toolbar</source>
-        <translation>Pruh s nástroji</translation>
+        <translation>Panel s nástroji</translation>
     </message>
     <message>
         <location filename="../configdialog.ui" line="417"/>
         <source>Highlighting</source>
-        <translation type="unfinished"></translation>
+        <translation>Zvýrazňování</translation>
     </message>
     <message>
         <location filename="../configdialog.ui" line="423"/>
         <source>Highlight text in notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Zvýraznit text v poznámkách</translation>
     </message>
     <message>
         <source>Highlight links in notes</source>
