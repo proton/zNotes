@@ -56,7 +56,7 @@ Usted puede agregar nuevos comandos en las preferencias.</translation>
     <message>
         <location filename="../mainwindow.cpp" line="191"/>
         <source>Edit command list</source>
-        <translation type="unfinished"></translation>
+        <translation>Editar lista de comandos</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="304"/>
@@ -231,32 +231,32 @@ Do you want to move your notes to new place ?</source>
         <location filename="../todomodel.cpp" line="316"/>
         <source>%n day(s)</source>
         <translation>
-            <numerusform>%n dia(s)</numerusform>
-            <numerusform></numerusform>
+            <numerusform>%n dia</numerusform>
+            <numerusform>%n dias</numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <location filename="../todomodel.cpp" line="317"/>
         <source>%n hour(s)</source>
         <translation>
-            <numerusform>%n hora(s)</numerusform>
-            <numerusform></numerusform>
+            <numerusform>%n hora</numerusform>
+            <numerusform>%n horas</numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <location filename="../todomodel.cpp" line="318"/>
         <source>%n minute(s)</source>
         <translation>
-            <numerusform>%n minuto(s)</numerusform>
-            <numerusform></numerusform>
+            <numerusform>%n minuto</numerusform>
+            <numerusform>%n minutos</numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <location filename="../todomodel.cpp" line="319"/>
         <source>%n second(s)</source>
         <translation>
-            <numerusform>%n segunda(s)</numerusform>
-            <numerusform></numerusform>
+            <numerusform>%n segunda</numerusform>
+            <numerusform>%n segundas</numerusform>
         </translation>
     </message>
     <message>
@@ -518,7 +518,7 @@ El texto de la licencia se puede encontrar en el archivo de licencia.</translati
     <message>
         <location filename="../aboutDialog.cpp" line="34"/>
         <source>Spanish translation</source>
-        <translation type="unfinished"></translation>
+        <translation>Traducción al español</translation>
     </message>
     <message>
         <location filename="../aboutDialog.cpp" line="36"/>
