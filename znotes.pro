@@ -57,7 +57,8 @@ TRANSLATIONS += translations/znotes_ru.ts \
 	translations/znotes_pt_BR.ts \
 	translations/znotes_uk.ts \
 	translations/znotes_sk.ts \
-	translations/znotes_es.ts
+	translations/znotes_es.ts \
+	translations/znotes_en.ts
 RESOURCES += znotes.qrc
 !without_single_inst {
     QT += network

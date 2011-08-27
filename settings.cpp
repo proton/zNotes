@@ -241,8 +241,6 @@ void Settings::loadLanguages()
 #ifdef Q_WS_MAC
 	translation_dirs << QCoreApplication::applicationDirPath()+"/../Resources";
 #endif
-	//Setting default(English) translation path
-	translations[QLocale::English][QLocale::UnitedStates]="";
 	//looking for qm-files in translation directories
 	QStringListIterator dir_path(translation_dirs);
 	while(dir_path.hasNext())
@@ -262,6 +260,9 @@ void Settings::loadLanguages()
 			}
 		}
 	}
+	//Setting default(English) translation path if other translation not found
+	if(!translations[QLocale::English].contains(QLocale::UnitedStates))
+		translations[QLocale::English][QLocale::UnitedStates]="";
 }
 
 /*
