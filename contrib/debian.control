@@ -1,0 +1,11 @@
+Source: znotes
+Section: editors
+Priority: optional
+Maintainer: TI_Eugene <ti.eugene@gmail.com>
+Standards-Version: 0.4.1
+Build-Depends: cdbs, libqt4-dev, qt4-dev-tools
+
+Package: znotes
+Architecture: any
+Depends: ${shlibs:Depends}
+Description: Simply notes
