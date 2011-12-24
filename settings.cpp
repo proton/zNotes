@@ -84,14 +84,14 @@ void Settings::load()
 	if(notes_path.isEmpty())
 	{
 #ifdef Q_WS_X11
-		notes_path = QDir::homePath()+"/.local/share/notes";
-#elif Q_WS_WIN
-		QSettings win_settings("Microsoft", "Windows");
-		QString mydocuments_path = win_settings->value("CurrentVersion/Explorer/Shell Folders/Personal", "").toString();
-		if(!mydocuments_path.isEmpty()) notes_path = mydocuments_path+"/Notes";
-		else if(!QDir::homePath().isEmpty()) notes_path = QDir::homePath()+"/Notes";
+	notes_path = QDir::homePath()+"/.local/share/notes";
+#elif defined(Q_WS_WIN)
+	QSettings win_settings("Microsoft", "Windows");
+	QString mydocuments_path = win_settings.value("CurrentVersion/Explorer/Shell Folders/Personal", "").toString();
+	if(!mydocuments_path.isEmpty()) notes_path = mydocuments_path+"/Notes";
+	else if(!QDir::homePath().isEmpty()) notes_path = QDir::homePath()+"/Notes";
 #else
-		if(!QDir::homePath().isEmpty()) notes_path = QDir::homePath()+"/Notes";
+	if(!QDir::homePath().isEmpty()) notes_path = QDir::homePath()+"/Notes";
 #endif
 		config.setValue("NotesPath", notes_path);
 	}
@@ -142,8 +142,8 @@ void Settings::load()
 	if((script_model.rowCount()==0) && !config.contains("ComandCount"))
 	{
 	#ifdef unix
-		script_model.append("Print note's content", "cat", "");
-	#elif Q_WS_WIN
+        script_model.append("Print note's content", "cat", "");
+    #elif defined(Q_WS_WIN)
 		//
 	#endif
 		config.setValue("ComandCount", script_model.rowCount());
