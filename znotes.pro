@@ -3,55 +3,62 @@
 # -------------------------------------------------
 TARGET = znotes
 VERSION = "0.4.5"
-QT += core \
-    gui
+QT += core gui network
 TEMPLATE = app
 OBJECTS_DIR = build
 UI_DIR = build
 MOC_DIR = build
 RCC_DIR = build
 SOURCES += main.cpp \
-    mainwindow.cpp \
-    configdialog.cpp \
-    settings.cpp \
-    note.cpp \
-    scriptmodel.cpp \
-    aboutDialog.cpp \
-    toolbarmodel.cpp \
-    highlighter.cpp \
-    textedit.cpp \
-    notelist.cpp \
-    note_text.cpp \
-    note_html.cpp \
-    note_picture.cpp \
-    application.cpp \
-    notecreatewidget.cpp \
-    notetype.cpp \
-    notecreatebutton.cpp \
-    highlightrulemodel.cpp
+	mainwindow.cpp \
+	configdialog.cpp \
+	settings.cpp \
+	note.cpp \
+	scriptmodel.cpp \
+	aboutDialog.cpp \
+	toolbarmodel.cpp \
+	highlighter.cpp \
+	textedit.cpp \
+	notelist.cpp \
+	note_text.cpp \
+	note_html.cpp \
+	note_picture.cpp \
+	application.cpp \
+	notecreatewidget.cpp \
+	notetype.cpp \
+	notecreatebutton.cpp \
+	highlightrulemodel.cpp \
+	single_inst/qtlockedfile_win.cpp \
+	single_inst/qtlockedfile_unix.cpp \
+	single_inst/qtlockedfile.cpp \
+	single_inst/qtlocalpeer.cpp \
+	single_inst/qtsingleapplication.cpp
 HEADERS += mainwindow.h \
-    configdialog.h \
-    settings.h \
-    note.h \
-    scriptmodel.h \
-    aboutDialog.h \
-    toolbaraction.h \
-    toolbarmodel.h \
-    highlighter.h \
-    textedit.h \
-    notelist.h \
-    note_text.h \
-    note_html.h \
-    note_picture.h \
-    application.h \
-    notecreatewidget.h \
-    notetype.h \
-    notecreatebutton.h \
-    highlightrulemodel.h
-FORMS += mainwindow.ui \
-    configdialog.ui \
-    aboutDialog.ui \
-    notecreatewidget.ui
+	configdialog.h \
+	settings.h \
+	note.h \
+	scriptmodel.h \
+	aboutDialog.h \
+	toolbaraction.h \
+	toolbarmodel.h \
+	highlighter.h \
+	textedit.h \
+	notelist.h \
+	note_text.h \
+	note_html.h \
+	note_picture.h \
+	application.h \
+	notecreatewidget.h \
+	notetype.h \
+	notecreatebutton.h \
+	highlightrulemodel.h \
+	single_inst/qtlockedfile.h \
+	single_inst/qtlocalpeer.h \
+	single_inst/qtsingleapplication.h
+	FORMS += mainwindow.ui \
+	configdialog.ui \
+	aboutDialog.ui \
+	notecreatewidget.ui
 TRANSLATIONS += translations/znotes_ru.ts \
 	translations/znotes_cs.ts \
 	translations/znotes_pt_BR.ts \
@@ -60,22 +67,12 @@ TRANSLATIONS += translations/znotes_ru.ts \
 	translations/znotes_es.ts \
 	translations/znotes_en.ts
 RESOURCES += znotes.qrc
-!without_single_inst {
-    QT += network
-    DEFINES += SINGLE_INSTANCE
-    SOURCES += single_inst/qtlockedfile_win.cpp \
-        single_inst/qtlockedfile_unix.cpp \
-        single_inst/qtlockedfile.cpp \
-        single_inst/qtlocalpeer.cpp
-    HEADERS += single_inst/qtlockedfile.h \
-        single_inst/qtlocalpeer.h
-}
 !without_todo_format {
-    QT += xml
-    DEFINES += NOTE_TODO_FORMAT
-    SOURCES += note_todo.cpp \
+	QT += xml
+	DEFINES += NOTE_TODO_FORMAT
+	SOURCES += note_todo.cpp \
 		todomodel.cpp
-    HEADERS += note_todo.h \
+	HEADERS += note_todo.h \
 		todomodel.h
 }
 

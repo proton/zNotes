@@ -37,60 +37,66 @@
 **
 ****************************************************************************/
 
-#ifndef QTLOCKEDFILE_H
-#define QTLOCKEDFILE_H
+#ifndef QTSINGLEAPPLICATION_H
+#define QTSINGLEAPPLICATION_H
 
-#include <QtCore/QFile>
-#ifdef Q_OS_WIN
-#include <QtCore/QVector>
-#endif
+#include <QtGui/QApplication>
+
+class QtLocalPeer;
 
 #if defined(Q_WS_WIN)
-#  if !defined(QT_QTLOCKEDFILE_EXPORT) && !defined(QT_QTLOCKEDFILE_IMPORT)
-#    define QT_QTLOCKEDFILE_EXPORT
-#  elif defined(QT_QTLOCKEDFILE_IMPORT)
-#    if defined(QT_QTLOCKEDFILE_EXPORT)
-#      undef QT_QTLOCKEDFILE_EXPORT
+#  if !defined(QT_QTSINGLEAPPLICATION_EXPORT) && !defined(QT_QTSINGLEAPPLICATION_IMPORT)
+#    define QT_QTSINGLEAPPLICATION_EXPORT
+#  elif defined(QT_QTSINGLEAPPLICATION_IMPORT)
+#    if defined(QT_QTSINGLEAPPLICATION_EXPORT)
+#      undef QT_QTSINGLEAPPLICATION_EXPORT
 #    endif
-#    define QT_QTLOCKEDFILE_EXPORT __declspec(dllimport)
-#  elif defined(QT_QTLOCKEDFILE_EXPORT)
-#    undef QT_QTLOCKEDFILE_EXPORT
-#    define QT_QTLOCKEDFILE_EXPORT __declspec(dllexport)
+#    define QT_QTSINGLEAPPLICATION_EXPORT __declspec(dllimport)
+#  elif defined(QT_QTSINGLEAPPLICATION_EXPORT)
+#    undef QT_QTSINGLEAPPLICATION_EXPORT
+#    define QT_QTSINGLEAPPLICATION_EXPORT __declspec(dllexport)
 #  endif
 #else
-#  define QT_QTLOCKEDFILE_EXPORT
+#  define QT_QTSINGLEAPPLICATION_EXPORT
 #endif
 
-namespace QtLP_Private {
-
-class QT_QTLOCKEDFILE_EXPORT QtLockedFile : public QFile
+class QT_QTSINGLEAPPLICATION_EXPORT QtSingleApplication : public QApplication
 {
+    Q_OBJECT
+
 public:
-    enum LockMode { NoLock = 0, ReadLock, WriteLock };
+    QtSingleApplication(int &argc, char **argv, bool GUIenabled = true);
+    QtSingleApplication(const QString &id, int &argc, char **argv);
+    QtSingleApplication(int &argc, char **argv, Type type);
+#if defined(Q_WS_X11)
+    QtSingleApplication(Display* dpy, Qt::HANDLE visual = 0, Qt::HANDLE colormap = 0);
+    QtSingleApplication(Display *dpy, int &argc, char **argv, Qt::HANDLE visual = 0, Qt::HANDLE cmap= 0);
+    QtSingleApplication(Display* dpy, const QString &appId, int argc, char **argv, Qt::HANDLE visual = 0, Qt::HANDLE colormap = 0);
+#endif
 
-    QtLockedFile();
-    QtLockedFile(const QString &name);
-    ~QtLockedFile();
+    bool isRunning();
+    QString id() const;
 
-    bool open(OpenMode mode);
+    void setActivationWindow(QWidget* aw, bool activateOnMessage = true);
+    QWidget* activationWindow() const;
 
-    bool lock(LockMode mode, bool block = true);
-    bool unlock();
-    bool isLocked() const;
-    LockMode lockMode() const;
+    // Obsolete:
+    void initialize(bool dummy = true)
+        { isRunning(); Q_UNUSED(dummy) }
+
+public Q_SLOTS:
+    bool sendMessage(const QString &message, int timeout = 5000);
+    void activateWindow();
+
+
+Q_SIGNALS:
+    void messageReceived(const QString &message);
+
 
 private:
-#ifdef Q_OS_WIN
-    Qt::HANDLE wmutex;
-    Qt::HANDLE rmutex;
-    QVector<Qt::HANDLE> rmutexes;
-    QString mutexname;
-
-    Qt::HANDLE getMutexHandle(int idx, bool doCreate);
-    bool waitMutex(Qt::HANDLE mutex, bool doBlock);
-
-#endif
-    LockMode m_lock_mode;
+    void sysInit(const QString &appId = QString());
+    QtLocalPeer *peer;
+    QWidget *actWin;
 };
-}
-#endif
+
+#endif // QTSINGLEAPPLICATION_H
