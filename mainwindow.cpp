@@ -94,16 +94,18 @@ void MainWindow::trayActivated(QSystemTrayIcon::ActivationReason reason)
 	}
 }
 
-void MainWindow::hideEvent(QHideEvent */*event*/)
+void MainWindow::hideEvent(QHideEvent* event)
 {
+	Q_UNUSED(event)
 	settings.setDialogGeometry(saveGeometry());
 	actShow->setEnabled(true);
 	actHide->setDisabled(true);
 	if(notes->current()) notes->saveAll();
 }
 
-void MainWindow::showEvent(QShowEvent */*event*/)
+void MainWindow::showEvent(QShowEvent* event)
 {
+	Q_UNUSED(event)
 	restoreGeometry(settings.getDialogGeometry());
 	actShow->setEnabled(false);
 	actHide->setDisabled(false);
