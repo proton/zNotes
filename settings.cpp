@@ -142,8 +142,8 @@ void Settings::load()
 	if((script_model.rowCount()==0) && !config.contains("ComandCount"))
 	{
 	#ifdef unix
-        script_model.append("Print note's content", "cat", "");
-    #elif defined(Q_WS_WIN)
+		script_model.append("Print note's content", "cat", "");
+	#elif defined(Q_WS_WIN)
 		//
 	#endif
 		config.setValue("ComandCount", script_model.rowCount());
