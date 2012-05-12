@@ -353,8 +353,9 @@ MainWindow::MainWindow(QWidget *parent)
 	tray.show();
 
 	//Creating shortcuts
-	scAdd	=	new QShortcut(QKeySequence::New,	this);
-	scRemove =	new QShortcut(QKeySequence::Delete,	this);
+//	scAdd	=	new QShortcut(QKeySequence::New,	this);
+	scAdd	=	new QShortcut(Qt::CTRL + Qt::Key_N,	this);
+	scRemove =	new QShortcut(Qt::CTRL + Qt::Key_W,	this);
 	scRename =	new QShortcut(Qt::Key_F2,	this);
 	scBack =	new QShortcut(QKeySequence::Back,	this);
 	scForward =	new QShortcut(QKeySequence::Forward,this);
@@ -362,7 +363,8 @@ MainWindow::MainWindow(QWidget *parent)
 	scNext =	new QShortcut(QKeySequence::NextChild,this);
 	scSearch =	new QShortcut(QKeySequence::Find,	this);
 	scSearchEsc = new QShortcut(Qt::Key_Escape, ui->edSearch, 0, 0, Qt::WidgetShortcut);
-	scExit =	new QShortcut(QKeySequence::Close,	this);
+//	scExit =	new QShortcut(QKeySequence::Close,	this);
+	scExit =	new QShortcut(Qt::CTRL + Qt::Key_Q,	this);
 	scFormatBold =		new QShortcut(Qt::CTRL + Qt::Key_B,	this);
 	scFormatItalic =	new QShortcut(Qt::CTRL + Qt::Key_I,	this);
 	scFormatStrikeout = new QShortcut(Qt::CTRL + Qt::Key_S,	this);

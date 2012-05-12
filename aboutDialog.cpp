@@ -66,8 +66,8 @@ aboutDialog::aboutDialog(QWidget *parent) :
 	strHelp.append(QString("<b>%1</b> - %2<br/>").arg("Alt+Fn").arg(tr("Go to note n")));
 	strHelp.append(QString("<b>%1</b> - %2<br/>").arg("Alt+Left").arg(tr("Go to previous note")));
 	strHelp.append(QString("<b>%1</b> - %2<br/>").arg("Alt+Right").arg(tr("Go to next note")));
-	strHelp.append(QString("<b>%1</b> - %2<br/>").arg("Insert").arg(tr("Create new note")));
-	strHelp.append(QString("<b>%1</b> - %2<br/>").arg("Delete").arg(tr("Remove current note")));
+	strHelp.append(QString("<b>%1</b> - %2<br/>").arg("Ctrl+N").arg(tr("Create new note")));
+	strHelp.append(QString("<b>%1</b> - %2<br/>").arg("Ctrl+W").arg(tr("Remove current note")));
 	strHelp.append(QString("<b>%1</b> - %2<br/>").arg("F2").arg(tr("Rename current note")));
 	strHelp.append(QString("<b>%1</b> - %2<br/>").arg("Ctrl+F").arg(tr("Search in the notes' text")));
 	strHelp.append(QString("<b>%1</b> - %2<br/>").arg("Ctrl+B").arg(tr("Make selected text bold")));
