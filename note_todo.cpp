@@ -32,6 +32,9 @@ TodoNote::TodoNote(const QFileInfo& fileinfo, Note::Type type_new)
 {
 	text_edit = new TextEdit();
 	text_edit->setAcceptRichText(false);
+	text_edit->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+//	text_edit->setMinimumHeight(100);
+//	text_edit->setMaximumHeight(200);
 
 	model = new TodoModel();
 	proxy_model = new TodoProxyModel();
@@ -47,6 +50,7 @@ TodoNote::TodoNote(const QFileInfo& fileinfo, Note::Type type_new)
 	tree_view->setAcceptDrops(true);
 	tree_view->setDropIndicatorShown(true);
 	tree_view->setDragDropMode(QAbstractItemView::InternalMove);
+	tree_view->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::MinimumExpanding);
 
 	connect(proxy_model, SIGNAL(dataChanged(const QModelIndex&, const QModelIndex&)), this, SLOT(taskChanged(QModelIndex)));
 	connect(tree_view->selectionModel(), SIGNAL(currentChanged(QModelIndex,QModelIndex)), this, SLOT(taskChanged(QModelIndex)));
