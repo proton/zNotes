@@ -65,6 +65,7 @@ TRANSLATIONS += translations/znotes_ru.ts \
 	translations/znotes_uk.ts \
 	translations/znotes_sk.ts \
 	translations/znotes_es.ts \
+	translations/znotes_de.ts \
 	translations/znotes_en.ts
 RESOURCES += znotes.qrc
 !without_todo_format {
