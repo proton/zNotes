@@ -241,6 +241,9 @@ void Settings::loadLanguages()
 #ifdef Q_WS_MAC
 	translation_dirs << QCoreApplication::applicationDirPath()+"/../Resources";
 #endif
+#ifdef Q_OS_UNIX
+	translation_dirs << QDir::homePath()+"/.local/share/znotes/translations";
+#endif
 	//looking for qm-files in translation directories
 	QStringListIterator dir_path(translation_dirs);
 	while(dir_path.hasNext())
