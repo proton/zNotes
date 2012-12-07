@@ -43,7 +43,7 @@ NoteList::NoteList(QWidget* parent)
 {
 	initNoteTypes();
 
-	tabs = new QTabWidget(parent);
+	tabs = new ZTabWidget(parent);
 	tabs->setDocumentMode(true);
 	tabs->setTabPosition(QTabWidget::TabPosition(settings.getTabPosition()));
 

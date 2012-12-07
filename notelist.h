@@ -3,11 +3,11 @@
 
 #include "note.h"
 #include "notetype.h"
+#include "ztabwidget.h"
 
 #include <QVector>
 #include <QList>
 #include <QObject>
-#include <QTabWidget>
 #include <QSet>
 #include <QMap>
 #include <QDir>
@@ -35,7 +35,7 @@ public:
 	//
 	void search(const QString& text);
 	//
-	inline QTabWidget* getWidget() const { return tabs; }
+	inline ZTabWidget* getWidget() const { return tabs; }
 	//
 	void retranslate(const QLocale& locale);
 	//
@@ -79,7 +79,7 @@ private:
 	bool history_back_pressed;
 	//
 	int current_index;
-	QTabWidget* tabs;
+	ZTabWidget* tabs;
 	//
 	QFileSystemWatcher* watcher;
 	QDir dir;

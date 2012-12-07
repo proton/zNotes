@@ -32,7 +32,9 @@ SOURCES += main.cpp \
 	single_inst/qtlockedfile_unix.cpp \
 	single_inst/qtlockedfile.cpp \
 	single_inst/qtlocalpeer.cpp \
-	single_inst/qtsingleapplication.cpp
+	single_inst/qtsingleapplication.cpp \
+    ztabwidget.cpp \
+    ztabbar.cpp
 HEADERS += mainwindow.h \
 	configdialog.h \
 	settings.h \
@@ -54,7 +56,9 @@ HEADERS += mainwindow.h \
 	highlightrulemodel.h \
 	single_inst/qtlockedfile.h \
 	single_inst/qtlocalpeer.h \
-	single_inst/qtsingleapplication.h
+	single_inst/qtsingleapplication.h \
+    ztabwidget.h \
+    ztabbar.h
 	FORMS += mainwindow.ui \
 	configdialog.ui \
 	aboutDialog.ui \
