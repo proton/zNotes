@@ -70,7 +70,8 @@ TRANSLATIONS += translations/znotes_ru.ts \
 	translations/znotes_sk.ts \
 	translations/znotes_es.ts \
 	translations/znotes_de.ts \
-	translations/znotes_en.ts
+	translations/znotes_en.ts \
+	translations/znotes_sv.ts
 RESOURCES += znotes.qrc
 !without_todo_format {
 	QT += xml
