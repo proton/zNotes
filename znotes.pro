@@ -65,6 +65,7 @@ HEADERS += mainwindow.h \
 	notecreatewidget.ui
 TRANSLATIONS += translations/znotes_ru.ts \
 	translations/znotes_cs.ts \
+	translations/znotes_pl.ts \
 	translations/znotes_pt_BR.ts \
 	translations/znotes_uk.ts \
 	translations/znotes_sk.ts \
