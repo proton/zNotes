@@ -1,2 +1,5 @@
 .svn
 translations/*.qm
+build
+Makefile
+znotes
