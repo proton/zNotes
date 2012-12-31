@@ -14,7 +14,7 @@ aboutDialog::aboutDialog(QWidget *parent) :
 	ui->lbAbout->setText(QString("zNotes\n%1\n%2 %3\n%4\n%5\n\n%6")
 		.arg(tr("Simple Qt-based notes aplication"))
 		.arg(tr("version")).arg(VERSION)
-		.arg(tr("Copyright (c) 2011"))
+		.arg(tr("Copyright (c) 2013"))
 		.arg(tr("by Peter Savichev (proton)"))
 		.arg(tr("Distributed under the GPL license version 3 or later")));
 	//Adding authors information
@@ -35,7 +35,11 @@ aboutDialog::aboutDialog(QWidget *parent) :
 	strAuthors.append(QString("<p><b>%1</b> - <a href='mailto:%2'>%2</a><br/>%3</p>")
 		.arg("Alieola", "aliaeolova@gmail.com", tr("Spanish translation")));
 	strAuthors.append(QString("<p><b>%1</b> - <a href='mailto:%2'>%2</a><br/>%3</p>")
+		.arg("lukethenuke", "", tr("Swedish translation")));
+	strAuthors.append(QString("<p><b>%1</b> - <a href='mailto:%2'>%2</a><br/>%3</p>")
 		.arg("Vadim Nekhai (onix)", "onix@onix.name", tr("Ukrainian translation")));
+	strAuthors.append(QString("<p><b>%1</b> - <a href='mailto:%2'>%2</a><br/>%3</p>")
+		.arg("Janusz J. Maczka (zzzzzzzzz@github)", "", tr("Polish translation")));
 	strAuthors.append(QString("<p><b>%1</b></p>").arg(tr("Icons:")));
 	strAuthors.append(QString("%1\n<a href ='%2'>%2</a>")
 		.arg(tr("All icons are modified icons from Oxygen project"), "http://www.oxygen-icons.org"));
