@@ -479,91 +479,101 @@ Do you want to move your notes to new place ?</source>
     </message>
     <message>
         <location filename="../aboutDialog.cpp" line="38"/>
+        <source>Swedish translation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../aboutDialog.cpp" line="40"/>
         <source>Ukrainian translation</source>
         <translation>Український переклад</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="39"/>
+        <location filename="../aboutDialog.cpp" line="42"/>
+        <source>Polish translation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../aboutDialog.cpp" line="43"/>
         <source>Icons:</source>
         <translation>Іконки:</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="41"/>
+        <location filename="../aboutDialog.cpp" line="45"/>
         <source>All icons are modified icons from Oxygen project</source>
         <translation>Всі іконки взяті із проекту Oxygen та модифіковані</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="45"/>
+        <location filename="../aboutDialog.cpp" line="49"/>
         <source>Testing:</source>
         <translation>Тестування:</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="51"/>
+        <location filename="../aboutDialog.cpp" line="55"/>
         <source>Releasing:</source>
         <translation>Збірка:</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="67"/>
+        <location filename="../aboutDialog.cpp" line="71"/>
         <source>Shortcuts:</source>
         <translation>Комбінації клавіш:</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="68"/>
+        <location filename="../aboutDialog.cpp" line="72"/>
         <source>Go to note n</source>
         <translation>Перейти до нотатки n</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="69"/>
+        <location filename="../aboutDialog.cpp" line="73"/>
         <source>Go to previous note</source>
         <translation>Перейти до попередньої нотатки</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="70"/>
+        <location filename="../aboutDialog.cpp" line="74"/>
         <source>Go to next note</source>
         <translation>Перейти до наступної нотатки</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="71"/>
+        <location filename="../aboutDialog.cpp" line="75"/>
         <source>Create new note</source>
         <translation>Створити нову нотатку</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="72"/>
+        <location filename="../aboutDialog.cpp" line="76"/>
         <source>Remove current note</source>
         <translation>Видалити поточну нотатку</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="73"/>
+        <location filename="../aboutDialog.cpp" line="77"/>
         <source>Rename current note</source>
         <translation>Змінити ім&apos;я поточної нотатки</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="74"/>
+        <location filename="../aboutDialog.cpp" line="78"/>
         <source>Search in the notes&apos; text</source>
         <translation>Пошук у тексті нотаток</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="75"/>
+        <location filename="../aboutDialog.cpp" line="79"/>
         <source>Make selected text bold</source>
         <translation>Зробити виділений текст жирним</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="76"/>
+        <location filename="../aboutDialog.cpp" line="80"/>
         <source>Make selected text italic</source>
         <translation>Зробити виділений текст курсивом</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="77"/>
+        <location filename="../aboutDialog.cpp" line="81"/>
         <source>Make selected text strikeout</source>
         <translation>Зробити виділений текст закресленим</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="78"/>
+        <location filename="../aboutDialog.cpp" line="82"/>
         <source>Make selected text underline</source>
         <translation>Зробити виділений текст підкресленим</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="79"/>
+        <location filename="../aboutDialog.cpp" line="83"/>
         <source>Exit program</source>
         <translation>Вийти із програми</translation>
     </message>

@@ -524,92 +524,102 @@ The text of the license can can be found in the file LICENSE.</source>
         <translation>hiszpański</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="38"/>
+        <location filename="../aboutDialog.cpp" line="40"/>
         <source>Ukrainian translation</source>
         <translation>ukraiński</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="39"/>
+        <location filename="../aboutDialog.cpp" line="42"/>
+        <source>Polish translation</source>
+        <translation>polski</translation>
+    </message>
+    <message>
+        <location filename="../aboutDialog.cpp" line="38"/>
+        <source>Swedish translation</source>
+        <translation>szwedzki</translation>
+    </message>
+    <message>
+        <location filename="../aboutDialog.cpp" line="43"/>
         <source>Icons:</source>
         <translation>Ikony:</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="41"/>
+        <location filename="../aboutDialog.cpp" line="45"/>
         <source>All icons are modified icons from Oxygen project</source>
         <translation>Ikony pochodzą z projektu Oxygen</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="45"/>
+        <location filename="../aboutDialog.cpp" line="49"/>
         <source>Testing:</source>
         <translation>Testowanie:</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="51"/>
+        <location filename="../aboutDialog.cpp" line="55"/>
         <source>Releasing:</source>
         <translation>Wydania:</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="67"/>
+        <location filename="../aboutDialog.cpp" line="71"/>
         <source>Shortcuts:</source>
         <translation>Skróty:</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="68"/>
+        <location filename="../aboutDialog.cpp" line="72"/>
         <source>Go to note n</source>
         <translation>Idź do notatki n</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="69"/>
+        <location filename="../aboutDialog.cpp" line="73"/>
         <source>Go to previous note</source>
         <translation>Idź do poprzedniej notatki</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="70"/>
+        <location filename="../aboutDialog.cpp" line="74"/>
         <source>Go to next note</source>
         <translation>Idź do następnej notatki</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="71"/>
+        <location filename="../aboutDialog.cpp" line="75"/>
         <source>Create new note</source>
         <translation>Utwórz nową notatkę</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="72"/>
+        <location filename="../aboutDialog.cpp" line="76"/>
         <source>Remove current note</source>
         <translation>Usuń bieżącą notatkę</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="73"/>
+        <location filename="../aboutDialog.cpp" line="77"/>
         <source>Rename current note</source>
         <translation>Zmień nazwę bieżącej notatki</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="74"/>
+        <location filename="../aboutDialog.cpp" line="78"/>
         <source>Search in the notes&apos; text</source>
         <translation>Szukaj w treści notatki</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="75"/>
+        <location filename="../aboutDialog.cpp" line="79"/>
         <source>Make selected text bold</source>
         <translation>Pogrub zaznaczony tekst</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="76"/>
+        <location filename="../aboutDialog.cpp" line="80"/>
         <source>Make selected text italic</source>
         <translation>Uzyj czcionki pochyłej w zaznaczonym tekście</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="77"/>
+        <location filename="../aboutDialog.cpp" line="81"/>
         <source>Make selected text strikeout</source>
         <translation>Przekreśl zaznaczony tekst</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="78"/>
+        <location filename="../aboutDialog.cpp" line="82"/>
         <source>Make selected text underline</source>
         <translation>Podkreśl zaznaczony tekst</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="79"/>
+        <location filename="../aboutDialog.cpp" line="83"/>
         <source>Exit program</source>
         <translation>Zakończ program</translation>
     </message>
