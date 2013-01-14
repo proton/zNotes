@@ -459,7 +459,7 @@ Do you want to move your notes to new place ?</source>
     <message>
         <location filename="../aboutDialog.cpp" line="30"/>
         <source>German translation</source>
-        <translation type="unfinished"></translation>
+        <translation>Немецкий перевод</translation>
     </message>
     <message>
         <location filename="../aboutDialog.cpp" line="32"/>
