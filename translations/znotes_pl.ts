@@ -32,40 +32,40 @@
         <translation>Pokaż pasek narzędzi</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="145"/>
+        <location filename="../mainwindow.cpp" line="147"/>
         <source>Settings changed</source>
         <translation>Ustawienia zmienione</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="146"/>
+        <location filename="../mainwindow.cpp" line="148"/>
         <source>You need restart application to get effect.</source>
         <translation>Zmiany zostaną wprowadzone po ponownym uruchomieniu programu.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="158"/>
+        <location filename="../mainwindow.cpp" line="160"/>
         <source>Commandlist is clear</source>
         <translation>Lista poleceń jest pusta</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="158"/>
+        <location filename="../mainwindow.cpp" line="160"/>
         <source>List of commands is clear!
 You can add new commands in preferences.</source>
         <translation>Lista poleceń jest pusta!  Możesz dodać nowe polecenia w oknie Ustawienia.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="191"/>
+        <location filename="../mainwindow.cpp" line="193"/>
         <source>Edit command list</source>
         <translation>Edytuj listę poleceń</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="304"/>
-        <location filename="../mainwindow.cpp" line="528"/>
+        <location filename="../mainwindow.cpp" line="306"/>
+        <location filename="../mainwindow.cpp" line="532"/>
         <source>Show</source>
         <translation>Pokaż</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="305"/>
-        <location filename="../mainwindow.cpp" line="529"/>
+        <location filename="../mainwindow.cpp" line="307"/>
+        <location filename="../mainwindow.cpp" line="533"/>
         <source>Hide</source>
         <translation>Ukryj</translation>
     </message>
@@ -231,6 +231,7 @@ Do you want to move your notes to new place ?</source>
         <translation>
             <numerusform>%n day</numerusform>
             <numerusform>%n days</numerusform>
+            <numerusform></numerusform>
         </translation>
     </message>
     <message numerus="yes">
@@ -239,6 +240,7 @@ Do you want to move your notes to new place ?</source>
         <translation>
             <numerusform>%n hour</numerusform>
             <numerusform>%n hours</numerusform>
+            <numerusform></numerusform>
         </translation>
     </message>
     <message numerus="yes">
@@ -247,6 +249,7 @@ Do you want to move your notes to new place ?</source>
         <translation>
             <numerusform>%n minute</numerusform>
             <numerusform>%n minutes</numerusform>
+            <numerusform></numerusform>
         </translation>
     </message>
     <message numerus="yes">
@@ -255,6 +258,7 @@ Do you want to move your notes to new place ?</source>
         <translation>
             <numerusform>%n second</numerusform>
             <numerusform>%n seconds</numerusform>
+            <numerusform></numerusform>
         </translation>
     </message>
     <message>
@@ -371,34 +375,34 @@ Do you want to move your notes to new place ?</source>
 <context>
     <name>TodoNote</name>
     <message>
-        <location filename="../note_todo.cpp" line="60"/>
-        <location filename="../note_todo.cpp" line="61"/>
-        <location filename="../note_todo.cpp" line="138"/>
-        <location filename="../note_todo.cpp" line="139"/>
+        <location filename="../note_todo.cpp" line="64"/>
+        <location filename="../note_todo.cpp" line="65"/>
+        <location filename="../note_todo.cpp" line="142"/>
+        <location filename="../note_todo.cpp" line="143"/>
         <source>Insert new task</source>
         <translation>Wstaw nowe zadanie</translation>
     </message>
     <message>
-        <location filename="../note_todo.cpp" line="62"/>
-        <location filename="../note_todo.cpp" line="140"/>
+        <location filename="../note_todo.cpp" line="66"/>
+        <location filename="../note_todo.cpp" line="144"/>
         <source>Remove this task</source>
         <translation>Usuń zadanie</translation>
     </message>
     <message>
-        <location filename="../note_todo.cpp" line="70"/>
-        <location filename="../note_todo.cpp" line="142"/>
+        <location filename="../note_todo.cpp" line="74"/>
+        <location filename="../note_todo.cpp" line="146"/>
         <source>Created: </source>
         <translation>Utworzono: </translation>
     </message>
     <message>
-        <location filename="../note_todo.cpp" line="72"/>
-        <location filename="../note_todo.cpp" line="143"/>
+        <location filename="../note_todo.cpp" line="76"/>
+        <location filename="../note_todo.cpp" line="147"/>
         <source>Completed: </source>
         <translation>Ukończono: </translation>
     </message>
     <message>
-        <location filename="../note_todo.cpp" line="75"/>
-        <location filename="../note_todo.cpp" line="144"/>
+        <location filename="../note_todo.cpp" line="79"/>
+        <location filename="../note_todo.cpp" line="148"/>
         <source>Limited: </source>
         <translation></translation>
     </message>
@@ -466,7 +470,7 @@ The text of the license can can be found in the file LICENSE.</source>
     </message>
     <message>
         <location filename="../aboutDialog.cpp" line="17"/>
-        <source>Copyright (c) 2011</source>
+        <source>Copyright (c) 2013</source>
         <translation></translation>
     </message>
     <message>
@@ -495,7 +499,7 @@ The text of the license can can be found in the file LICENSE.</source>
         <translation>brazylijski portugalski</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" />
+        <location filename="../aboutDialog.cpp" line="30"/>
         <source>German translation</source>
         <translation>niemiecki</translation>
     </message>
@@ -505,107 +509,117 @@ The text of the license can can be found in the file LICENSE.</source>
         <translation>czeski</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="30"/>
+        <location filename="../aboutDialog.cpp" line="32"/>
         <source>Russian translation</source>
         <translation>rosyjski</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="32"/>
+        <location filename="../aboutDialog.cpp" line="34"/>
         <source>Slovak translation</source>
         <translation>słowacki</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="34"/>
+        <location filename="../aboutDialog.cpp" line="36"/>
         <source>Spanish translation</source>
         <translation>hiszpański</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="36"/>
+        <location filename="../aboutDialog.cpp" line="40"/>
         <source>Ukrainian translation</source>
         <translation>ukraiński</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="37"/>
+        <location filename="../aboutDialog.cpp" line="42"/>
+        <source>Polish translation</source>
+        <translation>polski</translation>
+    </message>
+    <message>
+        <location filename="../aboutDialog.cpp" line="38"/>
+        <source>Swedish translation</source>
+        <translation>szwedzki</translation>
+    </message>
+    <message>
+        <location filename="../aboutDialog.cpp" line="43"/>
         <source>Icons:</source>
         <translation>Ikony:</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="39"/>
+        <location filename="../aboutDialog.cpp" line="45"/>
         <source>All icons are modified icons from Oxygen project</source>
         <translation>Ikony pochodzą z projektu Oxygen</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="43"/>
+        <location filename="../aboutDialog.cpp" line="49"/>
         <source>Testing:</source>
         <translation>Testowanie:</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="49"/>
+        <location filename="../aboutDialog.cpp" line="55"/>
         <source>Releasing:</source>
         <translation>Wydania:</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="65"/>
+        <location filename="../aboutDialog.cpp" line="71"/>
         <source>Shortcuts:</source>
         <translation>Skróty:</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="66"/>
+        <location filename="../aboutDialog.cpp" line="72"/>
         <source>Go to note n</source>
         <translation>Idź do notatki n</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="67"/>
+        <location filename="../aboutDialog.cpp" line="73"/>
         <source>Go to previous note</source>
         <translation>Idź do poprzedniej notatki</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="68"/>
+        <location filename="../aboutDialog.cpp" line="74"/>
         <source>Go to next note</source>
         <translation>Idź do następnej notatki</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="69"/>
+        <location filename="../aboutDialog.cpp" line="75"/>
         <source>Create new note</source>
         <translation>Utwórz nową notatkę</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="70"/>
+        <location filename="../aboutDialog.cpp" line="76"/>
         <source>Remove current note</source>
         <translation>Usuń bieżącą notatkę</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="71"/>
+        <location filename="../aboutDialog.cpp" line="77"/>
         <source>Rename current note</source>
         <translation>Zmień nazwę bieżącej notatki</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="72"/>
+        <location filename="../aboutDialog.cpp" line="78"/>
         <source>Search in the notes&apos; text</source>
         <translation>Szukaj w treści notatki</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="73"/>
+        <location filename="../aboutDialog.cpp" line="79"/>
         <source>Make selected text bold</source>
         <translation>Pogrub zaznaczony tekst</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="74"/>
+        <location filename="../aboutDialog.cpp" line="80"/>
         <source>Make selected text italic</source>
         <translation>Uzyj czcionki pochyłej w zaznaczonym tekście</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="75"/>
+        <location filename="../aboutDialog.cpp" line="81"/>
         <source>Make selected text strikeout</source>
         <translation>Przekreśl zaznaczony tekst</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="76"/>
+        <location filename="../aboutDialog.cpp" line="82"/>
         <source>Make selected text underline</source>
         <translation>Podkreśl zaznaczony tekst</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="77"/>
+        <location filename="../aboutDialog.cpp" line="83"/>
         <source>Exit program</source>
         <translation>Zakończ program</translation>
     </message>
