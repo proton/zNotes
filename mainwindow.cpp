@@ -26,21 +26,34 @@
 
 Settings settings;
 
+// Small little wrapper receiver for the note_create_widget signal
+void MainWindow::SetCheckedInverse(bool checked)
+{
+	actions[itemAdd]->setChecked(!checked);
+}
+
 void MainWindow::NewNote()
 {
 	if(!note_create_widget)
 	{
 		note_create_widget = new NoteCreateWidget(this, notes);
-		connect(note_create_widget, SIGNAL(closed(bool)), notes->getWidget(), SLOT(setShown(bool)));
-		connect(note_create_widget, SIGNAL(closed(bool)), ui->mainToolBar, SLOT(setEnabled(bool)));
-		connect(note_create_widget, SIGNAL(closed(bool)), &cmenu, SLOT(setEnabled(bool)));
-		ui->layout->addWidget(note_create_widget);
+		connect(note_create_widget, SIGNAL(closed(bool)), this, SLOT(SetCheckedInverse(bool)));
+		note_create_widget->setWindowFlags(Qt::Dialog | Qt::FramelessWindowHint);
+		note_create_widget->setFrameStyle(QFrame::StyledPanel | QFrame::Raised);
+		note_create_widget->setFrameShadow(QFrame::Raised);
 	}
-	notes->getWidget()->hide();
-	ui->mainToolBar->setDisabled(true);
-	cmenu.setDisabled(true);
-	note_create_widget->show();
+	// TODO: Check if the toolbar is on the right side or bottom and 'flip' the note_create_widget
+	if(ui->mainToolBar->orientation() == Qt::Horizontal)
+		note_create_widget->move(ui->mainToolBar->mapToGlobal(QPoint(0,ui->mainToolBar->height())));
+	else
+		note_create_widget->move(ui->mainToolBar->mapToGlobal(QPoint(ui->mainToolBar->width(),0)));
+
+	if(actions[itemAdd]->isChecked())
+		note_create_widget->show();
+	else
+		note_create_widget->hide();
 }
+
 void MainWindow::NewNotePlain()
 {
 	notes->create(Note::type_text);
@@ -306,6 +319,7 @@ MainWindow::MainWindow(QWidget *parent)
 	actShow =	new QAction(tr("Show"),	parent);
 	actHide =	new QAction(tr("Hide"),	parent);
 	//Connecting actions with slots
+	actions[itemAdd]->setCheckable(true);
 	connect(actions[itemAdd],		SIGNAL(triggered()), this, SLOT(NewNote()));
 	connect(actions[itemAddText],		SIGNAL(triggered()), this, SLOT(NewNotePlain()));
 	connect(actions[itemAddHtml],	SIGNAL(triggered()), this, SLOT(NewNoteHTML()));

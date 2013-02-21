@@ -1,7 +1,7 @@
 #ifndef NOTECREATEWIDGET_H
 #define NOTECREATEWIDGET_H
 
-#include <QWidget>
+#include <QFrame>
 
 class QSignalMapper;
 
@@ -11,7 +11,7 @@ namespace Ui {
 	class NoteCreateWidget;
 }
 
-class NoteCreateWidget : public QWidget
+class NoteCreateWidget : public QFrame
 {
 	Q_OBJECT
 
@@ -25,7 +25,8 @@ protected:
 private slots:
 	void clicked(int id);
 
-	void on_closeButton_clicked();
+public slots:
+	void closeEvent(QCloseEvent* event);
 
 signals:
 	void closed(bool);
