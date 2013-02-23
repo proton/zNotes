@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="en_US">
+<TS version="2.0" language="sv_SE">
 <context>
     <name>HighlightRuleModel</name>
     <message>
         <location filename="../highlightrulemodel.cpp" line="26"/>
         <source>Pattern</source>
-        <translation></translation>
+        <translation>Regexp</translation>
     </message>
     <message>
         <location filename="../highlightrulemodel.cpp" line="27"/>
@@ -39,18 +39,18 @@
     <message>
         <location filename="../mainwindow.cpp" line="148"/>
         <source>You need restart application to get effect.</source>
-        <translation>Omstart krävs för att ändringarna ska sparas.</translation>
+        <translation>Starta om programmet för att verkställa ändringarna</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="160"/>
         <source>Commandlist is clear</source>
-        <translation>Kommando listan är tom</translation>
+        <translation>Inga kommandon hittades.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="160"/>
         <source>List of commands is clear!
 You can add new commands in preferences.</source>
-        <translation>Inga tillgängliga kommandon finns!
+        <translation>Inga kommandon hittades!
 Du kan lägga till nya i inställningarna.</translation>
     </message>
     <message>
@@ -81,7 +81,7 @@ Du kan lägga till nya i inställningarna.</translation>
     <message>
         <location filename="../notecreatewidget.ui" line="22"/>
         <source>New note name:</source>
-        <translation>Ny anteckning:</translation>
+        <translation>Namn:</translation>
     </message>
     <message>
         <location filename="../notecreatewidget.ui" line="41"/>
@@ -94,7 +94,7 @@ Du kan lägga till nya i inställningarna.</translation>
     <message>
         <location filename="../notelist.cpp" line="56"/>
         <source>Select place for notes directory</source>
-        <translation>Välj plats för antecknigs mapp</translation>
+        <translation>Välj mapp för sparning av nya anteckningar</translation>
     </message>
     <message>
         <location filename="../notelist.cpp" line="60"/>
@@ -114,7 +114,7 @@ Du kan lägga till nya i inställningarna.</translation>
     <message>
         <location filename="../notelist.cpp" line="220"/>
         <source>Rename note</source>
-        <translation>Döp om anteckning</translation>
+        <translation>Byt namn</translation>
     </message>
     <message>
         <location filename="../notelist.cpp" line="220"/>
@@ -124,7 +124,7 @@ Du kan lägga till nya i inställningarna.</translation>
     <message>
         <location filename="../notelist.cpp" line="227"/>
         <source>Note renaming</source>
-        <translation>Byter namn på anteckning</translation>
+        <translation>Byt namn</translation>
     </message>
     <message>
         <location filename="../notelist.cpp" line="227"/>
@@ -140,18 +140,17 @@ Du kan lägga till nya i inställningarna.</translation>
         <location filename="../notelist.cpp" line="360"/>
         <source>notes path changed!
 Do you want to move your notes to new place ?</source>
-        <translation>Antecknings mappens har flyttats!
-Vill du flytta dina anteckningar till en ny plats?</translation>
+        <translation>Vill du flytta dina anteckningar till den nya mappen?</translation>
     </message>
     <message>
         <location filename="../notelist.cpp" line="369"/>
         <source>notes path change</source>
-        <translation>&gt;Antecknings mappens sökväg</translation>
+        <translation>Sökväg ändrades</translation>
     </message>
     <message>
         <location filename="../notelist.cpp" line="370"/>
         <source>You need restart application to get effect.</source>
-        <translation>Omstart krävs för att ändringarna ska sparas.</translation>
+        <translation>Starta om programmet för att verkställa ändringarna</translation>
     </message>
 </context>
 <context>
@@ -165,7 +164,7 @@ Vill du flytta dina anteckningar till en ny plats?</translation>
         <location filename="../notelist.cpp" line="21"/>
         <location filename="../notelist.cpp" line="23"/>
         <source>Simple text Note</source>
-        <translation>Enkel text</translation>
+        <translation>Enkel anteckning</translation>
     </message>
     <message>
         <location filename="../notelist.cpp" line="22"/>
@@ -175,7 +174,7 @@ Vill du flytta dina anteckningar till en ny plats?</translation>
     <message>
         <location filename="../notelist.cpp" line="22"/>
         <source>Simple Note with text formating</source>
-        <translation>Enkel text med textformatering</translation>
+        <translation>Avancerad anteckning med textformatering</translation>
     </message>
     <message>
         <location filename="../notelist.cpp" line="23"/>
@@ -190,17 +189,17 @@ Vill du flytta dina anteckningar till en ny plats?</translation>
     <message>
         <location filename="../notelist.cpp" line="25"/>
         <source>Simple TODO list</source>
-        <translation>Enkel TODO</translation>
+        <translation>Enkel TODO lista</translation>
     </message>
     <message>
         <location filename="../notelist.cpp" line="28"/>
         <source>XML Note</source>
-        <translation>XML Lapp</translation>
+        <translation>XML anteckning</translation>
     </message>
     <message>
         <location filename="../notelist.cpp" line="28"/>
         <source>XML file</source>
-        <translation>XML Fil</translation>
+        <translation>XML fil</translation>
     </message>
     <message>
         <location filename="../scriptmodel.cpp" line="30"/>
@@ -262,7 +261,7 @@ Vill du flytta dina anteckningar till en ny plats?</translation>
     <message>
         <location filename="../toolbaraction.h" line="44"/>
         <source>Separator</source>
-        <translation>Avgränsare</translation>
+        <translation>Avgränsningslist</translation>
     </message>
     <message>
         <location filename="../toolbaraction.h" line="45"/>
@@ -272,7 +271,7 @@ Vill du flytta dina anteckningar till en ny plats?</translation>
     <message>
         <location filename="../toolbaraction.h" line="46"/>
         <source>Create new Text note</source>
-        <translation>Skapa ny Text anteckning</translation>
+        <translation>Skapa ny enkel anteckning</translation>
     </message>
     <message>
         <location filename="../toolbaraction.h" line="47"/>
@@ -282,7 +281,7 @@ Vill du flytta dina anteckningar till en ny plats?</translation>
     <message>
         <location filename="../toolbaraction.h" line="48"/>
         <source>Create new TODO note</source>
-        <translation>Skapa ny TODO anteckning</translation>
+        <translation>Skapa ny Att-göra-lista</translation>
     </message>
     <message>
         <location filename="../toolbaraction.h" line="49"/>
@@ -292,7 +291,7 @@ Vill du flytta dina anteckningar till en ny plats?</translation>
     <message>
         <location filename="../toolbaraction.h" line="50"/>
         <source>Rename this note</source>
-        <translation>Döp om denna anteckning</translation>
+        <translation>Byt namn</translation>
     </message>
     <message>
         <location filename="../toolbaraction.h" line="51"/>
@@ -317,7 +316,7 @@ Vill du flytta dina anteckningar till en ny plats?</translation>
     <message>
         <location filename="../toolbaraction.h" line="55"/>
         <source>Copy this note to clipboard</source>
-        <translation>Kopiera anteckning</translation>
+        <translation>Kopiera till urklipp</translation>
     </message>
     <message>
         <location filename="../toolbaraction.h" line="56"/>
@@ -378,7 +377,7 @@ Vill du flytta dina anteckningar till en ny plats?</translation>
         <location filename="../note_todo.cpp" line="142"/>
         <location filename="../note_todo.cpp" line="143"/>
         <source>Insert new task</source>
-        <translation>Infoga ny uppgift</translation>
+        <translation>Lägg till ny uppgift</translation>
     </message>
     <message>
         <location filename="../note_todo.cpp" line="66"/>
@@ -448,7 +447,7 @@ The text of the license can can be found in the file LICENSE.</source>
 This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 See the GNU General Public License for more details.
 
-För den fullständiga licensen kolla i filen LICENSE.</translation>
+Det fullständiga licensavtalet finns i filen LICENSE</translation>
     </message>
     <message>
         <location filename="../aboutDialog.ui" line="113"/>
@@ -463,7 +462,7 @@ För den fullständiga licensen kolla i filen LICENSE.</translation>
     <message>
         <location filename="../aboutDialog.cpp" line="15"/>
         <source>Simple Qt-based notes aplication</source>
-        <translation>En enkel Qt-baserad antecknings programvara</translation>
+        <translation>Qt-baserad antecknings program</translation>
     </message>
     <message>
         <location filename="../aboutDialog.cpp" line="16"/>
@@ -548,7 +547,7 @@ För den fullständiga licensen kolla i filen LICENSE.</translation>
     <message>
         <location filename="../aboutDialog.cpp" line="45"/>
         <source>All icons are modified icons from Oxygen project</source>
-        <translation>Alla ikoner är baserade på ikoner från Oxygen</translation>
+        <translation>Alla ikoner är baserade på ikoner ifrån</translation>
     </message>
     <message>
         <location filename="../aboutDialog.cpp" line="49"/>
@@ -588,17 +587,17 @@ För den fullständiga licensen kolla i filen LICENSE.</translation>
     <message>
         <location filename="../aboutDialog.cpp" line="76"/>
         <source>Remove current note</source>
-        <translation>Ta bort nuvarande anteckning</translation>
+        <translation>Ta bort anteckning</translation>
     </message>
     <message>
         <location filename="../aboutDialog.cpp" line="77"/>
         <source>Rename current note</source>
-        <translation>Döp om nuvarande anteckning</translation>
+        <translation>Byt namn på anteckning</translation>
     </message>
     <message>
         <location filename="../aboutDialog.cpp" line="78"/>
         <source>Search in the notes&apos; text</source>
-        <translation>Sök i anteckningarnas&apos; text</translation>
+        <translation>Sök efter text</translation>
     </message>
     <message>
         <location filename="../aboutDialog.cpp" line="79"/>
@@ -671,12 +670,12 @@ För den fullständiga licensen kolla i filen LICENSE.</translation>
     <message>
         <location filename="../configdialog.ui" line="78"/>
         <source>Show files extensions</source>
-        <translation>Visa filnamns tillägg </translation>
+        <translation>Visa filnamnstillägg</translation>
     </message>
     <message>
         <location filename="../configdialog.ui" line="102"/>
         <source>Hide in tray on start</source>
-        <translation>Starta i Meddelandefältet</translation>
+        <translation>Starta i systemfältet</translation>
     </message>
     <message>
         <location filename="../configdialog.ui" line="109"/>
@@ -691,17 +690,17 @@ För den fullständiga licensen kolla i filen LICENSE.</translation>
     <message>
         <location filename="../configdialog.ui" line="140"/>
         <source>Use only one running instance of zNotes</source>
-        <translation>zNotes körs redan</translation>
+        <translation>Tillåt bara en aktiv instans av zNotes</translation>
     </message>
     <message>
         <location filename="../configdialog.ui" line="150"/>
         <source>Raise main window on starting application copy</source>
-        <translation>Raise main window on starting application copy</translation>
+        <translation>Flytta fokus till huvudfönstret vid start</translation>
     </message>
     <message>
         <location filename="../configdialog.ui" line="174"/>
         <source>Use custom language:</source>
-        <translation>Använd eget språk:</translation>
+        <translation>Språk:</translation>
     </message>
     <message>
         <location filename="../configdialog.ui" line="191"/>
@@ -721,12 +720,12 @@ För den fullständiga licensen kolla i filen LICENSE.</translation>
     <message>
         <location filename="../configdialog.ui" line="235"/>
         <source>Show script&apos;s output</source>
-        <translation>Visa skriptens utmatning</translation>
+        <translation>Visa skriptets utmatning</translation>
     </message>
     <message>
         <location filename="../configdialog.ui" line="242"/>
         <source>Copy script&apos;s output to clipboard</source>
-        <translation>Kopiera skriptens utmatning</translation>
+        <translation>Kopiera skriptets utmatning</translation>
     </message>
     <message>
         <location filename="../configdialog.ui" line="252"/>
@@ -741,7 +740,7 @@ För den fullständiga licensen kolla i filen LICENSE.</translation>
     <message>
         <location filename="../configdialog.ui" line="333"/>
         <source>Path to notes directory:</source>
-        <translation>Antecknigs mappens sökväg</translation>
+        <translation>Spara anteckningar i:</translation>
     </message>
     <message>
         <location filename="../configdialog.ui" line="347"/>
@@ -766,7 +765,7 @@ För den fullständiga licensen kolla i filen LICENSE.</translation>
     <message>
         <location filename="../configdialog.ui" line="402"/>
         <source>Open links (with pressed CTRL)</source>
-        <translation>Öppna länkar med CTRL</translation>
+        <translation>Öppna länkar med CTRL + Vänsterklick</translation>
     </message>
     <message>
         <location filename="../configdialog.ui" line="409"/>
@@ -786,7 +785,7 @@ För den fullständiga licensen kolla i filen LICENSE.</translation>
     <message>
         <location filename="../configdialog.cpp" line="154"/>
         <source>Select notes directory</source>
-        <translation>Välj antecknings mapp</translation>
+        <translation>Välj mapp för sparning av nya anteckningar</translation>
     </message>
 </context>
 </TS>
