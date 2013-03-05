@@ -216,10 +216,21 @@ void NoteList::renameCurrentNote()
 	Note* note = current();
 	if(!note) return;
 	bool ok;
-	const QString filename = note->fileName();
-	QString new_name = QInputDialog::getText(0, tr("Rename note"), tr("New name:"), QLineEdit::Normal, filename, &ok);
+
+	int typedot = note->fileName().lastIndexOf(".");
+	QString filename = note->fileName();
+	QString extension;
+	if(typedot != -1)
+	{
+		// Specify size to keep it backwards compitable with Qt >4.7
+		extension = QString(&note->fileName().data()[typedot], note->fileName().length() - typedot);
+		filename.truncate(typedot);
+	}
+
+	QString new_name = QInputDialog::getText(0, tr("Rename note"), tr("New name:"), QLineEdit::Normal, filename,  &ok);
 	if(ok && !new_name.isEmpty())
 	{
+		new_name.append(extension);
 		QFile file(dir.absoluteFilePath(new_name));
 		if(!file.exists()) rename(current_index, new_name);
 		else
