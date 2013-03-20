@@ -31,6 +31,7 @@ protected:
 	void closeEvent(QCloseEvent *event);
 	void hideEvent(QHideEvent *event);
 	void showEvent(QShowEvent *event);
+	void moveEvent(QMoveEvent *event);
 private:
 	Ui::MainWindow *ui;
 	//

@@ -114,6 +114,12 @@ void MainWindow::hideEvent(QHideEvent* event)
 	actShow->setEnabled(true);
 	actHide->setDisabled(true);
 	if(notes->current()) notes->saveAll();
+
+	if(note_create_widget && note_create_widget->isVisible())
+	{
+		actions[itemAdd]->setChecked(false);
+		note_create_widget->hide();
+	}
 }
 
 void MainWindow::showEvent(QShowEvent* event)
@@ -130,6 +136,24 @@ void MainWindow::closeEvent(QCloseEvent *event)
 	{
 		hide();
 		event->ignore();
+	}
+
+	if(note_create_widget && note_create_widget->isVisible())
+	{
+		actions[itemAdd]->setChecked(false);
+		note_create_widget->hide();
+	}
+}
+
+void MainWindow::moveEvent(QMoveEvent *event)
+{
+	if(note_create_widget && note_create_widget->isVisible())
+	{
+		// TODO: Check if the toolbar is on the right side or bottom and 'flip' the note_create_widget
+		if(ui->mainToolBar->orientation() == Qt::Horizontal)
+			note_create_widget->move(ui->mainToolBar->mapToGlobal(QPoint(0,ui->mainToolBar->height())));
+		else
+			note_create_widget->move(ui->mainToolBar->mapToGlobal(QPoint(ui->mainToolBar->width(),0)));
 	}
 }
 
