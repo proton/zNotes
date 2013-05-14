@@ -3,7 +3,6 @@
 
 #include <QPainter>
 #include <QPaintEvent>
-#include <QtDebug>
 
 NoteCreateButton::NoteCreateButton(QWidget *parent, const NoteType& ntype) :
 	QPushButton(parent), note_type(ntype)

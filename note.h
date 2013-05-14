@@ -44,7 +44,7 @@ public:
 	void move(const QString& new_dir);
 
 	virtual void copy() const = 0; //Coping note's content to clipboard
-	virtual bool find(const QString& text, bool next=false); //Searching text in a note's content
+    virtual bool find(const QString& text, bool from_start=false); //Searching text in a note's content
 
 	virtual void setSelFormat(const QTextCharFormat& format)
 	{

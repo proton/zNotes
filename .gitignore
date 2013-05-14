@@ -1,4 +1,6 @@
+.directory
 .svn
+znotes.pro.user
 translations/*.qm
 build
 Makefile

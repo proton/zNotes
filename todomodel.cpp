@@ -3,8 +3,6 @@
 #include <QCheckBox>
 #include <QMimeData>
 
-#include <QtDebug>
-
 #define NOTE_TODO_TASK_MIME "application/znotes.content.list"
 
 Task::Task(QDomDocument* document, QDomNode &node, int row, Task* parent)

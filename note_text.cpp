@@ -62,8 +62,8 @@ void TextNote::copy() const
 }
 
 //Searching in a note's content
-bool TextNote::find(const QString& text, bool next)
+bool TextNote::find(const QString& text, bool from_start)
 {
-	return text_edit->search(text, next);
+    return text_edit->search(text, from_start);
 }
 

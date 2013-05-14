@@ -179,15 +179,15 @@ void NoteList::move(const QString& path)
 
 void NoteList::search(const QString& text)
 {
-	//Searching in current note
-	if(current()->find(text)) return;
+    //Searching in current note
+    if(current()->find(text)) return;
 	//Searching in all notes
 	const int max = count()+currentIndex();
 	for(int n=currentIndex()+1; n<=max; ++n)
 	{
-		int i = n%vec.size(); //secret formula of success search
+        int i = n%vec.size(); //secret formula of success search
 		if(vec[i]->find(text, true))
-		{
+        {
 			tabs->setCurrentIndex(i);
 			return;
 		}

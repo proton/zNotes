@@ -13,8 +13,6 @@
 #include <QLocale>
 #include <QMap>
 
-#include <QtDebug>
-
 #include "scriptmodel.h"
 
 struct HighlightRule

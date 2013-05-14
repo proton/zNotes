@@ -53,10 +53,10 @@ void Note::move(const QString& new_dirname)
 }
 
 //Searching in a note's content
-bool Note::find(const QString& text, bool next)
+bool Note::find(const QString& text, bool from_start)
 {
 	Q_UNUSED(text)
-	Q_UNUSED(next)
+    Q_UNUSED(from_start)
 	return false;
 }
 

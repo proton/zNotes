@@ -129,14 +129,19 @@ void TextEdit::linkOpenChanged()
 }
 
 //Searching
-bool TextEdit::search(const QString& text, bool next)
+bool TextEdit::search(const QString& text, bool from_start)
 {
-	if(next) //search next
-	{
-		QTextCursor cursor(textCursor().block().next());
-		setTextCursor(cursor);
-	}
-	else unsetCursor(); //new search
+    if(from_start)
+    {
+        QTextCursor cursor(textCursor());
+        cursor.movePosition(QTextCursor::Start);
+        setTextCursor(cursor);
+    }
+    else
+    {
+        QTextCursor cursor(textCursor().block().next());
+        setTextCursor(cursor);
+    }
 	return find(text);
 }
 

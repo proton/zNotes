@@ -1,5 +1,4 @@
 #include "notetype.h"
-#include <QtDebug>
 
 NoteType::NoteType(Note::Type id, const QString& title, const QString& description,
 					const QString& big_icon_path, const QString& small_icon_path,
