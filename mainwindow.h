@@ -31,6 +31,7 @@ protected:
 	void closeEvent(QCloseEvent *event);
 	void hideEvent(QHideEvent *event);
 	void showEvent(QShowEvent *event);
+	void moveEvent(QMoveEvent *event);
 private:
 	Ui::MainWindow *ui;
 	//
@@ -57,6 +58,7 @@ private:
 	void Search(bool next);
 	void changeEvent(QEvent *e);
 public slots:
+	void SetCheckedInverse(bool checked);
 	void NewNote();
 	void NewNotePlain();
 	void NewNoteHTML();

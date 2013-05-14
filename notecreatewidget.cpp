@@ -6,7 +6,7 @@
 #include <QSignalMapper>
 
 NoteCreateWidget::NoteCreateWidget(QWidget *parent, NoteList* note_list) :
-	QWidget(parent),
+	QFrame(parent),
 	ui(new Ui::NoteCreateWidget),
 	notes(note_list)
 {
@@ -31,7 +31,11 @@ NoteCreateWidget::~NoteCreateWidget()
 void NoteCreateWidget::clicked(int id)
 {
 	notes->create(Note::Type(id), ui->noteNameEdit->text());
-	hide();
+	close();
+}
+
+void NoteCreateWidget::closeEvent( QCloseEvent* event )
+{
 	emit closed(true);
 }
 
@@ -45,10 +49,4 @@ void NoteCreateWidget::changeEvent(QEvent *e)
     default:
         break;
     }
-}
-
-void NoteCreateWidget::on_closeButton_clicked()
-{
-	hide();
-	emit closed(true);
 }
