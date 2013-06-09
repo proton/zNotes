@@ -1,5 +1,6 @@
 #include "aboutDialog.h"
 #include "ui_aboutDialog.h"
+#include "shared.h"
 
 //Fixed problems with compilation, if program version is undefined
 #ifndef VERSION
@@ -70,17 +71,10 @@ aboutDialog::aboutDialog(QWidget *parent) :
 	QString strHelp;
 	strHelp.append(QString("<p><b>%1</b><p>").arg(tr("Shortcuts:")));
 	strHelp.append(QString("<b>%1</b> - %2<br/>").arg("Alt+Fn").arg(tr("Go to note n")));
-	strHelp.append(QString("<b>%1</b> - %2<br/>").arg("Alt+Left").arg(tr("Go to previous note")));
-	strHelp.append(QString("<b>%1</b> - %2<br/>").arg("Alt+Right").arg(tr("Go to next note")));
-	strHelp.append(QString("<b>%1</b> - %2<br/>").arg("Ctrl+N").arg(tr("Create new note")));
-	strHelp.append(QString("<b>%1</b> - %2<br/>").arg("Ctrl+W").arg(tr("Remove current note")));
-	strHelp.append(QString("<b>%1</b> - %2<br/>").arg("F2").arg(tr("Rename current note")));
-	strHelp.append(QString("<b>%1</b> - %2<br/>").arg("Ctrl+F").arg(tr("Search in the notes' text")));
-	strHelp.append(QString("<b>%1</b> - %2<br/>").arg("Ctrl+B").arg(tr("Make selected text bold")));
-	strHelp.append(QString("<b>%1</b> - %2<br/>").arg("Ctrl+I").arg(tr("Make selected text italic")));
-	strHelp.append(QString("<b>%1</b> - %2<br/>").arg("Ctrl+S").arg(tr("Make selected text strikeout")));
-	strHelp.append(QString("<b>%1</b> - %2<br/>").arg("Ctrl+U").arg(tr("Make selected text underline")));
-	strHelp.append(QString("<b>%1</b> - %2<br/>").arg("Ctrl+Q").arg(tr("Exit program")));
+	QShortcut* shortcut;
+	foreach(shortcut, Shared::shortcuts())
+		if(!shortcut->whatsThis().isEmpty())
+			strHelp.append(QString("<b>%1</b> - %2<br/>").arg(shortcut->key().toString()).arg(shortcut->whatsThis()));
 	ui->lbHelp->setHtml(strHelp);
 	//adjustSize();
 }

@@ -34,7 +34,8 @@ SOURCES += main.cpp \
 	single_inst/qtlocalpeer.cpp \
 	single_inst/qtsingleapplication.cpp \
     ztabwidget.cpp \
-    ztabbar.cpp
+    ztabbar.cpp \
+    shared.cpp
 HEADERS += mainwindow.h \
 	configdialog.h \
 	settings.h \
@@ -58,7 +59,8 @@ HEADERS += mainwindow.h \
 	single_inst/qtlocalpeer.h \
 	single_inst/qtsingleapplication.h \
     ztabwidget.h \
-    ztabbar.h
+    ztabbar.h \
+    shared.h
 	FORMS += mainwindow.ui \
 	configdialog.ui \
 	aboutDialog.ui \

@@ -45,13 +45,8 @@ private:
 	QSignalMapper alt_mapper;
 	//QTimer SaveTimer;
 	//
-	QAction* actions[itemMax];
-//	//
-	QAction *actShow, *actHide;
-//	//
-	QShortcut *scAdd, *scRemove, *scRename, *scBack, *scForward, *scPrev, *scNext, *scExit, *scSearch;
-	QShortcut *scFormatBold, *scFormatItalic, *scFormatStrikeout, *scFormatUnderline;
-	QShortcut *scSearchEsc;
+    QAction* actions[itemMax];
+    QAction *actShow, *actHide;
 	//
 	void LoadNotes();
 	//

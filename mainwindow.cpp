@@ -5,6 +5,7 @@
 #include "aboutDialog.h"
 #include "note_html.h"
 #include "notecreatewidget.h"
+#include "shared.h"
 
 #include <QMessageBox>
 #include <QClipboard>
@@ -145,8 +146,9 @@ void MainWindow::closeEvent(QCloseEvent *event)
 	}
 }
 
-void MainWindow::moveEvent(QMoveEvent *event)
+void MainWindow::moveEvent(QMoveEvent* event)
 {
+	Q_UNUSED(event)
 	if(note_create_widget && note_create_widget->isVisible())
 	{
 		// TODO: Check if the toolbar is on the right side or bottom and 'flip' the note_create_widget
@@ -324,6 +326,8 @@ inline QAction* GenerateAction(int item_id /*, bool checkable = false*/)
 	return action;
 }
 
+#include <QtDebug>
+
 MainWindow::MainWindow(QWidget *parent)
 	: QMainWindow(parent), ui(new Ui::MainWindow), note_create_widget(0)
 {
@@ -391,38 +395,35 @@ MainWindow::MainWindow(QWidget *parent)
 	tray.show();
 
 	//Creating shortcuts
-//	scAdd	=	new QShortcut(QKeySequence::New,	this);
-	scAdd	=	new QShortcut(Qt::CTRL + Qt::Key_N,	this);
-	scRemove =	new QShortcut(Qt::CTRL + Qt::Key_W,	this);
-	scRename =	new QShortcut(Qt::Key_F2,	this);
-	scBack =	new QShortcut(QKeySequence::Back,	this);
-	scForward =	new QShortcut(QKeySequence::Forward,this);
-	scPrev =	new QShortcut(QKeySequence::PreviousChild,	this);
-	scNext =	new QShortcut(QKeySequence::NextChild,this);
-	scSearch =	new QShortcut(QKeySequence::Find,	this);
-	scSearchEsc = new QShortcut(Qt::Key_Escape, ui->edSearch, 0, 0, Qt::WidgetShortcut);
-//	scExit =	new QShortcut(QKeySequence::Close,	this);
-	scExit =	new QShortcut(Qt::CTRL + Qt::Key_Q,	this);
-	scFormatBold =		new QShortcut(Qt::CTRL + Qt::Key_B,	this);
-	scFormatItalic =	new QShortcut(Qt::CTRL + Qt::Key_I,	this);
-	scFormatStrikeout = new QShortcut(Qt::CTRL + Qt::Key_S,	this);
-	scFormatUnderline = new QShortcut(Qt::CTRL + Qt::Key_U,	this);
-	//Connecting shortcuts with slots
-	connect(scAdd,		SIGNAL(activated()), this, SLOT(NewNote()));
-	connect(scRemove,	SIGNAL(activated()), notes, SLOT(removeCurrentNote()));
-	connect(scRename,	SIGNAL(activated()), notes, SLOT(renameCurrentNote()));
-	connect(scPrev,		SIGNAL(activated()), this, SLOT(PreviousNote()));
-	connect(scNext,		SIGNAL(activated()), this, SLOT(NextNote()));
-	connect(scBack,		SIGNAL(activated()), notes, SLOT(historyBack()));
-	connect(scForward,	SIGNAL(activated()), notes, SLOT(historyForward()));
-	connect(scSearch,	SIGNAL(activated()), actions[itemSearch], SLOT(toggle()));
-	connect(scSearchEsc,	SIGNAL(activated()), actions[itemSearch], SLOT(toggle()));
-	connect(scExit,		SIGNAL(activated()), qApp, SLOT(quit()));
-	connect(scFormatBold,	SIGNAL(activated()), this, SLOT(formatBold()));
-	connect(scFormatItalic,	SIGNAL(activated()), this, SLOT(formatItalic()));
-	connect(scFormatStrikeout,	SIGNAL(activated()), this, SLOT(formatStrikeout()));
-	connect(scFormatUnderline,	SIGNAL(activated()), this, SLOT(formatUnderline()));
-	//
+	Shared::addShortcut(new QShortcut(QKeySequence::New, this), tr("Create new note"));
+		connect(Shared::shortcuts().last(), SIGNAL(activated()), this, SLOT(NewNote()));
+	Shared::addShortcut(new QShortcut(QKeySequence::Close, this));
+		connect(Shared::shortcuts().last(), SIGNAL(activated()), notes, SLOT(removeCurrentNote()));
+	Shared::addShortcut(new QShortcut(Qt::Key_F2, this), tr("Rename current note"));
+		connect(Shared::shortcuts().last(), SIGNAL(activated()), notes, SLOT(renameCurrentNote()));
+	Shared::addShortcut(new QShortcut(QKeySequence::Back, this), tr("Go to previous note"));
+		connect(Shared::shortcuts().last(), SIGNAL(activated()), this, SLOT(PreviousNote()));
+	Shared::addShortcut(new QShortcut(QKeySequence::Forward, this), tr("Go to next note"));
+		connect(Shared::shortcuts().last(), SIGNAL(activated()), this, SLOT(NextNote()));
+	Shared::addShortcut(new QShortcut(QKeySequence::PreviousChild, this));
+		connect(Shared::shortcuts().last(), SIGNAL(activated()), notes, SLOT(historyBack()));
+	Shared::addShortcut(new QShortcut(QKeySequence::NextChild, this));
+		connect(Shared::shortcuts().last(), SIGNAL(activated()), notes, SLOT(historyForward()));
+	Shared::addShortcut(new QShortcut(QKeySequence::Find, this), tr("Search in the notes' text"));
+		connect(Shared::shortcuts().last(), SIGNAL(activated()), actions[itemSearch], SLOT(toggle()));
+	Shared::addShortcut(new QShortcut(Qt::Key_Escape, ui->edSearch, 0, 0, Qt::WidgetShortcut));
+		connect(Shared::shortcuts().last(), SIGNAL(activated()), actions[itemSearch], SLOT(toggle()));
+	Shared::addShortcut(new QShortcut(Qt::CTRL + Qt::Key_Q, this), tr("Exit program"));
+		connect(Shared::shortcuts().last(), SIGNAL(activated()), qApp, SLOT(quit()));
+	Shared::addShortcut(new QShortcut(QKeySequence::Bold, this), tr("Make selected text bold"));
+		connect(Shared::shortcuts().last(), SIGNAL(activated()), this, SLOT(formatBold()));
+	Shared::addShortcut(new QShortcut(QKeySequence::Italic, this), tr("Make selected text italic"));
+		connect(Shared::shortcuts().last(), SIGNAL(activated()), this, SLOT(formatItalic()));
+	Shared::addShortcut(new QShortcut(Qt::CTRL + Qt::Key_S, this), tr("Make selected text strikeout"));
+		connect(Shared::shortcuts().last(), SIGNAL(activated()), this, SLOT(formatStrikeout()));
+	Shared::addShortcut(new QShortcut(QKeySequence::Underline, this), tr("Make selected text underline"));
+		connect(Shared::shortcuts().last(), SIGNAL(activated()), this, SLOT(formatUnderline()));
+
 	for(int i=1; i<=9; ++i) //from Alt+1 to Alt+9
 	{
 		QShortcut* shortcut = new QShortcut(QKeySequence(Qt::ALT + Qt::Key_0+i), this);
