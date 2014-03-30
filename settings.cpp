@@ -91,7 +91,7 @@ void Settings::load()
 	if(!mydocuments_path.isEmpty()) notes_path = mydocuments_path+"/Notes";
 	else if(!QDir::homePath().isEmpty()) notes_path = QDir::homePath()+"/Notes";
 #else
-	if(!QDir::homePath().isEmpty()) notes_path = QDir::homePath()+"\Notes";
+    if(!QDir::homePath().isEmpty()) notes_path = QDir::homePath()+"/Notes";
 #endif
 		config.setValue("NotesPath", notes_path);
 	}

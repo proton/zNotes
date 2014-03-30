@@ -27,7 +27,7 @@ public:
 
 	inline const QList<Task*>& subtasks() const { return _subtasks; }
 	inline Task* parent() const { return _parent; }
-	inline int row() const { return _row; };
+    inline int row() const { return _row; }
 
 	inline const QDomNode& node() const { return _node; }
 

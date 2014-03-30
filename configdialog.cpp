@@ -46,7 +46,7 @@ configDialog::configDialog(QWidget *parent) :
 #endif
 	//
 	m_ui->tabScripts->setModel(&settings.getScriptModel());
-	m_ui->tabScripts->horizontalHeader()->setResizeMode(QHeaderView::Stretch);
+    m_ui->tabScripts->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 	m_ui->cb_ScriptShowOutput->setChecked(settings.getScriptShowOutput());
 	m_ui->cb_ScriptCopyOutput->setChecked(settings.getScriptCopyOutput());
 	//
@@ -59,7 +59,7 @@ configDialog::configDialog(QWidget *parent) :
 	connect(m_ui->cb_NoteHighlight, SIGNAL(toggled(bool)), m_ui->highlightRulesTableView, SLOT(setEnabled(bool)));
 	highlight_rule_model = new HighlightRuleModel(this, settings.getHighlightRules());
 	m_ui->highlightRulesTableView->setModel(highlight_rule_model);
-	m_ui->highlightRulesTableView->horizontalHeader()->setResizeMode(QHeaderView::Stretch);
+    m_ui->highlightRulesTableView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 	connect(m_ui->highlightRulesTableView->selectionModel(), SIGNAL(currentRowChanged(QModelIndex,QModelIndex)),
 			this, SLOT(currentHighlightRuleModelRowChanged(QModelIndex,QModelIndex)));
 	//

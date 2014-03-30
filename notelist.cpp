@@ -59,6 +59,7 @@ NoteList::NoteList(QWidget* parent)
 		{
 			QString new_path = QDir(dir.path()+'/'+tr("Notes")).absolutePath();
 			settings.setNotesPath(new_path);
+            dir.setPath(new_path);
 			if(!dir.exists()) if(!dir.mkpath(dir.path())) dir.setPath("");
 			if(!dir.isReadable()) dir.setPath("");
 		}
