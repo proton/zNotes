@@ -57,11 +57,11 @@ NoteList::NoteList(QWidget* parent)
 			QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks));
 		if(!dir.path().isEmpty())
 		{
-			QString new_path = QDir(dir.path()+'/'+tr("Notes")).absolutePath();
-			settings.setNotesPath(new_path);
+            QString new_path = QDir(dir.path()+'/'+tr("Notes")).absolutePath();
             dir.setPath(new_path);
 			if(!dir.exists()) if(!dir.mkpath(dir.path())) dir.setPath("");
 			if(!dir.isReadable()) dir.setPath("");
+            settings.setNotesPath(new_path);
 		}
 	}
 
