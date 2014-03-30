@@ -90,8 +90,10 @@ void Settings::load()
 	QString mydocuments_path = win_settings.value("CurrentVersion/Explorer/Shell Folders/Personal", "").toString();
 	if(!mydocuments_path.isEmpty()) notes_path = mydocuments_path+"/Notes";
 	else if(!QDir::homePath().isEmpty()) notes_path = QDir::homePath()+"/Notes";
-#else
+#elif defined(Q_OS_UNIX)
     if(!QDir::homePath().isEmpty()) notes_path = QDir::homePath()+"/Notes";
+#else
+    if(!QDir::homePath().isEmpty()) notes_path = QDir::homePath()+"\\Notes";
 #endif
 		config.setValue("NotesPath", notes_path);
 	}
