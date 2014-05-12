@@ -61,7 +61,7 @@ NoteList::NoteList(QWidget* parent)
             dir.setPath(new_path);
 			if(!dir.exists()) if(!dir.mkpath(dir.path())) dir.setPath("");
 			if(!dir.isReadable()) dir.setPath("");
-            settings.setNotesPath(new_path);
+            else settings.setNotesPath(new_path);
 		}
 	}
 
