@@ -94,6 +94,11 @@ Qt::DropActions ItemModel::supportedDropActions() const
 	return Qt::MoveAction;
 }
 
+Qt::DropActions ItemModel::supportedDragActions() const
+{
+    return Qt::CopyAction | Qt::MoveAction;
+}
+
 QStringList ItemModel::mimeTypes() const
 {
 	QStringList types;
@@ -164,6 +169,11 @@ Qt::DropActions ItemToolbarModel::supportedDropActions() const
 	return Qt::MoveAction;
 }
 
+Qt::DropActions ItemToolbarModel::supportedDragActions() const
+{
+    return Qt::CopyAction | Qt::MoveAction;
+}
+
 Qt::ItemFlags ItemToolbarModel::flags(const QModelIndex &index) const
 {
 	if(!index.isValid()) return Qt::ItemIsDropEnabled;
@@ -222,7 +232,7 @@ QModelIndex ItemToolbarModel::up(const QModelIndex &index)
 	int row = index.row();
 	if(row==0) return index; //if this item first
 	items.swap(row, row-1);
-	emit reset();
+    emit items.reset();
 	QModelIndex new_index(this->index(row-1, index.column()));
 	return new_index;
 }
@@ -232,7 +242,7 @@ QModelIndex ItemToolbarModel::down(const QModelIndex &index)
 	int row = index.row();
 	if(row==v.size()-1) return index; //if this item last
 	items.swap(row, row+1);
-	emit reset();
+    emit items.reset();
 	QModelIndex new_index(this->index(row+1, index.column()));
 	return new_index;
 }

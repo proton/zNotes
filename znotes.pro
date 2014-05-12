@@ -3,7 +3,7 @@
 # -------------------------------------------------
 TARGET = znotes
 VERSION = "0.4.5"
-QT += core gui network
+QT += core gui network widgets
 TEMPLATE = app
 OBJECTS_DIR = build
 UI_DIR = build

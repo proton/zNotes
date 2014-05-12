@@ -44,7 +44,7 @@ TodoNote::TodoNote(const QFileInfo& fileinfo, Note::Type type_new)
 	tree_view->setModel(proxy_model);
 	tree_view->setEditTriggers(QAbstractItemView::DoubleClicked | QAbstractItemView::SelectedClicked);
 	tree_view->setSelectionBehavior(QAbstractItemView::SelectRows);
-	tree_view->header()->setResizeMode(QHeaderView::ResizeToContents);
+    tree_view->header()->setSectionResizeMode(QHeaderView::ResizeToContents);
 	tree_view->header()->hide();
 	tree_view->setDragEnabled(true);
 	tree_view->setAcceptDrops(true);

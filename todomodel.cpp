@@ -174,7 +174,7 @@ QDomDocument*  TodoModel::load(QFile& file)
 	QDomElement root_element = _document->documentElement();
 	_root_task = new Task(_document, root_element, 0, NULL);
 
-	reset();
+//	reset();
 
 	return _document;
 }
