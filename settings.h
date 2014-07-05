@@ -101,6 +101,7 @@ private:
 	QTranslator qtranslator;
 	//
 	QMap<int, QMap<int, QString> > translations;
+    QMap<int, QMap<int, QString> > qtTranslations;
 	QLocale locale_current;
 	QLocale locale_system;
 	QLocale locale;

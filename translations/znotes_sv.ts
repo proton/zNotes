@@ -32,43 +32,93 @@
         <translation>Visa Vertygsfältet</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="147"/>
+        <location filename="../mainwindow.cpp" line="186"/>
         <source>Settings changed</source>
         <translation>Inställningarna ändrades</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="148"/>
+        <location filename="../mainwindow.cpp" line="187"/>
         <source>You need restart application to get effect.</source>
         <translation>Starta om programmet för att verkställa ändringarna</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="160"/>
+        <location filename="../mainwindow.cpp" line="199"/>
         <source>Commandlist is clear</source>
         <translation>Inga kommandon hittades.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="160"/>
+        <location filename="../mainwindow.cpp" line="199"/>
         <source>List of commands is clear!
 You can add new commands in preferences.</source>
         <translation>Inga kommandon hittades!
 Du kan lägga till nya i inställningarna.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="193"/>
+        <location filename="../mainwindow.cpp" line="232"/>
         <source>Edit command list</source>
         <translation>Redigera kommando listan</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="306"/>
-        <location filename="../mainwindow.cpp" line="532"/>
+        <location filename="../mainwindow.cpp" line="347"/>
+        <location filename="../mainwindow.cpp" line="571"/>
         <source>Show</source>
         <translation>Visa</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="307"/>
-        <location filename="../mainwindow.cpp" line="533"/>
+        <location filename="../mainwindow.cpp" line="348"/>
+        <location filename="../mainwindow.cpp" line="572"/>
         <source>Hide</source>
         <translation>Göm</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="398"/>
+        <source>Create new note</source>
+        <translation type="unfinished">Skapa ny anteckning</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="402"/>
+        <source>Rename current note</source>
+        <translation type="unfinished">Byt namn på anteckning</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="404"/>
+        <source>Go to previous note</source>
+        <translation type="unfinished">Gå till föregående anteckning</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="406"/>
+        <source>Go to next note</source>
+        <translation type="unfinished">Gå till nästa anteckning</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="412"/>
+        <source>Search in the notes&apos; text</source>
+        <translation type="unfinished">Sök efter text</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="416"/>
+        <source>Exit program</source>
+        <translation type="unfinished">Avsluta programmet</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="418"/>
+        <source>Make selected text bold</source>
+        <translation type="unfinished">Gör markerad text fet</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="420"/>
+        <source>Make selected text italic</source>
+        <translation type="unfinished">Gör markerad text kursiv</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="422"/>
+        <source>Make selected text strikeout</source>
+        <translation type="unfinished">Gör markerad text genomstruken</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="424"/>
+        <source>Make selected text underline</source>
+        <translation type="unfinished">Gör markerad text udnerstruken</translation>
     </message>
 </context>
 <context>
@@ -79,14 +129,13 @@ Du kan lägga till nya i inställningarna.</translation>
         <translation>Form</translation>
     </message>
     <message>
-        <location filename="../notecreatewidget.ui" line="22"/>
+        <location filename="../notecreatewidget.ui" line="25"/>
         <source>New note name:</source>
         <translation>Namn:</translation>
     </message>
     <message>
-        <location filename="../notecreatewidget.ui" line="41"/>
         <source>Cancel</source>
-        <translation>Avbryt</translation>
+        <translation type="obsolete">Avbryt</translation>
     </message>
 </context>
 <context>
@@ -107,48 +156,52 @@ Du kan lägga till nya i inställningarna.</translation>
         <translation>Ta bort anteckning</translation>
     </message>
     <message>
-        <location filename="../notelist.cpp" line="204"/>
         <source>Do you realy want to delete note %1 ?</source>
-        <translation>Vill du verkligen ta bort %1 ?</translation>
+        <translation type="obsolete">Vill du verkligen ta bort %1 ?</translation>
     </message>
     <message>
-        <location filename="../notelist.cpp" line="220"/>
+        <location filename="../notelist.cpp" line="204"/>
+        <source>Do you really want to delete note %1 ?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../notelist.cpp" line="230"/>
         <source>Rename note</source>
         <translation>Byt namn</translation>
     </message>
     <message>
-        <location filename="../notelist.cpp" line="220"/>
+        <location filename="../notelist.cpp" line="230"/>
         <source>New name:</source>
         <translation>Nytt namn:</translation>
     </message>
     <message>
-        <location filename="../notelist.cpp" line="227"/>
+        <location filename="../notelist.cpp" line="238"/>
         <source>Note renaming</source>
         <translation>Byt namn</translation>
     </message>
     <message>
-        <location filename="../notelist.cpp" line="227"/>
+        <location filename="../notelist.cpp" line="238"/>
         <source>Note %1 already exists!</source>
         <translation>%1 finns redan!</translation>
     </message>
     <message>
-        <location filename="../notelist.cpp" line="359"/>
+        <location filename="../notelist.cpp" line="370"/>
         <source>Move notes</source>
         <translation>Flytta anteckning</translation>
     </message>
     <message>
-        <location filename="../notelist.cpp" line="360"/>
+        <location filename="../notelist.cpp" line="371"/>
         <source>notes path changed!
 Do you want to move your notes to new place ?</source>
         <translation>Vill du flytta dina anteckningar till den nya mappen?</translation>
     </message>
     <message>
-        <location filename="../notelist.cpp" line="369"/>
+        <location filename="../notelist.cpp" line="380"/>
         <source>notes path change</source>
         <translation>Sökväg ändrades</translation>
     </message>
     <message>
-        <location filename="../notelist.cpp" line="370"/>
+        <location filename="../notelist.cpp" line="381"/>
         <source>You need restart application to get effect.</source>
         <translation>Starta om programmet för att verkställa ändringarna</translation>
     </message>
@@ -217,17 +270,17 @@ Do you want to move your notes to new place ?</source>
         <translation>Ikon</translation>
     </message>
     <message>
-        <location filename="../todomodel.cpp" line="62"/>
+        <location filename="../todomodel.cpp" line="60"/>
         <source>New task</source>
         <translation>Ny uppgift</translation>
     </message>
     <message>
-        <location filename="../todomodel.cpp" line="314"/>
+        <location filename="../todomodel.cpp" line="312"/>
         <source>expired</source>
         <translation>upphört</translation>
     </message>
     <message numerus="yes">
-        <location filename="../todomodel.cpp" line="316"/>
+        <location filename="../todomodel.cpp" line="314"/>
         <source>%n day(s)</source>
         <translation>
             <numerusform>%n dag</numerusform>
@@ -235,7 +288,7 @@ Do you want to move your notes to new place ?</source>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../todomodel.cpp" line="317"/>
+        <location filename="../todomodel.cpp" line="315"/>
         <source>%n hour(s)</source>
         <translation>
             <numerusform>%n timme</numerusform>
@@ -243,7 +296,7 @@ Do you want to move your notes to new place ?</source>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../todomodel.cpp" line="318"/>
+        <location filename="../todomodel.cpp" line="316"/>
         <source>%n minute(s)</source>
         <translation>
             <numerusform>%n minut</numerusform>
@@ -251,7 +304,7 @@ Do you want to move your notes to new place ?</source>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../todomodel.cpp" line="319"/>
+        <location filename="../todomodel.cpp" line="317"/>
         <source>%n second(s)</source>
         <translation>
             <numerusform>%n sekund</numerusform>
@@ -460,169 +513,158 @@ Det fullständiga licensavtalet finns i filen LICENSE</translation>
         <translation>Avbryt</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="15"/>
+        <location filename="../aboutDialog.cpp" line="16"/>
         <source>Simple Qt-based notes aplication</source>
         <translation>Qt-baserad antecknings program</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="16"/>
+        <location filename="../aboutDialog.cpp" line="17"/>
         <source>version</source>
         <translation>version</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="17"/>
+        <location filename="../aboutDialog.cpp" line="18"/>
         <source>Copyright (c) 2013</source>
         <translation>Copyright (c) 2013</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="18"/>
+        <location filename="../aboutDialog.cpp" line="19"/>
         <source>by Peter Savichev (proton)</source>
         <translation>av Peter Savichev (proton)</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="19"/>
+        <location filename="../aboutDialog.cpp" line="20"/>
         <source>Distributed under the GPL license version 3 or later</source>
         <translation>Distribueras under GPL licensen version 3 eller senare</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="23"/>
+        <location filename="../aboutDialog.cpp" line="24"/>
         <source>Application concept and main development</source>
         <translation>Koncept och utveckling</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="24"/>
+        <location filename="../aboutDialog.cpp" line="25"/>
         <source>Translations:</source>
         <translation>Översättningar:</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="26"/>
+        <location filename="../aboutDialog.cpp" line="27"/>
         <source>Brazilian Portuguese translation</source>
         <translation>Brasiliansk-Portugisisk översättning</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="28"/>
+        <location filename="../aboutDialog.cpp" line="29"/>
         <source>Czech translation</source>
         <translation>Tjeckisk översättning</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="30"/>
+        <location filename="../aboutDialog.cpp" line="31"/>
         <source>German translation</source>
         <translation>Tysk översättning</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="32"/>
+        <location filename="../aboutDialog.cpp" line="33"/>
         <source>Russian translation</source>
         <translation>Rysk översättning</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="34"/>
+        <location filename="../aboutDialog.cpp" line="35"/>
         <source>Slovak translation</source>
         <translation>Slovakisk översättning</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="36"/>
+        <location filename="../aboutDialog.cpp" line="37"/>
         <source>Spanish translation</source>
         <translation>Spank översättning</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="38"/>
+        <location filename="../aboutDialog.cpp" line="39"/>
         <source>Swedish translation</source>
         <translation>Svensk översättning</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="40"/>
+        <location filename="../aboutDialog.cpp" line="41"/>
         <source>Ukrainian translation</source>
         <translation>Ukrainsk översättning</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="42"/>
+        <location filename="../aboutDialog.cpp" line="43"/>
         <source>Polish translation</source>
         <translation>Polsk översättning</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="43"/>
+        <location filename="../aboutDialog.cpp" line="44"/>
         <source>Icons:</source>
         <translation>Ikoner:</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="45"/>
+        <location filename="../aboutDialog.cpp" line="46"/>
         <source>All icons are modified icons from Oxygen project</source>
         <translation>Alla ikoner är baserade på ikoner ifrån</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="49"/>
+        <location filename="../aboutDialog.cpp" line="50"/>
         <source>Testing:</source>
         <translation>Testning:</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="55"/>
+        <location filename="../aboutDialog.cpp" line="56"/>
         <source>Releasing:</source>
         <translation>Utgivet:</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="71"/>
+        <location filename="../aboutDialog.cpp" line="72"/>
         <source>Shortcuts:</source>
         <translation>Genvägar:</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="72"/>
+        <location filename="../aboutDialog.cpp" line="73"/>
         <source>Go to note n</source>
         <translation>Gå till anteckning n</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="73"/>
         <source>Go to previous note</source>
-        <translation>Gå till föregående anteckning</translation>
+        <translation type="obsolete">Gå till föregående anteckning</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="74"/>
         <source>Go to next note</source>
-        <translation>Gå till nästa anteckning</translation>
+        <translation type="obsolete">Gå till nästa anteckning</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="75"/>
         <source>Create new note</source>
-        <translation>Skapa ny anteckning</translation>
+        <translation type="obsolete">Skapa ny anteckning</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="76"/>
         <source>Remove current note</source>
-        <translation>Ta bort anteckning</translation>
+        <translation type="obsolete">Ta bort anteckning</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="77"/>
         <source>Rename current note</source>
-        <translation>Byt namn på anteckning</translation>
+        <translation type="obsolete">Byt namn på anteckning</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="78"/>
         <source>Search in the notes&apos; text</source>
-        <translation>Sök efter text</translation>
+        <translation type="obsolete">Sök efter text</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="79"/>
         <source>Make selected text bold</source>
-        <translation>Gör markerad text fet</translation>
+        <translation type="obsolete">Gör markerad text fet</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="80"/>
         <source>Make selected text italic</source>
-        <translation>Gör markerad text kursiv</translation>
+        <translation type="obsolete">Gör markerad text kursiv</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="81"/>
         <source>Make selected text strikeout</source>
-        <translation>Gör markerad text genomstruken</translation>
+        <translation type="obsolete">Gör markerad text genomstruken</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="82"/>
         <source>Make selected text underline</source>
-        <translation>Gör markerad text udnerstruken</translation>
+        <translation type="obsolete">Gör markerad text udnerstruken</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="83"/>
         <source>Exit program</source>
-        <translation>Avsluta programmet</translation>
+        <translation type="obsolete">Avsluta programmet</translation>
     </message>
 </context>
 <context>

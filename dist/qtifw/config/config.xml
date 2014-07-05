@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+    <Installer>
+    <Name>zNotes</Name>
+    <Title>Simple application to control your notes</Title>
+    <Version>0.4.5</Version>
+    <Publisher>Muratov Sergey</Publisher>
+    <ProductUrl>http://sourceforge.net/projects/znotes/</ProductUrl>
+    <Logo>logo.png</Logo>
+    <Watermark>watermark.jpg</Watermark>
+    <UninstallerName>Uninstaller</UninstallerName>
+
+    <!-- Tweaked for windows in installscript.qs -->
+    <TargetDir>@homeDir@/znotes</TargetDir>
+</Installer>

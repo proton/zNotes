@@ -36,6 +36,7 @@ void NoteCreateWidget::clicked(int id)
 
 void NoteCreateWidget::closeEvent( QCloseEvent* event )
 {
+    Q_UNUSED(event);
 	emit closed(true);
 }
 

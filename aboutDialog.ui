@@ -174,8 +174,8 @@ The text of the license can can be found in the file LICENSE.</string>
    <slot>accept()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>168</x>
-     <y>286</y>
+     <x>252</x>
+     <y>309</y>
     </hint>
     <hint type="destinationlabel">
      <x>289</x>

@@ -6,4 +6,3 @@ ZTabWidget::ZTabWidget(QWidget *parent) :
 {
 	setTabBar(new ZTabBar(this));
 }
-

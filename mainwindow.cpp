@@ -161,13 +161,13 @@ void MainWindow::moveEvent(QMoveEvent* event)
 
 void MainWindow::showAboutDialog()
 {
-	aboutDialog dlg;
+    aboutDialog dlg(this);
 	dlg.exec();
 }
 
 void MainWindow::showPrefDialog()
 {
-	configDialog dlg;
+    configDialog dlg(this);
 	dlg.exec();
 }
 
@@ -196,7 +196,9 @@ void MainWindow::commandMenu()
 	}
 	else
 	{
-		QMessageBox(QMessageBox::Information, tr("Commandlist is clear"), tr("List of commands is clear!\nYou can add new commands in preferences.")).exec();
+        QMessageBox(QMessageBox::Information,
+                    tr("Commandlist is clear"),
+                    tr("List of commands is clear!\nYou can add new commands in preferences.")).exec();
 	}
 }
 
@@ -245,7 +247,7 @@ void MainWindow::actions_changed()
 
 void MainWindow::edit_command_list()
 {
-	configDialog dlg;
+    configDialog dlg(this);
 	dlg.changeTabToCommands();
 	dlg.exec();
 }

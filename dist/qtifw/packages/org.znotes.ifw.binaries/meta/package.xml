@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<Package>
+    <DisplayName>zNotes Binaries</DisplayName>
+    <Description>Installs the binaries, translations.</Description>
+    <Version>0.4.5</Version>
+    <ReleaseDate>2014-06-18</ReleaseDate>
+    <Default>True</Default>
+</Package>

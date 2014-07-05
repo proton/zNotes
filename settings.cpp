@@ -184,7 +184,11 @@ void Settings::load()
 			if(tb_items[i]!=itemSeparator)
 				config.setValue(ToolbarAction(item_enum(tb_items[i])).pref_name(), i);
 	}
-	loadLanguages();
+
+    // Build two dictionaries of translation files for the program:
+    // 1) the program translation files;
+    // 2) qt library translation files.
+    loadLanguages();
 	//
 #ifdef unix
 	//Fixing Qt's problem on unix systems...
@@ -197,7 +201,9 @@ void Settings::load()
 #endif
 	locale = (language_custom)?locale_current:locale_system;
 
-	QMap<int, QMap<int, QString> >::const_iterator it = translations.find(locale.language());
+    // Define priority locale for user interface.
+    // Analyze only the program translation files dictionary.
+    QMap<int, QMap<int, QString> >::const_iterator it = translations.find(locale.language());
 	if(it!=translations.end()) //if translation list has locale language
 	{
 		const QMap<int, QString>& country_list = it.value();
@@ -219,7 +225,8 @@ void Settings::load()
 	}
 	else locale = QLocale::c();
 
-	updateLocale();
+    // Load files from dictionary for defined locale.
+    updateLocale();
 
 	qApp->installTranslator(&qtranslator);
 	qApp->installTranslator(&translator);
@@ -244,28 +251,48 @@ void Settings::loadLanguages()
 #ifdef Q_OS_UNIX
 	translation_dirs << QDir::homePath()+"/.local/share/znotes/translations";
 #endif
+    // next path for qt library translation files
+    // For MS Windows such files generally place in the program directory.
+    translation_dirs << QLibraryInfo::location(QLibraryInfo::TranslationsPath);
+
 	//looking for qm-files in translation directories
-	QStringListIterator dir_path(translation_dirs);
-	while(dir_path.hasNext())
-	{
-		QDir dir(dir_path.next());
-		QStringList fileNames = dir.entryList(QStringList("znotes_*.qm"));
-		for(int i=0; i < fileNames.size(); ++i)
-		{
-			QString filename(fileNames[i]);
-			QString fullpath(dir.absoluteFilePath(filename));
-			filename.remove(0, filename.indexOf('_') + 1);
-			filename.chop(3);
-			QLocale locale(filename);
-			if(!translations[locale.language()].contains(locale.country()))
-			{
-				translations[locale.language()][locale.country()]=fullpath;
-			}
-		}
-	}
-	//Setting default(English) translation path if other translation not found
-	if(!translations[QLocale::English].contains(QLocale::UnitedStates))
-		translations[QLocale::English][QLocale::UnitedStates]="";
+    QMap<int, QMap<int, QString> > *currTranslations;
+    QString dirSearchTemplate;
+    for(int i = 1; i <= 2; ++i) {
+        switch (i) {
+        case 1:
+            currTranslations = &translations;
+            dirSearchTemplate = "znotes_*.qm";
+            break;
+
+        case 2:
+            currTranslations = &qtTranslations;
+            dirSearchTemplate = "qt_*.qm";
+            break;
+
+        default:
+            ;
+        }
+        QStringListIterator dir_path(translation_dirs);
+        while(dir_path.hasNext())
+        {
+            QDir dir(dir_path.next());
+            QStringList fileNames = dir.entryList(QStringList(dirSearchTemplate));
+            for(int i=0; i < fileNames.size(); ++i)
+            {
+                QString filename(fileNames[i]);
+                QString fullpath(dir.absoluteFilePath(filename));
+                filename.remove(0, filename.indexOf('_') + 1);
+                filename.chop(3);
+                QLocale locale(filename);
+                if(!(*currTranslations)[locale.language()].contains(locale.country()))
+                    (*currTranslations)[locale.language()][locale.country()] = fullpath;
+            }
+        }
+        //Setting default(English) translation path if other translation not found
+        if(!(*currTranslations)[QLocale::English].contains(QLocale::UnitedStates))
+            (*currTranslations)[QLocale::English][QLocale::UnitedStates]="";
+    }
 }
 
 /*
@@ -559,6 +586,8 @@ void Settings::setLocaleCustom(bool v)
 */
 void Settings::updateLocale()
 {
-	qtranslator.load("qt_"+locale.name(), QLibraryInfo::location(QLibraryInfo::TranslationsPath));
-	translator.load(translations[locale.language()][locale.country()]);
+    // Load a translation file for the program.
+    translator.load(translations[locale.language()][locale.country()]);
+    // Load a translation file for Qt library.
+    qtranslator.load(qtTranslations[locale.language()][locale.country()]);
 }

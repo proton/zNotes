@@ -16,6 +16,68 @@
 	#include "note_xml.h"
 #endif
 
+NoteList::NoteList(QWidget* parent)
+    : QObject(), vec(), history_index(0), history_forward_pressed(false),
+      history_back_pressed(false), current_index(-1)
+{
+    initNoteTypes();
+
+    tabs = new ZTabWidget(parent);
+    tabs->setDocumentMode(true);
+    tabs->setTabPosition(QTabWidget::TabPosition(settings.getTabPosition()));
+
+    //Setting and testing directory
+    dir.setPath(settings.getNotesPath());
+    if(!dir.exists()) if(!dir.mkpath(dir.path())) dir.setPath("");
+    while(dir.path().isEmpty())
+    {
+        dir.setPath(QFileDialog::getExistingDirectory(0,
+            tr("Select place for notes directory"), QDir::homePath(),
+            QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks));
+        if(!dir.path().isEmpty())
+        {
+            QString new_path = QDir(dir.path()+'/'+tr("Notes")).absolutePath();
+            settings.setNotesPath(new_path);
+            if(!dir.exists()) if(!dir.mkpath(dir.path())) dir.setPath("");
+            if(!dir.isReadable()) dir.setPath("");
+        }
+    }
+
+    //Loading files' list
+    if(settings.getShowHidden()) dir.setFilter(QDir::Files | QDir::Hidden | QDir::Readable);
+    else dir.setFilter(QDir::Files | QDir::Readable);
+    QFileInfoList flist = dir.entryInfoList();
+    const QString& last_note_title = settings.getLastNote();
+    int old_index=-1;
+    for(int i=0; i<flist.size(); ++i)
+    {
+        //Loading note
+        Note* note = this->add(flist.at(i), false);
+        if(old_index==-1 && note->fileName()==last_note_title) old_index = i;
+    }
+    if(old_index!=-1) tabs->setCurrentIndex(old_index);
+    else if(empty()) create(Note::type_html);
+    current_index = tabs->currentIndex();
+
+    watcher = new QFileSystemWatcher(this);
+    watcher->addPath(dir.absolutePath());
+
+    connect(tabs, SIGNAL(currentChanged(int)), this, SLOT(currentTabChanged(int)));
+    connect(&settings, SIGNAL(ShowExtensionsChanged(bool)), this, SLOT(showExtensionsChanged(bool)));
+    connect(&settings, SIGNAL(TabPositionChanged()), this, SLOT(tabPositionChanged()));
+    connect(&settings, SIGNAL(NotesPathChanged()), this, SLOT(notesPathChanged()));
+    connect(&settings, SIGNAL(ShowHiddenChanged()), this, SLOT(scanForNewFiles()));
+    connect(watcher, SIGNAL(directoryChanged(QString)), this, SLOT(scanForNewFiles()));
+
+    // Save a parent widget pointer.
+    parentWidget = parent;
+}
+
+NoteList::~NoteList()
+{
+    tabs->clear();
+}
+
 void NoteList::initNoteTypes()
 {
 	registerType(Note::type_text, QObject::tr("Text Note"), QObject::tr("Simple text Note"), ":/res/note_types/txt.png", ":/res/note_types/16/txt.png", "txt,");
@@ -36,64 +98,6 @@ void NoteList::registerType(Note::Type id, const QString& title,
 {
 	note_types[id] = NoteType(id, title, description, big_icon_path, small_icon_path, extensions, visible);
 	foreach(const QString& extension, note_types[id].extensions()) NOTE_TYPE_MAP[extension] = id;
-}
-
-NoteList::NoteList(QWidget* parent)
-	: QObject(), vec(), history_index(0), history_forward_pressed(false), history_back_pressed(false), current_index(-1)
-{
-	initNoteTypes();
-
-	tabs = new ZTabWidget(parent);
-	tabs->setDocumentMode(true);
-	tabs->setTabPosition(QTabWidget::TabPosition(settings.getTabPosition()));
-
-	//Setting and testing directory
-	dir.setPath(settings.getNotesPath());
-	if(!dir.exists()) if(!dir.mkpath(dir.path())) dir.setPath("");
-	while(dir.path().isEmpty())
-	{
-		dir.setPath(QFileDialog::getExistingDirectory(0,
-			tr("Select place for notes directory"), QDir::homePath(),
-			QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks));
-		if(!dir.path().isEmpty())
-		{
-			QString new_path = QDir(dir.path()+'/'+tr("Notes")).absolutePath();
-			settings.setNotesPath(new_path);
-			if(!dir.exists()) if(!dir.mkpath(dir.path())) dir.setPath("");
-			if(!dir.isReadable()) dir.setPath("");
-		}
-	}
-
-	//Loading files' list
-	if(settings.getShowHidden()) dir.setFilter(QDir::Files | QDir::Hidden | QDir::Readable);
-	else dir.setFilter(QDir::Files | QDir::Readable);
-	QFileInfoList flist = dir.entryInfoList();
-	const QString& last_note_title = settings.getLastNote();
-	int old_index=-1;
-	for(int i=0; i<flist.size(); ++i)
-	{
-		//Loading note
-		Note* note = this->add(flist.at(i), false);
-		if(old_index==-1 && note->fileName()==last_note_title) old_index = i;
-	}
-	if(old_index!=-1) tabs->setCurrentIndex(old_index);
-	else if(empty()) create(Note::type_html);
-	current_index = tabs->currentIndex();
-
-	watcher = new QFileSystemWatcher(this);
-	watcher->addPath(dir.absolutePath());
-
-	connect(tabs, SIGNAL(currentChanged(int)), this, SLOT(currentTabChanged(int)));
-	connect(&settings, SIGNAL(ShowExtensionsChanged(bool)), this, SLOT(showExtensionsChanged(bool)));
-	connect(&settings, SIGNAL(TabPositionChanged()), this, SLOT(tabPositionChanged()));
-	connect(&settings, SIGNAL(NotesPathChanged()), this, SLOT(notesPathChanged()));
-	connect(&settings, SIGNAL(ShowHiddenChanged()), this, SLOT(scanForNewFiles()));
-	connect(watcher, SIGNAL(directoryChanged(QString)), this, SLOT(scanForNewFiles()));
-}
-
-NoteList::~NoteList()
-{
-	tabs->clear();
 }
 
 void NoteList::scanForNewFiles()
@@ -200,9 +204,11 @@ void NoteList::removeCurrentNote()
 {
 	Note* note = current();
 	if(!note) return;
-	QMessageBox msgBox(QMessageBox::Question, tr("Delete Note"),
-		tr("Do you realy want to delete note %1 ?").arg(note->title()),
-		QMessageBox::Yes | QMessageBox::No);
+    QMessageBox msgBox(QMessageBox::Question,
+                       tr("Delete Note"),
+                       tr("Do you really want to delete note %1 ?").arg(note->title()),
+                       QMessageBox::Yes | QMessageBox::No,
+                       parentWidget);
 	int ret = msgBox.exec();
 	if(ret == QMessageBox::Yes)
 	{
@@ -227,15 +233,21 @@ void NoteList::renameCurrentNote()
 		filename.truncate(typedot);
 	}
 
-	QString new_name = QInputDialog::getText(0, tr("Rename note"), tr("New name:"), QLineEdit::Normal, filename,  &ok);
+    QString new_name = QInputDialog::getText(parentWidget,
+                                             tr("Rename note"),
+                                             tr("New name:"),
+                                             QLineEdit::Normal, filename,  &ok);
 	if(ok && !new_name.isEmpty())
 	{
 		new_name.append(extension);
 		QFile file(dir.absoluteFilePath(new_name));
-		if(!file.exists()) rename(current_index, new_name);
+        if(!file.exists())
+            rename(current_index, new_name);
 		else
 		{
-			QMessageBox::information(0, tr("Note renaming"), tr("Note %1 already exists!").arg(new_name));
+            QMessageBox::information(parentWidget,
+                                     tr("Note renaming"),
+                                     tr("Note %1 already exists!").arg(new_name));
 		}
 	}
 }
@@ -367,9 +379,11 @@ void NoteList::saveAll()
 
 void NoteList::notesPathChanged()
 {
-	QMessageBox msgBox(QMessageBox::Question, tr("Move notes"),
-		tr("notes path changed!\nDo you want to move your notes to new place ?"),
-		QMessageBox::Yes | QMessageBox::No);
+    QMessageBox msgBox(QMessageBox::Question,
+                       tr("Move notes"),
+                       tr("notes path changed!\nDo you want to move your notes to new place ?"),
+                       QMessageBox::Yes | QMessageBox::No,
+                       parentWidget);
 	int ret = msgBox.exec();
 	if(ret == QMessageBox::Yes)
 	{
@@ -377,8 +391,9 @@ void NoteList::notesPathChanged()
 		QString dir_path = dir.absolutePath();
 		move(dir_path);
 	}
-	else QMessageBox::information(0, tr("notes path change"),
-		tr("You need restart application to get effect."));
+    else
+        QMessageBox::information(parentWidget, tr("notes path change"),
+                                 tr("You need restart application to get effect."));
 }
 
 void NoteList::retranslate(const QLocale& locale)

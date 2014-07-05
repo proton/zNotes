@@ -32,42 +32,92 @@
         <translation>Pokaż pasek narzędzi</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="147"/>
+        <location filename="../mainwindow.cpp" line="186"/>
         <source>Settings changed</source>
         <translation>Ustawienia zmienione</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="148"/>
+        <location filename="../mainwindow.cpp" line="187"/>
         <source>You need restart application to get effect.</source>
         <translation>Zmiany zostaną wprowadzone po ponownym uruchomieniu programu.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="160"/>
+        <location filename="../mainwindow.cpp" line="199"/>
         <source>Commandlist is clear</source>
         <translation>Lista poleceń jest pusta</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="160"/>
+        <location filename="../mainwindow.cpp" line="199"/>
         <source>List of commands is clear!
 You can add new commands in preferences.</source>
         <translation>Lista poleceń jest pusta!  Możesz dodać nowe polecenia w oknie Ustawienia.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="193"/>
+        <location filename="../mainwindow.cpp" line="232"/>
         <source>Edit command list</source>
         <translation>Edytuj listę poleceń</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="306"/>
-        <location filename="../mainwindow.cpp" line="532"/>
+        <location filename="../mainwindow.cpp" line="347"/>
+        <location filename="../mainwindow.cpp" line="571"/>
         <source>Show</source>
         <translation>Pokaż</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="307"/>
-        <location filename="../mainwindow.cpp" line="533"/>
+        <location filename="../mainwindow.cpp" line="348"/>
+        <location filename="../mainwindow.cpp" line="572"/>
         <source>Hide</source>
         <translation>Ukryj</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="398"/>
+        <source>Create new note</source>
+        <translation type="unfinished">Utwórz nową notatkę</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="402"/>
+        <source>Rename current note</source>
+        <translation type="unfinished">Zmień nazwę bieżącej notatki</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="404"/>
+        <source>Go to previous note</source>
+        <translation type="unfinished">Idź do poprzedniej notatki</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="406"/>
+        <source>Go to next note</source>
+        <translation type="unfinished">Idź do następnej notatki</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="412"/>
+        <source>Search in the notes&apos; text</source>
+        <translation type="unfinished">Szukaj w treści notatki</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="416"/>
+        <source>Exit program</source>
+        <translation type="unfinished">Zakończ program</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="418"/>
+        <source>Make selected text bold</source>
+        <translation type="unfinished">Pogrub zaznaczony tekst</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="420"/>
+        <source>Make selected text italic</source>
+        <translation type="unfinished">Uzyj czcionki pochyłej w zaznaczonym tekście</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="422"/>
+        <source>Make selected text strikeout</source>
+        <translation type="unfinished">Przekreśl zaznaczony tekst</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="424"/>
+        <source>Make selected text underline</source>
+        <translation type="unfinished">Podkreśl zaznaczony tekst</translation>
     </message>
 </context>
 <context>
@@ -78,14 +128,13 @@ You can add new commands in preferences.</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../notecreatewidget.ui" line="22"/>
+        <location filename="../notecreatewidget.ui" line="25"/>
         <source>New note name:</source>
         <translation>Nazwa nowej notatki:</translation>
     </message>
     <message>
-        <location filename="../notecreatewidget.ui" line="41"/>
         <source>Cancel</source>
-        <translation>Anuluj</translation>
+        <translation type="obsolete">Anuluj</translation>
     </message>
 </context>
 <context>
@@ -106,48 +155,52 @@ You can add new commands in preferences.</source>
         <translation>Usuń notatkę</translation>
     </message>
     <message>
-        <location filename="../notelist.cpp" line="204"/>
         <source>Do you realy want to delete note %1 ?</source>
-        <translation>Czy rzeczywiście chcesz usunąć notatkę %1?</translation>
+        <translation type="obsolete">Czy rzeczywiście chcesz usunąć notatkę %1?</translation>
     </message>
     <message>
-        <location filename="../notelist.cpp" line="220"/>
+        <location filename="../notelist.cpp" line="204"/>
+        <source>Do you really want to delete note %1 ?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../notelist.cpp" line="230"/>
         <source>Rename note</source>
         <translation>Zmień nazwę notatki</translation>
     </message>
     <message>
-        <location filename="../notelist.cpp" line="220"/>
+        <location filename="../notelist.cpp" line="230"/>
         <source>New name:</source>
         <translation>Nowa nazwa:</translation>
     </message>
     <message>
-        <location filename="../notelist.cpp" line="227"/>
+        <location filename="../notelist.cpp" line="238"/>
         <source>Note renaming</source>
         <translation>Zmiana nazwy notatki</translation>
     </message>
     <message>
-        <location filename="../notelist.cpp" line="227"/>
+        <location filename="../notelist.cpp" line="238"/>
         <source>Note %1 already exists!</source>
         <translation>Notatka %1 już istnieje!</translation>
     </message>
     <message>
-        <location filename="../notelist.cpp" line="359"/>
+        <location filename="../notelist.cpp" line="370"/>
         <source>Move notes</source>
         <translation>Przenieś</translation>
     </message>
     <message>
-        <location filename="../notelist.cpp" line="360"/>
+        <location filename="../notelist.cpp" line="371"/>
         <source>notes path changed!
 Do you want to move your notes to new place ?</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../notelist.cpp" line="369"/>
+        <location filename="../notelist.cpp" line="380"/>
         <source>notes path change</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../notelist.cpp" line="370"/>
+        <location filename="../notelist.cpp" line="381"/>
         <source>You need restart application to get effect.</source>
         <translation>Musisz uruchomić ponownie program, żeby uzyskać efekt.</translation>
     </message>
@@ -216,17 +269,17 @@ Do you want to move your notes to new place ?</source>
         <translation>Ikona</translation>
     </message>
     <message>
-        <location filename="../todomodel.cpp" line="62"/>
+        <location filename="../todomodel.cpp" line="60"/>
         <source>New task</source>
         <translation>Nowe zadanie</translation>
     </message>
     <message>
-        <location filename="../todomodel.cpp" line="314"/>
+        <location filename="../todomodel.cpp" line="312"/>
         <source>expired</source>
         <translation>nieakt.</translation>
     </message>
     <message numerus="yes">
-        <location filename="../todomodel.cpp" line="316"/>
+        <location filename="../todomodel.cpp" line="314"/>
         <source>%n day(s)</source>
         <translation>
             <numerusform>%n day</numerusform>
@@ -235,7 +288,7 @@ Do you want to move your notes to new place ?</source>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../todomodel.cpp" line="317"/>
+        <location filename="../todomodel.cpp" line="315"/>
         <source>%n hour(s)</source>
         <translation>
             <numerusform>%n hour</numerusform>
@@ -244,7 +297,7 @@ Do you want to move your notes to new place ?</source>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../todomodel.cpp" line="318"/>
+        <location filename="../todomodel.cpp" line="316"/>
         <source>%n minute(s)</source>
         <translation>
             <numerusform>%n minute</numerusform>
@@ -253,7 +306,7 @@ Do you want to move your notes to new place ?</source>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../todomodel.cpp" line="319"/>
+        <location filename="../todomodel.cpp" line="317"/>
         <source>%n second(s)</source>
         <translation>
             <numerusform>%n second</numerusform>
@@ -459,169 +512,158 @@ The text of the license can can be found in the file LICENSE.</source>
         <translation>Zamknij</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="15"/>
+        <location filename="../aboutDialog.cpp" line="16"/>
         <source>Simple Qt-based notes aplication</source>
         <translation>Prosta aplikacja - notatki Qt</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="16"/>
+        <location filename="../aboutDialog.cpp" line="17"/>
         <source>version</source>
         <translation>wersja</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="17"/>
+        <location filename="../aboutDialog.cpp" line="18"/>
         <source>Copyright (c) 2013</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="18"/>
+        <location filename="../aboutDialog.cpp" line="19"/>
         <source>by Peter Savichev (proton)</source>
         <translation>Peter Savichev (proton)</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="19"/>
+        <location filename="../aboutDialog.cpp" line="20"/>
         <source>Distributed under the GPL license version 3 or later</source>
         <translation>Dystrybucja wg zasad licencji GPL w wersji 3 lub późniejszej</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="23"/>
+        <location filename="../aboutDialog.cpp" line="24"/>
         <source>Application concept and main development</source>
         <translation>Pomysł i realizacja</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="24"/>
+        <location filename="../aboutDialog.cpp" line="25"/>
         <source>Translations:</source>
         <translation>Tłumaczenia:</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="26"/>
+        <location filename="../aboutDialog.cpp" line="27"/>
         <source>Brazilian Portuguese translation</source>
         <translation>brazylijski portugalski</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="30"/>
+        <location filename="../aboutDialog.cpp" line="31"/>
         <source>German translation</source>
         <translation>niemiecki</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="28"/>
+        <location filename="../aboutDialog.cpp" line="29"/>
         <source>Czech translation</source>
         <translation>czeski</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="32"/>
+        <location filename="../aboutDialog.cpp" line="33"/>
         <source>Russian translation</source>
         <translation>rosyjski</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="34"/>
+        <location filename="../aboutDialog.cpp" line="35"/>
         <source>Slovak translation</source>
         <translation>słowacki</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="36"/>
+        <location filename="../aboutDialog.cpp" line="37"/>
         <source>Spanish translation</source>
         <translation>hiszpański</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="40"/>
+        <location filename="../aboutDialog.cpp" line="41"/>
         <source>Ukrainian translation</source>
         <translation>ukraiński</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="42"/>
+        <location filename="../aboutDialog.cpp" line="43"/>
         <source>Polish translation</source>
         <translation>polski</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="38"/>
+        <location filename="../aboutDialog.cpp" line="39"/>
         <source>Swedish translation</source>
         <translation>szwedzki</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="43"/>
+        <location filename="../aboutDialog.cpp" line="44"/>
         <source>Icons:</source>
         <translation>Ikony:</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="45"/>
+        <location filename="../aboutDialog.cpp" line="46"/>
         <source>All icons are modified icons from Oxygen project</source>
         <translation>Ikony pochodzą z projektu Oxygen</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="49"/>
+        <location filename="../aboutDialog.cpp" line="50"/>
         <source>Testing:</source>
         <translation>Testowanie:</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="55"/>
+        <location filename="../aboutDialog.cpp" line="56"/>
         <source>Releasing:</source>
         <translation>Wydania:</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="71"/>
+        <location filename="../aboutDialog.cpp" line="72"/>
         <source>Shortcuts:</source>
         <translation>Skróty:</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="72"/>
+        <location filename="../aboutDialog.cpp" line="73"/>
         <source>Go to note n</source>
         <translation>Idź do notatki n</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="73"/>
         <source>Go to previous note</source>
-        <translation>Idź do poprzedniej notatki</translation>
+        <translation type="obsolete">Idź do poprzedniej notatki</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="74"/>
         <source>Go to next note</source>
-        <translation>Idź do następnej notatki</translation>
+        <translation type="obsolete">Idź do następnej notatki</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="75"/>
         <source>Create new note</source>
-        <translation>Utwórz nową notatkę</translation>
+        <translation type="obsolete">Utwórz nową notatkę</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="76"/>
         <source>Remove current note</source>
-        <translation>Usuń bieżącą notatkę</translation>
+        <translation type="obsolete">Usuń bieżącą notatkę</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="77"/>
         <source>Rename current note</source>
-        <translation>Zmień nazwę bieżącej notatki</translation>
+        <translation type="obsolete">Zmień nazwę bieżącej notatki</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="78"/>
         <source>Search in the notes&apos; text</source>
-        <translation>Szukaj w treści notatki</translation>
+        <translation type="obsolete">Szukaj w treści notatki</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="79"/>
         <source>Make selected text bold</source>
-        <translation>Pogrub zaznaczony tekst</translation>
+        <translation type="obsolete">Pogrub zaznaczony tekst</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="80"/>
         <source>Make selected text italic</source>
-        <translation>Uzyj czcionki pochyłej w zaznaczonym tekście</translation>
+        <translation type="obsolete">Uzyj czcionki pochyłej w zaznaczonym tekście</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="81"/>
         <source>Make selected text strikeout</source>
-        <translation>Przekreśl zaznaczony tekst</translation>
+        <translation type="obsolete">Przekreśl zaznaczony tekst</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="82"/>
         <source>Make selected text underline</source>
-        <translation>Podkreśl zaznaczony tekst</translation>
+        <translation type="obsolete">Podkreśl zaznaczony tekst</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="83"/>
         <source>Exit program</source>
-        <translation>Zakończ program</translation>
+        <translation type="obsolete">Zakończ program</translation>
     </message>
 </context>
 <context>

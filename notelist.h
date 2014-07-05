@@ -67,7 +67,10 @@ private slots:
 	void scanForNewFiles();
 signals:
 	void currentNoteChanged(int old_index, int new_index);
+
 private:
+    QWidget *parentWidget;
+
 	QMap<Note::Type,NoteType> note_types;
 	QSet<QString> notes_filenames;
 	QMap<QString, Note::Type> NOTE_TYPE_MAP;

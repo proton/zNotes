@@ -3,12 +3,15 @@
 # -------------------------------------------------
 TARGET = znotes
 VERSION = "0.4.5"
+
 QT += core gui network
 TEMPLATE = app
+
 OBJECTS_DIR = build
 UI_DIR = build
 MOC_DIR = build
 RCC_DIR = build
+
 SOURCES += main.cpp \
 	mainwindow.cpp \
 	configdialog.cpp \
@@ -36,6 +39,7 @@ SOURCES += main.cpp \
     ztabwidget.cpp \
     ztabbar.cpp \
     shared.cpp
+
 HEADERS += mainwindow.h \
 	configdialog.h \
 	settings.h \
@@ -61,21 +65,34 @@ HEADERS += mainwindow.h \
     ztabwidget.h \
     ztabbar.h \
     shared.h
-	FORMS += mainwindow.ui \
+
+FORMS += mainwindow.ui \
 	configdialog.ui \
 	aboutDialog.ui \
 	notecreatewidget.ui
+
 TRANSLATIONS += translations/znotes_ru.ts \
-	translations/znotes_cs.ts \
-	translations/znotes_pl.ts \
-	translations/znotes_pt_BR.ts \
-	translations/znotes_uk.ts \
-	translations/znotes_sk.ts \
-	translations/znotes_es.ts \
-	translations/znotes_de.ts \
-	translations/znotes_en.ts \
-	translations/znotes_sv.ts
+                translations/znotes_cs.ts \
+                translations/znotes_pl.ts \
+                translations/znotes_pt_BR.ts \
+                translations/znotes_uk.ts \
+                translations/znotes_sk.ts \
+                translations/znotes_es.ts \
+                translations/znotes_de.ts \
+                translations/znotes_en.ts \
+                translations/znotes_sv.ts \
+                translations/qt_ru.ts \
+                translations/qt_cs.ts \
+                translations/qt_pl.ts \
+                translations/qt_pt.ts \
+                translations/qt_uk.ts \
+                translations/qt_sk.ts \
+                translations/qt_es.ts \
+                translations/qt_de.ts \
+                translations/qt_sv.ts
+
 RESOURCES += znotes.qrc
+
 !without_todo_format {
 	QT += xml
 	DEFINES += NOTE_TODO_FORMAT
@@ -97,6 +114,7 @@ TSQM.CONFIG = no_link
 QMAKE_EXTRA_COMPILERS += TSQM
 PRE_TARGETDEPS += compiler_TSQM_make_all
 !os2:DEFINES += VERSION=\\\"$$VERSION\\\"
+
 unix {
     PREFIX = $$(PREFIX)
     isEmpty( PREFIX ):PREFIX = /usr
@@ -113,8 +131,10 @@ unix {
         pixmap \
         desktop
 }
+
 os2 {
     DEFINES += VERSION=\'\"$$VERSION\"\'
     RC_FILE = znotes_os2.rc
 }
+
 win32:RC_FILE = znotes.rc
