@@ -28,8 +28,8 @@ Note::~Note()
 void Note::updateTitle(bool show_extensions)
 {
 	file.setFileName(file_info.absoluteFilePath());
-	_title = (show_extensions || (file_info.fileName()[0]=='.'))?
-		file_info.fileName() : file_info.baseName();
+    _title = (show_extensions || (file_info.fileName()[0]=='.'))
+             ? file_info.fileName() : file_info.completeBaseName();
 }
 
 //Renaming note

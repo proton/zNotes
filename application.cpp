@@ -17,7 +17,7 @@ zApplication::zApplication(Display* dpy, const QString& appId, int argc, char** 
 	: QtSingleApplication(dpy, appId, argc, argv, visual, colormap) {}
 #endif
 
-void zApplication::commitData(QSessionManager &) //fixing "KDE kogout was cancelled by zNotes" bug
+void zApplication::commitData(QSessionManager &) //fixing "KDE logout was cancelled by zNotes" bug
 {
 	settings.save();
 }

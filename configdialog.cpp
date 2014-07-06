@@ -9,6 +9,8 @@
 #include <QFontDialog>
 #include <QColorDialog>
 
+#define SINGLE_INSTANCE
+
 configDialog::configDialog(QWidget *parent) :
 	QDialog(parent), m_ui(new Ui::configDialog)
 {

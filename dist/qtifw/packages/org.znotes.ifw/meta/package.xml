@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<Package>
+    <DisplayName>zNotes</DisplayName>
+    <Description>Installs the zNotes.</Description>
+    <Version>0.4.5</Version>
+    <ReleaseDate>2014-06-18</ReleaseDate>
+    <Licenses>
+        <License name="GPL 3.0" file="LICENSE.GPL" />
+    </Licenses>
+    <Script>installscript.qs</Script>
+</Package>

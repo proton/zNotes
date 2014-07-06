@@ -17,41 +17,91 @@
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../mainwindow.cpp" line="147"/>
+        <location filename="../mainwindow.cpp" line="186"/>
         <source>Settings changed</source>
         <translation>Nastavení změněna</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="160"/>
+        <location filename="../mainwindow.cpp" line="199"/>
         <source>Commandlist is clear</source>
         <translation>Seznam s příkazy je prázdný</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="160"/>
+        <location filename="../mainwindow.cpp" line="199"/>
         <source>List of commands is clear!
 You can add new commands in preferences.</source>
         <translation>Seznam s příkazy je prázdný!
 Nové příkazy lze přidat v nastaveních.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="193"/>
+        <location filename="../mainwindow.cpp" line="232"/>
         <source>Edit command list</source>
         <translation>Upravit seznam příkazů</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="148"/>
+        <location filename="../mainwindow.cpp" line="398"/>
+        <source>Create new note</source>
+        <translation type="unfinished">Vytvořit novou poznámku</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="402"/>
+        <source>Rename current note</source>
+        <translation type="unfinished">Přejmenovat nynější poznámku</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="404"/>
+        <source>Go to previous note</source>
+        <translation type="unfinished">Jít na předchozí poznámku</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="406"/>
+        <source>Go to next note</source>
+        <translation type="unfinished">Jít na další poznámku</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="412"/>
+        <source>Search in the notes&apos; text</source>
+        <translation type="unfinished">Hledat v textu poznámky</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="416"/>
+        <source>Exit program</source>
+        <translation type="unfinished">Ukončit program</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="418"/>
+        <source>Make selected text bold</source>
+        <translation type="unfinished">Udělat vybraný text tučný</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="420"/>
+        <source>Make selected text italic</source>
+        <translation type="unfinished">Udělat vybraný text kurzívní</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="422"/>
+        <source>Make selected text strikeout</source>
+        <translation type="unfinished">Udělat vybraný text přeškrtnutý</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="424"/>
+        <source>Make selected text underline</source>
+        <translation type="unfinished">Udělat vybraný text podtrhnutý</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="187"/>
         <source>You need restart application to get effect.</source>
         <translation>Aby se změna projevila, musíte program spustit znovu.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="306"/>
-        <location filename="../mainwindow.cpp" line="532"/>
+        <location filename="../mainwindow.cpp" line="347"/>
+        <location filename="../mainwindow.cpp" line="571"/>
         <source>Show</source>
         <translation>Ukázat</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="307"/>
-        <location filename="../mainwindow.cpp" line="533"/>
+        <location filename="../mainwindow.cpp" line="348"/>
+        <location filename="../mainwindow.cpp" line="572"/>
         <source>Hide</source>
         <translation>Skrýt</translation>
     </message>
@@ -79,14 +129,13 @@ Nové příkazy lze přidat v nastaveních.</translation>
         <translation>Formulář</translation>
     </message>
     <message>
-        <location filename="../notecreatewidget.ui" line="22"/>
+        <location filename="../notecreatewidget.ui" line="25"/>
         <source>New note name:</source>
         <translation>Nový název poznámky:</translation>
     </message>
     <message>
-        <location filename="../notecreatewidget.ui" line="41"/>
         <source>Cancel</source>
-        <translation>Zrušit</translation>
+        <translation type="obsolete">Zrušit</translation>
     </message>
 </context>
 <context>
@@ -107,49 +156,53 @@ Nové příkazy lze přidat v nastaveních.</translation>
         <translation>Smazat poznámku</translation>
     </message>
     <message>
-        <location filename="../notelist.cpp" line="204"/>
         <source>Do you realy want to delete note %1 ?</source>
-        <translation>Opravdu chcete smazat poznámku %1?</translation>
+        <translation type="obsolete">Opravdu chcete smazat poznámku %1?</translation>
     </message>
     <message>
-        <location filename="../notelist.cpp" line="220"/>
+        <location filename="../notelist.cpp" line="204"/>
+        <source>Do you really want to delete note %1 ?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../notelist.cpp" line="230"/>
         <source>Rename note</source>
         <translation>Přejmenovat poznámku</translation>
     </message>
     <message>
-        <location filename="../notelist.cpp" line="220"/>
+        <location filename="../notelist.cpp" line="230"/>
         <source>New name:</source>
         <translation>Nový název:</translation>
     </message>
     <message>
-        <location filename="../notelist.cpp" line="227"/>
+        <location filename="../notelist.cpp" line="238"/>
         <source>Note renaming</source>
         <translation>Přejmenování poznámky</translation>
     </message>
     <message>
-        <location filename="../notelist.cpp" line="227"/>
+        <location filename="../notelist.cpp" line="238"/>
         <source>Note %1 already exists!</source>
         <translation>Poznámka %1 již existuje!</translation>
     </message>
     <message>
-        <location filename="../notelist.cpp" line="359"/>
+        <location filename="../notelist.cpp" line="370"/>
         <source>Move notes</source>
         <translation>Přesunout poznámky</translation>
     </message>
     <message>
-        <location filename="../notelist.cpp" line="360"/>
+        <location filename="../notelist.cpp" line="371"/>
         <source>notes path changed!
 Do you want to move your notes to new place ?</source>
         <translation>Cesta k poznámkám byla změněna!
 Chcete své poznámky přesunout na nové místo?</translation>
     </message>
     <message>
-        <location filename="../notelist.cpp" line="369"/>
+        <location filename="../notelist.cpp" line="380"/>
         <source>notes path change</source>
         <translation>Změna cesty k poznámkám</translation>
     </message>
     <message>
-        <location filename="../notelist.cpp" line="370"/>
+        <location filename="../notelist.cpp" line="381"/>
         <source>You need restart application to get effect.</source>
         <translation>Aby se změna projevila, musíte program spustit znovu.</translation>
     </message>
@@ -282,17 +335,17 @@ Chcete své poznámky přesunout na nové místo?</translation>
         <translation>Ikona</translation>
     </message>
     <message>
-        <location filename="../todomodel.cpp" line="62"/>
+        <location filename="../todomodel.cpp" line="60"/>
         <source>New task</source>
         <translation>Nový úkol</translation>
     </message>
     <message>
-        <location filename="../todomodel.cpp" line="314"/>
+        <location filename="../todomodel.cpp" line="312"/>
         <source>expired</source>
         <translation>vyprší</translation>
     </message>
     <message numerus="yes">
-        <location filename="../todomodel.cpp" line="316"/>
+        <location filename="../todomodel.cpp" line="314"/>
         <source>%n day(s)</source>
         <translation>
             <numerusform>jeden den</numerusform>
@@ -301,7 +354,7 @@ Chcete své poznámky přesunout na nové místo?</translation>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../todomodel.cpp" line="318"/>
+        <location filename="../todomodel.cpp" line="316"/>
         <source>%n minute(s)</source>
         <translation>
             <numerusform>jedna minuta</numerusform>
@@ -310,7 +363,7 @@ Chcete své poznámky přesunout na nové místo?</translation>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../todomodel.cpp" line="319"/>
+        <location filename="../todomodel.cpp" line="317"/>
         <source>%n second(s)</source>
         <translation>
             <numerusform>jedna sekunda</numerusform>
@@ -319,7 +372,7 @@ Chcete své poznámky přesunout na nové místo?</translation>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../todomodel.cpp" line="317"/>
+        <location filename="../todomodel.cpp" line="315"/>
         <source>%n hour(s)</source>
         <translation>
             <numerusform>jedna hodina</numerusform>
@@ -412,167 +465,156 @@ Chcete své poznámky přesunout na nové místo?</translation>
 <context>
     <name>aboutDialog</name>
     <message>
-        <location filename="../aboutDialog.cpp" line="15"/>
+        <location filename="../aboutDialog.cpp" line="16"/>
         <source>Simple Qt-based notes aplication</source>
         <translation>Jednoduchý program na vedení poznámek založený na Qt</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="16"/>
+        <location filename="../aboutDialog.cpp" line="17"/>
         <source>version</source>
         <translation>Verze</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="17"/>
+        <location filename="../aboutDialog.cpp" line="18"/>
         <source>Copyright (c) 2013</source>
         <translation>Autorské právo (c) 2013</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="18"/>
+        <location filename="../aboutDialog.cpp" line="19"/>
         <source>by Peter Savichev (proton)</source>
         <translation>Peter Savichev (proton)</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="19"/>
+        <location filename="../aboutDialog.cpp" line="20"/>
         <source>Distributed under the GPL license version 3 or later</source>
         <translation>Šířeno pod licencí GPL ve verzi 3 nebo pozdější</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="23"/>
+        <location filename="../aboutDialog.cpp" line="24"/>
         <source>Application concept and main development</source>
         <translation>Pojetí programu a hlavní vývoj</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="24"/>
+        <location filename="../aboutDialog.cpp" line="25"/>
         <source>Translations:</source>
         <translation>Překlady:</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="26"/>
+        <location filename="../aboutDialog.cpp" line="27"/>
         <source>Brazilian Portuguese translation</source>
         <translation>Překlad do brazilské portugalštiny</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="28"/>
+        <location filename="../aboutDialog.cpp" line="29"/>
         <source>Czech translation</source>
         <translation>Překlad do češtiny</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="30"/>
+        <location filename="../aboutDialog.cpp" line="31"/>
         <source>German translation</source>
         <translation>Překlad do němčiny</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="42"/>
+        <location filename="../aboutDialog.cpp" line="43"/>
         <source>Polish translation</source>
         <translation>Překlad do polštiny</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="38"/>
+        <location filename="../aboutDialog.cpp" line="39"/>
         <source>Swedish translation</source>
         <translation>Překlad do švédštiny</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="32"/>
+        <location filename="../aboutDialog.cpp" line="33"/>
         <source>Russian translation</source>
         <translation>Překlad do ruštiny</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="34"/>
+        <location filename="../aboutDialog.cpp" line="35"/>
         <source>Slovak translation</source>
         <translation>Překlad do slovenštiny</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="36"/>
+        <location filename="../aboutDialog.cpp" line="37"/>
         <source>Spanish translation</source>
         <translation>Překlad do španělštiny</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="40"/>
+        <location filename="../aboutDialog.cpp" line="41"/>
         <source>Ukrainian translation</source>
         <translation>Překlad do ukrajinštiny</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="43"/>
+        <location filename="../aboutDialog.cpp" line="44"/>
         <source>Icons:</source>
         <translation>Ikony:</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="45"/>
+        <location filename="../aboutDialog.cpp" line="46"/>
         <source>All icons are modified icons from Oxygen project</source>
         <translation>Všechny ikonky jsou upravenými ikonkami z projektu Oxygen</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="71"/>
+        <location filename="../aboutDialog.cpp" line="72"/>
         <source>Shortcuts:</source>
         <translation>Klávesové zkratky:</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="72"/>
+        <location filename="../aboutDialog.cpp" line="73"/>
         <source>Go to note n</source>
         <translation>Jít na poznámku n</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="73"/>
         <source>Go to previous note</source>
-        <translation>Jít na předchozí poznámku</translation>
+        <translation type="obsolete">Jít na předchozí poznámku</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="74"/>
         <source>Go to next note</source>
-        <translation>Jít na další poznámku</translation>
+        <translation type="obsolete">Jít na další poznámku</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="75"/>
         <source>Create new note</source>
-        <translation>Vytvořit novou poznámku</translation>
+        <translation type="obsolete">Vytvořit novou poznámku</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="76"/>
         <source>Remove current note</source>
-        <translation>Odstranit nynější poznámku</translation>
+        <translation type="obsolete">Odstranit nynější poznámku</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="77"/>
         <source>Rename current note</source>
-        <translation>Přejmenovat nynější poznámku</translation>
+        <translation type="obsolete">Přejmenovat nynější poznámku</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="78"/>
         <source>Search in the notes&apos; text</source>
-        <translation>Hledat v textu poznámky</translation>
+        <translation type="obsolete">Hledat v textu poznámky</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="79"/>
         <source>Make selected text bold</source>
-        <translation>Udělat vybraný text tučný</translation>
+        <translation type="obsolete">Udělat vybraný text tučný</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="80"/>
         <source>Make selected text italic</source>
-        <translation>Udělat vybraný text kurzívní</translation>
+        <translation type="obsolete">Udělat vybraný text kurzívní</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="81"/>
         <source>Make selected text strikeout</source>
-        <translation>Udělat vybraný text přeškrtnutý</translation>
+        <translation type="obsolete">Udělat vybraný text přeškrtnutý</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="82"/>
         <source>Make selected text underline</source>
-        <translation>Udělat vybraný text podtrhnutý</translation>
+        <translation type="obsolete">Udělat vybraný text podtrhnutý</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="83"/>
         <source>Exit program</source>
-        <translation>Ukončit program</translation>
+        <translation type="obsolete">Ukončit program</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="49"/>
+        <location filename="../aboutDialog.cpp" line="50"/>
         <source>Testing:</source>
         <translation>Zkouška:</translation>
     </message>
     <message>
-        <location filename="../aboutDialog.cpp" line="55"/>
+        <location filename="../aboutDialog.cpp" line="56"/>
         <source>Releasing:</source>
         <translation>Vydání:</translation>
     </message>

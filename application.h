@@ -16,7 +16,7 @@ public:
 	zApplication(Display* dpy, const QString &appId, int argc, char **argv, Qt::HANDLE visual = 0, Qt::HANDLE colormap = 0);
 #endif
 	~zApplication() {}
-	void commitData(QSessionManager &); //fixing "KDE kogout was cancelled by zNotes" bug
+    void commitData(QSessionManager &); //fixing "KDE logout was cancelled by zNotes" bug
 };
 
 #endif // APPLICATION_H

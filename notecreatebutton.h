@@ -19,9 +19,7 @@ public slots:
 
 private:
 	const NoteType& note_type;
-	NoteList* note_list;
-
-
+//	NoteList* note_list;
 };
 
 #endif // NOTECREATEBUTTON_H
