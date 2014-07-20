@@ -69,6 +69,8 @@ NoteList::NoteList(QWidget* parent)
     connect(&settings, SIGNAL(ShowHiddenChanged()), this, SLOT(scanForNewFiles()));
     connect(watcher, SIGNAL(directoryChanged(QString)), this, SLOT(scanForNewFiles()));
 
+    connect(tabs, SIGNAL(tabBarDoubleClickedOnTab(int)), this, SLOT(changeNoteName(int)));
+
     // Save a parent widget pointer.
     parentWidget = parent;
 }
@@ -80,14 +82,22 @@ NoteList::~NoteList()
 
 void NoteList::initNoteTypes()
 {
-	registerType(Note::type_text, QObject::tr("Text Note"), QObject::tr("Simple text Note"), ":/res/note_types/txt.png", ":/res/note_types/16/txt.png", "txt,");
-	registerType(Note::type_html, QObject::tr("HTML Note"), QObject::tr("Simple Note with text formating"), ":/res/note_types/html.png", ":/res/note_types/16/html.png", "html,htm");
-	registerType(Note::type_picture, QObject::tr("Picture Note"), QObject::tr("Simple text Note"), ":/res/note_types/pic.png", ":/res/note_types/16/pic.png", "png,jpeg,jpg,png,gif", false);
+    registerType(Note::type_text, QObject::tr("Text Note"),
+                 QObject::tr("Simple text Note"), ":/res/note_types/txt.png",
+                 ":/res/note_types/16/txt.png", "txt,");
+    registerType(Note::type_html, QObject::tr("HTML Note"),
+                 QObject::tr("Simple Note with text formating"), ":/res/note_types/html.png",
+                 ":/res/note_types/16/html.png", "html,htm");
+    registerType(Note::type_picture, QObject::tr("Picture Note"), QObject::tr("Simple text Note"),
+                 ":/res/note_types/pic.png", ":/res/note_types/16/pic.png", "png,jpeg,jpg,png,gif",
+                 false);
 #ifdef NOTE_TODO_FORMAT
-	registerType(Note::type_todo, QObject::tr("TODO Note"), QObject::tr("Simple TODO list"), ":/res/note_types/todo.png", ":/res/note_types/16/todo.png", "ztodo");
+    registerType(Note::type_todo, QObject::tr("TODO Note"), QObject::tr("Simple TODO list"),
+                 ":/res/note_types/todo.png", ":/res/note_types/16/todo.png", "ztodo");
 #endif
 #ifdef NOTE_XML_FORMAT
-	registerType(Note::type_xml, QObject::tr("XML Note"), QObject::tr("XML file"), ":/res/note_types/xml.png", ":/res/note_types/16/xml.png", "xml");
+    registerType(Note::type_xml, QObject::tr("XML Note"), QObject::tr("XML file"),
+                 ":/res/note_types/xml.png", ":/res/note_types/16/xml.png", "xml");
 #endif
 }
 
@@ -112,7 +122,13 @@ void NoteList::scanForNewFiles()
 		const QString& filename = flist.at(i).fileName();
 		bool exists = notes_filenames.contains(filename);
 		if(!exists) add(flist.at(i));
-	}
+    }
+}
+
+void NoteList::changeNoteName(int tabIndex)
+{
+    Q_UNUSED(tabIndex)
+    renameCurrentNote();
 }
 
 Note::Type NoteList::getType(const QFileInfo& fileinfo) const

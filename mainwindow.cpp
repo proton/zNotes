@@ -307,7 +307,7 @@ void MainWindow::formatTextColor()
 	if(note->type()!=Note::type_html) return;
 	QTextCharFormat format = note->getSelFormat();
 	QColor color = format.foreground().color();
-	QColorDialog dlg(color);
+    QColorDialog dlg(color, this);
 	if(dlg.exec()==QDialog::Accepted)
 	{
 		color = dlg.currentColor();
@@ -449,11 +449,12 @@ MainWindow::~MainWindow()
 	//saving notes
 	notes->saveAll();
 	//saving title of last note
-	if(notes->current()) settings.setLastNote(notes->current()->fileName());
+    if(notes->current())
+        settings.setLastNote(notes->current()->fileName());
 	//saving dialog's params
 	settings.setDialogGeometry(saveGeometry());
 	settings.setDialogState(saveState());
-	//saving scrits
+    //saving scripts
 	settings.setScripts();
 	//syncing settings
 	settings.save();
@@ -464,7 +465,8 @@ void MainWindow::currentNoteChanged(int old_index, int new_index)
 	if(old_index!=-1)
 	{
 		Note* note = notes->get(old_index);
-		if(note->type()==Note::type_html) disconnect(note, SIGNAL(formatChanged(QFont)), 0, 0); //disconnecting old note
+        //disconnecting old note
+        if(note->type()==Note::type_html) disconnect(note, SIGNAL(formatChanged(QFont)), 0, 0);
 	}
 	//
 	bool not_empty = !notes->empty();

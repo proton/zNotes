@@ -51,6 +51,7 @@ private:
 	void remove(int i);
 	void rename(int index, const QString& title);
 	void move(const QString& path);
+
 public slots:
 	void saveAll();
 	//
@@ -65,6 +66,8 @@ private slots:
 	void tabPositionChanged();
 	void notesPathChanged();
 	void scanForNewFiles();
+    void changeNoteName(int);
+
 signals:
 	void currentNoteChanged(int old_index, int new_index);
 
