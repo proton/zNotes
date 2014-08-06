@@ -41,5 +41,8 @@
         <file>res/note_types/txt.png</file>
         <file>res/note_types/unknown.png</file>
         <file>res/note_types/xml.png</file>
+        <file>res/exportpdf.png</file>
+        <file>res/print.png</file>
+        <file>res/print_preview.png</file>
     </qresource>
 </RCC>

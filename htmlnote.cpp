@@ -1,9 +1,10 @@
-#include "note_html.h"
+#include "htmlnote.h"
 #include "textedit.h"
 
 #include <QTextStream>
 #include <QClipboard>
 #include <QApplication>
+#include <QMessageBox>
 
 HtmlNote::HtmlNote(const QFileInfo& fileinfo, Note::Type type_new)
 	: Note(fileinfo, type_new)
@@ -97,3 +98,12 @@ void HtmlNote::noteNotePastePlaintextChanged()
 	text_edit->setAcceptRichText(!settings.getNotePastePlaintext());
 }
 
+bool HtmlNote::isDocumentSupported() const
+{
+    return true;
+}
+
+QTextDocument *HtmlNote::document() const
+{
+    return text_edit->document();
+}

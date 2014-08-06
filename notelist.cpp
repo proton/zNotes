@@ -2,15 +2,17 @@
 #include <QFileDialog>
 #include <QInputDialog>
 #include <QMessageBox>
+#include <QPrinter>
+#include <QTextEdit>
 
 #include "notelist.h"
 #include "settings.h"
 
-#include "note_text.h"
-#include "note_html.h"
-#include "note_picture.h"
+#include "textnote.h"
+#include "htmlnote.h"
+#include "picturenote.h"
 #ifdef NOTE_TODO_FORMAT
-	#include "note_todo.h"
+    #include "todonote.h"
 #endif
 #ifdef NOTE_XML_FORMAT
 	#include "note_xml.h"

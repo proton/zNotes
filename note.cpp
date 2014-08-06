@@ -5,6 +5,7 @@
 #include <QClipboard>
 #include <QApplication>
 #include <QDir>
+#include <QPrinter>
 
 /*
   Note is abstract class for notes
@@ -57,7 +58,7 @@ bool Note::find(const QString& text, bool from_start)
 {
 	Q_UNUSED(text)
     Q_UNUSED(from_start)
-	return false;
+    return false;
 }
 
 //------------------------------------------------------------------------------

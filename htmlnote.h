@@ -1,5 +1,5 @@
-#ifndef NOTE_HTML_H
-#define NOTE_HTML_H
+#ifndef HTMLNOTE_H
+#define HTMLNOTE_H
 
 #include "note.h"
 
@@ -18,6 +18,8 @@ public:
 	QWidget* widget();
 	void setSelFormat(const QTextCharFormat& format);
 	QTextCharFormat getSelFormat() const;
+    bool isDocumentSupported() const;
+    QTextDocument* document() const;
 
 private slots:
 	void currentCharFormatChanged(const QTextCharFormat&);
@@ -30,4 +32,4 @@ signals:
 	void formatChanged(const QFont& font);
 };
 
-#endif // NOTE_HTML_H
+#endif // HTMLNOTE_H

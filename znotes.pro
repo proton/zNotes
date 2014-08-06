@@ -23,9 +23,6 @@ SOURCES += main.cpp \
 	highlighter.cpp \
 	textedit.cpp \
 	notelist.cpp \
-	note_text.cpp \
-	note_html.cpp \
-	note_picture.cpp \
 	application.cpp \
 	notecreatewidget.cpp \
 	notetype.cpp \
@@ -38,7 +35,11 @@ SOURCES += main.cpp \
 	single_inst/qtsingleapplication.cpp \
     ztabwidget.cpp \
     ztabbar.cpp \
-    shared.cpp
+    shared.cpp \
+    todonote.cpp \
+    textnote.cpp \
+    picturenote.cpp \
+    htmlnote.cpp
 
 HEADERS += mainwindow.h \
 	configdialog.h \
@@ -51,9 +52,6 @@ HEADERS += mainwindow.h \
 	highlighter.h \
 	textedit.h \
 	notelist.h \
-	note_text.h \
-	note_html.h \
-	note_picture.h \
 	application.h \
 	notecreatewidget.h \
 	notetype.h \
@@ -64,7 +62,11 @@ HEADERS += mainwindow.h \
 	single_inst/qtsingleapplication.h \
     ztabwidget.h \
     ztabbar.h \
-    shared.h
+    shared.h \
+    textnote.h \
+    htmlnote.h \
+    picturenote.h \
+    todonote.h
 
 FORMS += mainwindow.ui \
 	configdialog.ui \
@@ -80,25 +82,26 @@ TRANSLATIONS += translations/znotes_ru.ts \
                 translations/znotes_es.ts \
                 translations/znotes_de.ts \
                 translations/znotes_en.ts \
-                translations/znotes_sv.ts \
-                translations/qt_ru.ts \
-                translations/qt_cs.ts \
-                translations/qt_pl.ts \
-                translations/qt_pt.ts \
-                translations/qt_uk.ts \
-                translations/qt_sk.ts \
-                translations/qt_es.ts \
-                translations/qt_de.ts \
-                translations/qt_sv.ts
+                translations/znotes_sv.ts
+# For Qt translation files only qm-files compiling. No lupdate.
+QT_TRANSLATIONS += translations/qt_ru.ts \
+                   translations/qt_cs.ts \
+                   translations/qt_pl.ts \
+                   translations/qt_pt.ts \
+                   translations/qt_uk.ts \
+                   translations/qt_sk.ts \
+                   translations/qt_es.ts \
+                   translations/qt_de.ts \
+                   translations/qt_sv.ts
 
 RESOURCES += znotes.qrc
 
 !without_todo_format {
 	QT += xml
 	DEFINES += NOTE_TODO_FORMAT
-	SOURCES += note_todo.cpp \
+	SOURCES += \
 		todomodel.cpp
-	HEADERS += note_todo.h \
+	HEADERS += \
 		todomodel.h
 }
 
@@ -106,7 +109,7 @@ RESOURCES += znotes.qrc
 isEmpty(QMAKE_LRELEASE):QMAKE_LRELEASE = $$[QT_INSTALL_BINS]/lrelease
 TSQM.name = $$QMAKE_LRELEASE \
     ${QMAKE_FILE_IN}
-TSQM.input = TRANSLATIONS
+TSQM.input = TRANSLATIONS QT_TRANSLATIONS
 TSQM.output = ${QMAKE_FILE_BASE}.qm
 TSQM.commands = $$QMAKE_LRELEASE \
     ${QMAKE_FILE_IN}

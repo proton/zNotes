@@ -1,9 +1,10 @@
-#include "note_text.h"
+#include "textnote.h"
 #include "textedit.h"
 
 #include <QTextStream>
 #include <QClipboard>
 #include <QApplication>
+#include <QMessageBox>
 
 TextNote::TextNote(const QFileInfo& fileinfo, Note::Type type_new)
 	: Note(fileinfo, type_new)
@@ -52,6 +53,16 @@ void TextNote::save(bool forced)
 QWidget* TextNote::widget()
 {
 	return text_edit;
+}
+
+bool TextNote::isDocumentSupported() const
+{
+    return true;
+}
+
+QTextDocument* TextNote::document() const
+{
+    return text_edit->document();
 }
 
 //Coping note's content to clipboard

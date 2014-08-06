@@ -6,6 +6,7 @@
 #include <QFileInfo>
 #include <QFile>
 #include <QTextCharFormat>
+#include <QPrinter>
 
 class Note : public QObject
 {
@@ -24,6 +25,7 @@ public:
 #endif
 		//type_count
 	};
+
 public:
 	Note(const QFileInfo& fileinfo, Note::Type type_new);
 	virtual ~Note();
@@ -58,6 +60,8 @@ public:
 	{
 		Q_UNUSED(locale)
 	}
+    virtual bool isDocumentSupported() const = 0;
+    virtual QTextDocument * document() const = 0;
 
 private:
 	Type _type;

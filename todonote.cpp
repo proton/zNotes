@@ -1,4 +1,4 @@
-#include "note_todo.h"
+#include "todonote.h"
 #include "textedit.h"
 #include "todomodel.h"
 
@@ -162,7 +162,7 @@ void TodoNote::load()
 	}
 	if(file.open(QIODevice::ReadOnly))
 	{
-		document = model->load(file);
+        domDocument = model->load(file);
 		file.close();
 	}
 }
@@ -175,7 +175,7 @@ void TodoNote::save(bool forced)
 	if(file.open(QFile::WriteOnly))
 	{
 		QTextStream out(&file);
-		document->save(out, QDomNode::EncodingFromDocument);
+        domDocument->save(out, QDomNode::EncodingFromDocument);
 		content_changed = false;
 	}
 }
@@ -278,4 +278,14 @@ void TodoNote::noteLimitChanged(bool limited)
 {
 	QDateTime date = limited?QDateTime::currentDateTime().addDays(7):QDateTime();
 	noteDateLimitChanged(date);
+}
+
+bool TodoNote::isDocumentSupported() const
+{
+    return false;
+}
+
+QTextDocument *TodoNote::document() const
+{
+    return 0;
 }
