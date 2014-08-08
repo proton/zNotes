@@ -1,5 +1,5 @@
-#ifndef NOTE_PICTURE_H
-#define NOTE_PICTURE_H
+#ifndef PICTURENOTE_H
+#define PICTURENOTE_H
 
 #include "note.h"
 
@@ -16,9 +16,12 @@ public:
 	void save(bool forced = false); //Saving note's content
 	void copy() const; //Coping note's content to clipboard
 	QWidget* widget();
+    bool isDocumentSupported() const;
+    QTextDocument* document() const;
+
 private:
 	QLabel* label;
 	QScrollArea* scroll_area;
 };
 
-#endif // NOTE_PICTURE_H
+#endif // PICTURENOTE_H

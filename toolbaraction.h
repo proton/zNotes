@@ -29,6 +29,9 @@ enum item_enum
 	itemFormatStrikeout,
 	itemFormatUnderline,
 	itemFormatColor,
+    itemExportPdf,
+    itemPrintNote,
+    itemPrintPreviewNote,
 	itemMax
 };
 
@@ -36,7 +39,7 @@ class ToolbarAction
 {
 public:
 	ToolbarAction(item_enum id):item_id(id) {}
-	//Returning action's title
+    // Returning action's title
 	inline const QString text() const
 	{
 		switch(item_id)
@@ -63,6 +66,9 @@ public:
 			case itemFormatStrikeout:	return QObject::tr("Strikeout");
 			case itemFormatUnderline:	return QObject::tr("Underline");
 			case itemFormatColor:		return QObject::tr("Text color");
+            case itemExportPdf:         return QObject::tr("Export note to PDF");
+            case itemPrintNote:         return QObject::tr("Print...");
+            case itemPrintPreviewNote:  return QObject::tr("Print Preview...");
 			default: return 0;
 		}
 	}
@@ -92,6 +98,9 @@ public:
 			case itemFormatStrikeout:	return QIcon(":/res/format_strikeout.png");
 			case itemFormatUnderline:	return QIcon(":/res/format_underline.png");
 			case itemFormatColor:		return QIcon(":/res/format_color.png");
+            case itemExportPdf:         return QIcon(":/res/exportpdf.png");
+            case itemPrintNote:         return QIcon(":/res/print.png");
+            case itemPrintPreviewNote:  return QIcon(":/res/print_preview.png");
 			default: return QIcon();
 		}
 	}
@@ -121,10 +130,13 @@ public:
 			case itemFormatStrikeout:	return "Toolbar/itemFormatStrikeout";
 			case itemFormatUnderline:	return "Toolbar/itemFormatUnderline";
 			case itemFormatColor:		return "Toolbar/itemFormatColor";
+            case itemExportPdf:	        return "Toolbar/itemExportPdf";
+            case itemPrintNote:         return "Toolbar/itemPrint";
+            case itemPrintPreviewNote:  return "Toolbar/itemPrintPreview";
 			default:			return "";
 		}
 	}
-	inline bool isSeparator() { return item_id==itemSeparator; }
+    inline bool isSeparator() { return item_id == itemSeparator; }
 	inline bool isCheckable()
 	{
 		switch(item_id)
@@ -153,6 +165,7 @@ public:
 			return false;
 		}
 	}
+
 private:
 	item_enum item_id;
 };

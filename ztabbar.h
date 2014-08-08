@@ -16,10 +16,8 @@ signals:
 	
 public slots:
 
-
 protected:
-	void paintEvent(QPaintEvent *);
-	
+	void paintEvent(QPaintEvent *);	
 };
 
 #endif // ZTABBAR_H

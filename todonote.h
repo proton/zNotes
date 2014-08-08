@@ -1,5 +1,5 @@
-#ifndef NOTE_TODO_H
-#define NOTE_TODO_H
+#ifndef TODONOTE_H
+#define TODONOTE_H
 
 #include "note.h"
 
@@ -27,6 +27,9 @@ public:
 	void copy() const; //Coping note's content to clipboard
 	QWidget* widget();
 	void retranslate(const QLocale& locale);
+    bool isDocumentSupported() const;
+    QTextDocument* document() const;
+
 private slots:
 	void taskChanged(const QModelIndex& proxy_index);
 	void contextMenuRequested(const QPoint& pos);
@@ -37,8 +40,9 @@ private slots:
 	//bool QAbstractItemView::isIndexHidden ( const QModelIndex & index ) const;
 	void noteDateLimitChanged(const QDateTime&);
 	void noteLimitChanged(bool);
+
 private:
-	QDomDocument* document;
+    QDomDocument* domDocument;
 	QTreeView* tree_view;
 	TodoModel* model;
 	TodoProxyModel* proxy_model;
@@ -58,4 +62,4 @@ private:
 	QMenu* menu_context;
 };
 
-#endif // NOTE_TODO_H
+#endif // TODONOTE_H

@@ -70,10 +70,10 @@ void Settings::load()
 		if(config.contains("Toolbar/itemCount"))
 		{
 			tb_items.resize(config.value("Toolbar/itemCount").toInt());
-			for(int i=itemAdd; i<itemMax; ++i)
-			{
+            for (int i = itemAdd; i < itemMax; ++i) {
 				int pos = config.value(ToolbarAction(item_enum(i)).pref_name(), tb_items.size()).toInt();
-				if(pos<tb_items.size()) tb_items[pos] = i; //Item's position
+                if (pos < tb_items.size())
+                    tb_items[pos] = i; //Item's position
 			}
 		}
 	}
@@ -511,20 +511,20 @@ void Settings::setScripts()
 */
 void Settings::setToolbarItems(const QVector<int>& v)
 {
-	if(v==tb_items) return;
-	//removing old settings
-	for(int i=0; i<tb_items.size(); ++i) if(tb_items[i]!=itemSeparator)
-	{
-		config.remove(ToolbarAction(item_enum(tb_items[i])).pref_name()); //dirty hack =(
-	}
+    if (v == tb_items)
+        return;
+    // Remove old settings
+    for (int i = 0; i < tb_items.size(); ++i)
+        if(tb_items[i] != itemSeparator)
+            config.remove(ToolbarAction(item_enum(tb_items[i])).pref_name()); //dirty hack =(
 	tb_items = v;
-	//saving settings
+    // Save settings
 	config.setValue("Toolbar/itemCount", tb_items.size());
-	for(int i=0; i<tb_items.size(); ++i) if(tb_items[i]!=itemSeparator)
-	{
-		config.setValue(ToolbarAction(item_enum(tb_items[i])).pref_name(), i);
-	}
-	emit ToolbarItemsChanged();
+    for (int i = 0; i < tb_items.size(); ++i)
+        if(tb_items[i] != itemSeparator)
+            config.setValue(ToolbarAction(item_enum(tb_items[i])).pref_name(), i);
+
+    emit ToolbarItemsChanged();
 }
 
 /*

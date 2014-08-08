@@ -3,7 +3,7 @@
 #include "settings.h"
 #include "configdialog.h"
 #include "aboutDialog.h"
-#include "note_html.h"
+#include "htmlnote.h"
 #include "notecreatewidget.h"
 #include "shared.h"
 
@@ -13,6 +13,10 @@
 #include <QCloseEvent>
 #include <QTextCharFormat>
 #include <QColorDialog>
+#include <QFileDialog>
+#include <QTextDocument>
+#include <QPrintPreviewDialog>
+#include <QPrintDialog>
 
 /*
 	Tray icon on windows is very small
@@ -26,6 +30,154 @@
 #endif
 
 Settings settings;
+
+//Function for fast generating actions
+static inline QAction* generateAction(int item_id /*, bool checkable = false*/)
+{
+    item_enum item = item_enum(item_id);
+    ToolbarAction toolbar_action(item);
+    QAction* action = new QAction(toolbar_action.icon(), toolbar_action.text(), 0);
+    action->setCheckable(toolbar_action.isCheckable());
+    return action;
+}
+
+MainWindow::MainWindow(QWidget *parent)
+    : QMainWindow(parent),
+      ui(new Ui::MainWindow),
+      note_create_widget(0)
+{
+    ui->setupUi(this);
+    ui->wSearch->hide();
+    //restoring window state
+    restoreGeometry(settings.getDialogGeometry());
+    restoreState(settings.getDialogState());
+    windowStateChanged();
+
+    notes = new NoteList(ui->centralWidget);
+    ui->layout->addWidget(notes->getWidget());
+    connect(notes, SIGNAL(currentNoteChanged(int,int)), this, SLOT(currentNoteChanged(int,int)));
+
+    // Creating toolbar/menu actions
+    for (int i = 0; i < itemMax ; ++i)
+        actions[i] = generateAction(i);
+    actShow =	new QAction(tr("Show"),	parent);
+    actHide =	new QAction(tr("Hide"),	parent);
+    //Connecting actions with slots
+    actions[itemAdd]->setCheckable(true);
+    connect(actions[itemAdd],              SIGNAL(triggered()),   this,  SLOT(NewNote()));
+    connect(actions[itemAddText],          SIGNAL(triggered()),   this,  SLOT(NewNotePlain()));
+    connect(actions[itemAddHtml],          SIGNAL(triggered()),   this,  SLOT(NewNoteHTML()));
+    connect(actions[itemAddTodo],          SIGNAL(triggered()),   this,  SLOT(NewNoteTODO()));
+    connect(actions[itemRemove],           SIGNAL(triggered()),   notes, SLOT(removeCurrentNote()));
+    connect(actions[itemRename],           SIGNAL(triggered()),   notes, SLOT(renameCurrentNote()));
+    connect(actions[itemPrev],             SIGNAL(triggered()),   this,  SLOT(PreviousNote()));
+    connect(actions[itemNext],             SIGNAL(triggered()),   this,  SLOT(NextNote()));
+    connect(actions[itemBack],	           SIGNAL(triggered()),   notes, SLOT(historyBack()));
+    connect(actions[itemForward],	       SIGNAL(triggered()),   notes, SLOT(historyForward()));
+    connect(actions[itemCopy],	           SIGNAL(triggered()),   this,  SLOT(CopyNote()));
+    connect(actions[itemSetup],	           SIGNAL(triggered()),   this,  SLOT(showPrefDialog()));
+    connect(actions[itemInfo],	           SIGNAL(triggered()),   this,  SLOT(showAboutDialog()));
+    connect(actions[itemRun],		       SIGNAL(triggered()),   this,  SLOT(commandMenu()));
+    connect(actions[itemSearch],	       SIGNAL(toggled(bool)), this,  SLOT(showSearchBar(bool)));
+    connect(actions[itemExit],             SIGNAL(triggered()),   qApp,  SLOT(quit()));
+    connect(actions[itemFormatBold],       SIGNAL(triggered()),   this,  SLOT(formatBold()));
+    connect(actions[itemFormatItalic],	   SIGNAL(triggered()),   this,  SLOT(formatItalic()));
+    connect(actions[itemFormatStrikeout],  SIGNAL(triggered()),   this,  SLOT(formatStrikeout()));
+    connect(actions[itemFormatUnderline],  SIGNAL(triggered()),   this,  SLOT(formatUnderline()));
+    connect(actions[itemFormatColor],	   SIGNAL(triggered()),   this,  SLOT(formatTextColor()));
+    connect(actions[itemExportPdf],	       SIGNAL(triggered()),   this,  SLOT(notePrintPdf()));
+    connect(actions[itemPrintNote],	       SIGNAL(triggered()),   this,  SLOT(notePrint()));
+    connect(actions[itemPrintPreviewNote], SIGNAL(triggered()),   this,  SLOT(notePrintPreview()));
+    //
+    connect(actShow,	SIGNAL(triggered()), this, SLOT(show()));
+    connect(actHide,	SIGNAL(triggered()), this, SLOT(hide()));
+
+    // Adding toolbar's actions
+    actions_changed();
+    // Adding scripts
+    cmd_changed();
+
+    // Adding menu actions
+    cmenu.addAction(actShow);
+    cmenu.addAction(actHide);
+    cmenu.addSeparator();
+    cmenu.addAction(actions[itemAdd]);
+    cmenu.addAction(actions[itemRemove]);
+    cmenu.addAction(actions[itemRename]);
+    cmenu.addSeparator();
+    cmenu.addAction(actions[itemSetup]);
+    cmenu.addAction(actions[itemInfo]);
+    cmenu.addSeparator();
+    cmenu.addAction(actions[itemExit]);
+    tray.setIcon(QIcon(TRAY_ICON_FILE_NAME));
+    tray.setContextMenu(&cmenu);
+    connect(&tray, SIGNAL(activated(QSystemTrayIcon::ActivationReason)),
+            this, SLOT(trayActivated(QSystemTrayIcon::ActivationReason)));
+    tray.show();
+
+    //Creating shortcuts
+    Shared::addShortcut(new QShortcut(QKeySequence::New, this), tr("Create new note"));
+        connect(Shared::shortcuts().last(), SIGNAL(activated()), this, SLOT(NewNote()));
+    Shared::addShortcut(new QShortcut(QKeySequence::Close, this));
+        connect(Shared::shortcuts().last(), SIGNAL(activated()), notes, SLOT(removeCurrentNote()));
+    Shared::addShortcut(new QShortcut(Qt::Key_F2, this), tr("Rename current note"));
+        connect(Shared::shortcuts().last(), SIGNAL(activated()), notes, SLOT(renameCurrentNote()));
+    Shared::addShortcut(new QShortcut(QKeySequence::Back, this), tr("Go to previous note"));
+        connect(Shared::shortcuts().last(), SIGNAL(activated()), this, SLOT(PreviousNote()));
+    Shared::addShortcut(new QShortcut(QKeySequence::Forward, this), tr("Go to next note"));
+        connect(Shared::shortcuts().last(), SIGNAL(activated()), this, SLOT(NextNote()));
+    Shared::addShortcut(new QShortcut(QKeySequence::PreviousChild, this));
+        connect(Shared::shortcuts().last(), SIGNAL(activated()), notes, SLOT(historyBack()));
+    Shared::addShortcut(new QShortcut(QKeySequence::NextChild, this));
+        connect(Shared::shortcuts().last(), SIGNAL(activated()), notes, SLOT(historyForward()));
+    Shared::addShortcut(new QShortcut(QKeySequence::Find, this), tr("Search in the notes' text"));
+        connect(Shared::shortcuts().last(), SIGNAL(activated()), actions[itemSearch], SLOT(toggle()));
+    Shared::addShortcut(new QShortcut(Qt::Key_Escape, ui->edSearch, 0, 0, Qt::WidgetShortcut));
+        connect(Shared::shortcuts().last(), SIGNAL(activated()), actions[itemSearch], SLOT(toggle()));
+    Shared::addShortcut(new QShortcut(Qt::CTRL + Qt::Key_Q, this), tr("Exit program"));
+        connect(Shared::shortcuts().last(), SIGNAL(activated()), qApp, SLOT(quit()));
+    Shared::addShortcut(new QShortcut(QKeySequence::Bold, this), tr("Make selected text bold"));
+        connect(Shared::shortcuts().last(), SIGNAL(activated()), this, SLOT(formatBold()));
+    Shared::addShortcut(new QShortcut(QKeySequence::Italic, this), tr("Make selected text italic"));
+        connect(Shared::shortcuts().last(), SIGNAL(activated()), this, SLOT(formatItalic()));
+    Shared::addShortcut(new QShortcut(Qt::CTRL + Qt::Key_S, this), tr("Make selected text strikeout"));
+        connect(Shared::shortcuts().last(), SIGNAL(activated()), this, SLOT(formatStrikeout()));
+    Shared::addShortcut(new QShortcut(QKeySequence::Underline, this), tr("Make selected text underline"));
+        connect(Shared::shortcuts().last(), SIGNAL(activated()), this, SLOT(formatUnderline()));
+
+    for(int i=1; i<=9; ++i) //from Alt+1 to Alt+9
+    {
+        QShortcut* shortcut = new QShortcut(QKeySequence(Qt::ALT + Qt::Key_0+i), this);
+        connect(shortcut, SIGNAL(activated()), &alt_mapper, SLOT(map()));
+        alt_mapper.setMapping(shortcut, i-1);
+    }
+    connect(&alt_mapper, SIGNAL(mapped(int)), this, SLOT(ToNote(int)));
+    //
+    connect(&settings, SIGNAL(ShowHiddenChanged()), this, SLOT(warningSettingsChanged()));
+    connect(&settings, SIGNAL(WindowStateChanged()), this, SLOT(windowStateChanged()));
+    connect(&settings, SIGNAL(ToolbarItemsChanged()), this, SLOT(actions_changed()));
+    connect(&settings.getScriptModel(), SIGNAL(dataChanged(const QModelIndex&, const QModelIndex&)),
+        this, SLOT(cmd_changed()));
+    if(!settings.getHideStart()) show();
+    //
+    currentNoteChanged(-1, notes->currentIndex());
+}
+
+MainWindow::~MainWindow()
+{
+    //saving notes
+    notes->saveAll();
+    //saving title of last note
+    if(notes->current())
+        settings.setLastNote(notes->current()->fileName());
+    //saving dialog's params
+    settings.setDialogGeometry(saveGeometry());
+    settings.setDialogState(saveState());
+    //saving scripts
+    settings.setScripts();
+    //syncing settings
+    settings.save();
+}
 
 // Small little wrapper receiver for the note_create_widget signal
 void MainWindow::SetCheckedInverse(bool checked)
@@ -91,7 +243,121 @@ void MainWindow::ToNote(int n)
 void MainWindow::CopyNote()
 {
 	if(notes->empty()) return;
-	notes->current()->copy();
+    notes->current()->copy();
+}
+
+void MainWindow::notePrint()
+{
+    // Get type of a current note.
+    Note *currentNote = notes->current();
+
+    if (!currentNote)
+        return;
+
+    // Check printing support of note.
+    if (currentNote->isDocumentSupported() == false) {
+        QMessageBox::warning(this,
+                             tr("Note printing"),
+                             tr("There is not printing support for current note"));
+        return;
+    }
+
+#ifndef QT_NO_PRINTER
+    QPrinter printer(QPrinter::HighResolution);
+    QPrintDialog *dlg = new QPrintDialog(&printer, this);
+    dlg->setWindowTitle(tr("Print note"));
+    if (dlg->exec() == QDialog::Accepted) {
+        if (!currentNote->document()) {
+            QMessageBox::warning(this,
+                                 tr("Note printing"),
+                                 tr("Access error to note's text"));
+            return;
+        }
+        currentNote->document()->print(&printer);
+    }
+    delete dlg;
+#endif
+}
+
+void MainWindow::notePrintPreview()
+{
+    // Get type of a current note.
+    Note *currentNote = notes->current();
+
+    if (!currentNote)
+        return;
+
+    // Check printing support of note.
+    if (currentNote->isDocumentSupported() == false) {
+        QMessageBox::warning(this,
+                             tr("Note printing"),
+                             tr("There is not printing support for current note"));
+        return;
+    }
+
+#ifndef QT_NO_PRINTER
+    QPrinter printer(QPrinter::HighResolution);
+    QPrintPreviewDialog preview(&printer, this);
+    connect(&preview, SIGNAL(paintRequested(QPrinter*)), SLOT(printPreview(QPrinter*)));
+    preview.exec();
+#endif
+}
+
+void MainWindow::printPreview(QPrinter *printer)
+{
+    // Get type of a current note.
+    Note *currentNote = notes->current();
+
+    if (!currentNote)
+        return;
+
+#ifndef QT_NO_PRINTER
+    if (!currentNote->document()) {
+        QMessageBox::warning(this,
+                             tr("Note printing"),
+                             tr("Access error to note's text"));
+        return;
+    }
+    currentNote->document()->print(printer);
+#endif
+}
+
+void MainWindow::notePrintPdf()
+{
+    // Get type of a current note.
+    Note *currentNote = notes->current();
+
+    if (!currentNote)
+        return;
+
+    // Check printing support of note.
+    if (currentNote->isDocumentSupported() == false) {
+        QMessageBox::warning(this,
+                             tr("Note printing"),
+                             tr("There is not printing support for current note"));
+        return;
+    }
+
+    // Real printing of a note.
+    QString defaultFileName = QDir::currentPath() + "/" + currentNote->title();
+    QString fileName = QFileDialog::getSaveFileName(this, tr("Export PDF"),
+                                                    defaultFileName, QString("*.pdf"));
+    if (!fileName.isEmpty()) {
+        if (QFileInfo(fileName).suffix().isEmpty())
+            fileName.append(".pdf");
+#ifndef QT_NO_PRINTER
+        QPrinter printer(QPrinter::HighResolution);
+        printer.setOutputFormat(QPrinter::PdfFormat);
+        printer.setOutputFileName(fileName);
+        if (!currentNote->document()) {
+            QMessageBox::warning(this,
+                                 tr("Note printing"),
+                                 tr("Access error to note's text"));
+            return;
+        }
+        currentNote->document()->print(&printer);
+#endif
+    }
 }
 
 void MainWindow::trayActivated(QSystemTrayIcon::ActivationReason reason)
@@ -236,12 +502,15 @@ void MainWindow::cmd_changed()
 
 void MainWindow::actions_changed()
 {
+    // Build toolbar content according to toolbar configuration.
 	ui->mainToolBar->clear();
 	const QVector<int>& items = settings.getToolbarItems();
-	for(int i=0; i<items.size(); ++i)
+    for (int i = 0; i < items.size(); ++i)
 	{
-		if(items[i]==itemSeparator) ui->mainToolBar->addSeparator();
-		else ui->mainToolBar->addAction(actions[items[i]]);
+        if (items[i] == itemSeparator)
+            ui->mainToolBar->addSeparator();
+        else
+            ui->mainToolBar->addAction(actions[items[i]]);
 	}
 }
 
@@ -307,7 +576,7 @@ void MainWindow::formatTextColor()
 	if(note->type()!=Note::type_html) return;
 	QTextCharFormat format = note->getSelFormat();
 	QColor color = format.foreground().color();
-	QColorDialog dlg(color);
+    QColorDialog dlg(color, this);
 	if(dlg.exec()==QDialog::Accepted)
 	{
 		color = dlg.currentColor();
@@ -317,154 +586,15 @@ void MainWindow::formatTextColor()
 }
 
 //------------------------------------------------------------------------------
-
-//Function for fast generating actions
-inline QAction* GenerateAction(int item_id /*, bool checkable = false*/)
-{
-	item_enum item = item_enum(item_id);
-	ToolbarAction toolbar_action(item);
-	QAction* action = new QAction(toolbar_action.icon(), toolbar_action.text(), 0);
-	action->setCheckable(toolbar_action.isCheckable());
-	return action;
-}
-
 #include <QtDebug>
-
-MainWindow::MainWindow(QWidget *parent)
-	: QMainWindow(parent), ui(new Ui::MainWindow), note_create_widget(0)
-{
-	ui->setupUi(this);
-	ui->wSearch->hide();
-	//restoring window state
-	restoreGeometry(settings.getDialogGeometry());
-	restoreState(settings.getDialogState());
-	windowStateChanged();
-
-	notes = new NoteList(ui->centralWidget);
-	ui->layout->addWidget(notes->getWidget());
-	connect(notes, SIGNAL(currentNoteChanged(int,int)), this, SLOT(currentNoteChanged(int,int)));
-
-	//Creating toolbar/menu actions
-	for(int i=0; i<itemMax ; ++i) actions[i] = GenerateAction(i);
-	actShow =	new QAction(tr("Show"),	parent);
-	actHide =	new QAction(tr("Hide"),	parent);
-	//Connecting actions with slots
-	actions[itemAdd]->setCheckable(true);
-	connect(actions[itemAdd],		SIGNAL(triggered()), this, SLOT(NewNote()));
-	connect(actions[itemAddText],		SIGNAL(triggered()), this, SLOT(NewNotePlain()));
-	connect(actions[itemAddHtml],	SIGNAL(triggered()), this, SLOT(NewNoteHTML()));
-	connect(actions[itemAddTodo],	SIGNAL(triggered()), this, SLOT(NewNoteTODO()));
-	connect(actions[itemRemove],	SIGNAL(triggered()), notes, SLOT(removeCurrentNote()));
-	connect(actions[itemRename],	SIGNAL(triggered()), notes, SLOT(renameCurrentNote()));
-	connect(actions[itemPrev],	SIGNAL(triggered()), this, SLOT(PreviousNote()));
-	connect(actions[itemNext],	SIGNAL(triggered()), this, SLOT(NextNote()));
-	connect(actions[itemBack],	SIGNAL(triggered()), notes, SLOT(historyBack()));
-	connect(actions[itemForward],	SIGNAL(triggered()), notes, SLOT(historyForward()));
-	connect(actions[itemCopy],	SIGNAL(triggered()), this, SLOT(CopyNote()));
-	connect(actions[itemSetup],	SIGNAL(triggered()), this, SLOT(showPrefDialog()));
-	connect(actions[itemInfo],	SIGNAL(triggered()), this, SLOT(showAboutDialog()));
-	connect(actions[itemRun],		SIGNAL(triggered()), this, SLOT(commandMenu()));
-	connect(actions[itemSearch],	SIGNAL(toggled(bool)), this, SLOT(showSearchBar(bool)));
-	connect(actions[itemExit],	SIGNAL(triggered()), qApp, SLOT(quit()));
-	connect(actions[itemFormatBold],	SIGNAL(triggered()), this, SLOT(formatBold()));
-	connect(actions[itemFormatItalic],	SIGNAL(triggered()), this, SLOT(formatItalic()));
-	connect(actions[itemFormatStrikeout],	SIGNAL(triggered()), this, SLOT(formatStrikeout()));
-	connect(actions[itemFormatUnderline],	SIGNAL(triggered()), this, SLOT(formatUnderline()));
-	connect(actions[itemFormatColor],	SIGNAL(triggered()), this, SLOT(formatTextColor()));
-	//
-	connect(actShow,	SIGNAL(triggered()), this, SLOT(show()));
-	connect(actHide,	SIGNAL(triggered()), this, SLOT(hide()));
-	//
-	actions_changed(); //Adding toolbar's actions
-	cmd_changed(); //Adding scripts
-
-	//Adding menu actions
-	cmenu.addAction(actShow);
-	cmenu.addAction(actHide);
-	cmenu.addSeparator();
-	cmenu.addAction(actions[itemAdd]);
-	cmenu.addAction(actions[itemRemove]);
-	cmenu.addAction(actions[itemRename]);
-	cmenu.addSeparator();
-	cmenu.addAction(actions[itemSetup]);
-	cmenu.addAction(actions[itemInfo]);
-	cmenu.addSeparator();
-	cmenu.addAction(actions[itemExit]);
-	tray.setIcon(QIcon(TRAY_ICON_FILE_NAME));
-	tray.setContextMenu(&cmenu);
-	connect(&tray, SIGNAL(activated(QSystemTrayIcon::ActivationReason)),
-			this, SLOT(trayActivated(QSystemTrayIcon::ActivationReason)));
-	tray.show();
-
-	//Creating shortcuts
-	Shared::addShortcut(new QShortcut(QKeySequence::New, this), tr("Create new note"));
-		connect(Shared::shortcuts().last(), SIGNAL(activated()), this, SLOT(NewNote()));
-	Shared::addShortcut(new QShortcut(QKeySequence::Close, this));
-		connect(Shared::shortcuts().last(), SIGNAL(activated()), notes, SLOT(removeCurrentNote()));
-	Shared::addShortcut(new QShortcut(Qt::Key_F2, this), tr("Rename current note"));
-		connect(Shared::shortcuts().last(), SIGNAL(activated()), notes, SLOT(renameCurrentNote()));
-	Shared::addShortcut(new QShortcut(QKeySequence::Back, this), tr("Go to previous note"));
-		connect(Shared::shortcuts().last(), SIGNAL(activated()), this, SLOT(PreviousNote()));
-	Shared::addShortcut(new QShortcut(QKeySequence::Forward, this), tr("Go to next note"));
-		connect(Shared::shortcuts().last(), SIGNAL(activated()), this, SLOT(NextNote()));
-	Shared::addShortcut(new QShortcut(QKeySequence::PreviousChild, this));
-		connect(Shared::shortcuts().last(), SIGNAL(activated()), notes, SLOT(historyBack()));
-	Shared::addShortcut(new QShortcut(QKeySequence::NextChild, this));
-		connect(Shared::shortcuts().last(), SIGNAL(activated()), notes, SLOT(historyForward()));
-	Shared::addShortcut(new QShortcut(QKeySequence::Find, this), tr("Search in the notes' text"));
-		connect(Shared::shortcuts().last(), SIGNAL(activated()), actions[itemSearch], SLOT(toggle()));
-	Shared::addShortcut(new QShortcut(Qt::Key_Escape, ui->edSearch, 0, 0, Qt::WidgetShortcut));
-		connect(Shared::shortcuts().last(), SIGNAL(activated()), actions[itemSearch], SLOT(toggle()));
-	Shared::addShortcut(new QShortcut(Qt::CTRL + Qt::Key_Q, this), tr("Exit program"));
-		connect(Shared::shortcuts().last(), SIGNAL(activated()), qApp, SLOT(quit()));
-	Shared::addShortcut(new QShortcut(QKeySequence::Bold, this), tr("Make selected text bold"));
-		connect(Shared::shortcuts().last(), SIGNAL(activated()), this, SLOT(formatBold()));
-	Shared::addShortcut(new QShortcut(QKeySequence::Italic, this), tr("Make selected text italic"));
-		connect(Shared::shortcuts().last(), SIGNAL(activated()), this, SLOT(formatItalic()));
-	Shared::addShortcut(new QShortcut(Qt::CTRL + Qt::Key_S, this), tr("Make selected text strikeout"));
-		connect(Shared::shortcuts().last(), SIGNAL(activated()), this, SLOT(formatStrikeout()));
-	Shared::addShortcut(new QShortcut(QKeySequence::Underline, this), tr("Make selected text underline"));
-		connect(Shared::shortcuts().last(), SIGNAL(activated()), this, SLOT(formatUnderline()));
-
-	for(int i=1; i<=9; ++i) //from Alt+1 to Alt+9
-	{
-		QShortcut* shortcut = new QShortcut(QKeySequence(Qt::ALT + Qt::Key_0+i), this);
-		connect(shortcut, SIGNAL(activated()), &alt_mapper, SLOT(map()));
-		alt_mapper.setMapping(shortcut, i-1);
-	}
-	connect(&alt_mapper, SIGNAL(mapped(int)), this, SLOT(ToNote(int)));
-	//
-	connect(&settings, SIGNAL(ShowHiddenChanged()), this, SLOT(warningSettingsChanged()));
-	connect(&settings, SIGNAL(WindowStateChanged()), this, SLOT(windowStateChanged()));
-	connect(&settings, SIGNAL(ToolbarItemsChanged()), this, SLOT(actions_changed()));
-	connect(&settings.getScriptModel(), SIGNAL(dataChanged(const QModelIndex&, const QModelIndex&)),
-		this, SLOT(cmd_changed()));
-	if(!settings.getHideStart()) show();
-	//
-	currentNoteChanged(-1, notes->currentIndex());
-}
-
-MainWindow::~MainWindow()
-{
-	//saving notes
-	notes->saveAll();
-	//saving title of last note
-	if(notes->current()) settings.setLastNote(notes->current()->fileName());
-	//saving dialog's params
-	settings.setDialogGeometry(saveGeometry());
-	settings.setDialogState(saveState());
-	//saving scrits
-	settings.setScripts();
-	//syncing settings
-	settings.save();
-}
 
 void MainWindow::currentNoteChanged(int old_index, int new_index)
 {
 	if(old_index!=-1)
 	{
 		Note* note = notes->get(old_index);
-		if(note->type()==Note::type_html) disconnect(note, SIGNAL(formatChanged(QFont)), 0, 0); //disconnecting old note
+        //disconnecting old note
+        if(note->type()==Note::type_html) disconnect(note, SIGNAL(formatChanged(QFont)), 0, 0);
 	}
 	//
 	bool not_empty = !notes->empty();
@@ -542,7 +672,7 @@ void MainWindow::Search(bool next)
 void MainWindow::on_edSearch_textChanged(QString text)
 {
 	Q_UNUSED(text);
-	Search(false);
+    Search(false);
 }
 
 void MainWindow::on_edSearch_returnPressed()

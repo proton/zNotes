@@ -12,10 +12,13 @@ void Highlighter::highlightBlock(const QString &text)
 	{
 		foreach (const HighlightRule &rule, settings.getHighlightRules())
 		{
-			if(!rule.enabled) continue;
-			if(rule.regexp.isEmpty()) continue;
+            if(!rule.enabled)
+                continue;
+            if(rule.regexp.isEmpty())
+                continue;
 			QRegExp expression(rule.regexp);
-			if(!expression.isValid()) continue;
+            if(!expression.isValid())
+                continue;
 			QTextCharFormat format;
 			format.setForeground(rule.color);
 			int index = expression.indexIn(text);

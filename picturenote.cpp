@@ -1,4 +1,4 @@
-#include "note_picture.h"
+#include "picturenote.h"
 
 #include <QClipboard>
 #include <QApplication>
@@ -6,6 +6,7 @@
 #include <QLabel>
 #include <QScrollArea>
 #include <QPicture>
+#include <QMessageBox>
 
 PictureNote::PictureNote(const QFileInfo& fileinfo, Note::Type type_new)
 	: Note(fileinfo, type_new)
@@ -54,4 +55,14 @@ void PictureNote::copy() const
 {
 	QClipboard* clipboard = QApplication::clipboard();
 	clipboard->setPixmap(*label->pixmap());
+}
+
+bool PictureNote::isDocumentSupported() const
+{
+    return false;
+}
+
+QTextDocument* PictureNote::document() const
+{
+    return 0;
 }
