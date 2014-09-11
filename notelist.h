@@ -44,22 +44,45 @@ public:
 					  const QString& description, const QString& big_icon_path,
 					  const QString& small_icon_path, const QString extensions,
 					  bool visible = true);
+public slots:
+    void saveAll();
+    //
+    void removeCurrentNote();
+    void renameCurrentNote();
+    //
+    void historyBack();
+    void historyForward();
+
 private:
 	void initNoteTypes();
 	Note::Type getType(const QFileInfo& fileinfo) const;
 	Note* add(const QFileInfo& fileinfo, bool set_current = true);
 	void remove(int i);
 	void rename(int index, const QString& title);
-	void move(const QString& path);
+    void move(const QString &newPath, const QString &oldPath);
 
-public slots:
-	void saveAll();
-	//
-	void removeCurrentNote();
-	void renameCurrentNote();
-	//
-	void historyBack();
-	void historyForward();
+    // File with format INI for saving cursor position of a note.
+    const QString FILE_WITH_CURSOR_POSITIONS;
+
+    QWidget *parentWidget;
+
+    QMap<Note::Type,NoteType> note_types;
+    QMap<QString, Note::Type> NOTE_TYPE_MAP;
+
+    // Next group of data is syncronized
+    QSet<QString> notes_filenames;
+    QList<Note*> vec;
+    //
+    QList<QString> history;
+    int history_index;
+    bool history_forward_pressed;
+    bool history_back_pressed;
+    //
+    int current_index;
+    ZTabWidget* tabs;
+    //
+    QFileSystemWatcher* watcher;
+    QDir dir;
 
 private slots:
 	void currentTabChanged(int index);
@@ -71,25 +94,6 @@ private slots:
 
 signals:
 	void currentNoteChanged(int old_index, int new_index);
-
-private:
-    QWidget *parentWidget;
-
-	QMap<Note::Type,NoteType> note_types;
-	QSet<QString> notes_filenames;
-	QMap<QString, Note::Type> NOTE_TYPE_MAP;
-	QList<Note*> vec;
-	//
-	QList<QString> history;
-	int history_index;
-	bool history_forward_pressed;
-	bool history_back_pressed;
-	//
-	int current_index;
-	ZTabWidget* tabs;
-	//
-	QFileSystemWatcher* watcher;
-	QDir dir;
 };
 
 #endif // NOTELIST_H

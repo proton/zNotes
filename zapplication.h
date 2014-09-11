@@ -1,5 +1,5 @@
-#ifndef APPLICATION_H
-#define APPLICATION_H
+#ifndef ZAPPLICATION_H
+#define ZAPPLICATION_H
 
 #include "single_inst/qtsingleapplication.h"
 
@@ -19,4 +19,4 @@ public:
     void commitData(QSessionManager &); //fixing "KDE logout was cancelled by zNotes" bug
 };
 
-#endif // APPLICATION_H
+#endif // ZAPPLICATION_H

@@ -1,4 +1,4 @@
-#include "application.h"
+#include "zapplication.h"
 #include "settings.h"
 
 zApplication::zApplication(int& argc, char** argv, bool GUIenabled)

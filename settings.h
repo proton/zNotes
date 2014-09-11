@@ -95,6 +95,7 @@ public:
 	void updateLocale();
 	//
 	inline void save() { config.sync(); }
+
 private:
 	QSettings config;
 	QTranslator translator;

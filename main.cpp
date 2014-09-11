@@ -1,4 +1,4 @@
-#include "application.h"
+#include "zapplication.h"
 #include "mainwindow.h"
 #include "settings.h"
 

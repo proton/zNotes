@@ -37,12 +37,14 @@ void TextNote::load()
 	else if(file.open(QIODevice::WriteOnly | QIODevice::Text)) file.close(); //If file don't exist, we creating it
 }
 
-//Saving note
+// Saving note
 void TextNote::save(bool forced)
 {
-	if(!(content_changed || forced)) return; //If file doesn't need in saving, exiting from function
+    if (!(content_changed || forced))
+        return; //If file doesn't need in saving, exiting from function
 	file.close();
-	if(!file.open(QFile::WriteOnly | QFile::Text)) return;
+    if(!file.open(QFile::WriteOnly | QFile::Text))
+        return;
 	QTextStream out(&file);
 	out << text_edit->toPlainText();
 	file.close();
