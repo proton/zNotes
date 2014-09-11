@@ -70,8 +70,6 @@ public slots:
     //
     void windowStateChanged();
     //
-//	void scanForNewFiles();
-    //
     void warningSettingsChanged();
 
 protected:
@@ -83,24 +81,24 @@ protected:
 private:
 	Ui::MainWindow *ui;
 	//
-	NoteList* notes;
-	NoteCreateWidget* note_create_widget;
+    NoteList *notes;
+    NoteCreateWidget *note_create_widget;
 	//
 	QSystemTrayIcon tray;
 	QMenu cmenu;
 	QMenu cmd_menu;
 	QSignalMapper cmd_mapper;
 	QSignalMapper alt_mapper;
-	//QTimer SaveTimer;
-	//
-    QAction* actions[itemMax];
+    QAction *actions[itemMax];
     QAction *actShow,
             *actHide;
 	//
-	void LoadNotes();
+//	void LoadNotes();
 	//
 	void Search(bool next);
 	void changeEvent(QEvent *e);
+    //
+    bool isNoteSupportsPrinting(const Note *note) const;
 
 private slots:
 	void on_btSearchClose_clicked();

@@ -165,17 +165,17 @@ MainWindow::MainWindow(QWidget *parent)
 
 MainWindow::~MainWindow()
 {
-    //saving notes
+    // saving notes
     notes->saveAll();
-    //saving title of last note
+    // saving title of last note
     if(notes->current())
         settings.setLastNote(notes->current()->fileName());
-    //saving dialog's params
+    // saving dialog's params
     settings.setDialogGeometry(saveGeometry());
     settings.setDialogState(saveState());
-    //saving scripts
+    // saving scripts
     settings.setScripts();
-    //syncing settings
+    // syncing settings
     settings.save();
 }
 
@@ -246,21 +246,28 @@ void MainWindow::CopyNote()
     notes->current()->copy();
 }
 
-void MainWindow::notePrint()
+bool MainWindow::isNoteSupportsPrinting(const Note *note) const
 {
-    // Get type of a current note.
-    Note *currentNote = notes->current();
-
-    if (!currentNote)
-        return;
+    if (!note)
+        return false;
 
     // Check printing support of note.
-    if (currentNote->isDocumentSupported() == false) {
-        QMessageBox::warning(this,
+    if (note->isDocumentSupported() == false) {
+        QMessageBox::warning(const_cast<MainWindow*>(this),
                              tr("Note printing"),
                              tr("There is not printing support for current note"));
-        return;
+        return false;
     }
+
+    return true;
+}
+
+void MainWindow::notePrint()
+{
+    Note *currentNote = notes->current();
+
+    if (!isNoteSupportsPrinting(currentNote))
+        return;
 
 #ifndef QT_NO_PRINTER
     QPrinter printer(QPrinter::HighResolution);
@@ -279,64 +286,12 @@ void MainWindow::notePrint()
 #endif
 }
 
-void MainWindow::notePrintPreview()
-{
-    // Get type of a current note.
-    Note *currentNote = notes->current();
-
-    if (!currentNote)
-        return;
-
-    // Check printing support of note.
-    if (currentNote->isDocumentSupported() == false) {
-        QMessageBox::warning(this,
-                             tr("Note printing"),
-                             tr("There is not printing support for current note"));
-        return;
-    }
-
-#ifndef QT_NO_PRINTER
-    QPrinter printer(QPrinter::HighResolution);
-    QPrintPreviewDialog preview(&printer, this);
-    connect(&preview, SIGNAL(paintRequested(QPrinter*)), SLOT(printPreview(QPrinter*)));
-    preview.exec();
-#endif
-}
-
-void MainWindow::printPreview(QPrinter *printer)
-{
-    // Get type of a current note.
-    Note *currentNote = notes->current();
-
-    if (!currentNote)
-        return;
-
-#ifndef QT_NO_PRINTER
-    if (!currentNote->document()) {
-        QMessageBox::warning(this,
-                             tr("Note printing"),
-                             tr("Access error to note's text"));
-        return;
-    }
-    currentNote->document()->print(printer);
-#endif
-}
-
 void MainWindow::notePrintPdf()
 {
-    // Get type of a current note.
     Note *currentNote = notes->current();
 
-    if (!currentNote)
+    if (!isNoteSupportsPrinting(currentNote))
         return;
-
-    // Check printing support of note.
-    if (currentNote->isDocumentSupported() == false) {
-        QMessageBox::warning(this,
-                             tr("Note printing"),
-                             tr("There is not printing support for current note"));
-        return;
-    }
 
     // Real printing of a note.
     QString defaultFileName = QDir::currentPath() + "/" + currentNote->title();
@@ -360,6 +315,39 @@ void MainWindow::notePrintPdf()
     }
 }
 
+void MainWindow::notePrintPreview()
+{
+    Note *currentNote = notes->current();
+
+    if (!isNoteSupportsPrinting(currentNote))
+        return;
+
+#ifndef QT_NO_PRINTER
+    QPrinter printer(QPrinter::HighResolution);
+    QPrintPreviewDialog preview(&printer, this);
+    connect(&preview, SIGNAL(paintRequested(QPrinter*)), SLOT(printPreview(QPrinter*)));
+    preview.exec();
+#endif
+}
+
+void MainWindow::printPreview(QPrinter *printer)
+{
+    Note *currentNote = notes->current();
+
+    if (!isNoteSupportsPrinting(currentNote))
+        return;
+
+#ifndef QT_NO_PRINTER
+    if (!currentNote->document()) {
+        QMessageBox::warning(this,
+                             tr("Note printing"),
+                             tr("Access error to note's text"));
+        return;
+    }
+    currentNote->document()->print(printer);
+#endif
+}
+
 void MainWindow::trayActivated(QSystemTrayIcon::ActivationReason reason)
 {
 	switch(reason)
@@ -377,10 +365,12 @@ void MainWindow::trayActivated(QSystemTrayIcon::ActivationReason reason)
 void MainWindow::hideEvent(QHideEvent* event)
 {
 	Q_UNUSED(event)
+
 	settings.setDialogGeometry(saveGeometry());
 	actShow->setEnabled(true);
 	actHide->setDisabled(true);
-	if(notes->current()) notes->saveAll();
+    if(notes->current())
+        notes->saveAll();
 
 	if(note_create_widget && note_create_widget->isVisible())
 	{
@@ -706,7 +696,7 @@ void MainWindow::changeEvent(QEvent *e)
 		notes->retranslate(settings.getLocaleCurrent());
 		break;
 	default: break;
-	}
+    }
 }
 
 void MainWindow::on_btSearchClose_clicked()

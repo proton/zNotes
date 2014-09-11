@@ -23,7 +23,6 @@ SOURCES += main.cpp \
 	highlighter.cpp \
 	textedit.cpp \
 	notelist.cpp \
-	application.cpp \
 	notecreatewidget.cpp \
 	notetype.cpp \
 	notecreatebutton.cpp \
@@ -39,7 +38,8 @@ SOURCES += main.cpp \
     todonote.cpp \
     textnote.cpp \
     picturenote.cpp \
-    htmlnote.cpp
+    htmlnote.cpp \
+    zapplication.cpp
 
 HEADERS += mainwindow.h \
 	configdialog.h \
@@ -52,7 +52,6 @@ HEADERS += mainwindow.h \
 	highlighter.h \
 	textedit.h \
 	notelist.h \
-	application.h \
 	notecreatewidget.h \
 	notetype.h \
 	notecreatebutton.h \
@@ -66,7 +65,8 @@ HEADERS += mainwindow.h \
     textnote.h \
     htmlnote.h \
     picturenote.h \
-    todonote.h
+    todonote.h \
+    zapplication.h
 
 FORMS += mainwindow.ui \
 	configdialog.ui \
