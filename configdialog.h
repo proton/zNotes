@@ -1,7 +1,7 @@
 #ifndef CONFIGDIALOG_H
 #define CONFIGDIALOG_H
 
-#include <QtGui/QDialog>
+#include <QDialog>
 #include <QAbstractButton>
 #include <QModelIndex>
 

@@ -4,7 +4,12 @@
 TARGET = znotes
 VERSION = "0.4.5"
 
-QT += core gui network
+QT += core network
+if(greaterThan(QT_MAJOR_VERSION, 4)) {
+   QT += widgets printsupport
+} else {
+   QT += gui
+}
 TEMPLATE = app
 
 OBJECTS_DIR = build

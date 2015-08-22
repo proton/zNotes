@@ -42,6 +42,11 @@
 #include <QtCore/QCoreApplication>
 #include <QtCore/QTime>
 
+#if QT_VERSION >= 0x050000
+#include <QtCore/QDataStream>
+#endif
+
+
 #if defined(Q_OS_WIN)
 #include <QtCore/QLibrary>
 #include <QtCore/qt_windows.h>
