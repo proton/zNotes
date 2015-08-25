@@ -5,8 +5,10 @@ zApplication::zApplication(int& argc, char** argv, bool GUIenabled)
 	: QtSingleApplication(argc, argv, GUIenabled) {}
 zApplication::zApplication(const QString& id, int& argc, char** argv)
 	: QtSingleApplication(id, argc, argv) {}
+#if QT_VERSION < 0x050000
 zApplication::zApplication(int& argc, char** argv, Type type)
 	: QtSingleApplication(argc, argv, type) {}
+#endif
 
 #if defined(Q_WS_X11)
 zApplication::zApplication(Display* dpy, Qt::HANDLE visual, Qt::HANDLE colormap)

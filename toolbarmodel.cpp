@@ -221,8 +221,15 @@ QModelIndex ItemToolbarModel::up(const QModelIndex &index)
 {
 	int row = index.row();
 	if(row==0) return index; //if this item first
+#if QT_VERSION >= 0x050000
+	beginResetModel();
+	items.swap(row, row-1);
+	endResetModel();
+#endif
+#if QT_VERSION < 0x050000
 	items.swap(row, row-1);
 	emit reset();
+#endif
 	QModelIndex new_index(this->index(row-1, index.column()));
 	return new_index;
 }
@@ -232,7 +239,9 @@ QModelIndex ItemToolbarModel::down(const QModelIndex &index)
 	int row = index.row();
 	if(row==v.size()-1) return index; //if this item last
 	items.swap(row, row+1);
+#if QT_VERSION < 0x050000
 	emit reset();
+#endif
 	QModelIndex new_index(this->index(row+1, index.column()));
 	return new_index;
 }

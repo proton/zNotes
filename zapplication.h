@@ -9,7 +9,9 @@ class zApplication: public QtSingleApplication
 public:
 	zApplication(int &argc, char **argv, bool GUIenabled = true);
 	zApplication(const QString &id, int &argc, char **argv);
+#if QT_VERSION < 0x050000
 	zApplication(int &argc, char **argv, Type type);
+#endif
 #if defined(Q_WS_X11)
 	zApplication(Display* dpy, Qt::HANDLE visual = 0, Qt::HANDLE colormap = 0);
 	zApplication(Display* dpy, int &argc, char **argv, Qt::HANDLE visual = 0, Qt::HANDLE cmap= 0);

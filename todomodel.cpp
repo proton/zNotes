@@ -172,9 +172,16 @@ QDomDocument*  TodoModel::load(QFile& file)
 
 	//Inserting new tasks
 	QDomElement root_element = _document->documentElement();
+#if QT_VERSION >= 0x050000
+        beginResetModel();
 	_root_task = new Task(_document, root_element, 0, NULL);
-
+        endResetModel();
+#endif
+#if QT_VERSION < 0x050000
+	_root_task = new Task(_document, root_element, 0, NULL);
 	reset();
+#endif
+
 
 	return _document;
 }
