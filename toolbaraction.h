@@ -77,30 +77,30 @@ public:
 	{
 		switch(item_id)
 		{
-			case itemAdd:		return QIcon(":/res/add.png");
-			case itemAddText:	return QIcon(":/res/add.png");
-			case itemAddHtml:	return QIcon(":/res/add.png");
-			case itemAddTodo:	return QIcon(":/res/add.png");
-			case itemRemove:	return QIcon(":/res/remove.png");
-			case itemRename:	return QIcon(":/res/rename.png");
-			case itemBack:		return QIcon(":/res/back.png");
-			case itemForward:	return QIcon(":/res/forward.png");
-			case itemPrev:		return QIcon(":/res/prev.png");
-			case itemNext:		return QIcon(":/res/next.png");
-			case itemCopy:		return QIcon(":/res/copy.png");
-			case itemSetup:		return QIcon(":/res/settings.png");
-			case itemInfo:		return QIcon(":/res/info.png");
-			case itemRun:		return QIcon(":/res/exec.png");
-			case itemSearch:	return QIcon(":/res/find.png");
-			case itemExit:		return QIcon(":/res/exit.png");
-			case itemFormatBold:		return QIcon(":/res/format_bold.png");
-			case itemFormatItalic:		return QIcon(":/res/format_italic.png");
-			case itemFormatStrikeout:	return QIcon(":/res/format_strikeout.png");
-			case itemFormatUnderline:	return QIcon(":/res/format_underline.png");
-			case itemFormatColor:		return QIcon(":/res/format_color.png");
-            case itemExportPdf:         return QIcon(":/res/exportpdf.png");
-            case itemPrintNote:         return QIcon(":/res/print.png");
-            case itemPrintPreviewNote:  return QIcon(":/res/print_preview.png");
+            case itemAdd:		return QIcon::fromTheme("list-add", QIcon(":/res/add.png"));
+            case itemAddText:	return QIcon::fromTheme("list-add", QIcon(":/res/add.png"));
+            case itemAddHtml:	return QIcon::fromTheme("list-add", QIcon(":/res/add.png"));
+            case itemAddTodo:	return QIcon::fromTheme("list-add", QIcon(":/res/add.png"));
+            case itemRemove:	return QIcon::fromTheme("list-remove", QIcon(":/res/remove.png"));
+            case itemRename:	return QIcon::fromTheme("edit-rename", QIcon(":/res/rename.png"));
+            case itemBack:		return QIcon::fromTheme("back", QIcon(":/res/back.png"));
+            case itemForward:	return QIcon::fromTheme("forward", QIcon(":/res/forward.png"));
+            case itemPrev:		return QIcon::fromTheme("go-previous", QIcon(":/res/prev.png"));
+            case itemNext:		return QIcon::fromTheme("go-next", QIcon(":/res/next.png"));
+            case itemCopy:		return QIcon::fromTheme("edit-copy", QIcon(":/res/copy.png"));
+            case itemSetup:		return QIcon::fromTheme("configure", QIcon(":/res/settings.png"));
+            case itemInfo:		return QIcon::fromTheme("help-about", QIcon(":/res/info.png"));
+            case itemRun:		return QIcon::fromTheme("run-build", QIcon(":/res/exec.png"));
+            case itemSearch:	return QIcon::fromTheme("edit-find", QIcon(":/res/find.png"));
+            case itemExit:		return QIcon::fromTheme("window-close", QIcon(":/res/exit.png"));
+            case itemFormatBold:		return QIcon::fromTheme("format-text-bold", QIcon(":/res/format_bold.png"));
+            case itemFormatItalic:		return QIcon::fromTheme("format-text-italic", QIcon(":/res/format_italic.png"));
+            case itemFormatStrikeout:	return QIcon::fromTheme("format-text-strikethrough", QIcon(":/res/format_strikeout.png"));
+            case itemFormatUnderline:	return QIcon::fromTheme("format-text-underline", QIcon(":/res/format_underline.png"));
+            case itemFormatColor:		return QIcon::fromTheme("color-management", QIcon(":/res/format_color.png"));
+            case itemExportPdf:         return QIcon::fromTheme("application-pdf", QIcon(":/res/exportpdf.png"));
+            case itemPrintNote:         return QIcon::fromTheme("printer", QIcon(":/res/print.png"));
+            case itemPrintPreviewNote:  return QIcon::fromTheme("document-print-preview", QIcon(":/res/print_preview.png"));
 			default: return QIcon();
 		}
 	}
