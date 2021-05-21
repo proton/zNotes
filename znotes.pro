@@ -2,7 +2,7 @@
 # Project created by QtCreator 2009-09-20T17:20:55
 # -------------------------------------------------
 TARGET = znotes
-VERSION = "0.4.5"
+VERSION = "0.4.6"
 
 QT += core network
 if(greaterThan(QT_MAJOR_VERSION, 4)) {
