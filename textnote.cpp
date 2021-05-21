@@ -40,11 +40,13 @@ void TextNote::load()
 // Saving note
 void TextNote::save(bool forced)
 {
-    if (!(content_changed || forced))
+    if (!(content_changed || forced)) {
         return; //If file doesn't need in saving, exiting from function
+    }
 	file.close();
-    if(!file.open(QFile::WriteOnly | QFile::Text))
+    if(!file.open(QFile::WriteOnly | QFile::Text)) {
         return;
+    }
 	QTextStream out(&file);
 	out << text_edit->toPlainText();
 	file.close();

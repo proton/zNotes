@@ -4,5 +4,6 @@ znotes.pro.user
 translations/*.qm
 build
 Makefile
+.qmake.stash
 znotes
 TODO

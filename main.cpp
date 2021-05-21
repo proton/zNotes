@@ -8,8 +8,10 @@ int main(int argc, char **argv)
 
 	settings.load();
     // if another copy is starts
-    if(app.isRunning() && settings.getSingleInstance())
-        return !app.sendMessage("proton is our god!");
+    if(app.isRunning() && settings.getSingleInstance()) {
+        return !app.sendMessage("Only one instance is allowed");
+    }
+
 	app.setQuitOnLastWindowClosed(false);
 
     MainWindow w;

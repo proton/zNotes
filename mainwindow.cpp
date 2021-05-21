@@ -168,8 +168,9 @@ MainWindow::~MainWindow()
     // saving notes
     notes->saveAll();
     // saving title of last note
-    if(notes->current())
+    if(notes->current()) {
         settings.setLastNote(notes->current()->fileName());
+    }
     // saving dialog's params
     settings.setDialogGeometry(saveGeometry());
     settings.setDialogState(saveState());
@@ -369,8 +370,9 @@ void MainWindow::hideEvent(QHideEvent* event)
 	settings.setDialogGeometry(saveGeometry());
 	actShow->setEnabled(true);
 	actHide->setDisabled(true);
-    if(notes->current())
+    if(notes->current()) {
         notes->saveAll();
+    }
 
 	if(note_create_widget && note_create_widget->isVisible())
 	{

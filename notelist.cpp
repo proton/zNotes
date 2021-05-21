@@ -170,10 +170,11 @@ void NoteList::registerType(Note::Type id,
 
 void NoteList::scanForNewFiles()
 {
-    if (settings.getShowHidden())
+    if (settings.getShowHidden()) {
         dir.setFilter(QDir::Files | QDir::Hidden | QDir::Readable);
-    else
+    } else {
         dir.setFilter(QDir::Files | QDir::Readable);
+    }
 	dir.refresh();
 	QFileInfoList flist = dir.entryInfoList();
     for (int i = 0; i < flist.size(); ++i)
@@ -246,8 +247,9 @@ Note* NoteList::add(const QFileInfo& fileinfo, bool set_current)
 	vec.append(note);
 	tabs->addTab(note->widget(), note->title());
 	notes_filenames.insert(fileinfo.fileName());
-    if (set_current)
+    if (set_current) {
         tabs->setCurrentWidget(note->widget());
+    }
 	return note;
 }
 
@@ -361,11 +363,12 @@ void NoteList::currentTabChanged(int index)
 {
     if (index==-1)
         return;
-    if (current_index != -1)
+    if (current_index != -1) {
         if(current()) {
             current()->save();
             tabs->currentWidget()->setFocus();
         }
+    }
 	int old_index = current_index;
 	current_index = index;
 	const QString path = vec[current_index]->absolutePath();

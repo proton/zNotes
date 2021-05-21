@@ -91,7 +91,7 @@ void Settings::load()
 	if(!mydocuments_path.isEmpty()) notes_path = mydocuments_path+"/Notes";
 	else if(!QDir::homePath().isEmpty()) notes_path = QDir::homePath()+"/Notes";
 #else
-	if(!QDir::homePath().isEmpty()) notes_path = QDir::homePath()+"\Notes";
+    if(!QDir::homePath().isEmpty()) notes_path = QDir::homePath()+"\\Notes";
 #endif
 		config.setValue("NotesPath", notes_path);
 	}
@@ -514,15 +514,19 @@ void Settings::setToolbarItems(const QVector<int>& v)
     if (v == tb_items)
         return;
     // Remove old settings
-    for (int i = 0; i < tb_items.size(); ++i)
-        if(tb_items[i] != itemSeparator)
+    for (int i = 0; i < tb_items.size(); ++i) {
+        if(tb_items[i] != itemSeparator) {
             config.remove(ToolbarAction(item_enum(tb_items[i])).pref_name()); //dirty hack =(
 	tb_items = v;
+        }
+    }
     // Save settings
 	config.setValue("Toolbar/itemCount", tb_items.size());
-    for (int i = 0; i < tb_items.size(); ++i)
-        if(tb_items[i] != itemSeparator)
+    for (int i = 0; i < tb_items.size(); ++i) {
+        if(tb_items[i] != itemSeparator) {
             config.setValue(ToolbarAction(item_enum(tb_items[i])).pref_name(), i);
+        }
+    }
 
     emit ToolbarItemsChanged();
 }

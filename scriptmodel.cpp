@@ -15,25 +15,19 @@ void ScriptModel::append(const QString& name, const QString& file, const QString
 	setData(index(r, 2), icon);
 }
 
-QVariant ScriptModel::headerData ( int section, Qt::Orientation orientation, int role) const
-{
-	switch(role)
-	{
-		case Qt::DisplayRole:
-		{
-			switch(orientation)
-			{
-				case Qt::Horizontal:
-				{
-					switch(section)
-					{
-					case 0: return QObject::tr("Name");
-					case 1: return QObject::tr("File");
-					case 2: return QObject::tr("Icon");
-					default: return QVariant();
+QVariant ScriptModel::headerData ( int section, Qt::Orientation orientation, int role) const {
+    switch(role) {
+        case Qt::DisplayRole: {
+            switch(orientation) {
+                case Qt::Horizontal: {
+                    switch(section) {
+                        case 0: return QObject::tr("Name");
+                        case 1: return QObject::tr("File");
+                        case 2: return QObject::tr("Icon");
+                        default: return QVariant();
 					}
 				}
-				case Qt::Vertical: return QString::number(section);
+                default: return QString::number(section);
 			}
 		}
 		default: return QVariant();
