@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>502</width>
-    <height>291</height>
+    <width>544</width>
+    <height>439</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -251,72 +251,122 @@
       <attribute name="title">
        <string>Toolbar</string>
       </attribute>
-      <layout class="QHBoxLayout" name="horizontalLayout_5">
+      <layout class="QVBoxLayout" name="verticalLayout_10">
        <item>
-        <widget class="QListView" name="listActions"/>
-       </item>
-       <item>
-        <layout class="QVBoxLayout" name="verticalLayout_5">
+        <layout class="QVBoxLayout" name="verticalLayout_9">
          <item>
-          <widget class="QPushButton" name="butActionAdd">
-           <property name="enabled">
-            <bool>false</bool>
-           </property>
-           <property name="text">
-            <string/>
-           </property>
-           <property name="icon">
-            <iconset resource="znotes.qrc">
-             <normaloff>:/res/te/right.png</normaloff>:/res/te/right.png</iconset>
-           </property>
-          </widget>
+          <layout class="QHBoxLayout" name="horizontalLayout_10">
+           <item>
+            <widget class="QListView" name="listActions"/>
+           </item>
+           <item>
+            <layout class="QVBoxLayout" name="verticalLayout_5">
+             <item>
+              <widget class="QPushButton" name="butActionAdd">
+               <property name="enabled">
+                <bool>false</bool>
+               </property>
+               <property name="text">
+                <string/>
+               </property>
+               <property name="icon">
+                <iconset resource="znotes.qrc">
+                 <normaloff>:/res/te/right.png</normaloff>:/res/te/right.png</iconset>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="butActionRemove">
+               <property name="enabled">
+                <bool>false</bool>
+               </property>
+               <property name="text">
+                <string/>
+               </property>
+               <property name="icon">
+                <iconset resource="znotes.qrc">
+                 <normaloff>:/res/te/left.png</normaloff>:/res/te/left.png</iconset>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="butActionTop">
+               <property name="enabled">
+                <bool>false</bool>
+               </property>
+               <property name="text">
+                <string/>
+               </property>
+               <property name="icon">
+                <iconset resource="znotes.qrc">
+                 <normaloff>:/res/te/up.png</normaloff>:/res/te/up.png</iconset>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="butActionBottom">
+               <property name="enabled">
+                <bool>false</bool>
+               </property>
+               <property name="text">
+                <string/>
+               </property>
+               <property name="icon">
+                <iconset resource="znotes.qrc">
+                 <normaloff>:/res/te/down.png</normaloff>:/res/te/down.png</iconset>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <widget class="QListView" name="listToolbarActions"/>
+           </item>
+          </layout>
          </item>
          <item>
-          <widget class="QPushButton" name="butActionRemove">
-           <property name="enabled">
-            <bool>false</bool>
-           </property>
-           <property name="text">
-            <string/>
-           </property>
-           <property name="icon">
-            <iconset resource="znotes.qrc">
-             <normaloff>:/res/te/left.png</normaloff>:/res/te/left.png</iconset>
-           </property>
-          </widget>
+          <layout class="QHBoxLayout" name="horizontalLayout_9">
+           <item>
+            <widget class="QLabel" name="label_4">
+             <property name="text">
+              <string>Icon size</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QComboBox" name="cb_IconsSize">
+             <item>
+              <property name="text">
+               <string>16</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>22</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>32</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>48</string>
+              </property>
+             </item>
+            </widget>
+           </item>
+          </layout>
          </item>
          <item>
-          <widget class="QPushButton" name="butActionTop">
-           <property name="enabled">
-            <bool>false</bool>
-           </property>
+          <widget class="QCheckBox" name="cb_IconsUseSystemTheme">
            <property name="text">
-            <string/>
-           </property>
-           <property name="icon">
-            <iconset resource="znotes.qrc">
-             <normaloff>:/res/te/up.png</normaloff>:/res/te/up.png</iconset>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QPushButton" name="butActionBottom">
-           <property name="enabled">
-            <bool>false</bool>
-           </property>
-           <property name="text">
-            <string/>
-           </property>
-           <property name="icon">
-            <iconset resource="znotes.qrc">
-             <normaloff>:/res/te/down.png</normaloff>:/res/te/down.png</iconset>
+            <string>Use system icons theme if possible</string>
            </property>
           </widget>
          </item>
         </layout>
-       </item>
-       <item>
-        <widget class="QListView" name="listToolbarActions"/>
        </item>
       </layout>
      </widget>
