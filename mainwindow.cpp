@@ -94,6 +94,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     // Adding toolbar's actions
     actions_changed();
+    icons_size_changed();
     // Adding scripts
     cmd_changed();
 
@@ -156,6 +157,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(&settings, SIGNAL(ShowHiddenChanged()), this, SLOT(warningSettingsChanged()));
     connect(&settings, SIGNAL(WindowStateChanged()), this, SLOT(windowStateChanged()));
     connect(&settings, SIGNAL(ToolbarItemsChanged()), this, SLOT(actions_changed()));
+    connect(&settings, SIGNAL(IconsSizeChanged()), this, SLOT(icons_size_changed()));
     connect(&settings.getScriptModel(), SIGNAL(dataChanged(const QModelIndex&, const QModelIndex&)),
         this, SLOT(cmd_changed()));
     if(!settings.getHideStart()) show();
@@ -203,7 +205,7 @@ void MainWindow::NewNote()
 		note_create_widget->move(ui->mainToolBar->mapToGlobal(QPoint(ui->mainToolBar->width(),0)));
 
 	if(actions[itemAdd]->isChecked())
-		note_create_widget->show();
+        note_create_widget->show();
 	else
 		note_create_widget->hide();
 }
@@ -504,6 +506,11 @@ void MainWindow::actions_changed()
         else
             ui->mainToolBar->addAction(actions[items[i]]);
 	}
+}
+
+void MainWindow::icons_size_changed() {
+    QSize size(settings.getIconsSize(), settings.getIconsSize());
+    ui->mainToolBar->setIconSize(size);
 }
 
 void MainWindow::edit_command_list()

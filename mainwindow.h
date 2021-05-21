@@ -63,6 +63,7 @@ public slots:
     void formatTextColor();
     //
     void actions_changed();
+    void icons_size_changed();
     //
     void cmd_changed();
     void cmdExec(const QString &);

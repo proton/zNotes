@@ -63,9 +63,11 @@ public:
 	inline const QMap<int, QMap<int, QString> >& getTranslations()	{ return translations; }
 	inline const QLocale& getLocaleCurrent()		{ return locale_current; }
 	inline const QLocale& getLocale()				{ return locale; }
-	inline bool getLanguageCustom()					{ return language_custom; }
-	inline bool getNoteLinksOpen()					{ return note_links_open; }
-	inline bool getNotePastePlaintext()				{ return note_paste_plaintext; }
+    inline bool getLanguageCustom()					{ return language_custom; }
+    inline bool getNoteLinksOpen()					{ return note_links_open; }
+    inline bool getNotePastePlaintext()				{ return note_paste_plaintext; }
+    inline bool getIconsUseSystemTheme()			{ return icons_use_system_theme; }
+    inline int  getIconsSize()				        { return icons_size; }
 	//
 	void setNotesPath(const QString& path);
 	void setLastNote(const QString& name);
@@ -90,6 +92,8 @@ public:
 	void setLocaleCustom(bool);
 	void setNoteLinksOpen(bool);
 	void setNotePastePlaintext(bool);
+    void setIconsUseSystemTheme(bool);
+    void setIconsSize(int);
 	//
 	void loadLanguages();
 	void updateLocale();
@@ -134,6 +138,9 @@ private:
 	ScriptModel script_model;
 	bool script_show_output;
 	bool script_copy_output;
+    //
+    bool icons_use_system_theme;
+    int icons_size;
 	//
 	QVector<int> tb_items;
 signals:
@@ -146,8 +153,9 @@ signals:
 	void NoteHighlightChanged();
 	void NoteLinkOpenChanged();
 	void NotePastePlaintextChanged();
-	void tbHidingChanged();
-	void ToolbarItemsChanged();
+    void tbHidingChanged();
+    void ToolbarItemsChanged();
+    void IconsSizeChanged();
 };
 
 extern Settings settings;

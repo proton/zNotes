@@ -134,6 +134,7 @@ void configDialog::SaveSettings()
 	settings.setToolbarItems(t_items->getToolbarElems());
 	settings.setLocaleCustom(m_ui->cb_LanguageCustom->isChecked());
 	settings.setLocaleCurrent(m_ui->cmb_Language->itemData(m_ui->cmb_Language->currentIndex(), Qt::UserRole).toLocale());
+    settings.setIconsSize(m_ui->cb_IconsSize->currentText().toInt());
 }
 
 void configDialog::on_buttonBox_clicked(QAbstractButton* button)

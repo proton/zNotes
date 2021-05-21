@@ -76,6 +76,8 @@ void Settings::load()
                     tb_items[pos] = i; //Item's position
 			}
 		}
+
+        icons_size = config.value("IconsSize").toInt();
 	}
 	/*
 	* If settings don't exist - setup default settings
@@ -153,13 +155,18 @@ void Settings::load()
 			config.setValue(QString("ComandFile%1").arg(i), script_model.getFile(i));
 			config.setValue(QString("ComandIcon%1").arg(i), script_model.getIcon(i));
 		}
-	}
-	//Setting default tab position
-	if(!config.contains("TabPosition"))
-	{
-		tab_position = West;
-		config.setValue("TabPosition", tab_position);
-	}
+    }
+    //Setting default tab position
+    if(!config.contains("TabPosition"))
+    {
+        tab_position = West;
+        config.setValue("TabPosition", tab_position);
+    }
+    //Setting default icons size
+    if(!config.contains("IconsSize")) {
+        icons_size = 16;
+        config.setValue("IconsSize", icons_size);
+    }
 	//Setting default toolbar items
 	if((tb_items.size()==0) && !config.contains("Toolbar/itemCount"))
 	{
@@ -229,7 +236,10 @@ void Settings::load()
     updateLocale();
 
 	qApp->installTranslator(&qtranslator);
-	qApp->installTranslator(&translator);
+    qApp->installTranslator(&translator);
+
+    // TODO:
+    icons_use_system_theme = false;
 }
 
 /*
@@ -583,6 +593,20 @@ void Settings::setLocaleCustom(bool v)
 			updateLocale();
 		}
 	}
+}
+
+
+void Settings::setIconsUseSystemTheme(bool v) {
+    // TODO:
+    emit ToolbarItemsChanged();
+}
+
+void Settings::setIconsSize(int v) {
+    if (icons_size == v) return;
+
+    icons_size = v;
+    config.setValue("IconsSize", icons_size);
+    emit IconsSizeChanged();
 }
 
 /*
