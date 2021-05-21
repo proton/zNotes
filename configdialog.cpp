@@ -97,6 +97,8 @@ configDialog::configDialog(QWidget *parent) :
 	m_ui->cmb_Language->setEnabled(settings.getLanguageCustom());
 	//
 	t_items->setVector(settings.getToolbarItems());
+
+    m_ui->cb_IconsSize->setCurrentText(QString("%1").arg(settings.getIconsSize()));
 	//
 	connect(m_ui->listActions->selectionModel(), SIGNAL(currentRowChanged(QModelIndex,QModelIndex)), this, SLOT(currentListActionChanged(QModelIndex,QModelIndex))); //TODO: selection changed
 	connect(m_ui->listToolbarActions->selectionModel(), SIGNAL(currentRowChanged(QModelIndex,QModelIndex)), this, SLOT(currentToolbarActionChanged(QModelIndex,QModelIndex)));
