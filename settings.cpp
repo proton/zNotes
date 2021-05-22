@@ -239,7 +239,7 @@ void Settings::load()
     qApp->installTranslator(&translator);
 
     // TODO:
-    icons_use_system_theme = false;
+    icons_use_system_theme = true;
 }
 
 /*

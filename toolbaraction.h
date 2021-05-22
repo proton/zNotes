@@ -38,7 +38,7 @@ enum item_enum
 class ToolbarAction
 {
 public:
-	ToolbarAction(item_enum id):item_id(id) {}
+    ToolbarAction(item_enum id, bool use_system_icons_theme = false):item_id(id), use_system_icons_theme(use_system_icons_theme) {}
     // Returning action's title
 	inline const QString text() const
 	{
@@ -106,8 +106,7 @@ public:
     }
     inline QIcon loadIcon(const QString& file_name) const {
         auto fallback_icon = QIcon(":/res/toolbar/" + file_name + ".png");
-        return fallback_icon;
-        return QIcon::fromTheme(file_name, fallback_icon);
+        return use_system_icons_theme ? QIcon::fromTheme(file_name, fallback_icon) : fallback_icon;
     }
 	//Returning action's identifiactor in configuration file
 	inline const QString pref_name() const
@@ -173,6 +172,7 @@ public:
 
 private:
 	item_enum item_id;
+    bool use_system_icons_theme;
 };
 
 #endif // TOOLBARACTION_H

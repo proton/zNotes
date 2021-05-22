@@ -35,7 +35,7 @@ Settings settings;
 static inline QAction* generateAction(int item_id /*, bool checkable = false*/)
 {
     item_enum item = item_enum(item_id);
-    ToolbarAction toolbar_action(item);
+    ToolbarAction toolbar_action(item, settings.getIconsUseSystemTheme());
     QAction* action = new QAction(toolbar_action.icon(), toolbar_action.text(), 0);
     action->setCheckable(toolbar_action.isCheckable());
     return action;

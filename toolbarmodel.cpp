@@ -77,7 +77,7 @@ QVariant ItemModel::data(const QModelIndex &index, int role) const
 	switch(role)
 	{
 		case Qt::DisplayRole: return ToolbarAction(item_enum(id)).text();
-		case Qt::DecorationRole: return ToolbarAction(item_enum(id)).icon();
+        case Qt::DecorationRole: return ToolbarAction(item_enum(id)).icon();
 		default: return QVariant();
 	}
 }
