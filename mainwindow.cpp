@@ -21,9 +21,9 @@
 /*
 	Tray icon on windows is very small
 */
-#ifdef Q_WS_WIN
+#if defined Q_WS_WIN /* Qt4 */ || defined Q_OS_WIN /* Qt5 */
 	#define TRAY_ICON_FILE_NAME ":/res/znotes.png"
-#elif Q_WS_MAC
+#elif defined Q_WS_MAC /* Qt4 */ || defined Q_OS_MAC /* Qt5 */
 	#define TRAY_ICON_FILE_NAME ":/res/znotes32_bw.png"
 #else
 	#define TRAY_ICON_FILE_NAME ":/res/znotes32.png"

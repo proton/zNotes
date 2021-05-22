@@ -87,7 +87,7 @@ void Settings::load()
 	{
 #if defined Q_WS_X11 /* Qt4 */ || defined Q_OS_LINUX /* Qt5 */
 	notes_path = QDir::homePath()+"/.local/share/notes";
-#elif defined(Q_WS_WIN)
+#elif defined Q_WS_WIN /* Qt4 */ || defined Q_OS_WIN /* Qt5 */
 	QSettings win_settings("Microsoft", "Windows");
 	QString mydocuments_path = win_settings.value("CurrentVersion/Explorer/Shell Folders/Personal", "").toString();
 	if(!mydocuments_path.isEmpty()) notes_path = mydocuments_path+"/Notes";
@@ -145,7 +145,7 @@ void Settings::load()
 	{
 	#ifdef unix
 		script_model.append("Print note's content", "cat", "");
-	#elif defined(Q_WS_WIN)
+    #elif defined Q_WS_WIN /* Qt4 */ || defined Q_OS_WIN /* Qt5 */
 		//
 	#endif
 		config.setValue("ComandCount", script_model.rowCount());
@@ -261,7 +261,7 @@ void Settings::loadLanguages()
 #ifdef PROGRAM_DATA_DIR
 	translation_dirs << QString(PROGRAM_DATA_DIR)+"/translations";
 #endif
-#ifdef Q_WS_MAC
+#if defined Q_WS_MAC /* Qt4 */ || defined Q_OS_MAC /* Qt5 */
 	translation_dirs << QCoreApplication::applicationDirPath()+"/../Resources";
 #endif
 #ifdef Q_OS_UNIX
