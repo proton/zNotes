@@ -72,38 +72,43 @@ public:
 			default: return 0;
 		}
 	}
-	//Returning action's icon
-	inline QIcon icon() const
-	{
-		switch(item_id)
-		{
-            case itemAdd:		return QIcon::fromTheme("list-add", QIcon(":/res/add.png"));
-            case itemAddText:	return QIcon::fromTheme("list-add", QIcon(":/res/add.png"));
-            case itemAddHtml:	return QIcon::fromTheme("list-add", QIcon(":/res/add.png"));
-            case itemAddTodo:	return QIcon::fromTheme("list-add", QIcon(":/res/add.png"));
-            case itemRemove:	return QIcon::fromTheme("list-remove", QIcon(":/res/remove.png"));
-            case itemRename:	return QIcon::fromTheme("edit-rename", QIcon(":/res/rename.png"));
-            case itemBack:		return QIcon::fromTheme("back", QIcon(":/res/back.png"));
-            case itemForward:	return QIcon::fromTheme("forward", QIcon(":/res/forward.png"));
-            case itemPrev:		return QIcon::fromTheme("go-previous", QIcon(":/res/prev.png"));
-            case itemNext:		return QIcon::fromTheme("go-next", QIcon(":/res/next.png"));
-            case itemCopy:		return QIcon::fromTheme("edit-copy", QIcon(":/res/copy.png"));
-            case itemSetup:		return QIcon::fromTheme("configure", QIcon(":/res/settings.png"));
-            case itemInfo:		return QIcon::fromTheme("help-about", QIcon(":/res/info.png"));
-            case itemRun:		return QIcon::fromTheme("run-build", QIcon(":/res/exec.png"));
-            case itemSearch:	return QIcon::fromTheme("edit-find", QIcon(":/res/find.png"));
-            case itemExit:		return QIcon::fromTheme("window-close", QIcon(":/res/exit.png"));
-            case itemFormatBold:		return QIcon::fromTheme("format-text-bold", QIcon(":/res/format_bold.png"));
-            case itemFormatItalic:		return QIcon::fromTheme("format-text-italic", QIcon(":/res/format_italic.png"));
-            case itemFormatStrikeout:	return QIcon::fromTheme("format-text-strikethrough", QIcon(":/res/format_strikeout.png"));
-            case itemFormatUnderline:	return QIcon::fromTheme("format-text-underline", QIcon(":/res/format_underline.png"));
-            case itemFormatColor:		return QIcon::fromTheme("color-management", QIcon(":/res/format_color.png"));
-            case itemExportPdf:         return QIcon::fromTheme("application-pdf", QIcon(":/res/exportpdf.png"));
-            case itemPrintNote:         return QIcon::fromTheme("printer", QIcon(":/res/print.png"));
-            case itemPrintPreviewNote:  return QIcon::fromTheme("document-print-preview", QIcon(":/res/print_preview.png"));
-			default: return QIcon();
-		}
-	}
+    //Returning action's icon
+    inline QIcon icon() const
+    {
+        switch(item_id)
+        {
+            case itemAdd:               return loadIcon("list-add");
+            case itemAddText:           return loadIcon("list-add");
+            case itemAddHtml:           return loadIcon("list-add");
+            case itemAddTodo:           return loadIcon("list-add");
+            case itemRemove:            return loadIcon("list-remove");
+            case itemRename:            return loadIcon("edit-rename");
+            case itemBack:              return loadIcon("back");
+            case itemForward:           return loadIcon("forward");
+            case itemPrev:              return loadIcon("go-previous");
+            case itemNext:              return loadIcon("go-next");
+            case itemCopy:              return loadIcon("edit-copy");
+            case itemSetup:             return loadIcon("configure");
+            case itemInfo:              return loadIcon("help-about");
+            case itemRun:               return loadIcon("run-build");
+            case itemSearch:            return loadIcon("edit-find");
+            case itemExit:              return loadIcon("window-close");
+            case itemFormatBold:		return loadIcon("format-text-bold");
+            case itemFormatItalic:		return loadIcon("format-text-italic");
+            case itemFormatStrikeout:	return loadIcon("format-text-strikethrough");
+            case itemFormatUnderline:	return loadIcon("format-text-underline");
+            case itemFormatColor:		return loadIcon("color-management");
+            case itemExportPdf:         return loadIcon("application-pdf");
+            case itemPrintNote:         return loadIcon("printer");
+            case itemPrintPreviewNote:  return loadIcon("document-print-preview");
+            default: return QIcon();
+        }
+    }
+    inline QIcon loadIcon(const QString& file_name) const {
+        auto fallback_icon = QIcon(":/res/toolbar/" + file_name + ".png");
+        return fallback_icon;
+        return QIcon::fromTheme(file_name, fallback_icon);
+    }
 	//Returning action's identifiactor in configuration file
 	inline const QString pref_name() const
 	{
