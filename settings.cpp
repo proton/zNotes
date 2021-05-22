@@ -167,6 +167,15 @@ void Settings::load()
         icons_size = 16;
         config.setValue("IconsSize", icons_size);
     }
+    //Setting default icons size
+    if(!config.contains("IconsUseSystemTheme")) {
+#ifdef Q_WS_X11
+        icons_use_system_theme = true;
+#else
+        icons_use_system_theme = false;
+#endif
+        config.setValue("IconsUseSystemTheme", icons_use_system_theme);
+    }
 	//Setting default toolbar items
 	if((tb_items.size()==0) && !config.contains("Toolbar/itemCount"))
 	{
@@ -237,9 +246,6 @@ void Settings::load()
 
 	qApp->installTranslator(&qtranslator);
     qApp->installTranslator(&translator);
-
-    // TODO:
-    icons_use_system_theme = true;
 }
 
 /*
