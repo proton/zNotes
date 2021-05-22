@@ -85,7 +85,7 @@ void Settings::load()
 	//Setting default path to notes
 	if(notes_path.isEmpty())
 	{
-#ifdef Q_WS_X11
+#if defined Q_WS_X11 /* Qt4 */ || defined Q_OS_LINUX /* Qt5 */
 	notes_path = QDir::homePath()+"/.local/share/notes";
 #elif defined(Q_WS_WIN)
 	QSettings win_settings("Microsoft", "Windows");
@@ -169,7 +169,7 @@ void Settings::load()
     }
     //Setting default icons size
     if(!config.contains("IconsUseSystemTheme")) {
-#ifdef Q_WS_X11
+#if defined Q_WS_X11 /* Qt4 */ || defined Q_OS_LINUX /* Qt5 */
         icons_use_system_theme = true;
 #else
         icons_use_system_theme = false;
