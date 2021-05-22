@@ -23,9 +23,6 @@
         <file>res/note_types/unknown.png</file>
         <file>res/note_types/xml.png</file>
         <file>res/toolbar/application-pdf.png</file>
-        <file>res/toolbar/back.png</file>
-        <file>res/toolbar/close.png</file>
-        <file>res/toolbar/color-management.png</file>
         <file>res/toolbar/configure.png</file>
         <file>res/toolbar/document-print-preview.png</file>
         <file>res/toolbar/edit-copy.png</file>
@@ -35,7 +32,6 @@
         <file>res/toolbar/format-text-italic.png</file>
         <file>res/toolbar/format-text-strikethrough.png</file>
         <file>res/toolbar/format-text-underline.png</file>
-        <file>res/toolbar/forward.png</file>
         <file>res/toolbar/go-next.png</file>
         <file>res/toolbar/go-previous.png</file>
         <file>res/toolbar/help-about.png</file>
@@ -43,7 +39,9 @@
         <file>res/toolbar/list-remove.png</file>
         <file>res/toolbar/printer.png</file>
         <file>res/toolbar/run-build.png</file>
-        <file>res/toolbar/save.png</file>
         <file>res/toolbar/window-close.png</file>
+        <file>res/toolbar/format-text-color.png</file>
+        <file>res/toolbar/go-next-view.png</file>
+        <file>res/toolbar/go-previous-view.png</file>
     </qresource>
 </RCC>

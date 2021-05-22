@@ -83,10 +83,10 @@ public:
             case itemAddTodo:           return loadIcon("list-add");
             case itemRemove:            return loadIcon("list-remove");
             case itemRename:            return loadIcon("edit-rename");
-            case itemBack:              return loadIcon("back");
-            case itemForward:           return loadIcon("forward");
-            case itemPrev:              return loadIcon("go-previous");
-            case itemNext:              return loadIcon("go-next");
+            case itemBack:              return loadIcon("go-previous");
+            case itemForward:           return loadIcon("go-next");
+            case itemPrev:              return loadIcon("go-previous-view");
+            case itemNext:              return loadIcon("go-next-view");
             case itemCopy:              return loadIcon("edit-copy");
             case itemSetup:             return loadIcon("configure");
             case itemInfo:              return loadIcon("help-about");
@@ -97,7 +97,7 @@ public:
             case itemFormatItalic:		return loadIcon("format-text-italic");
             case itemFormatStrikeout:	return loadIcon("format-text-strikethrough");
             case itemFormatUnderline:	return loadIcon("format-text-underline");
-            case itemFormatColor:		return loadIcon("color-management");
+            case itemFormatColor:		return loadIcon("format-text-color");
             case itemExportPdf:         return loadIcon("application-pdf");
             case itemPrintNote:         return loadIcon("printer");
             case itemPrintPreviewNote:  return loadIcon("document-print-preview");
