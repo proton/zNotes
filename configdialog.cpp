@@ -99,6 +99,7 @@ configDialog::configDialog(QWidget *parent) :
 	t_items->setVector(settings.getToolbarItems());
 
     m_ui->cb_IconsSize->setCurrentText(QString("%1").arg(settings.getIconsSize()));
+    m_ui->cb_IconsUseSystemTheme->setChecked(settings.getIconsUseSystemTheme());
 	//
 	connect(m_ui->listActions->selectionModel(), SIGNAL(currentRowChanged(QModelIndex,QModelIndex)), this, SLOT(currentListActionChanged(QModelIndex,QModelIndex))); //TODO: selection changed
 	connect(m_ui->listToolbarActions->selectionModel(), SIGNAL(currentRowChanged(QModelIndex,QModelIndex)), this, SLOT(currentToolbarActionChanged(QModelIndex,QModelIndex)));
@@ -137,6 +138,7 @@ void configDialog::SaveSettings()
 	settings.setLocaleCustom(m_ui->cb_LanguageCustom->isChecked());
 	settings.setLocaleCurrent(m_ui->cmb_Language->itemData(m_ui->cmb_Language->currentIndex(), Qt::UserRole).toLocale());
     settings.setIconsSize(m_ui->cb_IconsSize->currentText().toInt());
+    settings.setIconsUseSystemTheme(m_ui->cb_IconsUseSystemTheme->isChecked());
 }
 
 void configDialog::on_buttonBox_clicked(QAbstractButton* button)

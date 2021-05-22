@@ -78,6 +78,7 @@ void Settings::load()
 		}
 
         icons_size = config.value("IconsSize").toInt();
+        icons_use_system_theme = config.value("IconsUseSystemTheme").toBool();
 	}
 	/*
 	* If settings don't exist - setup default settings
@@ -603,7 +604,10 @@ void Settings::setLocaleCustom(bool v)
 
 
 void Settings::setIconsUseSystemTheme(bool v) {
-    // TODO:
+    if(icons_use_system_theme == v) return;
+
+    icons_use_system_theme = v;
+    config.setValue("IconsUseSystemTheme", icons_use_system_theme);
     emit ToolbarItemsChanged();
 }
 
