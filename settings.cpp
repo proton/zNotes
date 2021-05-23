@@ -526,14 +526,14 @@ void Settings::setScripts()
 /*
   Saving toolbar's items
 */
-void Settings::setToolbarItems(const QVector<int>& v)
-{
-    if (v == tb_items)
-        return;
+void Settings::setToolbarItems(const QVector<int>& v) {
+    if (v == tb_items) return;
+
     // Remove old settings
     for (int i = 0; i < tb_items.size(); ++i) {
         if(tb_items[i] != itemSeparator) {
-            config.remove(ToolbarAction(item_enum(tb_items[i])).pref_name()); //dirty hack =(
+            auto action = ToolbarAction(item_enum(tb_items[i]));
+            config.remove(action.pref_name()); //dirty hack =(
 	tb_items = v;
         }
     }
@@ -541,7 +541,8 @@ void Settings::setToolbarItems(const QVector<int>& v)
 	config.setValue("Toolbar/itemCount", tb_items.size());
     for (int i = 0; i < tb_items.size(); ++i) {
         if(tb_items[i] != itemSeparator) {
-            config.setValue(ToolbarAction(item_enum(tb_items[i])).pref_name(), i);
+            auto action = ToolbarAction(item_enum(tb_items[i]));
+            config.setValue(action.pref_name(), i);
         }
     }
 
@@ -608,6 +609,7 @@ void Settings::setIconsUseSystemTheme(bool v) {
 
     icons_use_system_theme = v;
     config.setValue("IconsUseSystemTheme", icons_use_system_theme);
+    // TODO: doesn't help
     emit ToolbarItemsChanged();
 }
 

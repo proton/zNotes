@@ -32,13 +32,18 @@
 Settings settings;
 
 //Function for fast generating actions
-static inline QAction* generateAction(int item_id /*, bool checkable = false*/)
-{
+static inline QAction* generateAction(int item_id) {
     item_enum item = item_enum(item_id);
     ToolbarAction toolbar_action(item, settings.getIconsUseSystemTheme());
     QAction* action = new QAction(toolbar_action.icon(), toolbar_action.text(), 0);
     action->setCheckable(toolbar_action.isCheckable());
     return action;
+}
+
+static inline void regenerateAction(int item_id, QAction* action) {
+    item_enum item = item_enum(item_id);
+    ToolbarAction toolbar_action(item, settings.getIconsUseSystemTheme());
+    action->setIcon(toolbar_action.icon());
 }
 
 MainWindow::MainWindow(QWidget *parent)
@@ -503,8 +508,11 @@ void MainWindow::actions_changed()
 	{
         if (items[i] == itemSeparator)
             ui->mainToolBar->addSeparator();
-        else
-            ui->mainToolBar->addAction(actions[items[i]]);
+        else {
+            QAction* action = actions[items[i]];
+            regenerateAction(items[i], action);
+            ui->mainToolBar->addAction(action);
+        }
 	}
 }
 

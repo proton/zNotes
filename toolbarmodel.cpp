@@ -64,6 +64,7 @@ ItemModel::ItemModel(ToolbarItems& t_items)
 	: items(t_items), v(t_items.getAllElems())
 {
 	connect(&t_items, SIGNAL(reset()), this, SIGNAL(modelReset()));
+    // TODO: connect to settings
 }
 
 int ItemModel::rowCount(const QModelIndex &) const
@@ -73,11 +74,12 @@ int ItemModel::rowCount(const QModelIndex &) const
 
 QVariant ItemModel::data(const QModelIndex &index, int role) const
 {
+    auto use_system_icons_theme = false; // TODO: take from settings/ui (how?)
 	const int id = index.row();
 	switch(role)
 	{
 		case Qt::DisplayRole: return ToolbarAction(item_enum(id)).text();
-        case Qt::DecorationRole: return ToolbarAction(item_enum(id)).icon();
+        case Qt::DecorationRole: return ToolbarAction(item_enum(id), use_system_icons_theme).icon();
 		default: return QVariant();
 	}
 }
