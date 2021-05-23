@@ -100,6 +100,12 @@ configDialog::configDialog(QWidget *parent) :
 
     m_ui->cb_IconsSize->setCurrentText(QString("%1").arg(settings.getIconsSize()));
     m_ui->cb_IconsUseSystemTheme->setChecked(settings.getIconsUseSystemTheme());
+
+#if defined Q_WS_X11 /* Qt4 */ || defined Q_OS_LINUX /* Qt5 */
+    m_ui->cb_IconsUseSystemTheme->show();
+#else
+    m_ui->cb_IconsUseSystemTheme->hide();
+#endif
 	//
 	connect(m_ui->listActions->selectionModel(), SIGNAL(currentRowChanged(QModelIndex,QModelIndex)), this, SLOT(currentListActionChanged(QModelIndex,QModelIndex))); //TODO: selection changed
 	connect(m_ui->listToolbarActions->selectionModel(), SIGNAL(currentRowChanged(QModelIndex,QModelIndex)), this, SLOT(currentToolbarActionChanged(QModelIndex,QModelIndex)));
