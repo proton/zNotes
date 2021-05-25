@@ -32,124 +32,120 @@
         <translation>Pokaż pasek narzędzi</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="452"/>
+        <location filename="../mainwindow.cpp" line="451"/>
         <source>Settings changed</source>
         <translation>Ustawienia zmienione</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="453"/>
+        <location filename="../mainwindow.cpp" line="452"/>
         <source>You need restart application to get effect.</source>
         <translation>Zmiany zostaną wprowadzone po ponownym uruchomieniu programu.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="466"/>
+        <location filename="../mainwindow.cpp" line="465"/>
         <source>Commandlist is clear</source>
         <translation>Lista poleceń jest pusta</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="467"/>
+        <location filename="../mainwindow.cpp" line="466"/>
         <source>List of commands is clear!
 You can add new commands in preferences.</source>
         <translation>Lista poleceń jest pusta!  Możesz dodać nowe polecenia w oknie Ustawienia.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="500"/>
+        <location filename="../mainwindow.cpp" line="499"/>
         <source>Edit command list</source>
         <translation>Edytuj listę poleceń</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="63"/>
-        <location filename="../mainwindow.cpp" line="703"/>
+        <location filename="../mainwindow.cpp" line="68"/>
+        <location filename="../mainwindow.cpp" line="710"/>
         <source>Show</source>
         <translation>Pokaż</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="64"/>
-        <location filename="../mainwindow.cpp" line="704"/>
+        <location filename="../mainwindow.cpp" line="69"/>
+        <location filename="../mainwindow.cpp" line="711"/>
         <source>Hide</source>
         <translation>Ukryj</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="119"/>
+        <location filename="../mainwindow.cpp" line="125"/>
         <source>Create new note</source>
         <translation type="unfinished">Utwórz nową notatkę</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="123"/>
+        <location filename="../mainwindow.cpp" line="129"/>
         <source>Rename current note</source>
         <translation type="unfinished">Zmień nazwę bieżącej notatki</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="125"/>
+        <location filename="../mainwindow.cpp" line="131"/>
         <source>Go to previous note</source>
         <translation type="unfinished">Idź do poprzedniej notatki</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="127"/>
+        <location filename="../mainwindow.cpp" line="133"/>
         <source>Go to next note</source>
         <translation type="unfinished">Idź do następnej notatki</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="133"/>
+        <location filename="../mainwindow.cpp" line="139"/>
         <source>Search in the notes&apos; text</source>
         <translation type="unfinished">Szukaj w treści notatki</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="137"/>
+        <location filename="../mainwindow.cpp" line="143"/>
         <source>Exit program</source>
         <translation type="unfinished">Zakończ program</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="139"/>
+        <location filename="../mainwindow.cpp" line="145"/>
         <source>Make selected text bold</source>
         <translation type="unfinished">Pogrub zaznaczony tekst</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="141"/>
+        <location filename="../mainwindow.cpp" line="147"/>
         <source>Make selected text italic</source>
         <translation type="unfinished">Uzyj czcionki pochyłej w zaznaczonym tekście</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="143"/>
+        <location filename="../mainwindow.cpp" line="149"/>
         <source>Make selected text strikeout</source>
         <translation type="unfinished">Przekreśl zaznaczony tekst</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="145"/>
+        <location filename="../mainwindow.cpp" line="151"/>
         <source>Make selected text underline</source>
         <translation type="unfinished">Podkreśl zaznaczony tekst</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="260"/>
-        <location filename="../mainwindow.cpp" line="272"/>
-        <location filename="../mainwindow.cpp" line="293"/>
+        <location filename="../mainwindow.cpp" line="265"/>
+        <location filename="../mainwindow.cpp" line="287"/>
         <location filename="../mainwindow.cpp" line="317"/>
-        <location filename="../mainwindow.cpp" line="336"/>
-        <location filename="../mainwindow.cpp" line="354"/>
+        <location filename="../mainwindow.cpp" line="351"/>
         <source>Note printing</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="261"/>
-        <location filename="../mainwindow.cpp" line="294"/>
-        <location filename="../mainwindow.cpp" line="337"/>
+        <location filename="../mainwindow.cpp" line="266"/>
         <source>There is not printing support for current note</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="268"/>
+        <location filename="../mainwindow.cpp" line="283"/>
         <source>Print note</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="273"/>
+        <location filename="../mainwindow.cpp" line="288"/>
         <location filename="../mainwindow.cpp" line="318"/>
-        <location filename="../mainwindow.cpp" line="355"/>
+        <location filename="../mainwindow.cpp" line="352"/>
         <source>Access error to note&apos;s text</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="343"/>
+        <location filename="../mainwindow.cpp" line="306"/>
         <source>Export PDF</source>
         <translation type="unfinished"></translation>
     </message>
@@ -174,17 +170,7 @@ You can add new commands in preferences.</source>
 <context>
     <name>NoteList</name>
     <message>
-        <location filename="../notelist.cpp" line="37"/>
-        <source>Select place for notes directory</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../notelist.cpp" line="41"/>
-        <source>Notes</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../notelist.cpp" line="226"/>
+        <location filename="../notelist.cpp" line="305"/>
         <source>Delete Note</source>
         <translation>Usuń notatkę</translation>
     </message>
@@ -193,48 +179,58 @@ You can add new commands in preferences.</source>
         <translation type="obsolete">Czy rzeczywiście chcesz usunąć notatkę %1?</translation>
     </message>
     <message>
-        <location filename="../notelist.cpp" line="227"/>
+        <location filename="../notelist.cpp" line="45"/>
+        <source>Select place for notes directory</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../notelist.cpp" line="50"/>
+        <source>Notes</source>
+        <translation type="unfinished">Notatki</translation>
+    </message>
+    <message>
+        <location filename="../notelist.cpp" line="306"/>
         <source>Do you really want to delete note %1 ?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../notelist.cpp" line="255"/>
+        <location filename="../notelist.cpp" line="334"/>
         <source>Rename note</source>
         <translation>Zmień nazwę notatki</translation>
     </message>
     <message>
-        <location filename="../notelist.cpp" line="256"/>
+        <location filename="../notelist.cpp" line="335"/>
         <source>New name:</source>
         <translation>Nowa nazwa:</translation>
     </message>
     <message>
-        <location filename="../notelist.cpp" line="267"/>
+        <location filename="../notelist.cpp" line="346"/>
         <source>Note renaming</source>
         <translation>Zmiana nazwy notatki</translation>
     </message>
     <message>
-        <location filename="../notelist.cpp" line="268"/>
+        <location filename="../notelist.cpp" line="347"/>
         <source>Note %1 already exists!</source>
         <translation>Notatka %1 już istnieje!</translation>
     </message>
     <message>
-        <location filename="../notelist.cpp" line="401"/>
+        <location filename="../notelist.cpp" line="505"/>
         <source>Move notes</source>
         <translation>Przenieś</translation>
     </message>
     <message>
-        <location filename="../notelist.cpp" line="402"/>
-        <source>notes path changed!
-Do you want to move your notes to new place ?</source>
-        <translation></translation>
+        <location filename="../notelist.cpp" line="506"/>
+        <source>Notes path changed!
+Do you want to move your notes to new place?</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../notelist.cpp" line="413"/>
-        <source>notes path change</source>
-        <translation></translation>
+        <location filename="../notelist.cpp" line="517"/>
+        <source>Notes path change</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../notelist.cpp" line="414"/>
+        <location filename="../notelist.cpp" line="518"/>
         <source>You need restart application to get effect.</source>
         <translation>Musisz uruchomić ponownie program, żeby uzyskać efekt.</translation>
     </message>
@@ -242,63 +238,63 @@ Do you want to move your notes to new place ?</source>
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../notelist.cpp" line="87"/>
+        <location filename="../notelist.cpp" line="139"/>
         <source>Text Note</source>
         <translation>Notatka tekstowa</translation>
     </message>
     <message>
-        <location filename="../notelist.cpp" line="88"/>
-        <location filename="../notelist.cpp" line="93"/>
+        <location filename="../notelist.cpp" line="140"/>
+        <location filename="../notelist.cpp" line="145"/>
         <source>Simple text Note</source>
         <translation>Prosta notatka tekstowa</translation>
     </message>
     <message>
-        <location filename="../notelist.cpp" line="90"/>
+        <location filename="../notelist.cpp" line="142"/>
         <source>HTML Note</source>
         <translation>Notatka HTML</translation>
     </message>
     <message>
-        <location filename="../notelist.cpp" line="91"/>
+        <location filename="../notelist.cpp" line="143"/>
         <source>Simple Note with text formating</source>
         <translation>Prosta fomatowana notatka tekstowa</translation>
     </message>
     <message>
-        <location filename="../notelist.cpp" line="93"/>
+        <location filename="../notelist.cpp" line="145"/>
         <source>Picture Note</source>
         <translation>Notatka obrazkowa</translation>
     </message>
     <message>
-        <location filename="../notelist.cpp" line="97"/>
+        <location filename="../notelist.cpp" line="149"/>
         <source>TODO Note</source>
         <translation>Notatka Do Zrobienia (TODO)</translation>
     </message>
     <message>
-        <location filename="../notelist.cpp" line="97"/>
+        <location filename="../notelist.cpp" line="149"/>
         <source>Simple TODO list</source>
         <translation>Prosta lista Do Zrobienia (TODO)</translation>
     </message>
     <message>
-        <location filename="../notelist.cpp" line="101"/>
+        <location filename="../notelist.cpp" line="153"/>
         <source>XML Note</source>
         <translation>Notatka XML</translation>
     </message>
     <message>
-        <location filename="../notelist.cpp" line="101"/>
+        <location filename="../notelist.cpp" line="153"/>
         <source>XML file</source>
         <translation>Plik XML</translation>
     </message>
     <message>
-        <location filename="../scriptmodel.cpp" line="30"/>
+        <location filename="../scriptmodel.cpp" line="24"/>
         <source>Name</source>
         <translation>Nazwa</translation>
     </message>
     <message>
-        <location filename="../scriptmodel.cpp" line="31"/>
+        <location filename="../scriptmodel.cpp" line="25"/>
         <source>File</source>
         <translation>Plik</translation>
     </message>
     <message>
-        <location filename="../scriptmodel.cpp" line="32"/>
+        <location filename="../scriptmodel.cpp" line="26"/>
         <source>Icon</source>
         <translation>Ikona</translation>
     </message>
@@ -308,12 +304,12 @@ Do you want to move your notes to new place ?</source>
         <translation>Nowe zadanie</translation>
     </message>
     <message>
-        <location filename="../todomodel.cpp" line="312"/>
+        <location filename="../todomodel.cpp" line="319"/>
         <source>expired</source>
         <translation>nieakt.</translation>
     </message>
     <message numerus="yes">
-        <location filename="../todomodel.cpp" line="314"/>
+        <location filename="../todomodel.cpp" line="321"/>
         <source>%n day(s)</source>
         <translation>
             <numerusform>%n day</numerusform>
@@ -322,7 +318,7 @@ Do you want to move your notes to new place ?</source>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../todomodel.cpp" line="315"/>
+        <location filename="../todomodel.cpp" line="322"/>
         <source>%n hour(s)</source>
         <translation>
             <numerusform>%n hour</numerusform>
@@ -331,7 +327,7 @@ Do you want to move your notes to new place ?</source>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../todomodel.cpp" line="316"/>
+        <location filename="../todomodel.cpp" line="323"/>
         <source>%n minute(s)</source>
         <translation>
             <numerusform>%n minute</numerusform>
@@ -340,7 +336,7 @@ Do you want to move your notes to new place ?</source>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../todomodel.cpp" line="317"/>
+        <location filename="../todomodel.cpp" line="324"/>
         <source>%n second(s)</source>
         <translation>
             <numerusform>%n second</numerusform>
@@ -349,164 +345,123 @@ Do you want to move your notes to new place ?</source>
         </translation>
     </message>
     <message>
-        <location filename="../toolbaraction.h" line="47"/>
         <source>Separator</source>
-        <translation>Separator</translation>
+        <translation type="vanished">Separator</translation>
     </message>
     <message>
-        <location filename="../toolbaraction.h" line="48"/>
         <source>Create new note</source>
-        <translation>Utwórz nową notatkę</translation>
+        <translation type="vanished">Utwórz nową notatkę</translation>
     </message>
     <message>
-        <location filename="../toolbaraction.h" line="49"/>
         <source>Create new Text note</source>
-        <translation>Utwórz nową notatkę tekstową</translation>
+        <translation type="vanished">Utwórz nową notatkę tekstową</translation>
     </message>
     <message>
-        <location filename="../toolbaraction.h" line="50"/>
         <source>Create new HTML note</source>
-        <translation>Utwórz nową notatkę HTML</translation>
+        <translation type="vanished">Utwórz nową notatkę HTML</translation>
     </message>
     <message>
-        <location filename="../toolbaraction.h" line="51"/>
         <source>Create new TODO note</source>
-        <translation>Utwórz nową notatkę Do Zrobienia (TODO)</translation>
+        <translation type="vanished">Utwórz nową notatkę Do Zrobienia (TODO)</translation>
     </message>
     <message>
-        <location filename="../toolbaraction.h" line="52"/>
         <source>Remove this note</source>
-        <translation>Usuń notatkę</translation>
+        <translation type="vanished">Usuń notatkę</translation>
     </message>
     <message>
-        <location filename="../toolbaraction.h" line="53"/>
         <source>Rename this note</source>
-        <translation>Zmień nazwę notatki</translation>
+        <translation type="vanished">Zmień nazwę notatki</translation>
     </message>
     <message>
-        <location filename="../toolbaraction.h" line="54"/>
         <source>Back</source>
-        <translation>Wstecz</translation>
+        <translation type="vanished">Wstecz</translation>
     </message>
     <message>
-        <location filename="../toolbaraction.h" line="55"/>
-        <source>Forward</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../toolbaraction.h" line="56"/>
         <source>Prev note</source>
-        <translation>Poprzednia notatka</translation>
+        <translation type="vanished">Poprzednia notatka</translation>
     </message>
     <message>
-        <location filename="../toolbaraction.h" line="57"/>
         <source>Next note</source>
-        <translation>Następna notatka</translation>
+        <translation type="vanished">Następna notatka</translation>
     </message>
     <message>
-        <location filename="../toolbaraction.h" line="58"/>
         <source>Copy this note to clipboard</source>
-        <translation>Kopiuj notatkę do schowka</translation>
+        <translation type="vanished">Kopiuj notatkę do schowka</translation>
     </message>
     <message>
-        <location filename="../toolbaraction.h" line="59"/>
         <source>Preferences</source>
-        <translation>Ustawienia</translation>
+        <translation type="vanished">Ustawienia</translation>
     </message>
     <message>
-        <location filename="../toolbaraction.h" line="60"/>
         <source>Info</source>
-        <translation>Informacje</translation>
+        <translation type="vanished">Informacje</translation>
     </message>
     <message>
-        <location filename="../toolbaraction.h" line="61"/>
         <source>Commands</source>
-        <translation>Polecenia</translation>
+        <translation type="vanished">Polecenia</translation>
     </message>
     <message>
-        <location filename="../toolbaraction.h" line="62"/>
         <source>Search</source>
-        <translation>Szukaj</translation>
+        <translation type="vanished">Szukaj</translation>
     </message>
     <message>
-        <location filename="../toolbaraction.h" line="63"/>
         <source>Exit</source>
-        <translation>Zakończ program</translation>
+        <translation type="vanished">Zakończ program</translation>
     </message>
     <message>
-        <location filename="../toolbaraction.h" line="64"/>
         <source>Bold</source>
-        <translation>Tekst pogrubiony</translation>
+        <translation type="vanished">Tekst pogrubiony</translation>
     </message>
     <message>
-        <location filename="../toolbaraction.h" line="65"/>
         <source>Italic</source>
-        <translation>Tekst pochyły</translation>
+        <translation type="vanished">Tekst pochyły</translation>
     </message>
     <message>
-        <location filename="../toolbaraction.h" line="66"/>
         <source>Strikeout</source>
-        <translation>Tekst przekreślony</translation>
+        <translation type="vanished">Tekst przekreślony</translation>
     </message>
     <message>
-        <location filename="../toolbaraction.h" line="67"/>
         <source>Underline</source>
-        <translation>Tekst podkreślony</translation>
+        <translation type="vanished">Tekst podkreślony</translation>
     </message>
     <message>
-        <location filename="../toolbaraction.h" line="68"/>
         <source>Text color</source>
-        <translation>Kolor tekstu</translation>
-    </message>
-    <message>
-        <location filename="../toolbaraction.h" line="69"/>
-        <source>Export note to PDF</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../toolbaraction.h" line="70"/>
-        <source>Print...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../toolbaraction.h" line="71"/>
-        <source>Print Preview...</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Kolor tekstu</translation>
     </message>
 </context>
 <context>
     <name>TodoNote</name>
     <message>
-        <location filename="../todonote.cpp" line="64"/>
-        <location filename="../todonote.cpp" line="65"/>
-        <location filename="../todonote.cpp" line="142"/>
-        <location filename="../todonote.cpp" line="143"/>
+        <location filename="../todonote.cpp" line="70"/>
+        <location filename="../todonote.cpp" line="71"/>
+        <location filename="../todonote.cpp" line="148"/>
+        <location filename="../todonote.cpp" line="149"/>
         <source>Insert new task</source>
         <translation>Wstaw nowe zadanie</translation>
     </message>
     <message>
-        <location filename="../todonote.cpp" line="66"/>
-        <location filename="../todonote.cpp" line="144"/>
+        <location filename="../todonote.cpp" line="72"/>
+        <location filename="../todonote.cpp" line="150"/>
         <source>Remove this task</source>
         <translation>Usuń zadanie</translation>
     </message>
     <message>
-        <location filename="../todonote.cpp" line="74"/>
-        <location filename="../todonote.cpp" line="146"/>
+        <location filename="../todonote.cpp" line="80"/>
+        <location filename="../todonote.cpp" line="152"/>
         <source>Created: </source>
         <translation>Utworzono: </translation>
     </message>
     <message>
-        <location filename="../todonote.cpp" line="76"/>
-        <location filename="../todonote.cpp" line="147"/>
+        <location filename="../todonote.cpp" line="82"/>
+        <location filename="../todonote.cpp" line="153"/>
         <source>Completed: </source>
         <translation>Ukończono: </translation>
     </message>
     <message>
-        <location filename="../todonote.cpp" line="79"/>
-        <location filename="../todonote.cpp" line="148"/>
+        <location filename="../todonote.cpp" line="85"/>
+        <location filename="../todonote.cpp" line="154"/>
         <source>Limited: </source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -572,8 +527,8 @@ The text of the license can can be found in the file LICENSE.</source>
     </message>
     <message>
         <location filename="../aboutDialog.cpp" line="18"/>
-        <source>Copyright (c) 2013</source>
-        <translation></translation>
+        <source>Copyright (c) 2021</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../aboutDialog.cpp" line="19"/>
@@ -823,57 +778,87 @@ The text of the license can can be found in the file LICENSE.</source>
         <translation>Pasek narzędzi</translation>
     </message>
     <message>
-        <location filename="../configdialog.ui" line="325"/>
+        <location filename="../configdialog.ui" line="332"/>
+        <source>Icon size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../configdialog.ui" line="340"/>
+        <source>16</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../configdialog.ui" line="345"/>
+        <source>22</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../configdialog.ui" line="350"/>
+        <source>32</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../configdialog.ui" line="355"/>
+        <source>48</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../configdialog.ui" line="365"/>
+        <source>Use system icons theme if possible</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../configdialog.ui" line="375"/>
         <source>Notes</source>
         <translation>Notatki</translation>
     </message>
     <message>
-        <location filename="../configdialog.ui" line="333"/>
+        <location filename="../configdialog.ui" line="383"/>
         <source>Path to notes directory:</source>
         <translation>Ścieżka do katalogu z notatkami</translation>
     </message>
     <message>
-        <location filename="../configdialog.ui" line="347"/>
+        <location filename="../configdialog.ui" line="397"/>
         <source>...</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../configdialog.ui" line="364"/>
+        <location filename="../configdialog.ui" line="414"/>
         <source>Font:</source>
         <translation>Czcionka:</translation>
     </message>
     <message>
-        <location filename="../configdialog.ui" line="380"/>
+        <location filename="../configdialog.ui" line="430"/>
         <source>The quick brown fox jumps over the lazy dog.</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../configdialog.ui" line="393"/>
+        <location filename="../configdialog.ui" line="443"/>
         <source>Change</source>
         <translation>Zmień</translation>
     </message>
     <message>
-        <location filename="../configdialog.ui" line="402"/>
+        <location filename="../configdialog.ui" line="452"/>
         <source>Open links (with pressed CTRL)</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../configdialog.ui" line="409"/>
+        <location filename="../configdialog.ui" line="459"/>
         <source>Convert rich text insertions to plain text in HTML notes</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../configdialog.ui" line="417"/>
+        <location filename="../configdialog.ui" line="467"/>
         <source>Highlighting</source>
         <translation>Wyróżnienie</translation>
     </message>
     <message>
-        <location filename="../configdialog.ui" line="423"/>
+        <location filename="../configdialog.ui" line="473"/>
         <source>Highlight text in notes</source>
         <translation>Wyróżnij tekst w notatce</translation>
     </message>
     <message>
-        <location filename="../configdialog.cpp" line="156"/>
+        <location filename="../configdialog.cpp" line="175"/>
         <source>Select notes directory</source>
         <translation>Wybierz katalog notatek</translation>
     </message>
