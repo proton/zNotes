@@ -1,4 +1,4 @@
-[![Flattr this git repo](http://api.flattr.com/button/flattr-badge-large.png)](https://flattr.com/submit/auto?user_id=proton&url=https://github.com/proton/zNotes/&title=zNotes&language=&tags=github&category=software)
+[![Flattr this git repo](http://api.flattr.com/button/flattr-badge-large.png)](https://flattr.com/submit/auto?user_id=proton&url=https://github.com/proton/zNotes/&title=zNotes&language=&tags=github&category=software) or https://www.patreon.com/_proton
 
 zNotes is lightweigh crossplatform application for notes management.
 
