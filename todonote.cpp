@@ -218,6 +218,8 @@ void TodoNote::insertTask()
 	QModelIndex child_index = model->index(row, 0);
 	QModelIndex proxy_index = proxy_model->mapFromSource(child_index);
 	tree_view->setCurrentIndex(proxy_index);
+    contentChanged();
+    save();
 }
 
 void TodoNote::insertSubTask()
@@ -230,14 +232,19 @@ void TodoNote::insertSubTask()
 	QModelIndex child_index = index.child(row, 0);
 	proxy_index = proxy_model->mapFromSource(child_index);
 	tree_view->setCurrentIndex(proxy_index);
+    contentChanged();
+    save();
 }
 
 void TodoNote::removeTask()
 {
 	QModelIndex proxy_index = tree_view->currentIndex();
 	QModelIndex index = proxy_model->mapToSource(proxy_index);
-	if(index.isValid())
+    if(index.isValid()) {
 		model->removeRow(index.row(), index.parent());
+        contentChanged();
+        save();
+    }
 }
 
 void TodoNote::hideCompletedTasks()
@@ -268,7 +275,8 @@ void TodoNote::taskChanged(const QModelIndex& proxy_index)
 	cb_date_limit->setHidden(task_done);
 	dt_date_limit->setHidden(task_done);
 	dt_date_limit->setEnabled(task->limited());
-
+    contentChanged();
+    save();
 }
 
 void TodoNote::noteDateLimitChanged(const QDateTime& date)
@@ -278,12 +286,16 @@ void TodoNote::noteDateLimitChanged(const QDateTime& date)
 	if(!index.isValid()) return;
 	QModelIndex date_limit_index = index.sibling(index.row(), 4);
 	model->setData(date_limit_index, date, Qt::EditRole);
+    contentChanged();
+    save();
 }
 
 void TodoNote::noteLimitChanged(bool limited)
 {
 	QDateTime date = limited?QDateTime::currentDateTime().addDays(7):QDateTime();
 	noteDateLimitChanged(date);
+    contentChanged();
+    save();
 }
 
 bool TodoNote::isDocumentSupported() const

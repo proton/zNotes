@@ -71,7 +71,7 @@ protected:
 	QFile file;
 	//
 	bool content_changed;
-private slots:
+protected slots:
 	void contentChanged();
 };
 
