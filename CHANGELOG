@@ -1,3 +1,6 @@
+zNotes 0.4.7:
+* Fixed saving TODO-notes
+
 zNotes 0.4.6:
 * Use system icons theme (for Linux)
 * Configurable toolbar icons size
