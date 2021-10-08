@@ -2,6 +2,8 @@
 
 zNotes is lightweigh crossplatform application for notes management.
 
+![screenshot](https://github.com/proton/zNotes/blob/master/screenshot.png?raw=true)
+
 ## INSTALLATION:
 
     lrelease znotes.pro #for Fedora - lrelease-qt4 znotes.pro
