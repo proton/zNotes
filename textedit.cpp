@@ -55,6 +55,7 @@ TextEdit::TextEdit()
 	connect(&settings, SIGNAL(NoteFontChanged()), this, SLOT(fontChanged()));
 	setMouseTracking(settings.getNoteLinksOpen());
 	connect(&settings, SIGNAL(NoteLinkOpenChanged()), this, SLOT(linkOpenChanged()));
+    this->setWordWrapMode(QTextOption::WordWrap);
 }
 
 //Mouse pressing
