@@ -38,9 +38,11 @@ aboutDialog::aboutDialog(QWidget *parent) :
 	strAuthors.append(QString("<p><b>%1</b> - <a href='mailto:%2'>%2</a><br/>%3</p>")
 		.arg("lukethenuke", "", tr("Swedish translation")));
 	strAuthors.append(QString("<p><b>%1</b> - <a href='mailto:%2'>%2</a><br/>%3</p>")
-		.arg("Vadim Nekhai (onix)", "onix@onix.name", tr("Ukrainian translation")));
-	strAuthors.append(QString("<p><b>%1</b> - <a href='mailto:%2'>%2</a><br/>%3</p>")
-		.arg("Janusz J. Maczka (zzzzzzzzz@github)", "", tr("Polish translation")));
+        .arg("Vadim Nekhai (onix)", "onix@onix.name", tr("Ukrainian translation")));
+    strAuthors.append(QString("<p><b>%1</b> - <a href='mailto:%2'>%2</a><br/>%3</p>")
+        .arg("Janusz J. Maczka (zzzzzzzzz@github)", "", tr("Polish translation")));
+    strAuthors.append(QString("<p><b>%1</b> - <a href='mailto:%2'>%2</a><br/>%3</p>")
+        .arg("Heimen Stoffels (vistausss@fastmail.com)", "", tr("Dutch translation")));
 	strAuthors.append(QString("<p><b>%1</b></p>").arg(tr("Icons:")));
 	strAuthors.append(QString("%1\n<a href ='%2'>%2</a>")
 		.arg(tr("All icons are modified icons from Oxygen project"), "http://www.oxygen-icons.org"));

@@ -569,6 +569,11 @@ Do you want to move your notes to new place ?</source>
         <translation>Польский перевод</translation>
     </message>
     <message>
+        <location filename="../aboutDialog.cpp" line="43"/>
+        <source>Dutch translation</source>
+        <translation>Голландский перевод</translation>
+    </message>
+    <message>
         <location filename="../aboutDialog.cpp" line="39"/>
         <source>Swedish translation</source>
         <translation>Шведский перевод</translation>

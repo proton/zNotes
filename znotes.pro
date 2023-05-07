@@ -2,7 +2,7 @@
 # Project created by QtCreator 2009-09-20T17:20:55
 # -------------------------------------------------
 TARGET = znotes
-VERSION = "0.4.7"
+VERSION = "0.4.8"
 
 QT += core network
 if(greaterThan(QT_MAJOR_VERSION, 4)) {
@@ -87,7 +87,8 @@ TRANSLATIONS += translations/znotes_ru.ts \
                 translations/znotes_es.ts \
                 translations/znotes_de.ts \
                 translations/znotes_en.ts \
-                translations/znotes_sv.ts
+                translations/znotes_sv.ts \
+                translations/znotes_nl.ts
 # For Qt translation files only qm-files compiling. No lupdate.
 QT_TRANSLATIONS += translations/qt_ru.ts \
                    translations/qt_cs.ts \
